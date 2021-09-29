@@ -1,4 +1,4 @@
-import { ElementRef,Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +9,7 @@ export class HeaderComponent implements OnInit {
 
   menu = "none";
 
-  constructor(private elemento: ElementRef) { }
+  constructor() { }
 
   ngOnInit() {
   }

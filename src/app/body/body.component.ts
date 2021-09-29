@@ -3,13 +3,16 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.sass']
+  styleUrls: ['./body.component.sass'],
 })
 export class BodyComponent implements OnInit {
+  /* src = '../../assets/prueba.jpg'; */
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  /* cambiarImagen() {
+    return this.src;
+  } */
 }
