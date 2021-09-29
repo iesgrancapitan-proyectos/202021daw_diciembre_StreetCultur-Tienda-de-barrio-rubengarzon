@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./body.component.sass'],
 })
 export class BodyComponent implements OnInit {
-  /* src = '../../assets/prueba.jpg'; */
+  src = '../../assets/prueba.jpg';
 
   constructor() {}
 
   ngOnInit() {}
 
-  /* cambiarImagen() {
+   cambiarImagen() {
     return this.src;
-  } */
+  }
 }
