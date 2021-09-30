@@ -1,7 +1,8 @@
+<!-- Slider -->
 <div>
-  <img class="flecha-izquierda" src="../../assets/left-arrow.png" width="20" height="20" alt="" [ngStyle]="{background: cambiarImagen()}">
-  <img class="img" src="../../assets/1.webp" width="300" height="400" alt="">
-  <img class="flecha-derecha" src="../../assets/right-arrow.png" width="20" height="20" alt="" (click)="cambiarImagen()">
+  <img class="flecha-izquierda" src="../../assets/left-arrow.png" width="20" height="20" alt="" (click)="retrocederImagen()">
+  <img class="img" src="../../assets/{{idImagen}}.webp" width="300" height="400" alt="">
+  <img class="flecha-derecha" src="../../assets/right-arrow.png" width="20" height="20" alt="" (click)="avanzarImagen()">
 </div>
 
 
