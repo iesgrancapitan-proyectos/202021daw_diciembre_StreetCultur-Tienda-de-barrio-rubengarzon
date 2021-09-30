@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-body',
-  templateUrl: './body.component.html',
-  styleUrls: ['./body.component.sass'],
+  selector: 'app-slider',
+  templateUrl: './slider.component.html',
+  styleUrls: ['./slider.component.sass'],
 })
-export class BodyComponent implements OnInit {
+export class SliderComponent implements OnInit {
 
   idImagen = 1;
 
@@ -15,7 +15,7 @@ export class BodyComponent implements OnInit {
   /**
    * Retroceder imagen del slider
    */
-  retrocederImagen(){
+  retrocederImagen() {
     if (this.idImagen == 1) {
       this.idImagen = 3;
     } else if (this.idImagen == 2) {
@@ -27,12 +27,12 @@ export class BodyComponent implements OnInit {
   /**
    * Avanzar imagen del slider
    */
-  avanzarImagen(){
+  avanzarImagen() {
     if (this.idImagen == 1) {
       this.idImagen = 2;
-    }else if(this.idImagen == 2){
+    } else if (this.idImagen == 2) {
       this.idImagen = 3;
-    }else if(this.idImagen == 3){
+    } else if (this.idImagen == 3) {
       this.idImagen = 1;
     }
   }
