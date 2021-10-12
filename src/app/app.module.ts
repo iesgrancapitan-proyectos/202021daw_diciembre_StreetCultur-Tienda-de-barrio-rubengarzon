@@ -13,6 +13,7 @@ import { FooterComponent } from './main/footer/footer.component';
 import { SliderComponent } from './main/body/slider/slider.component';
 import { CategoriasComponent } from './main/body/categorias/categorias.component';
 import { LoginComponent } from './login/login.component';
+import { SudaderasComponent } from './sudaderas/sudaderas.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -22,11 +23,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { SudaderasComponent } from './sudaderas/sudaderas.component';
+import { MatCardModule } from '@angular/material/card';
+import { PantalonesComponent } from './pantalones/pantalones.component';
+import { ZapatillasComponent } from './zapatillas/zapatillas.component';
+
+
 
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     MainComponent,
     HeaderComponent,
@@ -35,7 +40,9 @@ import { SudaderasComponent } from './sudaderas/sudaderas.component';
     SliderComponent,
     CategoriasComponent,
     LoginComponent,
-      SudaderasComponent
+    SudaderasComponent,
+      PantalonesComponent,
+      ZapatillasComponent
    ],
   imports: [
     BrowserModule,
@@ -50,6 +57,7 @@ import { SudaderasComponent } from './sudaderas/sudaderas.component';
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

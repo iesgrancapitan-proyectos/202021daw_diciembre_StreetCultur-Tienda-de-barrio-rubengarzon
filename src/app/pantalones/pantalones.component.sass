@@ -1,0 +1,16 @@
+div
+  display: grid
+  @media screen and (min-width: 500px) and (max-width: 900px)
+    grid-template-columns: repeat(2, 1fr)
+  @media screen and (min-width: 901px) and (max-width: 1024px)
+    grid-template-columns: repeat(3, 1fr)
+  @media screen and (min-width: 1025px)
+    grid-template-columns: repeat(4, 1fr)
+  .example-card
+    max-width: 400px
+    margin-bottom: 8px
+    @media screen and (min-width: 500px) and (max-width: 900px)
+      max-width: 300px
+    img
+h2
+  text-align: center
