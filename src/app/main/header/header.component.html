@@ -3,7 +3,6 @@
     mat-icon-button
     class="icon-button"
     [matMenuTriggerFor]="menu"
-    aria-label="Example icon-button with menu icon"
   >
     <mat-icon>menu</mat-icon>
   </button>
@@ -18,11 +17,19 @@
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/']" >INICIO</button>
-  <button mat-button class="item" [routerLink]="['/sudaderas']">SUDADERAS</button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">PANTALONES</button>
-  <button mat-button class="item">ZAPATILLAS</button>
-  <button mat-button class="item">ACCESORIOS</button>
+  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/sudaderas']">
+    SUDADERAS
+  </button>
+  <button mat-button class="item" [routerLink]="['/pantalones']">
+    PANTALONES
+  </button>
+  <button mat-button class="item" [routerLink]="['/zapatillas']">
+    ZAPATILLAS
+  </button>
+  <button mat-button class="item" [routerLink]="['/accesorios']">
+    ACCESORIOS
+  </button>
 
   <span class="example-spacer"></span>
 
@@ -36,10 +43,12 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>add_shopping_cart</mat-icon>
-  </button>
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with heart icon"
+      routerLink="/cart"
+      routerLinkActive="active"
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
 </mat-toolbar>

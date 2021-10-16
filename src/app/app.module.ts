@@ -16,22 +16,17 @@ import { LoginComponent } from './login/login.component';
 import { SudaderasComponent } from './sudaderas/sudaderas.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { PantalonesComponent } from './pantalones/pantalones.component';
 import { ZapatillasComponent } from './zapatillas/zapatillas.component';
+import { AccesoriosComponent } from './accesorios/accesorios.component';
+
+import { DemoMaterialModule } from '../app/material-module';
 
 
 
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     MainComponent,
     HeaderComponent,
@@ -41,23 +36,17 @@ import { ZapatillasComponent } from './zapatillas/zapatillas.component';
     CategoriasComponent,
     LoginComponent,
     SudaderasComponent,
-      PantalonesComponent,
-      ZapatillasComponent
-   ],
+    PantalonesComponent,
+    ZapatillasComponent,
+    AccesoriosComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
-    MatMenuModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule,
-    MatCardModule,
+    DemoMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
