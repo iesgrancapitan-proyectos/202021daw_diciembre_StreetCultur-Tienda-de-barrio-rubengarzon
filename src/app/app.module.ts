@@ -19,8 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PantalonesComponent } from './pantalones/pantalones.component';
 import { ZapatillasComponent } from './zapatillas/zapatillas.component';
 import { AccesoriosComponent } from './accesorios/accesorios.component';
-
+import { CartComponent } from './main/cart/cart.component';
 import { DemoMaterialModule } from '../app/material-module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 
@@ -39,6 +40,7 @@ import { DemoMaterialModule } from '../app/material-module';
     PantalonesComponent,
     ZapatillasComponent,
     AccesoriosComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { DemoMaterialModule } from '../app/material-module';
     ReactiveFormsModule,
     FormsModule,
     DemoMaterialModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
