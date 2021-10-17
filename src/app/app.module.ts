@@ -6,22 +6,23 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
-import { HeaderComponent } from './main/header/header.component';
-import { BodyComponent } from './main/body/body.component';
-import { FooterComponent } from './main/footer/footer.component';
-import { SliderComponent } from './main/body/slider/slider.component';
-import { CategoriasComponent } from './main/body/categorias/categorias.component';
-import { LoginComponent } from './login/login.component';
-import { SudaderasComponent } from './sudaderas/sudaderas.component';
+import { MainComponent } from './Main/main.component';
+import { HeaderComponent } from './Main/header/header.component';
+import { BodyComponent } from './Main/body/body.component';
+import { FooterComponent } from './Main/footer/footer.component';
+import { SliderComponent } from './Main/body/slider/slider.component';
+import { CategoriasComponent } from './Main/body/categorias/categorias.component';
+import { LoginComponent } from './Main/login/login.component';
+import { SudaderasComponent } from './Client/sudaderas/sudaderas.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PantalonesComponent } from './pantalones/pantalones.component';
-import { ZapatillasComponent } from './zapatillas/zapatillas.component';
-import { AccesoriosComponent } from './accesorios/accesorios.component';
-import { CartComponent } from './main/cart/cart.component';
+import { PantalonesComponent } from './Client/pantalones/pantalones.component';
+import { ZapatillasComponent } from './Client/zapatillas/zapatillas.component';
+import { AccesoriosComponent } from './Client/accesorios/accesorios.component';
+import { CartComponent } from './Main/cart/cart.component';
 import { DemoMaterialModule } from '../app/material-module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ContactComponent } from './Main/footer/contact/contact.component';
 
 
 
@@ -41,6 +42,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ZapatillasComponent,
     AccesoriosComponent,
     CartComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
