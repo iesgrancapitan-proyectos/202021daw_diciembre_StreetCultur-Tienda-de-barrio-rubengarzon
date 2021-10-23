@@ -1,3 +1,47 @@
-<p>
-  puntos works!
-</p>
+<app-header></app-header>
+<h3>¡Consigue puntos por cada compra!</h3>
+<h2>50 puntos</h2>
+<mat-tab-group dynamicHeight mat-align-tabs="center">
+  <mat-tab label="¿Que son los puntos de descuento?">
+    <div class="example-large-box mat-elevation-z4">
+      Por cada compra de cualquier prenda de esta web online recibirás 1 punto,
+      1 punto equivale a 1 €. Los puntos se pueden acumular hasta 100 puntos
+      como máximo, se pueden gastar solamente en algunas prendas. En la pestaña
+      "Canjear puntos" aparece el listado de todas las prendas que se puede
+      canjear los puntos de descuento y cuantos puntos. Por ejemplo: tienes 20
+      puntos de descuento (20€) y quieres canjearlos, debes de ir a la pestaña
+      canjear puntos, te muestra una sudadera de 40€ y canjeables 10 puntos. Te
+      saldría la sudadera por 30€.
+    </div>
+  </mat-tab>
+  <mat-tab label="Canjear puntos">
+    <div class="example-large-box1 mat-elevation-z4" style="text-align: center">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Shiba Inu</mat-card-title>
+          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-content>
+          <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz
+            breeds of dog from Japan. A small, agile dog that copes very well
+            with mountainous terrain, the Shiba Inu was originally bred for
+            hunting.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+
+<app-footer></app-footer>
