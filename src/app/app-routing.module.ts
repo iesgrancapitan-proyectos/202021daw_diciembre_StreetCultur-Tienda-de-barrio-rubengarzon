@@ -10,6 +10,7 @@ import { CartComponent } from './Main/cart/cart.component';
 import { ContactComponent } from './Main/footer/contact/contact.component';
 import { HeaderEmployeeComponent } from './Employee/header-employee/header-employee.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
+import { QuienesSomosComponent } from './Main/footer/quienes-somos/quienes-somos.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'empleado', component: HeaderEmployeeComponent },
   { path: 'contacto', component: ContactComponent },
   { path: 'puntos', component: PuntosComponent },
+  { path: 'quienes-somos', component: QuienesSomosComponent },
 ];
 
 @NgModule({

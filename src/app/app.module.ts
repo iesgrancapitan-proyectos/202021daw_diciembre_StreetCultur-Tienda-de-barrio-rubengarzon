@@ -24,6 +24,7 @@ import { DemoMaterialModule } from '../app/material-module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ContactComponent } from './Main/footer/contact/contact.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
+import { QuienesSomosComponent } from './Main/footer/quienes-somos/quienes-somos.component';
 
 
 
@@ -45,6 +46,7 @@ import { PuntosComponent } from './Client/puntos/puntos.component';
     CartComponent,
     ContactComponent,
     PuntosComponent,
+    QuienesSomosComponent
   ],
   imports: [
     BrowserModule,
