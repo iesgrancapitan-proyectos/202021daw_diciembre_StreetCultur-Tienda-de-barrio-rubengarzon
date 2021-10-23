@@ -23,6 +23,7 @@ import { CartComponent } from './Main/cart/cart.component';
 import { DemoMaterialModule } from '../app/material-module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ContactComponent } from './Main/footer/contact/contact.component';
+import { PuntosComponent } from './Client/puntos/puntos.component';
 
 
 
@@ -42,7 +43,8 @@ import { ContactComponent } from './Main/footer/contact/contact.component';
     ZapatillasComponent,
     AccesoriosComponent,
     CartComponent,
-    ContactComponent
+    ContactComponent,
+    PuntosComponent,
   ],
   imports: [
     BrowserModule,
