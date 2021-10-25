@@ -11,6 +11,10 @@ import { ContactComponent } from './Main/footer/contact/contact.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
 import { QuienesSomosComponent } from './Main/footer/quienes-somos/quienes-somos.component';
 import { EmpleadoComponent } from './Employee/empleado/empleado.component';
+import { PedidosComponent } from './Employee/pedidos/pedidos.component';
+import { RopaComponent } from './Employee/ropa/ropa.component';
+import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
+import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -23,7 +27,12 @@ const routes: Routes = [
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'contacto', component: ContactComponent },
   { path: 'puntos', component: PuntosComponent },
+  { path: 'inicio', component: EmpleadoComponent },
+  { path: 'pedidos', component: PedidosComponent },
+  { path: 'ropa', component: RopaComponent },
   { path: 'quienes-somos', component: QuienesSomosComponent },
+  { path: 'gestionarpuntos', component: GestionarPuntosComponent },
+  { path: 'incidencia', component: IncidenciaComponent },
 ];
 
 @NgModule({

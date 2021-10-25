@@ -29,6 +29,9 @@ import { HeaderEmployeeComponent } from './Employee/empleado/header-employee/hea
 import { EmpleadoComponent } from './Employee/empleado/empleado.component';
 import { BodyEmployeeComponent } from './Employee/empleado/body-employee/body-employee.component';
 import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/footer-employee.component';
+import { PedidosComponent } from './Employee/pedidos/pedidos.component';
+import { RopaComponent } from './Employee/ropa/ropa.component';
+import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 
 
 
@@ -54,6 +57,9 @@ import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/foo
     EmpleadoComponent,
     BodyEmployeeComponent,
     FooterEmployeeComponent,
+    PedidosComponent,
+    RopaComponent,
+    GestionarPuntosComponent,
   ],
   imports: [
     BrowserModule,

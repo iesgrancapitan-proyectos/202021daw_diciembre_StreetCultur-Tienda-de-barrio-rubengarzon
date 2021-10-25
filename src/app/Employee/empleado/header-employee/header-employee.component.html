@@ -3,27 +3,27 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>GESTIONAR PEDIDOS</button>
-    <button mat-menu-item>GESTIONAR ROPA</button>
-    <button mat-menu-item>GESTIONAR PUNTOS</button>
-    <button mat-menu-item>ABRIR INCIDENCIA</button>
+    <button mat-menu-item [routerLink]="['/pedidos']">GESTIONAR PEDIDOS</button>
+    <button mat-menu-item [routerLink]="['/ropa']">GESTIONAR ROPA</button>
+    <button mat-menu-item [routerLink]="['/gestionarpuntos']">GESTIONAR PUNTOS</button>
+    <button mat-menu-item [routerLink]="['/incidencia']">ABRIR INCIDENCIA</button>
   </mat-menu>
 
   <span>STREET🏀CULTUR</span>
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
+  <button mat-button class="item" [routerLink]="['/inicio']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/pedidos']">
     GESTIONAR PEDIDOS
   </button>
-  <button mat-button class="item" [routerLink]="['/sudaderas']">
+  <button mat-button class="item" [routerLink]="['/ropa']">
     GESTIONAR ROPA
   </button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
     GESTIONAR PUNTOS
   </button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
+  <button mat-button class="item" [routerLink]="['/incidencia']">
     ABRIR INCIDENCIA
   </button>
 
