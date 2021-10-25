@@ -7,10 +7,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>SUDADERAS</button>
-    <button mat-menu-item>PANTALONES</button>
-    <button mat-menu-item>ZAPATILLAS</button>
-    <button mat-menu-item>ACCESORIOS</button>
+    <button mat-menu-item [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item [routerLink]="['/sudaderas']">SUDADERAS</button>
+    <button mat-menu-item [routerLink]="['/pantalones']">PANTALONES</button>
+    <button mat-menu-item [routerLink]="['/zapatillas']">ZAPATILLAS</button>
+    <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
   </mat-menu>
 
   <span>STREET🏀CULTUR</span>
