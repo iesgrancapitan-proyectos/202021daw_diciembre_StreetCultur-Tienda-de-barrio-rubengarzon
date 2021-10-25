@@ -25,9 +25,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ContactComponent } from './Main/footer/contact/contact.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
 import { QuienesSomosComponent } from './Main/footer/quienes-somos/quienes-somos.component';
-import { HeaderEmployeeComponent } from './Employee/header-employee/header-employee.component';
+import { HeaderEmployeeComponent } from './Employee/empleado/header-employee/header-employee.component';
 import { EmpleadoComponent } from './Employee/empleado/empleado.component';
-
+import { BodyEmployeeComponent } from './Employee/empleado/body-employee/body-employee.component';
+import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/footer-employee.component';
 
 
 
@@ -51,6 +52,8 @@ import { EmpleadoComponent } from './Employee/empleado/empleado.component';
     QuienesSomosComponent,
     HeaderEmployeeComponent,
     EmpleadoComponent,
+    BodyEmployeeComponent,
+    FooterEmployeeComponent,
   ],
   imports: [
     BrowserModule,
