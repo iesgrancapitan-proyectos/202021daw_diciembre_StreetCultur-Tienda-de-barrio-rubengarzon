@@ -32,6 +32,7 @@ import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/foo
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { RopaComponent } from './Employee/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
+import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 
 
 
@@ -60,6 +61,7 @@ import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
     PedidosComponent,
     RopaComponent,
     GestionarPuntosComponent,
+    IncidenciaComponent
   ],
   imports: [
     BrowserModule,
