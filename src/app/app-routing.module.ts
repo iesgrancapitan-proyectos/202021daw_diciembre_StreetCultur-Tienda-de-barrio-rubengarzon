@@ -15,6 +15,7 @@ import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { RopaComponent } from './Employee/ropa/ropa.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'quienes-somos', component: QuienesSomosComponent },
   { path: 'gestionarpuntos', component: GestionarPuntosComponent },
   { path: 'incidencia', component: IncidenciaComponent },
+  { path: 'admin', component: AdminComponent },
 ];
 
 @NgModule({
