@@ -38,6 +38,7 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { GestionarUsuariosComponent } from './admin/gestionar-usuarios/gestionar-usuarios.component';
 import { GestionarEmpleadosComponent } from './admin/gestionar-empleados/gestionar-empleados.component';
 import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -80,6 +81,7 @@ import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/ges
     FormsModule,
     DemoMaterialModule,
     MDBBootstrapModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
