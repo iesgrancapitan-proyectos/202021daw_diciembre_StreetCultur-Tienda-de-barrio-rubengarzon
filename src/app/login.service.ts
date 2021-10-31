@@ -8,7 +8,7 @@ export class LoginService {
   constructor(private http: HttpClient) {}
 
   registrarUsuario(login: any) {
-    return this.http.post('streetcultur.com/registro.php', JSON.stringify(login));
+    return this.http.post('./registro.php', JSON.stringify(login));
   }
 
 }
