@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div>
   <h3>INICIA SESIÓN</h3>
-  <form  (submit)="loginEmail()">
+  <form (submit)="loginEmail()">
     <div class="example-container">
       <mat-form-field appearance="fill" class="email">
         <mat-label>Enter your email</mat-label>
@@ -9,14 +9,19 @@
           matInput
           placeholder="pat@example.com"
           [(ngModel)]="login.email"
-          [formControl]="email"
+          name="email"
           required
         />
         <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="login.contrasena" />
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          [(ngModel)]="login.contrasena"
+          name="email"
+        />
         <button
           mat-icon-button
           matSuffix
