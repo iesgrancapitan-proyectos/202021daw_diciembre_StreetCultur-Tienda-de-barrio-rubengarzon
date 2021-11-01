@@ -39,6 +39,7 @@ import { GestionarUsuariosComponent } from './admin/gestionar-usuarios/gestionar
 import { GestionarEmpleadosComponent } from './admin/gestionar-empleados/gestionar-empleados.component';
 import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistroComponent } from './Main/registro/registro.component';
 
 
 
@@ -72,6 +73,7 @@ import { HttpClientModule } from '@angular/common/http';
     AdminHeaderComponent,
     GestionarEmpleadosComponent,
     GestionarIncidenciasComponent,
+    RegistroComponent
    ],
   imports: [
     BrowserModule,

@@ -16,10 +16,12 @@ import { RopaComponent } from './Employee/ropa/ropa.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { AdminComponent } from './admin/admin.component';
+import { RegistroComponent } from './Main/registro/registro.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registro', component: RegistroComponent },
   { path: 'sudaderas', component: SudaderasComponent },
   { path: 'pantalones', component: PantalonesComponent },
   { path: 'zapatillas', component: ZapatillasComponent },
