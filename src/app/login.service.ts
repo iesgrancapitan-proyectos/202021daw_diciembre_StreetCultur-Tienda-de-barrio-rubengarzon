@@ -18,7 +18,7 @@ export class LoginService {
       );
     } else {
       return this.http.post(
-        'http://streetcultur.com/registro.php',
+        'https://streetcultur.com/registro.php',
         JSON.stringify(login)
       );
     }
@@ -32,7 +32,7 @@ export class LoginService {
       );
     } else {
       return this.http.post(
-        'http://streetcultur.com/login.php',
+        'https://streetcultur.com/login.php',
         JSON.stringify(login)
       );
     }
