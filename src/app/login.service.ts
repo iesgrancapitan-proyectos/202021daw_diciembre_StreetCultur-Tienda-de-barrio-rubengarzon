@@ -23,4 +23,18 @@ export class LoginService {
       );
     }
   }
+
+  loginUsuario(login: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/login.php',
+        JSON.stringify(login)
+      );
+    } else {
+      return this.http.post(
+        'http://streetcultur.com/login.php',
+        JSON.stringify(login)
+      );
+    }
+  }
 }

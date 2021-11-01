@@ -6,14 +6,14 @@ $json = file_get_contents('php://input'); // RECIBE EL JSON DE ANGULAR
 
 $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
-require("Conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
+require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = conexion(); // CREA LA CONEXION
 
-$contrasenaCifrada = md5($params->password);
+$contrasenaCifrada = md5($params->contrasena);
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE email='$params->email' AND pass='$contrasenaCifrada'");
+$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE Email='$params->email' AND Password='$contrasenaCifrada'");
 
 class Result
 {
@@ -25,12 +25,13 @@ $response = new Result();
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
+  $response->email = $fila['Email'];
 
-  if($fila['Perfil'] == "2"){
+  /* if ($fila['Perfil'] == "2") {
     $response->url = '/';
-  }else{
+  } else {
     $response->url = '/administracion';
-  }
+  } */
 }
 
 header('Content-Type: application/json');

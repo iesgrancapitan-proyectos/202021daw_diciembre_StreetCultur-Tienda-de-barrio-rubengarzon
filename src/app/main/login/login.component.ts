@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../../login.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
     contrasena: null,
   };
 
-  constructor(private loginService: LoginService) {}
+  email1 = this.login.email;
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -29,9 +31,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginEmail() {
-    this.loginService.registrarUsuario(this.login).subscribe((datos: any) => {
+    this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
-        alert('Te has registrado');
+        this.router.navigateByUrl('/');
+        sessionStorage.setItem('email', datos.email);
       } else {
         console.log('Ha habido un error al iniciar sesión');
       }
