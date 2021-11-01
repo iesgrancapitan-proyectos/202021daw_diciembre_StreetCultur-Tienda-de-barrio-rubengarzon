@@ -18,7 +18,7 @@ export class LoginService {
       );
     } else {
       return this.http.post(
-        'https://streetcultur.com/registro.php',
+        'https://streetcultur.com/registro1.php',
         JSON.stringify(login)
       );
     }
