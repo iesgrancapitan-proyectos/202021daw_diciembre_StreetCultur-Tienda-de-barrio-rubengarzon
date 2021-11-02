@@ -1,27 +1,78 @@
-# Prueba
+# STREETCULTUR
+_El proyecto consiste en una tienda online que vende ropa unisex de estilo urbano, con la peculiaridad de tener un sistema de puntos._
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+## Comenzando 🚀
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_Mira [Despliegue](http://github.com) para conocer como desplegar el proyecto._
 
-## Development server
+## Pre-requisitos📋
+_Que cosas necesitas para instalar el software y como instalarlas._
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+Da un ejemplo
+```
 
-## Code scaffolding
+_Y repite_
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+hasta finalizar
+```
 
-## Build
+### Instalación 🔧
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
 
-## Running unit tests
+_Dí cómo será ese paso_
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+Da un ejemplo
+```
 
-## Running end-to-end tests
+_Y repite_
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+hasta finalizar
+```
 
-## Further help
+_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Despliegue 
+
+_Agrega notas adicionales sobre como hacer deploy_
+
+## Construido con 🛠️
+
+_Menciona las herramientas que utilizaste para crear tu proyecto_
+
+* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
+* [Maven](https://maven.apache.org/) - Manejador de dependencias
+* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+
+
+## Wiki 📖
+
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
+
+## Autor ✒️
+
+* **Rubén Garzón**  - [Rubengarzon](https://github.com/rubengarzon)
+
+
+## Licencia 📄
+
+Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+
+## Expresiones de Gratitud 🎁
+
+* Comenta a otros sobre este proyecto 📢
+* Invita un café a alguien del equipo. 
+* Da las gracias públicamente 🤓.
+* etc.
+
+
+
+---
+⌨️ con ❤️ por [Rubengarzon](https://github.com/rubengarzon) 😊
+
