@@ -5,8 +5,11 @@ _El proyecto consiste en una tienda online que vende ropa unisex de estilo urban
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 _Mira [Despliegue](http://github.com) para conocer como desplegar el proyecto._
 
-## Pre-requisitos📋
-_Que cosas necesitas para instalar el software y como instalarlas._
+## Probar Angular sin instalar nada
+_Stackblitz es un IDE en la nube que permite crear aplicaciones fullstack con framework ya instalados como por ejemplo angular_.  [Stackblitz](https://stackblitz.com/edit/angular)
+
+## Requisitos📋
+_Se necesita Nodejs, npm y angular_ 
 
 ```
 Da un ejemplo
@@ -44,11 +47,9 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [Angular](https://angular.io/) - El framework web usado
+* [Nodejs](https://nodejs.org/es/) - Entorno para ejecutar javascript
+* [NPM](https://www.npmjs.com/) - Sistema de paquetes de nodejs
 
 
 ## Wiki 📖
