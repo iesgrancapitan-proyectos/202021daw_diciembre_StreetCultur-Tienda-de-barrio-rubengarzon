@@ -13,12 +13,12 @@ export class LoginService {
   registrarUsuario(login: any) {
     if (this.env == 'Development') {
       return this.http.post(
-        'http://localhost/streetcultur/registro.php',
+        'http://localhost/streetcultur/php/registro.php',
         JSON.stringify(login)
       );
     } else {
       return this.http.post(
-        'https://streetcultur.com/registro1.php',
+        'https://streetcultur.com/registro.php',
         JSON.stringify(login)
       );
     }
@@ -27,7 +27,7 @@ export class LoginService {
   loginUsuario(login: any) {
     if (this.env == 'Development') {
       return this.http.post(
-        'http://localhost/streetcultur/login.php',
+        'http://localhost/streetcultur/php/login.php',
         JSON.stringify(login)
       );
     } else {

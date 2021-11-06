@@ -30,6 +30,9 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
+  /**
+   * Inicia sesión el empleado y almacena el email en una sesion
+   */
   loginEmail() {
     this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
@@ -39,5 +42,16 @@ export class LoginComponent implements OnInit {
         console.log('Ha habido un error al iniciar sesión');
       }
     });
+  }
+  /**
+   * comprueba si alguien ha iniciado sesión
+   * @returns true o false
+   */
+  estaLogueado() {
+    if (sessionStorage.getItem('email')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

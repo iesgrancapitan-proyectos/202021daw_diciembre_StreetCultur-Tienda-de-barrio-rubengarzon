@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +7,15 @@ import { Component, Inject } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-  constructor() {}
+  constructor(private login:LoginComponent) {}
 
   panelOpenState = false;
+
+  estaLogueado:boolean = this.login.estaLogueado();
+
+  cerrarSesion(){
+    sessionStorage.removeItem("email");
+    this.estaLogueado = false;
+  }
+
 }

@@ -36,7 +36,7 @@
     routerLink="/puntos"
     routerLinkActive="active"
   >
-    <mat-icon matBadge="5" matBadgeColor="accent">card_giftcard</mat-icon>
+    <mat-icon matBadge="0" matBadgeColor="accent">card_giftcard</mat-icon>
   </button>
   <button
     mat-icon-button
@@ -55,5 +55,16 @@
     routerLinkActive="active"
   >
     <mat-icon matBadge="0" matBadgeColor="accent">shopping_cart</mat-icon>
+  </button>
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink=""
+    routerLinkActive="active"
+    (click)="cerrarSesion()"
+  >
+    <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>

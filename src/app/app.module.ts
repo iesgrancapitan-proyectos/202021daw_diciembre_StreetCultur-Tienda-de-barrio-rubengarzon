@@ -85,7 +85,7 @@ import { RegistroComponent } from './Main/registro/registro.component';
     MDBBootstrapModule.forRoot(),
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
