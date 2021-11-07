@@ -7,15 +7,15 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-  constructor(private login:LoginComponent) {}
+  constructor(private login: LoginComponent) {}
 
   panelOpenState = false;
 
-  estaLogueado:boolean = this.login.estaLogueado();
+  estaLogueado: boolean = this.login.estaLogueado();
 
-  cerrarSesion(){
-    sessionStorage.removeItem("email");
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
-
 }

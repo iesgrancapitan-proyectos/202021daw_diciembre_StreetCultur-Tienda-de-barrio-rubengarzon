@@ -1,4 +1,4 @@
-export class Ropa {
+export class Sudadera {
   constructor(
     public Nombre: string,
     public Descripcion: string,
@@ -8,6 +8,7 @@ export class Ropa {
     public Tipo: string,
     public Color: string,
     public Novedad: number,
+    public Imagen: string,
     public id?: number
   ) {}
 }

@@ -8,12 +8,12 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = conexion(); // CREA LA CONEXION
+$conexion = Conexion(); // CREA LA CONEXION
 
-$contrasenaCifrada = md5($params->contrasena);
+$query = "INSERT INTO carro (Nombre, Precio, Id_Cliente) VALUES('$params->Nombre', '$params->Precio', '$params->Id')";
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE Email='$params->email' AND Password='$contrasenaCifrada'");
+$resultado = mysqli_query($conexion, $query);
 
 class Result
 {
@@ -23,10 +23,11 @@ class Result
 $response = new Result();
 
 
-while ($fila = mysqli_fetch_assoc($resultado)) {
+if ($resultado == TRUE) {
   $response->resultado = 'OK';
-  $response->id = $fila['Id'];
-  $response->email = $fila['Email'];
+} else {
+  $response->resultado = 'FAIL';
+  $response->mensaje = $resultado->error;
 }
 
 header('Content-Type: application/json');

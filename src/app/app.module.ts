@@ -43,6 +43,7 @@ import { RegistroComponent } from './Main/registro/registro.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,7 @@ import { RegistroComponent } from './Main/registro/registro.component';
     AdminHeaderComponent,
     GestionarEmpleadosComponent,
     GestionarIncidenciasComponent,
-    RegistroComponent
+    RegistroComponent,
    ],
   imports: [
     BrowserModule,

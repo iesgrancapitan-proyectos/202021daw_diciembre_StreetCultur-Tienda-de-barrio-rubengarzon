@@ -10,10 +10,8 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = conexion(); // CREA LA CONEXION
 
-$contrasenaCifrada = md5($params->contrasena);
-
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE Email='$params->email' AND Password='$contrasenaCifrada'");
+$resultado = mysqli_query($conexion, "SELECT * FROM carro WHERE Id_Cliente='$params->Id'");
 
 class Result
 {
@@ -22,12 +20,19 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
+$response->carro = $resultado->fetch_all(MYSQLI_ASSOC);
 
-while ($fila = mysqli_fetch_assoc($resultado)) {
+/* while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
-  $response->id = $fila['Id'];
-  $response->email = $fila['Email'];
-}
+  //$response->descripcion = $fila['Descripcion'];
+  $response->sudaderas[] = $fila;
+
+  /* if ($fila['Perfil'] == "2") {
+    $response->url = '/';
+  } else {
+    $response->url = '/administracion';
+  } }*/
+
 
 header('Content-Type: application/json');
 

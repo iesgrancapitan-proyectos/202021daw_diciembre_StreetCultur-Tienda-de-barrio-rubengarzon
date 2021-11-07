@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       if (datos['resultado'] == 'OK') {
         this.router.navigateByUrl('/');
         sessionStorage.setItem('email', datos.email);
+        sessionStorage.setItem('id', datos.id);
       } else {
         console.log('Ha habido un error al iniciar sesión');
       }
