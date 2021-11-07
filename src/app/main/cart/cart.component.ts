@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrito } from 'src/app/Model/Carrito';
-import { LocalstorageService } from 'src/app/localstorage.service';
 import { CarroService } from 'src/app/carro.service';
 
 @Component({

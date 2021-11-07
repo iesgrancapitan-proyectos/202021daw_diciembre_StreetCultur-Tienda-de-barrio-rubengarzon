@@ -17,7 +17,10 @@ export class CarroService {
         JSON.stringify(carrito)
       );
     } else {
-      return this.http.get('https://streetcultur.com/login.php');
+      return this.http.post(
+        'https://streetcultur.com/php/insertarCarro.php',
+        JSON.stringify(carrito)
+      );
     }
   }
 
@@ -28,7 +31,10 @@ export class CarroService {
         JSON.stringify(this.id1)
       );
     } else {
-      return this.http.get('https://streetcultur.com/login.php');
+      return this.http.post(
+        'https://streetcultur.com/php/mostrarCarro.php',
+        JSON.stringify(this.id1)
+      );
     }
   }
 }

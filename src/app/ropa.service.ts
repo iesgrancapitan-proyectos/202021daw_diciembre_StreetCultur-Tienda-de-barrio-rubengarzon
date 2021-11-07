@@ -13,7 +13,7 @@ export class RopaService {
     if (this.env == 'Development') {
       return this.http.get('http://localhost/streetcultur/php/sudaderas.php');
     } else {
-      return this.http.get('https://streetcultur.com/login.php');
+      return this.http.get('https://streetcultur.com/php/sudaderas.php');
     }
   }
 }
