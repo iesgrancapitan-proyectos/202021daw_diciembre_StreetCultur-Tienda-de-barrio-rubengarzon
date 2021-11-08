@@ -34,7 +34,9 @@ export class SudaderasComponent implements OnInit {
     if (sessionStorage.getItem('email')) {
       let id = sessionStorage.getItem('id');
       let carrito = { Nombre: nombre, Precio: precio, Id: id };
-      this.carro.insertarCarro(carrito);
+      this.carro.insertarCarro(carrito).subscribe( dato => {
+        console.log(dato);
+      });
       return false;
     } else {
       return this.snackBar.open('Necesitas iniciar sesión.', 'De acuerdo', {
