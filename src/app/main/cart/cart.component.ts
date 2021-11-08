@@ -9,6 +9,7 @@ import { CarroService } from 'src/app/carro.service';
 })
 export class CartComponent implements OnInit {
   carrito: Carrito[] = [];
+  carritoVacio = false;
 
   constructor(private carritoServicio: CarroService) {}
 
@@ -19,6 +20,9 @@ export class CartComponent implements OnInit {
   mostrarCarrito() {
     this.carritoServicio.obtenerCarrito().subscribe((datos: any) => {
       this.carrito = datos['carro'];
+      if(this.carrito.length == 0){
+        this.carritoVacio = true;
+      }
     });
   }
 }
