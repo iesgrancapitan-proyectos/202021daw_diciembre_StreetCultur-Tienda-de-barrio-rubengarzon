@@ -37,4 +37,18 @@ export class CarroService {
       );
     }
   }
+
+  borrarProducto(nombre:any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/borrarProducto.php',
+        JSON.stringify(nombre)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/borrarProducto.php',
+        JSON.stringify(nombre)
+      );
+    }
+  }
 }
