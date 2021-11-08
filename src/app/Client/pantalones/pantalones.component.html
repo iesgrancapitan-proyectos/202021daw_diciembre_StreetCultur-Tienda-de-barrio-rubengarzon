@@ -1,90 +1,32 @@
 <app-header></app-header>
 <h2>PANTALONES</h2>
 <div>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
-  <mat-card class="example-card">
-    <img mat-card-image src="../../assets/aa.png" alt="Photo of a Shiba Inu" />
-    <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz
-        breeds of dog from Japan. A small, agile dog that copes very well with
-        mountainous terrain, the Shiba Inu was originally bred for hunting.
-      </p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button>COMPRAR</button>
-      <button mat-button>COMPARTIR</button>
-    </mat-card-actions>
-  </mat-card>
+  <div>
+    <mat-card class="example-card" *ngFor="let pantalon of pantalones">
+      <mat-card-header style="display: flex;place-content: center;">
+        <mat-card-title>{{ pantalon.Nombre }}</mat-card-title>
+        <mat-card-subtitle style="font-weight: bold"
+          >{{ pantalon.Precio }} €</mat-card-subtitle
+        >
+      </mat-card-header>
+      <img
+        mat-card-image
+        src="{{ pantalon.Imagen }}"
+        alt="Photo of a Shiba Inu"
+      />
+      <mat-card-content>
+        <p>{{ pantalon.Descripcion }}</p>
+      </mat-card-content>
+      <mat-card-actions style="display:flex;justify-content: center;">
+        <button
+          mat-button
+          (click)="guardarProducto(pantalon.Nombre, pantalon.Precio)"
+        >
+          AÑADIR AL CARRITO
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
 <app-footer></app-footer>

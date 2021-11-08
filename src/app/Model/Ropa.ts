@@ -1,4 +1,4 @@
-export class Sudadera {
+export class Ropa {
   constructor(
     public Nombre: string,
     public Descripcion: string,

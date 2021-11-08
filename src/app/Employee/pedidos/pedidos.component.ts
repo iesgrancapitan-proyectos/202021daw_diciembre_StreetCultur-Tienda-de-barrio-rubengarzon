@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from 'src/app/cliente.service';
 import { Pedido } from 'src/app/Model/Pedido';
+import { Cliente } from 'src/app/Model/Cliente';
 import { PedidoService } from 'src/app/pedido.service';
 
 @Component({
@@ -9,8 +11,9 @@ import { PedidoService } from 'src/app/pedido.service';
 })
 export class PedidosComponent implements OnInit {
   pedido: Pedido[] = [];
+  cliente: Cliente[] = [];
 
-  constructor(private pedidoServicio: PedidoService) {}
+  constructor(private pedidoServicio: PedidoService, private clienteServicio: ClienteService) {}
 
   ngOnInit() {
     this.mostrarPedido();
@@ -19,6 +22,11 @@ export class PedidosComponent implements OnInit {
   mostrarPedido() {
     this.pedidoServicio.obtenerPedido().subscribe((datos: any) => {
       this.pedido = datos['pedido'];
+    });
+    let email = sessionStorage.getItem("email");
+    let objEmail = {Email : email};
+    this.clienteServicio.mostrarCliente(objEmail).subscribe((datos: any) => {
+      this.cliente = datos['cliente'];
     });
   }
 }

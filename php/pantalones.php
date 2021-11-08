@@ -10,8 +10,9 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = conexion(); // CREA LA CONEXION
 
+
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT Nombre FROM cliente WHERE Email='$params->Email'");
+$resultado = mysqli_query($conexion, "SELECT * FROM ropa WHERE Tipo='Pantalon'");
 
 class Result
 {
@@ -20,7 +21,7 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-$response->cliente = $resultado->fetch_all(MYSQLI_ASSOC);
+$response->pantalones = $resultado->fetch_all(MYSQLI_ASSOC);
 
 /* while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';

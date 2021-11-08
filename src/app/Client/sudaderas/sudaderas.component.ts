@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sudadera } from 'src/app/Model/Sudadera';
+import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { LocalstorageService } from 'src/app/localstorage.service';
@@ -11,7 +11,7 @@ import { CarroService } from 'src/app/carro.service';
   styleUrls: ['./sudaderas.component.sass'],
 })
 export class SudaderasComponent implements OnInit {
-  sudaderas: Sudadera[] = [];
+  sudaderas: Ropa[] = [];
 
   constructor(
     private ropaServicio: RopaService,
