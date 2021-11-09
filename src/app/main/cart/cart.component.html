@@ -17,7 +17,7 @@
 
 
 <ng-template #carroNoVacio>
-  <button style="margin-left: 10em;">Hacer pedido</button>
+  <button style="margin-left: 10em;" (click)="hacerPedido()" routerLink="/pedido">Hacer pedido</button>
   <section class="mdl-grid" id="my-table" >
     <div class="mdl-layout-spacer"></div>
     <div
