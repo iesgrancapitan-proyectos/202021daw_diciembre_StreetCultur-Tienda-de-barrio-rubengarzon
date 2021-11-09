@@ -7,8 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CarroService {
   env: string = environment.env;
-  id = sessionStorage.getItem('id');
-  id1 = { Id: this.id };
+
   constructor(private http: HttpClient) {}
   insertarCarro(carrito: any) {
     if (this.env == 'Development') {
@@ -24,16 +23,17 @@ export class CarroService {
     }
   }
 
-  obtenerCarrito() {
+  obtenerCarrito(id1 : any) {
     if (this.env == 'Development') {
+      console.log(id1);
       return this.http.post(
         'http://localhost/streetcultur/php/mostrarCarro.php',
-        JSON.stringify(this.id1)
+        JSON.stringify(id1)
       );
     } else {
       return this.http.post(
         'https://streetcultur.com/php/mostrarCarro.php',
-        JSON.stringify(this.id1)
+        JSON.stringify(id1)
       );
     }
   }

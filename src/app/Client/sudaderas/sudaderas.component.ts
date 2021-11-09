@@ -26,14 +26,17 @@ export class SudaderasComponent implements OnInit {
 
   mostrarRopa() {
     this.ropaServicio.obtenerSudaderas().subscribe((datos: any) => {
+      console.log(datos);
       this.sudaderas = datos['sudaderas'];
     });
   }
 
   guardarProducto(nombre: any, precio: any) {
     if (sessionStorage.getItem('email')) {
+
       let id = sessionStorage.getItem('id');
       let carrito = { Nombre: nombre, Precio: precio, Id: id };
+
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){
         return this.snackBar.open('Se ha añadido al carrito.', '', {
