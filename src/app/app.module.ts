@@ -87,7 +87,7 @@ import { PedidoComponent } from './Client/pedido/pedido.component';
     MDBBootstrapModule.forRoot(),
     HttpClientModule
   ],
-  providers: [LoginComponent],
+  providers: [LoginComponent, HeaderComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CarroService } from 'src/app/carro.service';
+import { HeaderComponent } from 'src/app/main/header/header.component';
 
 @Component({
   selector: 'app-sudaderas',
@@ -14,6 +15,7 @@ export class SudaderasComponent implements OnInit {
 
   constructor(
     private ropaServicio: RopaService,
+    private headerComponent: HeaderComponent,
     readonly snackBar: MatSnackBar,
     private carro: CarroService
   ) {}
@@ -33,7 +35,11 @@ export class SudaderasComponent implements OnInit {
     if (sessionStorage.getItem('email')) {
 
       let id = sessionStorage.getItem('id');
+      let id1 = { Id: id };
       let carrito = { Nombre: nombre, Precio: precio, Id: id };
+
+
+
 
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){

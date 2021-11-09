@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CarroService {
   env: string = environment.env;
+  contador: number;
 
   constructor(private http: HttpClient) {}
   insertarCarro(carrito: any) {
@@ -65,4 +66,9 @@ export class CarroService {
       );
     }
   }
+
+  sumarProductos(){
+    
+  }
+
 }

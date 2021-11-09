@@ -52,7 +52,7 @@ export class CartComponent implements OnInit {
     });
   }
 
-  insertarPedido() {
+  /* insertarPedido() {
     if (sessionStorage.getItem('email')) {
       let id = sessionStorage.getItem('id');
       const tiempoTranscurrido = Date.now();
@@ -67,9 +67,7 @@ export class CartComponent implements OnInit {
 
       this.pedidoServicio.hacerPedido(pedido);
     }
-  }
-
-  comprobarDatosPersonales() {}
+  } */
 
   contarProductos() {
     let id = sessionStorage.getItem('id');
