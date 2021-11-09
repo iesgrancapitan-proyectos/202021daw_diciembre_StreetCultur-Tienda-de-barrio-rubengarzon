@@ -23,7 +23,7 @@ export class CarroService {
     }
   }
 
-  obtenerCarrito(id1 : any) {
+  obtenerCarrito(id1: any) {
     if (this.env == 'Development') {
       console.log(id1);
       return this.http.post(
@@ -38,7 +38,7 @@ export class CarroService {
     }
   }
 
-  borrarProducto(nombre:any) {
+  borrarProducto(nombre: any) {
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/borrarProducto.php',
@@ -48,6 +48,20 @@ export class CarroService {
       return this.http.post(
         'https://streetcultur.com/php/borrarProducto.php',
         JSON.stringify(nombre)
+      );
+    }
+  }
+
+  contarProductos(id: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/contarProductos.php',
+        JSON.stringify(id)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/contarProductos.php',
+        JSON.stringify(id)
       );
     }
   }

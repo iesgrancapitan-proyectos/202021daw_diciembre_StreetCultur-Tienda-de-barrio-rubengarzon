@@ -17,7 +17,10 @@
 
 <ng-template #carroNoVacio>
 
-  <h2>Productos</h2>
+  <h2 style="text-align: center;" *ngIf="numProductos == 1;else productos">{{numProductos}} Producto</h2>
+  <ng-template #productos>
+    <h2 style="text-align: center;">{{numProductos}} Productos</h2>
+  </ng-template>
 
   <section class="mdl-grid" id="my-table">
     <div class="mdl-layout-spacer"></div>

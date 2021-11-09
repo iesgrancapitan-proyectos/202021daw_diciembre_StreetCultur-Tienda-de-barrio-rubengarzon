@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
   carrito: Carrito[] = [];
   pedido: Pedido[] = [];
   carritoVacio = false;
+  numProductos: any;
 
   constructor(
     private carritoServicio: CarroService,
@@ -22,6 +23,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.mostrarCarrito();
+    this.contarProductos();
   }
 
   mostrarCarrito() {
@@ -29,6 +31,7 @@ export class CartComponent implements OnInit {
     let id1 = { Id: id };
     this.carritoServicio.obtenerCarrito(id1).subscribe((datos: any) => {
       this.carrito = datos['carro'];
+
       if (this.carrito.length == 0) {
         this.carritoVacio = true;
       } else {
@@ -65,7 +68,14 @@ export class CartComponent implements OnInit {
       this.pedidoServicio.hacerPedido(pedido);
     }
   }
-  comprobarDatosPersonales() {
 
+  comprobarDatosPersonales() {}
+
+  contarProductos() {
+    let id = sessionStorage.getItem('id');
+    let id1 = { Id: id };
+    this.carritoServicio.contarProductos(id1).subscribe((dato: any) => {
+      this.numProductos = Object.values(dato['numero'][0]);
+    });
   }
 }
