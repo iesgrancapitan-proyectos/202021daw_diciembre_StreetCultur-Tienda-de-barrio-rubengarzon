@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
     this.carritoServicio.borrarProducto(carrito).subscribe((datos: any) => {
       if (Object.values(datos).includes('OK')) {
         console.log('El producto ha sido borrado');
-        this.router.navigateByUrl("/cart");
+        this.mostrarCarrito();
       } else {
         console.log('El producto no se ha borrado');
       }
