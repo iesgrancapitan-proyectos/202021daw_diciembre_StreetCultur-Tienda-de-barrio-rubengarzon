@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { LocalstorageService } from 'src/app/localstorage.service';
 import { CarroService } from 'src/app/carro.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class SudaderasComponent implements OnInit {
   constructor(
     private ropaServicio: RopaService,
     readonly snackBar: MatSnackBar,
-    private localStorage: LocalstorageService,
     private carro: CarroService
   ) {}
 

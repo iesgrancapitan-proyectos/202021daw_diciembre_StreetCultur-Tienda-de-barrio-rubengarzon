@@ -24,4 +24,12 @@ export class RopaService {
       return this.http.get('https://streetcultur.com/php/pantalones.php');
     }
   }
+
+  obtenerZapatillas() {
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/zapatillas.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/zapatillas.php');
+    }
+  }
 }
