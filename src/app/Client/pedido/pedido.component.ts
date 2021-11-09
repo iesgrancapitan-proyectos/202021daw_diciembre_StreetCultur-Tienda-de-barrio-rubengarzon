@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Pedido } from 'src/app/Model/Pedido';
 import { PedidoService } from 'src/app/pedido.service';
+import {NgForm} from '@angular/forms';
+import { Cliente } from 'src/app/Model/Cliente';
 
 @Component({
   selector: 'app-pedido',
@@ -8,11 +9,20 @@ import { PedidoService } from 'src/app/pedido.service';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent implements OnInit {
-  pedido: Pedido[] = [];
+  /* cliente: Cliente[] = []; */
+
+  cliente = {
+    nombre: null,
+    contrasena: null,
+  };
 
   constructor(private pedidoServicio:PedidoService) { }
 
   ngOnInit() {
+  }
+
+  rellenarDatos(){
+    
   }
 
   /* insertarPedido(pedido: any) {
