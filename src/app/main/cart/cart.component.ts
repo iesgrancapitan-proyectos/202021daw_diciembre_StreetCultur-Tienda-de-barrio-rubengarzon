@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Carrito } from 'src/app/Model/Carrito';
 import { CarroService } from 'src/app/carro.service';
 import { Router } from '@angular/router';
+import { PedidoService } from 'src/app/pedido.service';
+import { Pedido } from 'src/app/Model/Pedido';
 
 @Component({
   selector: 'app-cart',
@@ -10,9 +12,13 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   carrito: Carrito[] = [];
+  pedido: Pedido[] = [];
   carritoVacio = false;
 
-  constructor(private carritoServicio: CarroService, private router: Router) {}
+  constructor(
+    private carritoServicio: CarroService,
+    private pedidoServicio: PedidoService
+  ) {}
 
   ngOnInit() {
     this.mostrarCarrito();
@@ -25,7 +31,7 @@ export class CartComponent implements OnInit {
       this.carrito = datos['carro'];
       if (this.carrito.length == 0) {
         this.carritoVacio = true;
-      }else{
+      } else {
         this.carritoVacio = false;
       }
     });
@@ -43,7 +49,23 @@ export class CartComponent implements OnInit {
     });
   }
 
-  hacerPedido(){
-      console.log("metodo ejecutado");
+  insertarPedido() {
+    if (sessionStorage.getItem('email')) {
+      let id = sessionStorage.getItem('id');
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
+      let fecha = hoy.toLocaleDateString();
+      let pedido = {
+        Fecha: fecha,
+        Nombre: 'aaa',
+        Estado: 'pendiente',
+        IdCliente: id,
+      };
+
+      this.pedidoServicio.hacerPedido(pedido);
+    }
+  }
+  comprobarDatosPersonales() {
+
   }
 }

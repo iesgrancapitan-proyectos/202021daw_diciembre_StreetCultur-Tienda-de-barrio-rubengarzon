@@ -10,8 +10,10 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = conexion(); // CREA LA CONEXION
 
+mysqli_query($conexion, "INSERT INTO pedido (Fecha, Nombre, Estado, Id_CLiente) VALUES('$params->Nombre', '$params->Precio', '$params->Id', NULL)"");
+
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM pedido");
+$resultado = mysqli_query($conexion, "SELECT * FROM pedido WHERE Id_Cliente='$params->Id'");
 
 class Result
 {

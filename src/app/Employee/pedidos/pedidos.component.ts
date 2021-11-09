@@ -20,13 +20,13 @@ export class PedidosComponent implements OnInit {
   }
 
   mostrarPedido() {
-    this.pedidoServicio.obtenerPedido().subscribe((datos: any) => {
+    /*this.pedidoServicio.obtenerPedido().subscribe((datos: any) => {
       this.pedido = datos['pedido'];
     });
     let email = sessionStorage.getItem("email");
     let objEmail = {Email : email};
     this.clienteServicio.mostrarCliente(objEmail).subscribe((datos: any) => {
       this.cliente = datos['cliente'];
-    });
+    }); */
   }
 }
