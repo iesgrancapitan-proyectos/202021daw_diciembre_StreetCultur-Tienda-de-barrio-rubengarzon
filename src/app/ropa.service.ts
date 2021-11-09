@@ -32,4 +32,12 @@ export class RopaService {
       return this.http.get('https://streetcultur.com/php/zapatillas.php');
     }
   }
+
+  obtenerAccesorios() {
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/accesorios.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/accesorios.php');
+    }
+  }
 }
