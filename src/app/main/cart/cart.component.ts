@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
 
   mostrarCarrito() {
     let id = sessionStorage.getItem('id');
-    let id1 = { Id: id };
+    let id1 = { id: id };
     this.carritoServicio.obtenerCarrito(id1).subscribe((datos: any) => {
       this.carrito = datos['carro'];
 
