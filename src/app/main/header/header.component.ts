@@ -9,7 +9,7 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent implements OnInit{
-  constructor(private login: LoginComponent, private carritoServicio: CarroService,) {}
+  constructor(private login: LoginComponent, private carritoServicio: CarroService) {}
 
   panelOpenState = false;
   numProductos: any;

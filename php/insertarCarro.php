@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "INSERT INTO carro (Nombre, Precio, Id_Cliente, Id_Pedido) VALUES('$params->Nombre', '$params->Precio', '$params->Id', NULL)";
+$query = "INSERT INTO carro (nombre, precio, idcliente, idpedido) VALUES('$params->Nombre', '$params->Precio', '$params->Id', NULL)";
 
 // REALIZA LA QUERY A LA DB
 $resultado = mysqli_query($conexion, $query);

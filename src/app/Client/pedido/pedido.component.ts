@@ -9,23 +9,34 @@ import { ClienteService } from 'src/app/cliente.service';
   styleUrls: ['./pedido.component.css'],
 })
 export class PedidoComponent implements OnInit {
+
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
   cliente = {
     id: sessionStorage.getItem('id'),
-    fecha: '12-12-2021',
+    email: sessionStorage.getItem('email'),
+    fecha: this.hoy.toLocaleDateString(),
     nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
     domicilio: null,
     codigo: null,
     movil: null,
   };
 
+  numProductos: any;
+
   productosEnCarrito = [];
 
 
-  constructor(private clienteServicio: ClienteService, private carroServicio:CarroService) {}
+  constructor(private clienteServicio: ClienteService, private carroServicio:CarroService, private carritoServicio: CarroService) {}
 
   ngOnInit() {
     this.obtenerDatos();
     this.obtenerCarro();
+    this.contarProductos();
   }
 
   rellenarDatos() {
@@ -49,6 +60,9 @@ export class PedidoComponent implements OnInit {
         datos['cliente'][0]['nombre'] != null && datos['cliente'][0]['domicilio'] != null && datos['cliente'][0]['codigopostal']  && datos['cliente'][0]['movil']
       ) {
         this.cliente.nombre = datos['cliente'][0]['nombre'];
+        this.cliente.apellidos = datos['cliente'][0]['apellidos'];
+        this.cliente.provincia = datos['cliente'][0]['provincia'];
+        this.cliente.localidad = datos['cliente'][0]['localidad'];
         this.cliente.domicilio = datos['cliente'][0]['domicilio'];
         this.cliente.codigo = datos['cliente'][0]['codigopostal'];
         this.cliente.movil = datos['cliente'][0]['movil'];
@@ -60,13 +74,17 @@ export class PedidoComponent implements OnInit {
     let id = sessionStorage.getItem('id');
     let id1 = { id: id };
     this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
-      /* this.productosEnCarrito = datos["carro"]; */
       for (const key in datos["carro"]) {
-        /* console.log(Object.values(datos["carro"][key])); */
         this.productosEnCarrito.push(Object.values(datos["carro"][key]));
-        /* this.productosEnCarrito.push(datos["carro"][key]); */
       }
-      console.log(this.productosEnCarrito);
+    });
+  }
+
+  contarProductos() {
+    let id = sessionStorage.getItem('id');
+    let id1 = { Id: id };
+    this.carritoServicio.contarProductos(id1).subscribe((dato: any) => {
+      this.numProductos = Object.values(dato['numero'][0]);
     });
   }
 
