@@ -15,22 +15,22 @@
 <form class="example-form" (submit)="rellenarDatos()" style="margin-left: 35%">
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Nombre completo</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Rodrigo García Gonzalez" [(ngModel)]="cliente.Nombre" #nombre required>
+    <input matInput placeholder="Rodrigo García Gonzalez" [(ngModel)]="cliente.nombre" name="nombre" required>
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Domicilio</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Calle Jaén Nº1 Portal 5 2º2" ngModel required #domicilio="ngModel">
+    <input matInput placeholder="Calle Jaén Nº1 Portal 5 2º2" [(ngModel)]="cliente.domicilio" name="domicilio" required>
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Código Postal</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="14010" ngModel required #codigopostal="ngModel">
+    <input matInput placeholder="14013" [(ngModel)]="cliente.codigo" name="codigo" required>
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Móvil</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="601020304" ngModel required #movil="ngModel">
+    <input matInput placeholder="601020304" [(ngModel)]="cliente.movil" name="movil" required>
   </mat-form-field>
 
   <button mat-raised-button color="primary" style="width: 7em; margin-left: 14em">Enviar</button>

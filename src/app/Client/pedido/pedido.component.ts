@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidoService } from 'src/app/pedido.service';
-import {NgForm} from '@angular/forms';
-import { Cliente } from 'src/app/Model/Cliente';
+import { ClienteService } from 'src/app/cliente.service';
 
 @Component({
   selector: 'app-pedido',
@@ -9,21 +7,34 @@ import { Cliente } from 'src/app/Model/Cliente';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent implements OnInit {
-  /* cliente: Cliente[] = []; */
-
   cliente = {
+    id: sessionStorage.getItem("id"),
+    fecha: "12-12-2021",
     nombre: null,
-    contrasena: null,
+    domicilio: null,
+    codigo: null,
+    movil: null
   };
 
-  constructor(private pedidoServicio:PedidoService) { }
+  constructor(private clienteServicio:ClienteService) { }
 
   ngOnInit() {
   }
 
   rellenarDatos(){
-    
+    this.clienteServicio.actualizarCliente(this.cliente).subscribe((datos) => {
+      if(datos["mensaje"] == undefined){
+        console.log("se ha modificado el pedido");
+      }else{
+        console.log("error");
+      }
+    });
   }
+
+  obtenerDatos(){
+    this.clienteServicio
+  }
+
 
   /* insertarPedido(pedido: any) {
     this.pedidoServicio.hacerPedido(pedido);

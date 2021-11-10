@@ -12,7 +12,7 @@ $conexion = Conexion(); // CREA LA CONEXION
 
 $contrasenaCifrada = md5($params->contrasena);
 
-$query = "INSERT INTO cliente (Email, Password) VALUES('$params->email', '$contrasenaCifrada')";
+$query = "INSERT INTO cliente (email, password) VALUES('$params->email', '$contrasenaCifrada')";
 
 // REALIZA LA QUERY A LA DB
 $resultado = mysqli_query($conexion, $query);

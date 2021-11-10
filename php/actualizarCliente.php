@@ -8,12 +8,13 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = conexion(); // CREA LA CONEXION
+$conexion = Conexion(); // CREA LA CONEXION
 
-$contrasenaCifrada = md5($params->contrasena);
+$query = "UPDATE cliente SET nombre = '$params->nombre', domicilio = '$params->domicilio', codigopostal = $params->codigo, movil = '$params->movil' WHERE id='$params->id'";
+
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE email='$params->email' AND password='$contrasenaCifrada'");
+$resultado = mysqli_query($conexion, $query);
 
 class Result
 {
@@ -23,10 +24,11 @@ class Result
 $response = new Result();
 
 
-while ($fila = mysqli_fetch_assoc($resultado)) {
+if ($resultado == TRUE) {
   $response->resultado = 'OK';
-  $response->id = $fila['id'];
-  $response->email = $fila['email'];
+} else {
+  $response->resultado = 'FAIL';
+  $response->mensaje = $resultado->error;
 }
 
 header('Content-Type: application/json');
