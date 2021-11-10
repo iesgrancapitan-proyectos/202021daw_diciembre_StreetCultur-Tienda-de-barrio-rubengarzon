@@ -18,10 +18,8 @@ export class PedidoComponent implements OnInit {
     movil: null,
   };
 
-  productos = {
-    nombre: null,
-    precio: null
-  };
+  productosEnCarrito = [];
+
 
   constructor(private clienteServicio: ClienteService, private carroServicio:CarroService) {}
 
@@ -62,7 +60,13 @@ export class PedidoComponent implements OnInit {
     let id = sessionStorage.getItem('id');
     let id1 = { id: id };
     this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
-      console.log(datos["carro"][0]);
+      /* this.productosEnCarrito = datos["carro"]; */
+      for (const key in datos["carro"]) {
+        /* console.log(Object.values(datos["carro"][key])); */
+        this.productosEnCarrito.push(Object.values(datos["carro"][key]));
+        /* this.productosEnCarrito.push(datos["carro"][key]); */
+      }
+      console.log(this.productosEnCarrito);
     });
   }
 
