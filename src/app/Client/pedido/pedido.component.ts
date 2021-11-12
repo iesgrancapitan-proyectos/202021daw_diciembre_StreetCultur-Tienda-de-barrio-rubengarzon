@@ -23,7 +23,7 @@ export class PedidoComponent implements OnInit {
     provincia: null,
     localidad: null,
     domicilio: null,
-    codigo: null,
+    codigopostal: null,
     movil: null,
   };
 
@@ -44,10 +44,6 @@ export class PedidoComponent implements OnInit {
     this.contarProductos();
   }
 
-  actualizarCliente() {
-    this.clienteServicio.actualizarCliente(this.cliente);
-  }
-
   obtenerDatos() {
     let email = sessionStorage.getItem('email');
     let email1 = { email: email };
@@ -64,7 +60,7 @@ export class PedidoComponent implements OnInit {
         this.cliente.provincia = datos['cliente'][0]['provincia'];
         this.cliente.localidad = datos['cliente'][0]['localidad'];
         this.cliente.domicilio = datos['cliente'][0]['domicilio'];
-        this.cliente.codigo = datos['cliente'][0]['codigopostal'];
+        this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
         this.cliente.movil = datos['cliente'][0]['movil'];
       }
     });
@@ -89,15 +85,15 @@ export class PedidoComponent implements OnInit {
   }
 
   insertarPedido() {
-    this.actualizarCliente();
+    this.clienteServicio.actualizarCliente(this.cliente).subscribe((dato) => {
+      console.log(dato["resultado"]);
+    });
     let pedido = {
       fecha: this.hoy,
       estado: "pendiente",
       id: sessionStorage.getItem("id")
     }
 
-    this.pedidoServicio.hacerPedido(pedido).subscribe( (datos) => {
-      console.log(datos);
-    });
+    this.pedidoServicio.hacerPedido(pedido);
   }
 }

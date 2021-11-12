@@ -12,7 +12,6 @@ export class PedidoService {
 
   hacerPedido(pedido: any) {
     if (this.env == 'Development') {
-      console.log(pedido);
       return this.http.post(
         'http://localhost/streetcultur/php/hacerPedido.php',
         JSON.stringify(pedido)
