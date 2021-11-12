@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
     let id1 = { id: id };
     this.carritoServicio.obtenerCarrito(id1).subscribe((datos: any) => {
       this.carrito = datos['carro'];
+      console.log(this.carrito)
 
       if (this.carrito.length == 0) {
         this.carritoVacio = true;

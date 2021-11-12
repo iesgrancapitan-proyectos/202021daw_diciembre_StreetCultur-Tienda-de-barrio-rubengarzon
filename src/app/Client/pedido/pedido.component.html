@@ -220,7 +220,7 @@
                 </div>
               </div>
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continuar la compra</button>
+              <button class="btn btn-primary btn-lg btn-block" (click)="insertarPedido()">Continuar la compra</button>
 
             </form>
 
@@ -284,64 +284,5 @@
   <!--Main layout-->
 
 </div>
-
-<!-- <h2 style="text-align: center;">Rellena los datos</h2>
-<form class="example-form" (submit)="rellenarDatos()" style="margin-left: 35%">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Nombre completo</mat-label>
-    <input matInput placeholder="Rodrigo García Gonzalez" [(ngModel)]="cliente.nombre" name="nombre" required>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Domicilio</mat-label>
-    <input matInput placeholder="Calle Jaén Nº1 Portal 5 2º2" [(ngModel)]="cliente.domicilio" name="domicilio" required>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Código Postal</mat-label>
-    <input matInput placeholder="14013" [(ngModel)]="cliente.codigo" name="codigo" required>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Móvil</mat-label>
-    <input matInput placeholder="601020304" [(ngModel)]="cliente.movil" name="movil" required>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" style="width: 7em; margin-left: 14em">Enviar</button>
-</form>
-
-<ul >
-  <li *ngFor="let item of productosEnCarrito">
-    {{item[1]}}
-  </li>
-</ul> -->
-
-<!-- <section class="mdl-grid" id="my-table" >
-  <div class="mdl-layout-spacer"></div>
-  <div
-    class="
-      mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
-    "
-  >
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Nombre</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of pedido">
-          <td> {{item.Fecha}} </td>
-          <td> {{item.Nombre}} </td>
-          <td> {{item.Estado}} </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-  </div>
-  <div class="mdl-layout-spacer"></div>
-</section> -->
 
 <!-- <app-footer></app-footer> -->

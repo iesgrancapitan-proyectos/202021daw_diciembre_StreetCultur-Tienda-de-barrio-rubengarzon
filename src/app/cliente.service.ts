@@ -27,7 +27,6 @@ mostrarCliente(email:any) {
 
 actualizarCliente(cliente:any) {
   if (this.env == 'Development') {
-    console.log(cliente);
     return this.http.post(
       'http://localhost/streetcultur/php/actualizarCliente.php',
       JSON.stringify(cliente)

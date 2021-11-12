@@ -10,10 +10,8 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = conexion(); // CREA LA CONEXION
 
-mysqli_query($conexion, "INSERT INTO pedido (Fecha, Nombre, Estado, Id_CLiente) VALUES('$params->Nombre', '$params->Precio', '$params->Id', NULL)"");
-
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM pedido WHERE Id_Cliente='$params->Id'");
+$resultado = mysqli_query($conexion, "INSERT INTO pedido (fecha, estado, idcliente) VALUES('$params->fecha', '$params->estado', '$params->id')");
 
 class Result
 {
@@ -26,14 +24,14 @@ $response->pedido = $resultado->fetch_all(MYSQLI_ASSOC);
 
 /* while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
-  //$response->descripcion = $fila['Descripcion'];
+  $response->descripcion = $fila['Descripcion'];
   $response->sudaderas[] = $fila;
 
-  /* if ($fila['Perfil'] == "2") {
+  if ($fila['Perfil'] == "2") {
     $response->url = '/';
   } else {
     $response->url = '/administracion';
-  } }*/
+  } } */
 
 
 header('Content-Type: application/json');

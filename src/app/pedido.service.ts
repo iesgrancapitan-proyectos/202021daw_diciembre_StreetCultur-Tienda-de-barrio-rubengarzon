@@ -10,16 +10,17 @@ export class PedidoService {
 
   constructor(private http: HttpClient) {}
 
-  hacerPedido(id: any) {
+  hacerPedido(pedido: any) {
     if (this.env == 'Development') {
+      console.log(pedido);
       return this.http.post(
         'http://localhost/streetcultur/php/hacerPedido.php',
-        JSON.stringify(id)
+        JSON.stringify(pedido)
       );
     } else {
       return this.http.post(
         'https://streetcultur.com/php/hacerPedido.php',
-        JSON.stringify(id)
+        JSON.stringify(pedido)
       );
     }
   }

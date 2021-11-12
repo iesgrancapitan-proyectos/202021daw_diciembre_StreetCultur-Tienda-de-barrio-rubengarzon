@@ -1,7 +1,9 @@
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
+import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { CarroService } from 'src/app/carro.service';
 import { ClienteService } from 'src/app/cliente.service';
+import { PedidoService } from 'src/app/pedido.service';
 
 @Component({
   selector: 'app-pedido',
@@ -9,14 +11,13 @@ import { ClienteService } from 'src/app/cliente.service';
   styleUrls: ['./pedido.component.css'],
 })
 export class PedidoComponent implements OnInit {
-
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
 
   cliente = {
     id: sessionStorage.getItem('id'),
     email: sessionStorage.getItem('email'),
-    fecha: this.hoy.toLocaleDateString(),
+    fecha: this.hoy,
     nombre: null,
     apellidos: null,
     provincia: null,
@@ -30,8 +31,12 @@ export class PedidoComponent implements OnInit {
 
   productosEnCarrito = [];
 
-
-  constructor(private clienteServicio: ClienteService, private carroServicio:CarroService, private carritoServicio: CarroService) {}
+  constructor(
+    private clienteServicio: ClienteService,
+    private carroServicio: CarroService,
+    private carritoServicio: CarroService,
+    private pedidoServicio: PedidoService
+  ) {}
 
   ngOnInit() {
     this.obtenerDatos();
@@ -39,16 +44,8 @@ export class PedidoComponent implements OnInit {
     this.contarProductos();
   }
 
-  rellenarDatos() {
-    this.clienteServicio.actualizarCliente(this.cliente).subscribe((datos) => {
-      if (datos['mensaje'] == undefined) {
-        /* insertarPedido(pedido: any) {
-          this.pedidoServicio.hacerPedido(pedido);
-        } */
-      } else {
-        console.log('error');
-      }
-    });
+  actualizarCliente() {
+    this.clienteServicio.actualizarCliente(this.cliente);
   }
 
   obtenerDatos() {
@@ -57,7 +54,10 @@ export class PedidoComponent implements OnInit {
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
       if (
-        datos['cliente'][0]['nombre'] != null && datos['cliente'][0]['domicilio'] != null && datos['cliente'][0]['codigopostal']  && datos['cliente'][0]['movil']
+        datos['cliente'][0]['nombre'] != null &&
+        datos['cliente'][0]['domicilio'] != null &&
+        datos['cliente'][0]['codigopostal'] &&
+        datos['cliente'][0]['movil']
       ) {
         this.cliente.nombre = datos['cliente'][0]['nombre'];
         this.cliente.apellidos = datos['cliente'][0]['apellidos'];
@@ -70,12 +70,12 @@ export class PedidoComponent implements OnInit {
     });
   }
 
-  obtenerCarro(){
+  obtenerCarro() {
     let id = sessionStorage.getItem('id');
     let id1 = { id: id };
     this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
-      for (const key in datos["carro"]) {
-        this.productosEnCarrito.push(Object.values(datos["carro"][key]));
+      for (const key in datos['carro']) {
+        this.productosEnCarrito.push(Object.values(datos['carro'][key]));
       }
     });
   }
@@ -88,5 +88,16 @@ export class PedidoComponent implements OnInit {
     });
   }
 
+  insertarPedido() {
+    this.actualizarCliente();
+    let pedido = {
+      fecha: this.hoy,
+      estado: "pendiente",
+      id: sessionStorage.getItem("id")
+    }
 
+    this.pedidoServicio.hacerPedido(pedido).subscribe( (datos) => {
+      console.log(datos);
+    });
+  }
 }
