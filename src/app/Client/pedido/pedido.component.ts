@@ -1,9 +1,8 @@
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
-import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { CarroService } from 'src/app/carro.service';
 import { ClienteService } from 'src/app/cliente.service';
 import { PedidoService } from 'src/app/pedido.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pedido',
@@ -35,7 +34,8 @@ export class PedidoComponent implements OnInit {
     private clienteServicio: ClienteService,
     private carroServicio: CarroService,
     private carritoServicio: CarroService,
-    private pedidoServicio: PedidoService
+    private pedidoServicio: PedidoService,
+    readonly snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -86,14 +86,24 @@ export class PedidoComponent implements OnInit {
 
   insertarPedido() {
     this.clienteServicio.actualizarCliente(this.cliente).subscribe((dato) => {
-      console.log(dato["resultado"]);
+      console.log(dato['resultado']);
     });
     let pedido = {
       fecha: this.hoy,
-      estado: "pendiente",
-      id: sessionStorage.getItem("id")
-    }
+      estado: 'pendiente',
+      id: sessionStorage.getItem('id'),
+    };
 
-    this.pedidoServicio.hacerPedido(pedido);
+    this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
+      if (dato['resultado'] == 'OK') {
+        return this.snackBar.open('Se ha realizado el pedido.', '', {
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          duration: 1500,
+        });
+      } else {
+        return false;
+      }
+    });
   }
 }

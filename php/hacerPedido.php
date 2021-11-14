@@ -20,18 +20,12 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-$response->pedido = $resultado->fetch_all(MYSQLI_ASSOC);
-
-/* while ($fila = mysqli_fetch_assoc($resultado)) {
+if ($resultado == TRUE) {
   $response->resultado = 'OK';
-  $response->descripcion = $fila['Descripcion'];
-  $response->sudaderas[] = $fila;
-
-  if ($fila['Perfil'] == "2") {
-    $response->url = '/';
-  } else {
-    $response->url = '/administracion';
-  } } */
+} else {
+  $response->resultado = 'FAIL';
+  $response->mensaje = $resultado->error;
+}
 
 
 header('Content-Type: application/json');

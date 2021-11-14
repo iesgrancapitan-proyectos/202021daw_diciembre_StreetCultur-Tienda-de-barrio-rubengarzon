@@ -3,7 +3,6 @@ import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CarroService } from 'src/app/carro.service';
-import { HeaderComponent } from 'src/app/main/header/header.component';
 import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
@@ -21,7 +20,6 @@ export class SudaderasComponent implements OnInit {
   constructor(
     private ropaServicio: RopaService,
     private login: LoginComponent,
-    private headerComponent: HeaderComponent,
     readonly snackBar: MatSnackBar,
     private carro: CarroService,
     private carritoServicio: CarroService
