@@ -38,7 +38,6 @@
       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
-            <th>Seleccionar Producto</th>
             <th>Nombre del producto</th>
             <th>Imagen</th>
             <th>Precio</th>
@@ -50,9 +49,6 @@
         <tbody>
           <tr *ngFor="let item of carrito">
             <td>
-              <mat-checkbox></mat-checkbox>
-            </td>
-            <td>
               {{ item.nombre }}
             </td>
             <td>Imagen</td>
@@ -62,17 +58,29 @@
             <td>
               <mat-icon
                 style="cursor: pointer"
-                (click)="borrarProducto(item.Id)"
+                (click)="borrarProducto(item.id)"
                 >delete</mat-icon
               >
             </td>
           </tr>
           <tr style="cursor: default">
             <td>
-              <button mat-raised-button color="primary" [routerLink]="['/pedido']">Realizar pago</button>
+              <button
+                mat-raised-button
+                color="primary"
+                [routerLink]="['/pedido']"
+              >
+                Realizar pago
+              </button>
             </td>
-            <td><button mat-raised-button color="accent" [routerLink]="['/']">Comprar más</button></td>
-            <td><button mat-raised-button color="warn">Vaciar Carrito</button></td>
+            <td>
+              <button mat-raised-button color="accent" [routerLink]="['/']">
+                Comprar más
+              </button>
+            </td>
+            <td>
+              <button mat-raised-button color="warn">Vaciar Carrito</button>
+            </td>
           </tr>
         </tbody>
       </table>

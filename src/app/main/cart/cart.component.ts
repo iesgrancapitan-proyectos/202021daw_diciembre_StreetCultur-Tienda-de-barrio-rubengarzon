@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
     let id1 = { id: id };
     this.carritoServicio.obtenerCarrito(id1).subscribe((datos: any) => {
       this.carrito = datos['carro'];
-      console.log(this.carrito)
+      console.log(this.carrito);
 
       if (this.carrito.length == 0) {
         this.carritoVacio = true;
@@ -52,23 +52,6 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
-  /* insertarPedido() {
-    if (sessionStorage.getItem('email')) {
-      let id = sessionStorage.getItem('id');
-      const tiempoTranscurrido = Date.now();
-      const hoy = new Date(tiempoTranscurrido);
-      let fecha = hoy.toLocaleDateString();
-      let pedido = {
-        Fecha: fecha,
-        Nombre: 'aaa',
-        Estado: 'pendiente',
-        IdCliente: id,
-      };
-
-      this.pedidoServicio.hacerPedido(pedido);
-    }
-  } */
 
   contarProductos() {
     let id = sessionStorage.getItem('id');

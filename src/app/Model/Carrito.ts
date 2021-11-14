@@ -1,6 +1,6 @@
 export class Carrito {
   constructor(
-    public Id: number,
+    public id: number,
     public nombre: string,
     public precio: number,
     public idcliente: number
