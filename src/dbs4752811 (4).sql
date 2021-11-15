@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2021 a las 19:24:36
+-- Tiempo de generación: 15-11-2021 a las 19:22:01
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.3.31
 
@@ -54,12 +54,13 @@ INSERT INTO `carro` (`id`, `nombre`, `precio`, `idcliente`, `idpedido`) VALUES
 
 CREATE TABLE `cliente` (
   `id` int(100) NOT NULL,
+  `perfil` set('cliente','empleado','admin','') NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
   `apellidos` varchar(50) DEFAULT NULL,
-  `provincia` varchar(30) NOT NULL,
-  `localidad` varchar(30) NOT NULL,
+  `provincia` varchar(30) DEFAULT NULL,
+  `localidad` varchar(30) DEFAULT NULL,
   `domicilio` varchar(100) DEFAULT NULL,
   `codigopostal` int(30) DEFAULT NULL,
   `movil` int(30) DEFAULT NULL
@@ -69,8 +70,9 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
-(12, 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'yyy', 'bbbb', 'Córdoba', 'Córdoba', 'ccc', 14013, 1111);
+INSERT INTO `cliente` (`id`, `perfil`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
+(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'yyy', 'bbbb', 'Córdoba', 'Córdoba', 'ccc', 14013, 1111),
+(13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -185,7 +187,7 @@ ALTER TABLE `carro`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
