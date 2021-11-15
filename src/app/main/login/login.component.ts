@@ -39,6 +39,19 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
         sessionStorage.setItem('email', datos.email);
         sessionStorage.setItem('id', datos.id);
+        switch (datos['perfil']) {
+          case 'cliente':
+            this.router.navigate(['/']);
+            break;
+          case 'empleado':
+            this.router.navigate(['/empleado']);
+            break;
+          case 'admin':
+            this.router.navigate(['/admin']);
+            break;
+          default:
+            break;
+        }
       } else {
         console.log('Ha habido un error al iniciar sesión');
       }

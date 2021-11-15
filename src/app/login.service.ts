@@ -37,4 +37,23 @@ export class LoginService {
       );
     }
   }
+
+  comprobarPerfil(){
+    let login = {
+      email: sessionStorage.getItem("email")
+    };
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/perfil.php',
+        JSON.stringify(login)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/perfil.php',
+        JSON.stringify(login)
+      );
+    }
+  }
+
+
 }
