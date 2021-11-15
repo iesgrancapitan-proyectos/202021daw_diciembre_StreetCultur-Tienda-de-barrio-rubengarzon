@@ -24,6 +24,18 @@ export class PedidoService {
     }
   }
 
+  obtenerPedido() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/obtenerPedido.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/obtenerPedido.php',
+      );
+    }
+  }
+
   obtenerCliente(id: any) {
     if (this.env == 'Development') {
       return this.http.post(
