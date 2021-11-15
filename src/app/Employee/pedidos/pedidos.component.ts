@@ -24,4 +24,7 @@ export class PedidosComponent implements OnInit {
       this.pedido = datos['pedido'];
     });
   }
+
+  borrarPedido(id:any){
+  }
 }

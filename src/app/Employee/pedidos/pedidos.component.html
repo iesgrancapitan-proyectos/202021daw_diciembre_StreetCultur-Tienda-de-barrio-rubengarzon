@@ -23,14 +23,19 @@
           <th>Nombre del Cliente</th>
           <th>Fecha</th>
           <th>Estado</th>
+          <th>Borrar</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of pedido">
-          <td></td>
           <td>{{ item.Fecha }}</td>
           <td>{{ item.Nombre }}</td>
           <td>{{ item.Estado }}</td>
+          <td><mat-icon
+            style="cursor: pointer"
+            (click)="borrarPedido(item.id)"
+            >delete</mat-icon
+          ></td>
         </tr>
       </tbody>
     </table>
