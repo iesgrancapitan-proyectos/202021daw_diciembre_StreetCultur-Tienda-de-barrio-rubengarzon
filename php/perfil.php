@@ -11,7 +11,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 $conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT perfil FROM cliente WHERE email='$params->email'");
+$resultado = mysqli_query($conexion, "SELECT perfil, nombre FROM cliente WHERE email='$params->email'");
 
 class Result
 {
@@ -25,6 +25,7 @@ $response = new Result();
 while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
   $response->perfil = $fila['perfil'];
+  $response->nombre = $fila['nombre'];
 }
 
 header('Content-Type: application/json');

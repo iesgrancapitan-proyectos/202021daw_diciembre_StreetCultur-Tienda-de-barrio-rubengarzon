@@ -16,7 +16,7 @@ export class PedidosComponent implements OnInit {
   constructor(private pedidoServicio: PedidoService, private clienteServicio: ClienteService) {}
 
   ngOnInit() {
-    this.mostrarPedido();
+    //this.mostrarPedido();
   }
 
   mostrarPedido() {

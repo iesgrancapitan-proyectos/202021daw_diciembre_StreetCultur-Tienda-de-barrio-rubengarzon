@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-footer-employee',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterEmployeeComponent implements OnInit {
 
-  constructor() { }
+  nombreEmpleado:any;
+
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.loginService.comprobarPerfil().subscribe((datos) =>{
+      this.nombreEmpleado = datos["nombre"]
+    })
   }
 
 }

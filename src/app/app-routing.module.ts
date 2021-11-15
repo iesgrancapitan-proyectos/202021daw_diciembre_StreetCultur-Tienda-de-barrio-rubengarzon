@@ -17,6 +17,7 @@ import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
+import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'incidencia', component: IncidenciaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
+  { path: 'gestionarpedidos', component: PedidosComponent},
 ];
 
 @NgModule({
