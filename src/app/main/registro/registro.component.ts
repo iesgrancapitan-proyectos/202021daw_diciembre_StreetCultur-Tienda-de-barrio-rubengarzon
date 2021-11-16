@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EmailService } from 'src/app/email.service';
 
 @Component({
   selector: 'app-registro',
@@ -21,7 +22,8 @@ export class RegistroComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private emailService: EmailService
   ) {}
 
   ngOnInit() {}
@@ -47,5 +49,6 @@ export class RegistroComponent implements OnInit {
         });
       }
     });
-  }
+    this.emailService.emailConfirmacion();
+    }
 }
