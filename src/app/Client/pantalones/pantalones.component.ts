@@ -3,6 +3,7 @@ import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CarroService } from 'src/app/carro.service';
+import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
   selector: 'app-pantalones',
@@ -11,10 +12,16 @@ import { CarroService } from 'src/app/carro.service';
 })
 export class PantalonesComponent implements OnInit {
   pantalones: Ropa[] = [];
+
+  numProductos: any;
+
+  estaLogueado: boolean = this.login.estaLogueado();
+
   constructor(
     private ropaServicio: RopaService,
     readonly snackBar: MatSnackBar,
-    private carro: CarroService
+    private carro: CarroService,
+    private login: LoginComponent
   ) {}
 
   ngOnInit() {
@@ -51,5 +58,19 @@ export class PantalonesComponent implements OnInit {
         verticalPosition: 'bottom',
       });
     }
+  }
+
+  contarProductos() {
+    let id = sessionStorage.getItem('id');
+    let id1 = { Id: id };
+    this.carro.contarProductos(id1).subscribe((dato: any) => {
+      this.numProductos = Object.values(dato['numero'][0]);
+    });
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
   }
 }

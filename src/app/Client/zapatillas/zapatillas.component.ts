@@ -3,6 +3,7 @@ import { Ropa } from 'src/app/Model/Ropa';
 import { RopaService } from 'src/app/ropa.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CarroService } from 'src/app/carro.service';
+import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
   selector: 'app-zapatillas',
@@ -12,10 +13,15 @@ import { CarroService } from 'src/app/carro.service';
 export class ZapatillasComponent implements OnInit {
   zapatillas: Ropa[] = [];
 
+  numProductos: any;
+
+  estaLogueado: boolean = this.login.estaLogueado();
+
   constructor(
     private ropaServicio: RopaService,
     readonly snackBar: MatSnackBar,
-    private carro: CarroService
+    private carro: CarroService,
+    private login: LoginComponent,
   ) {}
 
   ngOnInit() {
@@ -52,5 +58,11 @@ export class ZapatillasComponent implements OnInit {
         verticalPosition: 'bottom',
       });
     }
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
   }
 }

@@ -4,6 +4,7 @@ import { CarroService } from 'src/app/carro.service';
 import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido.service';
 import { Pedido } from 'src/app/Model/Pedido';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-cart',
@@ -15,10 +16,12 @@ export class CartComponent implements OnInit {
   pedido: Pedido[] = [];
   carritoVacio = false;
   numProductos: any;
+  estaLogueado: boolean = this.login.estaLogueado();
 
   constructor(
     private carritoServicio: CarroService,
-    private pedidoServicio: PedidoService
+    private pedidoServicio: PedidoService,
+    private login: LoginComponent
   ) {}
 
   ngOnInit() {
@@ -59,5 +62,11 @@ export class CartComponent implements OnInit {
     this.carritoServicio.contarProductos(id1).subscribe((dato: any) => {
       this.numProductos = Object.values(dato['numero'][0]);
     });
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
   }
 }

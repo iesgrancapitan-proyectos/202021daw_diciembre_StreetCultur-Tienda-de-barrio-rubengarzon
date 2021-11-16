@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PuntosService } from 'src/app/puntos.service';
 
 @Component({
   selector: 'app-puntos',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PuntosComponent implements OnInit {
 
-  constructor() { }
+  puntos:number;
+
+  constructor(private puntosServicio: PuntosService) { }
 
   ngOnInit() {
+    this.puntosServicio.obtenerPuntos(sessionStorage.getItem("id")).subscribe( (datos) => {
+     this.puntos = datos["puntos"];
+    });
   }
 
 }
