@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div>
   <h3>REGISTRO</h3>
-  <form (submit)="loginEmail()">
+  <form [formGroup]="registroForm" (submit)="loginEmail()">
     <div class="example-container">
       <mat-form-field appearance="fill" class="email">
         <mat-label>Escribe tu email</mat-label>
@@ -12,7 +12,10 @@
           name="email"
           required
         />
-        <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+        <mat-error *ngIf="registroForm.get('email').errors && registroForm.get('email').dirty">
+          <p *ngIf="registroForm.get('email').hasError('required')"> Este campo es requerido</p>
+          <p *ngIf="registroForm.get('email').hasError('email')">El formato de email es incorrecto</p>
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Escribe tu contraseña</mat-label>
@@ -22,12 +25,18 @@
           [(ngModel)]="login.contrasena"
           name="email"
         />
+        <mat-error *ngIf="registroForm.get('password').errors && registroForm.get('password').dirty">
+          <p *ngIf="registroForm.get('password').hasError('required')"> Este campo es requerido</p>
+          <p *ngIf="registroForm.get('password').hasError('minlength')">La contraseña debe tener 3 caracteres como mínimo</p>
+        </mat-error>
         <button
           mat-icon-button
           matSuffix
+          type="submit"
           (click)="hide = !hide"
           [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide"
+          [disabled]="registroForm.invalid"
         >
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>

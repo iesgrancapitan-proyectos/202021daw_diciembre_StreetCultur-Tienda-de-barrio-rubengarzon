@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,7 +12,8 @@ import { EmailService } from 'src/app/email.service';
 })
 export class RegistroComponent implements OnInit {
   hide = true;
-  email = new FormControl('', [Validators.required, Validators.email]);
+
+  registroForm: FormGroup;
 
   login = {
     email: null,
@@ -23,18 +24,17 @@ export class RegistroComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private emailService: EmailService
-  ) {}
+    private emailService: EmailService,
+    public fb: FormBuilder
+  ) {
+    this.registroForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
+    });
+  }
 
   ngOnInit() {}
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
 
   loginEmail() {
     this.loginService.registrarUsuario(this.login).subscribe((datos: any) => {
