@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../login.service';
 
@@ -10,25 +10,25 @@ import { LoginService } from '../../login.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  email = new FormControl('', [Validators.required, Validators.email]);
 
   login = {
     email: null,
     contrasena: null,
   };
 
+  loginForm: FormGroup;
+
   email1 = this.login.email;
-  constructor(private loginService: LoginService, private router: Router) {}
+
+  constructor(public fb: FormBuilder,private loginService: LoginService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(3)]],
+    });
+  }
 
   ngOnInit() {}
 
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.email.hasError('email') ? 'Not a valid email' : '';
-  }
 
   /**
    * Inicia sesión el empleado y almacena el email en una sesion
