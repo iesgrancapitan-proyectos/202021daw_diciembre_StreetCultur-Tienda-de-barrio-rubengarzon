@@ -54,7 +54,7 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 ## Wiki 📖
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/iesgrancapitan-proyectos/202021daw_diciembre_StreetCultur-Tienda-de-barrio-rubengarzon/wiki)
 
 ## Autor ✒️
 
