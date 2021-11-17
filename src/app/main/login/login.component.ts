@@ -21,13 +21,15 @@ export class LoginComponent implements OnInit {
   email1 = this.login.email;
 
   constructor(public fb: FormBuilder,private loginService: LoginService, private router: Router) {
+
+  }
+
+  ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]],
     });
   }
-
-  ngOnInit() {}
 
 
   /**

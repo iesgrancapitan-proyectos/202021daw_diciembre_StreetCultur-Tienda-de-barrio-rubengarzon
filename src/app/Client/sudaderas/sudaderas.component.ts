@@ -43,16 +43,16 @@ export class SudaderasComponent implements OnInit {
     });
   }
 
-  guardarProducto(nombre: any, precio: any) {
+  addCarrito(nombre: any, precio: any, imagen: any) {
     if (sessionStorage.getItem('email')) {
 
       let id = sessionStorage.getItem('id');
-      let id1 = { Id: id };
-      let carrito = { Nombre: nombre, Precio: precio, Id: id };
+      let carrito = { nombre: nombre, imagen: imagen, precio: precio, id: id };
 
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){
         this.contarProductos();
+
         return this.snackBar.open('Se ha añadido al carrito.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

@@ -108,8 +108,8 @@
       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
-            <th>Nombre del producto</th>
             <th>Imagen</th>
+            <th>Nombre del producto</th>
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Total</th>
@@ -118,10 +118,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of carrito">
+            <td><img src="{{item.imagen}}" width="100"></td>
             <td>
               {{ item.nombre }}
             </td>
-            <td>Imagen</td>
             <td>{{ item.precio }}</td>
             <td>Cantidad</td>
             <td>Total</td>

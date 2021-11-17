@@ -10,6 +10,7 @@
           placeholder="carlos@gmail.com"
           [(ngModel)]="login.email"
           name="email"
+          formControlName="email"
           required
         />
         <mat-error *ngIf="loginForm.get('email').errors && loginForm.get('email').dirty">
@@ -23,7 +24,8 @@
           matInput
           [type]="hide ? 'password' : 'text'"
           [(ngModel)]="login.contrasena"
-          name="email"
+          name="password"
+          formControlName="password"
           required
         />
         <mat-error *ngIf="loginForm.get('password').errors && loginForm.get('password').dirty">
