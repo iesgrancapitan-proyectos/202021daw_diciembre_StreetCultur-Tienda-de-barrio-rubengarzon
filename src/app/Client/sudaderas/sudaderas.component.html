@@ -70,34 +70,27 @@
   </button>
 </mat-toolbar>
 
-
-
-
-
 <h2>SUDADERAS</h2>
 <div>
-  <mat-card class="example-card" *ngFor="let sudadera of sudaderas">
+  <mat-card class="example-card" *ngFor="let sudadera of sudaderas" style="box-shadow: none">
     <mat-card-header style="display: flex;place-content: center;">
-      <mat-card-title>{{ sudadera.Nombre }}</mat-card-title>
-      <mat-card-subtitle style="font-weight: bold"
-        >{{ sudadera.Precio }} €</mat-card-subtitle
-      >
     </mat-card-header>
-    <img
+    <a routerLink="/detalle-sudadera/{{sudadera.Id}}">
+      <img
       mat-card-image
       src="{{ sudadera.Imagen }}"
-      alt="Photo of a Shiba Inu"
-    />
-    <mat-card-content>
-      <p>{{ sudadera.Descripcion }}</p>
-    </mat-card-content>
-    <mat-card-actions style="display:flex;justify-content: center;">
+      />
+    </a>
+    <mat-card-actions style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
+      <p>Sudadera {{ sudadera.Nombre }}</p>
+      <p style="font-weight: bold;">{{ sudadera.Precio }}€</p>
       <button
         mat-button
         (click)="addCarrito(sudadera.Nombre, sudadera.Precio, sudadera.Imagen)"
       >
         AÑADIR AL CARRITO
       </button>
+
     </mat-card-actions>
   </mat-card>
 </div>

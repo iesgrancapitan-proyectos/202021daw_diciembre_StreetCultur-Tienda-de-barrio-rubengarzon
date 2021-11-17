@@ -9,6 +9,6 @@ export class Ropa {
     public Color: string,
     public Novedad: number,
     public Imagen: string,
-    public id?: number
+    public Id?: number
   ) {}
 }

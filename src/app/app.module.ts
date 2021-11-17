@@ -40,6 +40,8 @@ import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/ges
 import { HttpClientModule } from '@angular/common/http';
 import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
+import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/detalle-sudadera.component';
+
 
 
 
@@ -75,7 +77,8 @@ import { PedidoComponent } from './Client/pedido/pedido.component';
     GestionarEmpleadosComponent,
     GestionarIncidenciasComponent,
     RegistroComponent,
-    PedidoComponent
+    PedidoComponent,
+    DetalleSudaderaComponent
    ],
   imports: [
     BrowserModule,

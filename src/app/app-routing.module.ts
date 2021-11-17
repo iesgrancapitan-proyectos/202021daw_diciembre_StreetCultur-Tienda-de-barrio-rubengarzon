@@ -18,6 +18,7 @@ import { AdminComponent } from './admin/admin.component';
 import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
+import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/detalle-sudadera.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'gestionarpedidos', component: PedidosComponent},
+  { path: 'detalle-sudadera/:id', component: DetalleSudaderaComponent},
 ];
 
 @NgModule({

@@ -38,7 +38,6 @@ export class SudaderasComponent implements OnInit {
 
   mostrarRopa() {
     this.ropaServicio.obtenerSudaderas().subscribe((datos: any) => {
-      console.log(datos);
       this.sudaderas = datos['sudaderas'];
     });
   }
