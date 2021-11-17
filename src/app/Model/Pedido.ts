@@ -1,8 +1,8 @@
 export class Pedido {
   constructor(
     public id: number,
-    public Fecha: Date,
-    public Nombre: string,
-    public Estado: string
+    public fecha: Date,
+    public nombre: string,
+    public estado: string
   ) {}
 }

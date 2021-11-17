@@ -11,16 +11,20 @@ import { PedidoService } from 'src/app/pedido.service';
 })
 export class PedidosComponent implements OnInit {
   pedido: Pedido[] = [];
-  cliente: Cliente[] = [];
 
-  constructor(private pedidoServicio: PedidoService, private clienteServicio: ClienteService) {}
+  estado:any;
+
+  constructor(private pedidoServicio: PedidoService) {}
 
   ngOnInit() {
     this.mostrarPedido();
   }
 
   mostrarPedido() {
-    this.pedidoServicio.obtenerPedido().subscribe((datos: any) => {
+    let cliente = {
+      id: sessionStorage.getItem("id")
+    }
+    this.pedidoServicio.obtenerPedido(cliente).subscribe((datos: any) => {
       this.pedido = datos['pedido'];
     });
   }

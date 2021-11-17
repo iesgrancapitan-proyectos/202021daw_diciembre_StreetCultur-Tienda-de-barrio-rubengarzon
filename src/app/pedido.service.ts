@@ -24,14 +24,16 @@ export class PedidoService {
     }
   }
 
-  obtenerPedido() {
+  obtenerPedido(cliente) {
     if (this.env == 'Development') {
-      return this.http.get(
-        'http://localhost/streetcultur/php/obtenerPedido.php'
+      return this.http.post(
+        'http://localhost/streetcultur/php/obtenerPedido.php',
+        JSON.stringify(cliente)
       );
     } else {
-      return this.http.get(
+      return this.http.post(
         'https://streetcultur.com/php/obtenerPedido.php',
+        JSON.stringify(cliente)
       );
     }
   }
