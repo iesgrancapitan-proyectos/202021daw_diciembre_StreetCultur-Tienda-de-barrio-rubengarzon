@@ -1,6 +1,4 @@
-<app-header></app-header>
 <div>
-  <h3>INICIAR SESIÓN</h3>
   <form [formGroup]="loginForm" (submit)="loginEmail()">
     <div class="example-container">
       <mat-form-field appearance="fill" class="email">
@@ -43,9 +41,7 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
-      <button mat-button>ENTRAR</button>
       <a [routerLink]="['/registro']">¿No tienes cuenta? Regístrate aquí</a>
     </div>
   </form>
 </div>
-<app-footer></app-footer>

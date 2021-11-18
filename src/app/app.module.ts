@@ -7,14 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-import { HeaderComponent } from './main/header/header.component';
 import { BodyComponent } from './main/body/body.component';
 import { FooterComponent } from './main/footer/footer.component';
 import { SliderComponent } from './main/body/slider/slider.component';
 import { CategoriasComponent } from './main/body/categorias/categorias.component';
 import { LoginComponent } from './main/login/login.component';
 import { SudaderasComponent } from './Client/sudaderas/sudaderas.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PantalonesComponent } from './Client/pantalones/pantalones.component';
 import { ZapatillasComponent } from './Client/zapatillas/zapatillas.component';
@@ -50,7 +48,6 @@ import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/de
   declarations: [
     AppComponent,
     MainComponent,
-    HeaderComponent,
     BodyComponent,
     FooterComponent,
     SliderComponent,
@@ -90,7 +87,7 @@ import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/de
     MDBBootstrapModule.forRoot(),
     HttpClientModule
   ],
-  providers: [LoginComponent, HeaderComponent],
+  providers: [LoginComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

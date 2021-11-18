@@ -1,7 +1,112 @@
-<app-header></app-header>
+<mat-toolbar color="primary">
+  <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item [routerLink]="['/sudaderas']">SUDADERAS</button>
+    <button mat-menu-item [routerLink]="['/pantalones']">PANTALONES</button>
+    <button mat-menu-item [routerLink]="['/zapatillas']">ZAPATILLAS</button>
+    <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
+  </mat-menu>
+
+  <span>STREET🏀CULTUR</span>
+
+  <span class="example-spacer"></span>
+
+  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/sudaderas']">
+    SUDADERAS
+  </button>
+  <button mat-button class="item" [routerLink]="['/pantalones']">
+    PANTALONES
+  </button>
+  <button mat-button class="item" [routerLink]="['/zapatillas']">
+    ZAPATILLAS
+  </button>
+  <button mat-button class="item" [routerLink]="['/accesorios']">
+    ACCESORIOS
+  </button>
+
+  <span class="example-spacer"></span>
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/puntos"
+    routerLinkActive="active"
+  >
+    <mat-icon matBadge="0" matBadgeColor="accent">card_giftcard</mat-icon>
+  </button>
+
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/cart"
+    routerLinkActive="active"
+  >
+    <mat-icon [matBadge]="numProductos" matBadgeColor="accent">shopping_cart</mat-icon>
+  </button>
+  <button
+   *ngIf="!estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLinkActive="active"
+    matTooltip="Iniciar Sesión"
+    data-toggle="modal"
+    (click)="frame.show()"
+    mdbWavesEffect
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink=""
+    routerLinkActive="active"
+    (click)="cerrarSesion()"
+  >
+    <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <app-login></app-login>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button mdbBtn color="default" class="waves-light" mdbWavesEffect>Entrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
 <h3>QUIENES SOMOS</h3>
 <p>
-  STREETCULTUR, surgió la idea entre unos amigos durante la pandemia en 2020. Todas las tiendas de ropa urbana estaban cerradas, y muy pocas ofrecían entregas a domicilio. Pensamos en crear una página web con servicio de entregas a domicilio a coste cero para clientes de Córdoba.
+  <strong>STREETCULTUR</strong>, surgió la idea entre unos amigos durante la pandemia en 2020. Todas las tiendas de ropa urbana estaban cerradas, y muy pocas ofrecían entregas a domicilio. Pensamos en crear una página web con servicio de entregas a domicilio a coste cero para clientes de Córdoba.
 </p>
-<img src="" alt="">
+<img src="https://www.torontohispano.com/wp-content/uploads/2018/12/trabajo-lider-amigos.jpg" alt="">
 <app-footer></app-footer>
