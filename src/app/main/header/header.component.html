@@ -30,6 +30,7 @@
 
   <span class="example-spacer"></span>
   <button
+    *ngIf="estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -40,6 +41,7 @@
   </button>
 
   <button
+    *ngIf="estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -49,6 +51,7 @@
     <mat-icon [matBadge]="numProductos" matBadgeColor="accent">shopping_cart</mat-icon>
   </button>
   <button
+   *ngIf="!estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
