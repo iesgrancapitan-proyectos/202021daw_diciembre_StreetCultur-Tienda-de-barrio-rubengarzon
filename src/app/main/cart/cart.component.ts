@@ -56,6 +56,17 @@ export class CartComponent implements OnInit {
     });
   }
 
+  borrarProductos() {
+    this.carritoServicio.borrarProductos().subscribe((datos: any) => {
+      if (Object.values(datos).includes('OK')) {
+        console.log('El producto ha sido borrado');
+        this.mostrarCarrito();
+      } else {
+        console.log('El producto no se ha borrado');
+      }
+    });;
+  }
+
   contarProductos() {
     let id = sessionStorage.getItem('id');
     let id1 = { Id: id };

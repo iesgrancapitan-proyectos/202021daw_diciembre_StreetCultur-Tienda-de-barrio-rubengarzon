@@ -81,8 +81,10 @@
 />
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-<div *ngIf="carritoVacio == true; else carroNoVacio">
-  <h4>El carrito está vacío</h4>
+<div *ngIf="carritoVacio == true; else carroNoVacio" style="margin-top: 5em; margin-bottom: 11em;display:flex;flex-direction: column; align-items: center;">
+  <img src="../../../assets/caratriste.png" width="100">
+  <h2>El carrito está vacío</h2>
+
 </div>
 
 <ng-template #carroNoVacio>
@@ -113,6 +115,7 @@
             <th>Precio</th>
             <th>Cantidad</th>
             <th>Total</th>
+            <th>Talla</th>
             <th>Eliminar Producto</th>
           </tr>
         </thead>
@@ -124,7 +127,8 @@
             </td>
             <td>{{ item.precio }}</td>
             <td>{{ item.cantidad }}</td>
-            <td>{{ item.cantidad * item.precio }}€</td>
+            <td>{{ item.total }}€</td>
+            <td>{{ item.talla }}</td>
             <td>
               <mat-icon
               matTooltip="borrar"
@@ -141,7 +145,7 @@
                 color="primary"
                 [routerLink]="['/pedido']"
               >
-                Realizar pago
+                Confirmar pedido
               </button>
             </td>
             <td>
@@ -150,7 +154,7 @@
               </button>
             </td>
             <td>
-              <button mat-raised-button color="warn">Vaciar Carrito</button>
+              <button mat-raised-button color="warn" (click)="borrarProductos()">Vaciar Carrito</button>
             </td>
           </tr>
         </tbody>

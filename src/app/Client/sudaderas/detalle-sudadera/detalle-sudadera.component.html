@@ -160,34 +160,28 @@
             </tr>
             <tr>
               <td class="pl-0">
-                <input matInput placeholder="" [ngModel]="cantidad" >
+                <input type="text" placeholder="" [ngModel]="cantidad">
               </td>
               <td>
                 <div class="mt-1">
                   <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="small" name="materialExampleRadios"
-                      checked>
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="small">S</label>
-                  </div>
-                  <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="medium" name="materialExampleRadios">
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="medium">M</label>
-                  </div>
-                  <div class="form-check form-check-inline pl-0">
-                    <input type="radio" class="form-check-input" id="large" name="materialExampleRadios">
-                    <label class="form-check-label small text-uppercase card-link-secondary"
-                      for="large">L</label>
-                  </div>
+                    <select class="browser-default custom-select" [ngModel]="talla">
+                      <option value="XS">XS</option>
+                      <option value="S">S</option>
+                      <option value="M">M</option>
+                      <option value="L">L</option>
+                      <option value="XL">XL</option>
+                      <option value="XXL">XXL</option>
+                    </select>
+                 </div>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <button type="button" class="btn btn-primary btn-md mr-1 mb-2" routerLink="/pedido" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen)">Comprar ahora</button>
-      <button type="button" class="btn btn-light btn-md mr-1 mb-2" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen)"><i
+      <button type="button" class="btn btn-primary btn-md mr-1 mb-2" routerLink="/pedido" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen, cantidad, talla)">Comprar ahora</button>
+      <button type="button" class="btn btn-light btn-md mr-1 mb-2" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen, cantidad, talla)"><i
           class="fas fa-shopping-cart pr-2"></i>Añadir a la carta</button>
     </div>
   </div>

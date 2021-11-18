@@ -53,6 +53,18 @@ export class CarroService {
     }
   }
 
+  borrarProductos() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/borrarProductos.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/borrarProductos.php'
+      );
+    }
+  }
+
   contarProductos(id: any) {
     if (this.env == 'Development') {
       return this.http.post(

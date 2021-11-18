@@ -27,7 +27,9 @@ export class DetalleSudaderaComponent implements OnInit {
 
   numProductos: any;
 
-  cantidad: any
+  cantidad = 1;
+
+  talla = "L";
 
   estaLogueado: boolean = this.login.estaLogueado();
 
@@ -42,7 +44,6 @@ export class DetalleSudaderaComponent implements OnInit {
   ngOnInit() {
     this.contarProductos();
     this.mostrarSudadera(this.rutaActiva.snapshot.params.id);
-    this.cantidad = 1;
   }
 
   cerrarSesion() {
@@ -72,11 +73,15 @@ export class DetalleSudaderaComponent implements OnInit {
     });
   }
 
-  addCarrito(nombre: any, precio: any, imagen: any) {
+  addCarrito(nombre: any, precio: any, imagen: any, cantidad:any, talla:any) {
     if (sessionStorage.getItem('email')) {
 
+      console.log(cantidad);
+
+      let total = precio * cantidad;
+
       let id = sessionStorage.getItem('id');
-      let carrito = { nombre: nombre, imagen: imagen, precio: precio, id: id };
+      let carrito = { nombre: nombre, imagen: imagen, precio: precio, cantidad:cantidad, total: total, talla: talla, id: id };
 
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){
