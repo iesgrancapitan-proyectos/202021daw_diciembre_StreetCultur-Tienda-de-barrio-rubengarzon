@@ -123,10 +123,11 @@
               {{ item.nombre }}
             </td>
             <td>{{ item.precio }}</td>
-            <td>Cantidad</td>
-            <td>Total</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.cantidad * item.precio }}€</td>
             <td>
               <mat-icon
+              matTooltip="borrar"
                 style="cursor: pointer"
                 (click)="borrarProducto(item.id)"
                 >delete</mat-icon

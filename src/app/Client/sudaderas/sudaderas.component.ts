@@ -50,7 +50,7 @@ export class SudaderasComponent implements OnInit {
     if (sessionStorage.getItem('email')) {
 
       let id = sessionStorage.getItem('id');
-      let carrito = { nombre: nombre, imagen: imagen, precio: precio, id: id };
+      let carrito = { nombre: nombre, cantidad: 1, imagen: imagen, precio: precio, id: id };
 
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){
