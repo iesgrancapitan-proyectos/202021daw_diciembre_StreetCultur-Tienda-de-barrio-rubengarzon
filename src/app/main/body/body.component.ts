@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { CarroService } from 'src/app/carro.service';
+import { LoginService } from 'src/app/login.service';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -14,16 +15,22 @@ export class BodyComponent implements OnInit {
 
   estaLogueado: boolean = this.login.estaLogueado();
 
-  constructor(private login: LoginComponent,readonly snackBar: MatSnackBar, private carritoServicio: CarroService) {
-
-  }
+  constructor(
+    private login: LoginComponent,
+    readonly snackBar: MatSnackBar,
+    private carritoServicio: CarroService,
+  ) {}
 
   ngOnInit() {
     this.contarProductos();
-    return this.snackBar.open('Este sitio web es un proyecto de FP que está en desarrollo.', 'De acuerdo', {
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom'
-    });
+    return this.snackBar.open(
+      'Este sitio web es un proyecto de FP que está en desarrollo.',
+      'De acuerdo',
+      {
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      }
+    );
   }
 
   contarProductos() {
@@ -39,4 +46,6 @@ export class BodyComponent implements OnInit {
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
+
+
 }

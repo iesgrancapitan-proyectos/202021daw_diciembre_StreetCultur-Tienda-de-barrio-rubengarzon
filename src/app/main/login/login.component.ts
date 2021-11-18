@@ -38,13 +38,12 @@ export class LoginComponent implements OnInit {
   loginEmail() {
     this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
-        this.router.navigateByUrl('/');
         sessionStorage.setItem('email', datos.email);
         sessionStorage.setItem('id', datos.id);
         this.loginService.comprobarPerfil().subscribe((datos) => {
           switch (datos['perfil']) {
             case 'cliente':
-              this.router.navigate(['/']);
+              this.router.navigate(['/sudaderas']);
               break;
             case 'empleado':
               this.router.navigate(['/empleado']);

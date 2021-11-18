@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
   selector: 'app-header-employee',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderEmployeeComponent implements OnInit {
   panelOpenState = false;
-  constructor() {}
+
+  estaLogueado: boolean = this.login.estaLogueado();
+  constructor(
+    private login: LoginComponent,
+  ) {}
 
   ngOnInit() {}
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
+  }
 }

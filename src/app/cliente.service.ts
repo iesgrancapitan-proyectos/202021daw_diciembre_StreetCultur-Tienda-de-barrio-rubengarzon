@@ -11,6 +11,18 @@ export class ClienteService {
 constructor(private http: HttpClient) { }
 
 
+mostrarIdClientes(){
+  if (this.env == 'Development') {
+    return this.http.get(
+      'http://localhost/streetcultur/php/listaCliente.php'
+    );
+  } else {
+    return this.http.get(
+      'https://streetcultur.com/php/listaCliente.php'
+    );
+  }
+}
+
 mostrarCliente(email:any) {
   if (this.env == 'Development') {
     return this.http.post(

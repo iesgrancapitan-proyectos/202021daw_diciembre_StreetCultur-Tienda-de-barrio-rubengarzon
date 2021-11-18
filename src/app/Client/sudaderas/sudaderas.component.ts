@@ -55,7 +55,6 @@ export class SudaderasComponent implements OnInit {
       this.carro.insertarCarro(carrito).subscribe( dato => {
        if (Object.values(dato).includes("OK") == true){
         this.contarProductos();
-
         return this.snackBar.open('Se ha añadido al carrito.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
