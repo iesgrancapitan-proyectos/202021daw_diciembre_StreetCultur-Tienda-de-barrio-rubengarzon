@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 5em;">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -10,7 +10,7 @@
     <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
   </mat-menu>
 
-  <span>STREET🏀CULTUR</span>
+  <img src="../../../../assets/logo.gif" width="120" alt="">
 
   <span class="example-spacer"></span>
 
@@ -30,6 +30,7 @@
 
   <span class="example-spacer"></span>
   <button
+    *ngIf="estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -40,6 +41,7 @@
   </button>
 
   <button
+    *ngIf="estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -49,11 +51,15 @@
     <mat-icon [matBadge]="numProductos" matBadgeColor="accent">shopping_cart</mat-icon>
   </button>
   <button
+   *ngIf="!estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
-    routerLink="/login"
     routerLinkActive="active"
+    matTooltip="Iniciar Sesión"
+    data-toggle="modal"
+    (click)="frame.show()"
+    mdbWavesEffect
   >
     <mat-icon>account_circle</mat-icon>
   </button>
@@ -70,8 +76,29 @@
   </button>
 </mat-toolbar>
 
-<h2>SUDADERAS</h2>
-<div>
+
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <app-login></app-login>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cont">
   <mat-card class="example-card" *ngFor="let sudadera of sudaderas" style="box-shadow: none">
     <mat-card-header style="display: flex;place-content: center;">
     </mat-card-header>

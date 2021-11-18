@@ -1,4 +1,4 @@
-div
+.cont
   display: grid
   @media screen and (min-width: 500px) and (max-width: 900px)
     grid-template-columns: repeat(2, 1fr)
@@ -17,10 +17,18 @@ div
       height: 350px
     p
       text-align: justify
-    button
 
-h2
+.filtros
+    display: flex
+    place-content: center
+.a
+  border: 1px solid gray
+  width: 6em
   text-align: center
+.a:active
+  border: 1px solid black
+.a:hover
+  border: 1px solid black
 
 .example-spacer
   flex: 1 1 auto
@@ -31,3 +39,7 @@ mat-toolbar
   .item
     @media screen and ( max-width: 700px)
       display: none
+.item
+  font-size: 17px
+mat-icon
+  font-size: 27px
