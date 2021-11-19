@@ -3,15 +3,18 @@ import { CarroService } from 'src/app/carro.service';
 import { ClienteService } from 'src/app/cliente.service';
 import { PedidoService } from 'src/app/pedido.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
   selector: 'app-pedido',
   templateUrl: './pedido.component.html',
-  styleUrls: ['./pedido.component.css'],
+  styleUrls: ['./pedido.component.sass'],
 })
 export class PedidoComponent implements OnInit {
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
+
+  estaLogueado: boolean = this.login.estaLogueado();
 
   cliente = {
     id: sessionStorage.getItem('id'),
@@ -37,7 +40,8 @@ export class PedidoComponent implements OnInit {
     private carroServicio: CarroService,
     private carritoServicio: CarroService,
     private pedidoServicio: PedidoService,
-    readonly snackBar: MatSnackBar
+    readonly snackBar: MatSnackBar,
+    private login: LoginComponent,
   ) {}
 
   ngOnInit() {
@@ -112,4 +116,12 @@ export class PedidoComponent implements OnInit {
       }
     });
   }
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
+  }
+
+
 }
