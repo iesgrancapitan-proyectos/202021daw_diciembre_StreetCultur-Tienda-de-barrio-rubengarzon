@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2021 a las 19:22:01
+-- Tiempo de generación: 19-11-2021 a las 20:05:17
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.3.31
 
@@ -30,21 +30,21 @@ SET time_zone = "+00:00";
 CREATE TABLE `carro` (
   `id` int(20) NOT NULL,
   `nombre` varchar(50) NOT NULL,
+  `imagen` varchar(300) NOT NULL,
+  `cantidad` int(30) NOT NULL,
   `precio` int(20) NOT NULL,
-  `idcliente` int(20) NOT NULL,
-  `idpedido` int(20) DEFAULT NULL
+  `total` int(30) NOT NULL,
+  `talla` set('XS','S','M','L','XL','XXL') NOT NULL,
+  `idcliente` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `carro`
 --
 
-INSERT INTO `carro` (`id`, `nombre`, `precio`, `idcliente`, `idpedido`) VALUES
-(123, 'Bear', 17, 12, NULL),
-(124, 'Degraded', 15, 12, NULL),
-(125, 'Smile', 10, 12, NULL),
-(126, 'Heart', 16, 12, NULL),
-(127, 'Heart', 16, 12, NULL);
+INSERT INTO `carro` (`id`, `nombre`, `imagen`, `cantidad`, `precio`, `total`, `talla`, `idcliente`) VALUES
+(148, 'Smile', '../../../assets/sonrisa.png', 1, 10, 10, 'M', 12),
+(158, 'Bear', '../../../assets/oso.jpg', 2, 17, 34, 'XXL', 12);
 
 -- --------------------------------------------------------
 
@@ -71,8 +71,21 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `perfil`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
-(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'yyy', 'bbbb', 'Córdoba', 'Córdoba', 'ccc', 14013, 1111),
-(13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL);
+(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pedro', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
+(13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL),
+(14, 'cliente', 'aaa@gmail.com', '123', 'aaa', 'bbb', 'Córdoba', 'Córdoba', 'aaa', 14013, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `img`
+--
+
+CREATE TABLE `img` (
+  `id` int(30) NOT NULL,
+  `imagen` varchar(100) NOT NULL,
+  `idropa` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -84,6 +97,9 @@ CREATE TABLE `pedido` (
   `id` int(20) NOT NULL,
   `fecha` date NOT NULL,
   `estado` set('Pendiente','Enviado','Recibido','') NOT NULL,
+  `preciototal` int(30) NOT NULL,
+  `fechaenvio` date DEFAULT NULL,
+  `fecharecibido` date DEFAULT NULL,
   `idcliente` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -91,22 +107,22 @@ CREATE TABLE `pedido` (
 -- Volcado de datos para la tabla `pedido`
 --
 
-INSERT INTO `pedido` (`id`, `fecha`, `estado`, `idcliente`) VALUES
-(3, '0000-00-00', 'Pendiente', 12),
-(10, '2021-11-12', 'Pendiente', 12),
-(11, '2021-11-12', 'Pendiente', 12),
-(12, '2021-11-12', 'Pendiente', 12),
-(13, '2021-11-12', 'Pendiente', 12),
-(14, '2021-11-12', 'Pendiente', 12),
-(15, '2021-11-12', 'Pendiente', 12),
-(16, '2021-11-12', 'Pendiente', 12),
-(17, '2021-11-12', 'Pendiente', 12),
-(18, '2021-11-12', 'Pendiente', 12),
-(19, '2021-11-12', 'Pendiente', 12),
-(20, '2021-11-12', 'Pendiente', 12),
-(21, '2021-11-12', 'Pendiente', 12),
-(22, '2021-11-12', 'Pendiente', 12),
-(23, '2021-11-12', 'Pendiente', 12);
+INSERT INTO `pedido` (`id`, `fecha`, `estado`, `preciototal`, `fechaenvio`, `fecharecibido`, `idcliente`) VALUES
+(27, '2021-11-19', 'Pendiente', 27, NULL, NULL, 12),
+(28, '2021-11-19', 'Pendiente', 30, NULL, NULL, 12),
+(29, '2021-11-19', 'Pendiente', 30, NULL, NULL, 12);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puntos`
+--
+
+CREATE TABLE `puntos` (
+  `id` int(30) NOT NULL,
+  `puntos` int(30) NOT NULL,
+  `idcliente` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -150,8 +166,7 @@ INSERT INTO `ropa` (`Id`, `Nombre`, `Descripcion`, `Talla`, `Precio`, `Cantidad`
 --
 ALTER TABLE `carro`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `carro-cliente` (`idcliente`),
-  ADD KEY `carro-pedido` (`idpedido`);
+  ADD KEY `carro-cliente` (`idcliente`);
 
 --
 -- Indices de la tabla `cliente`
@@ -161,11 +176,25 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `Email` (`email`);
 
 --
+-- Indices de la tabla `img`
+--
+ALTER TABLE `img`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `img-ropa` (`idropa`);
+
+--
 -- Indices de la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pedido-cliente` (`idcliente`);
+
+--
+-- Indices de la tabla `puntos`
+--
+ALTER TABLE `puntos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `puntos-cliente` (`idcliente`);
 
 --
 -- Indices de la tabla `ropa`
@@ -181,19 +210,31 @@ ALTER TABLE `ropa`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `img`
+--
+ALTER TABLE `img`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT de la tabla `puntos`
+--
+ALTER TABLE `puntos`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `ropa`
@@ -209,14 +250,25 @@ ALTER TABLE `ropa`
 -- Filtros para la tabla `carro`
 --
 ALTER TABLE `carro`
-  ADD CONSTRAINT `carro-cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `carro-pedido` FOREIGN KEY (`idpedido`) REFERENCES `pedido` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `carro-cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `img`
+--
+ALTER TABLE `img`
+  ADD CONSTRAINT `img-ropa` FOREIGN KEY (`idropa`) REFERENCES `ropa` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pedido`
 --
 ALTER TABLE `pedido`
   ADD CONSTRAINT `pedido-cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `puntos`
+--
+ALTER TABLE `puntos`
+  ADD CONSTRAINT `puntos-cliente` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
