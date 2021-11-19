@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login.service';
+import { LoginComponent } from 'src/app/main/login/login.component';
 
 @Component({
   selector: 'app-empleado',
@@ -9,7 +10,10 @@ import { LoginService } from 'src/app/login.service';
 })
 export class EmpleadoComponent implements OnInit {
   nombreEmpleado:any;
-  constructor(private loginServicio: LoginService, private router: Router) { }
+  estaLogueado: boolean = this.login.estaLogueado();
+
+
+  constructor(private login: LoginComponent,private loginServicio: LoginService, private router: Router) { }
 
   ngOnInit() {
     this.loginServicio.comprobarPerfil().subscribe((datos) =>{
@@ -27,5 +31,10 @@ export class EmpleadoComponent implements OnInit {
     }else{
       this.router.navigate(["/login"]);
     }
+  }
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
   }
 }

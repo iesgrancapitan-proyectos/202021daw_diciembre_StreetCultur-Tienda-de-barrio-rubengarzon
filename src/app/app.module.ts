@@ -20,8 +20,6 @@ import { ContactComponent } from './main/footer/contact/contact.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
 import { QuienesSomosComponent } from './main/footer/quienes-somos/quienes-somos.component';
 import { EmpleadoComponent } from './Employee/empleado/empleado.component';
-import { BodyEmployeeComponent } from './Employee/empleado/body-employee/body-employee.component';
-import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/footer-employee.component';
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
@@ -53,8 +51,6 @@ import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.co
     PuntosComponent,
     QuienesSomosComponent,
     EmpleadoComponent,
-    BodyEmployeeComponent,
-    FooterEmployeeComponent,
     PedidosComponent,
     RopaComponent,
     GestionarPuntosComponent,

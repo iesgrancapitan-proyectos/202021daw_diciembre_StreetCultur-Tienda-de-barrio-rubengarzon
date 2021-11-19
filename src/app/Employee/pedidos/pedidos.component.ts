@@ -3,15 +3,18 @@ import { ClienteService } from 'src/app/cliente.service';
 import { Pedido } from 'src/app/Model/Pedido';
 import { Cliente } from 'src/app/Model/Cliente';
 import { PedidoService } from 'src/app/pedido.service';
+import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pedidos',
   templateUrl: './pedidos.component.html',
-  styleUrls: ['./pedidos.component.css'],
+  styleUrls: ['./pedidos.component.sass'],
 })
 export class PedidosComponent implements OnInit {
   pedido: Pedido[] = [];
+
+  estaLogueado: boolean = this.login.estaLogueado();
 
   estado:any;
 
@@ -21,7 +24,7 @@ export class PedidosComponent implements OnInit {
 
   hayPedidos = false;
 
-  constructor(private pedidoServicio: PedidoService, private clienteServicio: ClienteService, readonly snackBar: MatSnackBar) {}
+  constructor(private login: LoginComponent,private pedidoServicio: PedidoService, private clienteServicio: ClienteService, readonly snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
@@ -68,5 +71,11 @@ export class PedidosComponent implements OnInit {
         duration: 1500,
       });
     });
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('id');
+    this.estaLogueado = false;
   }
 }

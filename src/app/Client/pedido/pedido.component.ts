@@ -30,6 +30,8 @@ export class PedidoComponent implements OnInit {
 
   productosEnCarrito = [];
 
+  total:number = 0;
+
   constructor(
     private clienteServicio: ClienteService,
     private carroServicio: CarroService,
@@ -72,8 +74,11 @@ export class PedidoComponent implements OnInit {
     this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
       for (const key in datos['carro']) {
         this.productosEnCarrito.push(Object.values(datos['carro'][key]));
+          this.total = this.total +  parseInt(datos['carro'][key]['precio']);
+          console.log(isNaN(this.total));
+        }
       }
-    });
+    );
   }
 
   contarProductos() {
@@ -91,6 +96,7 @@ export class PedidoComponent implements OnInit {
     let pedido = {
       fecha: this.hoy,
       estado: 'pendiente',
+      preciototal: this.total,
       id: sessionStorage.getItem('id'),
     };
 

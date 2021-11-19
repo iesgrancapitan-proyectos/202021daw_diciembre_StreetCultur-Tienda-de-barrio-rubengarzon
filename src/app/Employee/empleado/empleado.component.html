@@ -1,4 +1,92 @@
-<img src="../../../../assets/3.jpg" alt="" width="300" height="400">
-<h3>
-  ¡Bienvenido {{nombreEmpleado}}!
-</h3>
+<mat-toolbar color="primary" style="height: 5em">
+  <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
+  </mat-menu>
+
+  <img src="../../../../assets/logo.gif" width="120" alt="" />
+
+  <span class="example-spacer"></span>
+
+  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
+
+  <span class="example-spacer"></span>
+
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/cart"
+    routerLinkActive="active"
+  >
+  </button>
+  <button
+    *ngIf="!estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLinkActive="active"
+    matTooltip="Iniciar Sesión"
+    data-toggle="modal"
+    (click)="frame.show()"
+    mdbWavesEffect
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink=""
+    routerLinkActive="active"
+    (click)="cerrarSesion()"
+  >
+    <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display: flex; flex-direction: column;align-items: center;margin-top: 2em">
+  <h3>
+    ¡Bienvenido {{nombreEmpleado}}!
+  </h3>
+  <img class="imgr" src="../../../../assets/3.jpg" alt="" width="300" height="400">
+</div>
+
