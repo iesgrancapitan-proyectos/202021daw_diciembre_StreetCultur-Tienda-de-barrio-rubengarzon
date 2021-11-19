@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/cliente.service';
 import { PedidoService } from 'src/app/pedido.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { LoginComponent } from 'src/app/main/login/login.component';
+import { render } from 'creditcardpayments/creditCardPayments';
 
 @Component({
   selector: 'app-pedido',
@@ -42,7 +43,17 @@ export class PedidoComponent implements OnInit {
     private pedidoServicio: PedidoService,
     readonly snackBar: MatSnackBar,
     private login: LoginComponent,
-  ) {}
+  ) {
+    render({
+      id: "#miPaypalBoton",
+      currency: "€",
+      value: "1.0",
+      onApprove: (details) =>{
+        this.insertarPedido(this.cliente.codigopostal);
+        console.log(details);
+      }
+    })
+  }
 
   ngOnInit() {
     this.obtenerDatos();
@@ -93,10 +104,16 @@ export class PedidoComponent implements OnInit {
     });
   }
 
-  insertarPedido() {
+  insertarPedido(codigo:any) {
     this.clienteServicio.actualizarCliente(this.cliente).subscribe((dato) => {
       console.log(dato['resultado']);
     });
+
+
+    if(codigo > 14999 || codigo < 14000){
+      this.total = this.total + 3
+    }
+
     let pedido = {
       fecha: this.hoy,
       estado: 'pendiente',
@@ -106,6 +123,7 @@ export class PedidoComponent implements OnInit {
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
+        this.carroServicio.borrarProductos();
         return this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

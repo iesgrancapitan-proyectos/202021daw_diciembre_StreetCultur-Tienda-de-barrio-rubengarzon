@@ -277,49 +277,11 @@
               </div>
               <!--Grid row-->
 
-              <hr>
-
-              <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                  <label class="" style="font-size: 12px; font-weight: bold;">Paypal</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="cc-name">Titular de la tarjeta</label>
-                  <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                  <small class="text-muted">Nombre completo de la tarjeta</small>
-                  <div class="invalid-feedback">
-                    Name on card is required
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-number">Número de crédito</label>
-                  <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration">Expiración</label>
-                  <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration">CVV</label>
-                  <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                  <div class="invalid-feedback">
-                    Security code required
-                  </div>
-                </div>
-              </div>
               <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" (click)="insertarPedido()">Completar pedido</button>
 
+              <!-- sb-sm9yh8614634@business.example.com -->
+              <!-- R})k5YD9 -->
+              <div id="miPaypalBoton"></div>
             </form>
 
           </div>
@@ -342,8 +304,8 @@
             <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of productosEnCarrito">
               <div >
                 <h6 class="my-0">{{item[1]}}</h6>
-                <small class="text-muted">Brief description</small>
-                <span class="text-muted">{{item[0]}}</span>
+                <small class="text-muted">Talla: </small>
+                <span class="text-muted">{{item[6]}}</span>
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
@@ -355,7 +317,8 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (€)</span>
-              <strong>{{total}}</strong>
+              <strong *ngIf="cliente.codigopostal > 14999 || cliente.codigopostal < 14000;else gratis">{{total+3}}</strong>
+              <ng-template #gratis>{{total-3}}</ng-template>
             </li>
           </ul>
           <!-- Cart -->
