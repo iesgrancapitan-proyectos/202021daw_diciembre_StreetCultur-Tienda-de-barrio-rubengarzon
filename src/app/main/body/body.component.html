@@ -3,11 +3,8 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/']">INICIO</button>
-    <button mat-menu-item [routerLink]="['/sudaderas']">SUDADERAS</button>
-    <button mat-menu-item [routerLink]="['/pantalones']">PANTALONES</button>
-    <button mat-menu-item [routerLink]="['/zapatillas']">ZAPATILLAS</button>
-    <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
   </mat-menu>
 
   <img src="../../../../assets/logo.gif" width="120" alt="">
@@ -15,18 +12,7 @@
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/sudaderas']">
-    SUDADERAS
-  </button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
-    PANTALONES
-  </button>
-  <button mat-button class="item" [routerLink]="['/zapatillas']">
-    ZAPATILLAS
-  </button>
-  <button mat-button class="item" [routerLink]="['/accesorios']">
-    ACCESORIOS
-  </button>
+  <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
 
   <span class="example-spacer"></span>
   <button

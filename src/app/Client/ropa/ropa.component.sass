@@ -19,8 +19,8 @@
       text-align: justify
 
 .filtros
-    display: flex
-    place-content: center
+  display: flex
+  place-content: center
 .a
   border: 1px solid gray
   width: 6em
@@ -43,3 +43,9 @@ mat-toolbar
   font-size: 17px
 mat-icon
   font-size: 27px
+
+.example-box.cdk-drag-animating
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.example-chip .cdk-drop-list-dragging
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)

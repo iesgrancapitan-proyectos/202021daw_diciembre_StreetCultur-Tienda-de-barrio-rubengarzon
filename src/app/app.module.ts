@@ -12,11 +12,7 @@ import { FooterComponent } from './main/footer/footer.component';
 import { SliderComponent } from './main/body/slider/slider.component';
 import { CategoriasComponent } from './main/body/categorias/categorias.component';
 import { LoginComponent } from './main/login/login.component';
-import { SudaderasComponent } from './Client/sudaderas/sudaderas.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PantalonesComponent } from './Client/pantalones/pantalones.component';
-import { ZapatillasComponent } from './Client/zapatillas/zapatillas.component';
-import { AccesoriosComponent } from './Client/accesorios/accesorios.component';
 import { CartComponent } from './main/cart/cart.component';
 import { DemoMaterialModule } from '../app/material-module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -28,7 +24,7 @@ import { EmpleadoComponent } from './Employee/empleado/empleado.component';
 import { BodyEmployeeComponent } from './Employee/empleado/body-employee/body-employee.component';
 import { FooterEmployeeComponent } from './Employee/empleado/footer-employee/footer-employee.component';
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
-import { RopaComponent } from './Employee/ropa/ropa.component';
+import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { AdminComponent } from './admin/admin.component';
@@ -38,7 +34,7 @@ import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/ges
 import { HttpClientModule } from '@angular/common/http';
 import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
-import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/detalle-sudadera.component';
+import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 
 
 
@@ -53,10 +49,6 @@ import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/de
     SliderComponent,
     CategoriasComponent,
     LoginComponent,
-    SudaderasComponent,
-    PantalonesComponent,
-    ZapatillasComponent,
-    AccesoriosComponent,
     CartComponent,
     ContactComponent,
     PuntosComponent,
@@ -75,7 +67,7 @@ import { DetalleSudaderaComponent } from './Client/sudaderas/detalle-sudadera/de
     GestionarIncidenciasComponent,
     RegistroComponent,
     PedidoComponent,
-    DetalleSudaderaComponent
+    DetalleRopaComponent
    ],
   imports: [
     BrowserModule,

@@ -8,11 +8,11 @@ import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sudaderas',
-  templateUrl: './sudaderas.component.html',
-  styleUrls: ['./sudaderas.component.sass'],
+  selector: 'app-ropa',
+  templateUrl: './ropa.component.html',
+  styleUrls: ['./ropa.component.sass'],
 })
-export class SudaderasComponent implements OnInit {
+export class RopaComponent implements OnInit {
   sudaderas: Ropa[] = [];
 
   numProductos: any;

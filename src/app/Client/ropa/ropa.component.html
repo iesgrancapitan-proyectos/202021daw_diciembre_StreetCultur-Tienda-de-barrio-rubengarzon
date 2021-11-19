@@ -1,32 +1,18 @@
-<mat-toolbar color="primary" style="height: 5em;">
+<mat-toolbar color="primary" style="height: 5em">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/']">INICIO</button>
-    <button mat-menu-item [routerLink]="['/sudaderas']">SUDADERAS</button>
-    <button mat-menu-item [routerLink]="['/pantalones']">PANTALONES</button>
-    <button mat-menu-item [routerLink]="['/zapatillas']">ZAPATILLAS</button>
-    <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="">
+  <img src="../../../../assets/logo.gif" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/sudaderas']">
-    SUDADERAS
-  </button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
-    PANTALONES
-  </button>
-  <button mat-button class="item" [routerLink]="['/zapatillas']">
-    ZAPATILLAS
-  </button>
-  <button mat-button class="item" [routerLink]="['/accesorios']">
-    ACCESORIOS
-  </button>
+  <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
 
   <span class="example-spacer"></span>
   <button
@@ -48,10 +34,12 @@
     routerLink="/cart"
     routerLinkActive="active"
   >
-    <mat-icon [matBadge]="numProductos" matBadgeColor="accent">shopping_cart</mat-icon>
+    <mat-icon [matBadge]="numProductos" matBadgeColor="accent"
+      >shopping_cart</mat-icon
+    >
   </button>
   <button
-   *ngIf="!estaLogueado"
+    *ngIf="!estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -76,15 +64,27 @@
   </button>
 </mat-toolbar>
 
-
-
-<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -92,32 +92,50 @@
         <div class="md-form mb-5">
           <app-login></app-login>
         </div>
-
       </div>
     </div>
   </div>
 </div>
 
+<div style="margin: 36px 5px 13px 43px;">
+  <mat-chip-list
+    class="example-chip"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+  >
+    <mat-chip class="example-box" cdkDrag> Sudaderas </mat-chip>
+    <mat-chip class="example-box" cdkDrag> Pantalones </mat-chip>
+    <mat-chip class="example-box" cdkDrag> Accesorios </mat-chip>
+  </mat-chip-list>
+</div>
+
 <div class="cont">
-  <mat-card class="example-card" *ngFor="let sudadera of sudaderas" style="box-shadow: none">
-    <mat-card-header style="display: flex;place-content: center;">
+  <mat-card
+    class="example-card"
+    *ngFor="let sudadera of sudaderas"
+    style="box-shadow: none"
+  >
+    <mat-card-header style="display: flex; place-content: center">
     </mat-card-header>
-    <a routerLink="/detalle-sudadera/{{sudadera.Id}}">
-      <img
-      mat-card-image
-      src="{{ sudadera.Imagen }}"
-      />
+    <a routerLink="/detalle-sudadera/{{ sudadera.Id }}">
+      <img mat-card-image src="{{ sudadera.Imagen }}" />
     </a>
-    <mat-card-actions style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
+    <mat-card-actions
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
       <p>Sudadera {{ sudadera.Nombre }}</p>
-      <p style="font-weight: bold;">{{ sudadera.Precio }}€</p>
+      <p style="font-weight: bold">{{ sudadera.Precio }}€</p>
       <button
         mat-button
         (click)="addCarrito(sudadera.Nombre, sudadera.Precio, sudadera.Imagen)"
       >
         AÑADIR AL CARRITO
       </button>
-
     </mat-card-actions>
   </mat-card>
 </div>

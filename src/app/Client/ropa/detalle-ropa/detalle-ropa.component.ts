@@ -3,15 +3,16 @@ import { Ropa } from 'src/app/Model/Ropa';
 import { CarroService } from 'src/app/carro.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { RopaService } from 'src/app/ropa.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
-  selector: 'app-detalle-sudadera',
-  templateUrl: './detalle-sudadera.component.html',
-  styleUrls: ['./detalle-sudadera.component.sass']
+  selector: 'app-detalle-ropa',
+  templateUrl: './detalle-ropa.component.html',
+  styleUrls: ['./detalle-ropa.component.sass']
 })
-export class DetalleSudaderaComponent implements OnInit {
+export class DetalleRopaComponent implements OnInit {
   sudaderas = {
     Id: null,
     Nombre: null,
@@ -39,6 +40,8 @@ export class DetalleSudaderaComponent implements OnInit {
               private rutaActiva: ActivatedRoute,
               readonly snackBar: MatSnackBar,
               private carro: CarroService,
+              private loginService: LoginService,
+              private router: Router
               ) { }
 
   ngOnInit() {
@@ -104,6 +107,36 @@ export class DetalleSudaderaComponent implements OnInit {
         verticalPosition: 'bottom',
       });
     }
+  }
+
+  /**
+   * Inicia sesión el empleado y almacena el email en una sesion
+   */
+   loginEmail() {
+    this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        this.router.navigateByUrl('/');
+        sessionStorage.setItem('email', datos.email);
+        sessionStorage.setItem('id', datos.id);
+        this.loginService.comprobarPerfil().subscribe((datos) => {
+          switch (datos['perfil']) {
+            case 'cliente':
+              this.router.navigate(['/']);
+              break;
+            case 'empleado':
+              this.router.navigate(['/empleado']);
+              break;
+            case 'admin':
+              this.router.navigate(['/admin']);
+              break;
+            default:
+              break;
+          }
+        })
+      } else {
+        console.log('Ha habido un error al iniciar sesión');
+      }
+    });
   }
 
 }
