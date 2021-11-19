@@ -8,10 +8,13 @@ import { LoginService } from 'src/app/login.service';
   styleUrls: ['./empleado.component.sass']
 })
 export class EmpleadoComponent implements OnInit {
-
+  nombreEmpleado:any;
   constructor(private loginServicio: LoginService, private router: Router) { }
 
   ngOnInit() {
+    this.loginServicio.comprobarPerfil().subscribe((datos) =>{
+      this.nombreEmpleado = datos["nombre"]
+    })
     console.log(sessionStorage.getItem("email").length);
     if(sessionStorage.getItem("email").length > 0){
     this.loginServicio.comprobarPerfil().subscribe((datos) => {
