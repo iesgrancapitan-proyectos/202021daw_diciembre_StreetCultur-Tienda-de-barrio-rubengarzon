@@ -13,7 +13,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./ropa.component.sass'],
 })
 export class RopaComponent implements OnInit {
-  sudaderas: Ropa[] = [];
+  ropa: Ropa[] = [];
+
+  pantalones: any;
 
   numProductos: any;
 
@@ -30,7 +32,7 @@ export class RopaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mostrarRopa();
+    this.mostrarSudaderas();
     this.contarProductos();
   }
 
@@ -40,29 +42,36 @@ export class RopaComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  mostrarRopa() {
+  mostrarSudaderas() {
     this.ropaServicio.obtenerSudaderas().subscribe((datos: any) => {
-      this.sudaderas = datos['sudaderas'];
+      this.ropa = datos['sudaderas'];
     });
   }
 
   addCarrito(nombre: any, precio: any, imagen: any) {
     if (sessionStorage.getItem('email')) {
-
       let id = sessionStorage.getItem('id');
-      let carrito = { nombre: nombre, imagen: imagen, cantidad: 1, precio: precio, total: precio, talla: 'M', id: id };
+      let carrito = {
+        nombre: nombre,
+        imagen: imagen,
+        cantidad: 1,
+        precio: precio,
+        total: precio,
+        talla: 'M',
+        id: id,
+      };
 
-      this.carro.insertarCarro(carrito).subscribe( dato => {
-       if (Object.values(dato).includes("OK") == true){
-        this.contarProductos();
-        return this.snackBar.open('Se ha añadido al carrito.', '', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          duration: 1500,
-        });
-       }else{
-         return false;
-       }
+      this.carro.insertarCarro(carrito).subscribe((dato) => {
+        if (Object.values(dato).includes('OK') == true) {
+          this.contarProductos();
+          return this.snackBar.open('Se ha añadido al carrito.', '', {
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            duration: 1500,
+          });
+        } else {
+          return false;
+        }
       });
       return false;
     } else {
@@ -84,7 +93,7 @@ export class RopaComponent implements OnInit {
   /**
    * Inicia sesión el empleado y almacena el email en una sesion
    */
-   loginEmail() {
+  loginEmail() {
     this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
         this.router.navigateByUrl('/');
@@ -104,10 +113,22 @@ export class RopaComponent implements OnInit {
             default:
               break;
           }
-        })
+        });
       } else {
         console.log('Ha habido un error al iniciar sesión');
       }
+    });
+  }
+
+  mostrarPantalones() {
+    this.ropaServicio.obtenerPantalones().subscribe((datos) => {
+      this.ropa = datos['pantalones'];
+    });
+  }
+
+  mostrarAccesorios() {
+    this.ropaServicio.obtenerAccesorios().subscribe((datos) => {
+      this.ropa = datos['accesorios']
     });
   }
 }

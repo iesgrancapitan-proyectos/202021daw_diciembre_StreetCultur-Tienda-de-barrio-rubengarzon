@@ -5,6 +5,7 @@ import { PedidoService } from 'src/app/pedido.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { render } from 'creditcardpayments/creditCardPayments';
+import { PuntosService } from 'src/app/puntos.service';
 
 @Component({
   selector: 'app-pedido',
@@ -34,7 +35,11 @@ export class PedidoComponent implements OnInit {
 
   productosEnCarrito = [];
 
-  total:number = 0;
+  total: number = 0;
+
+  puntos: any;
+
+  canjearpuntos:any;
 
   constructor(
     private clienteServicio: ClienteService,
@@ -43,22 +48,29 @@ export class PedidoComponent implements OnInit {
     private pedidoServicio: PedidoService,
     readonly snackBar: MatSnackBar,
     private login: LoginComponent,
-  ) {
-    render({
-      id: "#miPaypalBoton",
-      currency: "€",
-      value: "1.0",
-      onApprove: (details) =>{
-        this.insertarPedido(this.cliente.codigopostal);
-        console.log(details);
-      }
-    })
-  }
+    private puntosServicio: PuntosService
+  ) {}
 
   ngOnInit() {
     this.obtenerDatos();
     this.obtenerCarro();
     this.contarProductos();
+    render({
+      id: '#miPaypalBoton',
+      currency: '€',
+      value: '1.0',
+      onApprove: (details) => {
+        this.insertarPedido(this.cliente.codigopostal);
+      },
+    });
+
+    let cliente = {
+      idcliente: sessionStorage.getItem('id'),
+    };
+
+    this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
+      this.puntos = datos['puntos'];
+    });
   }
 
   obtenerDatos() {
@@ -89,11 +101,10 @@ export class PedidoComponent implements OnInit {
     this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
       for (const key in datos['carro']) {
         this.productosEnCarrito.push(Object.values(datos['carro'][key]));
-          this.total = this.total +  parseInt(datos['carro'][key]['precio']);
-          console.log(isNaN(this.total));
-        }
+        this.total = this.total + parseInt(datos['carro'][key]['precio']);
+        console.log(isNaN(this.total));
       }
-    );
+    });
   }
 
   contarProductos() {
@@ -104,14 +115,13 @@ export class PedidoComponent implements OnInit {
     });
   }
 
-  insertarPedido(codigo:any) {
+  insertarPedido(codigo: any) {
     this.clienteServicio.actualizarCliente(this.cliente).subscribe((dato) => {
       console.log(dato['resultado']);
     });
 
-
-    if(codigo > 14999 || codigo < 14000){
-      this.total = this.total + 3
+    if (codigo > 14999 || codigo < 14000) {
+      this.total = this.total + 3;
     }
 
     let pedido = {
@@ -123,6 +133,15 @@ export class PedidoComponent implements OnInit {
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
+        let clienteid = {
+          idcliente: sessionStorage.getItem('id'),
+          puntos: '',
+        };
+        this.puntosServicio.obtenerPuntos(clienteid).subscribe((datos) => {
+          clienteid.puntos = datos['puntos'] + 3;
+          this.puntosServicio.actualizarPuntos(clienteid);
+        });
+
         this.carroServicio.borrarProductos();
         return this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
@@ -141,5 +160,9 @@ export class PedidoComponent implements OnInit {
     this.estaLogueado = false;
   }
 
+  canjearPuntos(){
+    if(this.canjearPuntos){
 
+    }
+  }
 }

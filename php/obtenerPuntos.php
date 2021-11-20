@@ -20,7 +20,7 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-$response->puntos = $resultado->fetch_all(MYSQLI_ASSOC);
+/* $response->puntos = $resultado->fetch_all(MYSQLI_ASSOC); */
 
 while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';

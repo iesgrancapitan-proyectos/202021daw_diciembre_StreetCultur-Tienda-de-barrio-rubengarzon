@@ -8,13 +8,10 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = Conexion(); // CREA LA CONEXION
-
-$query = "UPDATE puntos SET puntos = '$params->puntos' WHERE id='$params->id'";
-
+$conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, $query);
+$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE email='$params->email'");
 
 class Result
 {
@@ -23,13 +20,13 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
+/* $response->puntos = $resultado->fetch_all(MYSQLI_ASSOC); */
 
-if ($resultado == TRUE) {
+while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
-} else {
-  $response->resultado = 'FAIL';
-  $response->mensaje = $resultado->error;
+  $response->id = $fila['id'];
 }
+
 
 header('Content-Type: application/json');
 

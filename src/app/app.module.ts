@@ -29,7 +29,6 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { GestionarEmpleadosComponent } from './admin/gestionar-empleados/gestionar-empleados.component';
 import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 
@@ -59,7 +58,6 @@ import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.co
     AdminHeaderComponent,
     GestionarEmpleadosComponent,
     GestionarIncidenciasComponent,
-    RegistroComponent,
     PedidoComponent,
     DetalleRopaComponent
    ],

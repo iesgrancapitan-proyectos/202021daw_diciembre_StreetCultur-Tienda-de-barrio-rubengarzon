@@ -10,7 +10,6 @@ import { EmpleadoComponent } from './Employee/empleado/empleado.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { AdminComponent } from './admin/admin.component';
-import { RegistroComponent } from './main/registro/registro.component';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
@@ -19,7 +18,6 @@ import { RopaComponent } from './Client/ropa/ropa.component';
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent },
   { path: 'ropa', component: RopaComponent},
   { path: 'cart', component: CartComponent },
   { path: 'empleado', component: EmpleadoComponent },

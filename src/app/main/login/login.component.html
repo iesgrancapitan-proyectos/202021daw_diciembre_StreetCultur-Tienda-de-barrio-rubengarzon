@@ -1,5 +1,5 @@
 <div>
-  <form [formGroup]="loginForm" (submit)="loginEmail()">
+  <form [formGroup]="loginForm" (submit)="loginEmail()" *ngIf="flag == false; else registro">
     <div class="example-container">
       <mat-form-field appearance="fill" class="email">
         <mat-label>Escribe tu email</mat-label>
@@ -11,9 +11,15 @@
           formControlName="email"
           required
         />
-        <mat-error *ngIf="loginForm.get('email').errors && loginForm.get('email').dirty">
-          <p *ngIf="loginForm.get('email').hasError('required')"> Este campo es requerido</p>
-          <p *ngIf="loginForm.get('email').hasError('email')">El formato de email es incorrecto</p>
+        <mat-error
+          *ngIf="loginForm.get('email').errors && loginForm.get('email').dirty"
+        >
+          <p *ngIf="loginForm.get('email').hasError('required')">
+            Este campo es requerido
+          </p>
+          <p *ngIf="loginForm.get('email').hasError('email')">
+            El formato de email es incorrecto
+          </p>
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -26,9 +32,17 @@
           formControlName="password"
           required
         />
-        <mat-error *ngIf="loginForm.get('password').errors && loginForm.get('password').dirty">
-          <p *ngIf="loginForm.get('password').hasError('required')"> Este campo es requerido</p>
-          <p *ngIf="loginForm.get('password').hasError('minlength')">La contraseña debe tener 3 caracteres como mínimo</p>
+        <mat-error
+          *ngIf="
+            loginForm.get('password').errors && loginForm.get('password').dirty
+          "
+        >
+          <p *ngIf="loginForm.get('password').hasError('required')">
+            Este campo es requerido
+          </p>
+          <p *ngIf="loginForm.get('password').hasError('minlength')">
+            La contraseña debe tener 3 caracteres como mínimo
+          </p>
         </mat-error>
         <button
           mat-icon-button
@@ -41,8 +55,79 @@
           <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
         </button>
       </mat-form-field>
-      <a [routerLink]="['/registro']">¿No tienes cuenta? Regístrate aquí</a>
-      <button type="submit" mdbBtn color="dark" mdbWavesEffect>Entrar</button>
+      <a (click)="cambiarFlag()"
+        >¿No tienes cuenta? Regístrate aquí</a
+      >
+      <button class="bton" type="submit" mdbBtn color="dark" mdbWavesEffect>
+        Entrar
+      </button>
     </div>
   </form>
 </div>
+
+<ng-template #registro>
+  <form [formGroup]="loginForm" (submit)="registroEmail()">
+    <div class="example-container">
+      <mat-form-field appearance="fill" class="email">
+        <mat-label>Escribe tu email</mat-label>
+        <input
+          matInput
+          placeholder="carlos@gmail.com"
+          [(ngModel)]="login.email"
+          name="email"
+          formControlName="email"
+          required
+        />
+        <mat-error
+          *ngIf="loginForm.get('email').errors && loginForm.get('email').dirty"
+        >
+          <p *ngIf="loginForm.get('email').hasError('required')">
+            Este campo es requerido
+          </p>
+          <p *ngIf="loginForm.get('email').hasError('email')">
+            El formato de email es incorrecto
+          </p>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Escribe tu contraseña</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          [(ngModel)]="login.contrasena"
+          name="password"
+          formControlName="password"
+          required
+        />
+        <mat-error
+          *ngIf="
+            loginForm.get('password').errors && loginForm.get('password').dirty
+          "
+        >
+          <p *ngIf="loginForm.get('password').hasError('required')">
+            Este campo es requerido
+          </p>
+          <p *ngIf="loginForm.get('password').hasError('minlength')">
+            La contraseña debe tener 3 caracteres como mínimo
+          </p>
+        </mat-error>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+          [disabled]="loginForm.invalid"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <a (click)="cambiarFlag1()"
+        >¿Tienes una cuenta? inicia sesión</a
+      >
+      <button class="bton" type="submit" mdbBtn color="dark" mdbWavesEffect>
+        Registrar
+      </button>
+    </div>
+  </form>
+</ng-template>

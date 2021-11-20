@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "INSERT INTO puntos (puntos, idcliente) VALUES('$params->puntos', '$params->idcliente')";
+$query = "INSERT INTO puntos (puntos, idcliente) VALUES('0', '$params->idcliente')";
 
 // REALIZA LA QUERY A LA DB
 $resultado = mysqli_query($conexion, $query);

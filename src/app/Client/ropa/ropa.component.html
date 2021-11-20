@@ -103,22 +103,22 @@
     cdkDropList
     cdkDropListOrientation="horizontal"
   >
-    <mat-chip class="example-box" cdkDrag> Sudaderas </mat-chip>
-    <mat-chip class="example-box" cdkDrag> Pantalones </mat-chip>
-    <mat-chip class="example-box" cdkDrag> Accesorios </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarSudaderas()"> Sudaderas </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarPantalones()"> Pantalones </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarAccesorios()"> Accesorios </mat-chip>
   </mat-chip-list>
 </div>
 
 <div class="cont">
   <mat-card
     class="example-card"
-    *ngFor="let sudadera of sudaderas"
+    *ngFor="let item of ropa"
     style="box-shadow: none"
   >
     <mat-card-header style="display: flex; place-content: center">
     </mat-card-header>
-    <a routerLink="/detalle-sudadera/{{ sudadera.Id }}">
-      <img mat-card-image src="{{ sudadera.Imagen }}" />
+    <a routerLink="/detalle-ropa/{{ item.Id }}">
+      <img mat-card-image src="{{ item.Imagen }}" />
     </a>
     <mat-card-actions
       style="
@@ -128,16 +128,17 @@
         align-items: center;
       "
     >
-      <p>Sudadera {{ sudadera.Nombre }}</p>
-      <p style="font-weight: bold">{{ sudadera.Precio }}€</p>
+      <p>Sudadera {{ item.Nombre }}</p>
+      <p style="font-weight: bold">{{ item.Precio }}€</p>
       <button
         mat-button
-        (click)="addCarrito(sudadera.Nombre, sudadera.Precio, sudadera.Imagen)"
+        (click)="addCarrito(item.Nombre, item.Precio, item.Imagen)"
       >
         AÑADIR AL CARRITO
       </button>
     </mat-card-actions>
   </mat-card>
+
 </div>
 
 <app-footer></app-footer>
