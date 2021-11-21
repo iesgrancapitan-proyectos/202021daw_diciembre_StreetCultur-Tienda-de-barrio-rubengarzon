@@ -9,6 +9,17 @@ export class RopaService {
   env: string = environment.env;
   constructor(private http: HttpClient) {}
 
+  obtenerRopa(){
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/ropa.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/ropa.php'
+      );
+    }
+  }
 
   obtenerSudadera(sudadera){
     if (this.env == 'Development') {

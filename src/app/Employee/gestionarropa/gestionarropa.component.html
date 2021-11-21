@@ -3,12 +3,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/empleado']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">
+      INICIO
+    </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
       GESTIONAR PEDIDOS
-    </button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
-      GESTIONAR PUNTOS
     </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
       GESTIONAR ROPA
@@ -22,9 +21,6 @@
   <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
     GESTIONAR PEDIDOS
-  </button>
-  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
-    GESTIONAR PUNTOS
   </button>
   <button mat-button class="item" [routerLink]="['/gestionarropa']">
     GESTIONAR ROPA
@@ -117,53 +113,66 @@
       mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
     "
   >
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Id del cliente</mat-label>
-      <input
-        type="text"
-        matInput
-        [matAutocomplete]="auto"
-        [(ngModel)]="id"
-        (keyup)="mostrarPuntos(id)"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let item of clientes">
-          {{ item.id }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <table
-      class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
-    >
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Puntos</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Color</th>
+          <th>Borrar</th>
           <th>Modificar</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{ puntos.id }}</td>
+        <tr *ngFor="let item of ropa">
           <td>
-            <input type="text" [(ngModel)]="puntos.puntos" value="{{ puntos.puntos }}">
+            <input
+              type="text"
+              [(ngModel)]="item.Nombre"
+              value="{{ item.Nombre }}"
+            />
           </td>
           <td>
-            <mat-icon
+            <input
+              type="text"
+              [(ngModel)]="item.Descripcion"
+              value="{{ item.Descripcion }}"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              [(ngModel)]="item.Precio"
+              value="{{ item.Precio }}"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              [(ngModel)]="item.Color"
+              value="{{ item.Color }}"
+            />
+          </td>
+          <td>
+             <mat-icon
+              matTooltip="Borrar"
               style="cursor: pointer"
-              (click)="modificarPuntos(puntos.id, puntos.puntos)"
-              >edit</mat-icon
+              (click)="borrarRopa(item.Id)"
+              >delete</mat-icon
             >
+          </td>
+          <td>
+            <!-- <mat-icon
+              style="cursor: pointer"
+              (click)="modificarRopa(item.id, item.estado)"
+              >edit</mat-icon
+            > -->
           </td>
         </tr>
       </tbody>
     </table>
     <br />
   </div>
-
-  <ng-template #nohaypedidos>
-    <p>El Cliente no tiene pedidos</p>
-  </ng-template>
   <div class="mdl-layout-spacer"></div>
 </section>

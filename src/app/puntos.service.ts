@@ -51,4 +51,18 @@ export class PuntosService {
       );
     }
   }
+
+  borrarPuntos(cliente: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/borrarPuntos.php',
+        JSON.stringify(cliente)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/borrarPuntos.php',
+        JSON.stringify(cliente)
+      );
+    }
+  }
 }

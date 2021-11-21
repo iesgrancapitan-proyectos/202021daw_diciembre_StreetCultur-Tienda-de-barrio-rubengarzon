@@ -3,16 +3,26 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
+      GESTIONAR PEDIDOS
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
+      GESTIONAR ROPA
+    </button>
   </mat-menu>
 
   <img src="../../../../assets/logo.gif" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
+  <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
+    GESTIONAR PEDIDOS
+  </button>
+  <button mat-button class="item" [routerLink]="['/gestionarropa']">
+    GESTIONAR ROPA
+  </button>
 
   <span class="example-spacer"></span>
 
@@ -23,8 +33,7 @@
     aria-label="Example icon-button with heart icon"
     routerLink="/cart"
     routerLinkActive="active"
-  >
-  </button>
+  ></button>
   <button
     *ngIf="!estaLogueado"
     mat-icon-button
@@ -102,22 +111,26 @@
       mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
     "
   >
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Id del cliente</mat-label>
-    <input type="text"
-           matInput
-           [matAutocomplete]="auto"
-           [(ngModel)]="id"
-           (keyup)="mostrarPedido(id)"
-           >
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let item of clientes">
-        {{item.id}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id del cliente</mat-label>
+      <input
+        type="text"
+        matInput
+        [matAutocomplete]="auto"
+        [(ngModel)]="id"
+        (keyup)="mostrarPedido(id)"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let item of clientes">
+          {{ item.id }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" *ngIf="hayPedidos == true;else nohaypedidos">
+    <table
+      class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
+      *ngIf="hayPedidos == true; else nohaypedidos"
+    >
       <thead>
         <tr>
           <th>Fecha del pedido</th>
@@ -133,22 +146,42 @@
         <tr *ngFor="let item of pedido">
           <td>{{ item.fecha }}</td>
           <td>
-            {{ item.estado }}
+            <select [(ngModel)]="item.estado">
+              <option value="{{ item.estado }}" selected>
+                {{ item.estado }}
+              </option>
+              <option *ngIf="item.estado != 'Pendiente'" value="Pendiente">
+                Pendiente
+              </option>
+              <option *ngIf="item.estado != 'Recibido'" value="Recibido">
+                Recibido
+              </option>
+              <option *ngIf="item.estado != 'Enviado'" value="Enviado">
+                Enviado
+              </option>
+            </select>
+          </td>
+          <td>{{ item.preciototal }} €</td>
+          <td>
+            {{ item.fechadeenvio }}
           </td>
           <td>
-
+            {{ item.fechaderecibo }}
           </td>
           <td>
-
+            <mat-icon
+              matTooltip="Borrar"
+              style="cursor: pointer"
+              (click)="borrarPedido(item.id, item.idcliente)"
+              >delete</mat-icon
+            >
           </td>
-          <td></td>
-          <td><mat-icon matTooltip="Borrar"
-            style="cursor: pointer"
-            (click)="borrarPedido(item.id, item.idcliente)"
-            >delete</mat-icon
-          ></td>
           <td>
-            <mat-icon matTooltip="Modificar" >edit</mat-icon>
+            <mat-icon
+              style="cursor: pointer"
+              (click)="modificarPedido(item.id, item.estado)"
+              >edit</mat-icon
+            >
           </td>
         </tr>
       </tbody>

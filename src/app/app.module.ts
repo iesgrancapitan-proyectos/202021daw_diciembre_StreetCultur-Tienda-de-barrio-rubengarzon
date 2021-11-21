@@ -31,9 +31,7 @@ import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/ges
 import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
-
-
-
+import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
 
 
 @NgModule({
@@ -59,7 +57,8 @@ import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.co
     GestionarEmpleadosComponent,
     GestionarIncidenciasComponent,
     PedidoComponent,
-    DetalleRopaComponent
+    DetalleRopaComponent,
+    GestionarRopaComponent
    ],
   imports: [
     BrowserModule,

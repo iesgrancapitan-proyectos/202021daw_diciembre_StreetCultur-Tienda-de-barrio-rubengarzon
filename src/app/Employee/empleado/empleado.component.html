@@ -3,17 +3,20 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">INICIO</button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">GESTIONAR PUNTOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">GESTIONAR ROPA</button>
   </mat-menu>
 
   <img src="../../../../assets/logo.gif" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">GESTIONAR PEDIDOS</button>
-
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">GESTIONAR PUNTOS</button>
+  <button mat-button class="item" [routerLink]="['/gestionarropa']">GESTIONAR ROPA</button>
   <span class="example-spacer"></span>
 
   <button
@@ -89,4 +92,3 @@
   </h3>
   <img class="imgr" src="../../../../assets/3.jpg" alt="" width="300" height="400">
 </div>
-

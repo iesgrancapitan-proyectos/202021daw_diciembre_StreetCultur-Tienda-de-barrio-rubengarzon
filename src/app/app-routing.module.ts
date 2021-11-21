@@ -14,11 +14,12 @@ import { PedidoComponent } from './Client/pedido/pedido.component';
 import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 import { RopaComponent } from './Client/ropa/ropa.component';
+import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'ropa', component: RopaComponent},
+  { path: 'ropa', component: RopaComponent },
   { path: 'cart', component: CartComponent },
   { path: 'empleado', component: EmpleadoComponent },
   { path: 'contacto', component: ContactComponent },
@@ -26,11 +27,12 @@ const routes: Routes = [
   { path: 'inicio', component: EmpleadoComponent },
   { path: 'quienes-somos', component: QuienesSomosComponent },
   { path: 'gestionarpuntos', component: GestionarPuntosComponent },
+  { path: 'gestionarropa', component: GestionarRopaComponent },
   { path: 'incidencia', component: IncidenciaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
-  { path: 'gestionarpedidos', component: PedidosComponent},
-  { path: 'detalle-ropa/:id', component: DetalleRopaComponent},
+  { path: 'gestionarpedidos', component: PedidosComponent },
+  { path: 'detalle-ropa/:id', component: DetalleRopaComponent },
 ];
 
 @NgModule({

@@ -65,4 +65,18 @@ export class PedidoService {
       );
     }
   }
+
+  actualizarPedido(pedido){
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/actualizarPedido.php',
+        JSON.stringify(pedido)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/actualizarPedido.php',
+        JSON.stringify(pedido)
+      );
+    }
+  }
 }
