@@ -43,45 +43,40 @@ export class GestionarRopaComponent implements OnInit {
     let ropa = {
       Id: id,
     };
-    let cliente = {
-      id: idpedido,
-    };
-    this.pedidoServicio.borrarPedido(pedido).subscribe((datos) => {
-      this.pedidoServicio.obtenerPedido(cliente).subscribe((datos: any) => {
-        this.pedido = datos['pedido'];
-        if (this.pedido.length > 0) {
-          this.hayPedidos = true;
-        } else {
-          this.hayPedidos = false;
-        }
-      });
-      return this.snackBar.open('Se ha borrado el pedido.', '', {
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-        duration: 1500,
-      });
-    });
+    this.ropaServicio.borrarRopa(ropa).subscribe((datos) => {
+        this.ropaServicio.obtenerRopa().subscribe((datos: any) => {
+          this.ropa = datos['ropa'];
+        });
+        return this.snackBar.open('Se ha borrado la ropa.', '', {
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+          duration: 1500,
+        });
+    })
   }
+
   cerrarSesion() {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
 
-  /* modificarPedido(id, estado) {
-    console.log(estado);
-    let pedido = {
-      id: id,
-      estado: estado,
+  modificarRopa(id, nombre, descripcion, precio, color) {
+    let ropa = {
+      Id: id,
+      Nombre: nombre,
+      Descripcion: descripcion,
+      Precio: precio,
+      Color: color
     };
-    this.pedidoServicio.actualizarPedido(pedido).subscribe((datos) => {
+    this.ropaServicio.actualizarRopa(ropa).subscribe((datos) => {
       if (datos['resultado'] == 'OK') {
-        this.snackBar.open('El pedido se ha modificado', '', {
+        this.snackBar.open('La ropa se ha modificado', '', {
           duration: 2000,
         });
       } else {
         alert('error');
       }
     });
-  } */
+  }
 }

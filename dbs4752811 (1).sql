@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2021 a las 20:05:17
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.3.31
+-- Tiempo de generación: 21-11-2021 a las 19:30:50
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,8 +43,7 @@ CREATE TABLE `carro` (
 --
 
 INSERT INTO `carro` (`id`, `nombre`, `imagen`, `cantidad`, `precio`, `total`, `talla`, `idcliente`) VALUES
-(148, 'Smile', '../../../assets/sonrisa.png', 1, 10, 10, 'M', 12),
-(158, 'Bear', '../../../assets/oso.jpg', 2, 17, 34, 'XXL', 12);
+(160, 'Degraded', '../../../assets/degraded.png', 3, 15, 45, 'XL', 12);
 
 -- --------------------------------------------------------
 
@@ -73,7 +72,10 @@ CREATE TABLE `cliente` (
 INSERT INTO `cliente` (`id`, `perfil`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
 (12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pedro', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
 (13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL),
-(14, 'cliente', 'aaa@gmail.com', '123', 'aaa', 'bbb', 'Córdoba', 'Córdoba', 'aaa', 14013, 12);
+(14, 'cliente', 'aaa@gmail.com', '123', 'aaa', 'bbb', 'Córdoba', 'Córdoba', 'aaa', 14013, 12),
+(20, 'cliente', 'rujex93rujex@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'admin', 'aa@gmail.com', '123', 'aa', 'bb', 'aa', NULL, NULL, NULL, NULL),
+(22, 'admin', 'jj@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -109,7 +111,7 @@ CREATE TABLE `pedido` (
 
 INSERT INTO `pedido` (`id`, `fecha`, `estado`, `preciototal`, `fechaenvio`, `fecharecibido`, `idcliente`) VALUES
 (27, '2021-11-19', 'Pendiente', 27, NULL, NULL, 12),
-(28, '2021-11-19', 'Pendiente', 30, NULL, NULL, 12),
+(28, '2021-11-19', 'Recibido', 30, NULL, NULL, 12),
 (29, '2021-11-19', 'Pendiente', 30, NULL, NULL, 12);
 
 -- --------------------------------------------------------
@@ -123,6 +125,15 @@ CREATE TABLE `puntos` (
   `puntos` int(30) NOT NULL,
   `idcliente` int(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `puntos`
+--
+
+INSERT INTO `puntos` (`id`, `puntos`, `idcliente`) VALUES
+(1, 10, 12),
+(2, 0, 20),
+(3, 0, 22);
 
 -- --------------------------------------------------------
 
@@ -148,14 +159,7 @@ CREATE TABLE `ropa` (
 --
 
 INSERT INTO `ropa` (`Id`, `Nombre`, `Descripcion`, `Talla`, `Precio`, `Cantidad`, `Tipo`, `Color`, `Novedad`, `Imagen`) VALUES
-(1, 'Bear', 'Articulo Unisex. Sudadera disponible en colores amarillo y blanco tiene en el bolsillo un pequeño peluche de oso.', 'S, L, XL', '17', 10, 'Sudadera', 'Amarillo, Blanco', 1, '../../../assets/oso.jpg'),
-(3, 'Smile', 'Articulo Unisex. Sudadera disponible en colores gris claro y negro tiene impreso una cara sonriente.', 'S, L, XL', '10', 12, 'Sudadera', 'aa', 1, '../../../assets/sonrisa.png'),
-(4, 'Degraded', 'Articulo Unisex. Sudadera disponible en un degradado gris.', 'S, L, XL', '15', 15, 'Sudadera', 'Gris', 1, '../../../assets/degraded.png'),
-(5, 'Heart', 'Articulo Unisex. Sudadera disponible en color negro, tiene un estampado de un corazón.', 'S,L,XL', '16', 15, 'Sudadera', 'Negra', 1, '../../../assets/heart.PNG'),
-(6, 'Weekend', 'Articulo Unisex. Pantalón vaquero con estampado weekend.', 'S,L,XL', '20', 12, 'Pantalon', 'Azul', 1, '../../../assets/weekend.PNG'),
-(7, 'aaaaa', 'aaaa', 'S,L,XL', '20', 12, 'Pantalon', 'Negra', 1, '../../../assets/weekend.PNG'),
-(8, 'aaaaa', 'aaa', 'S,L,XL', '22', 12, 'Zapatilla', 'Negra', 1, ''),
-(9, 'aaadasd', 'sads', 'S,L,XL', '12', 12, 'Accesorio', 'asd', 1, '');
+(11, 'aaa', 'bbb', 'S, L, XL', '13', 12, 'Sudadera', 'Amarillo, Blanco', 1, '../../../assets/oso.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -210,13 +214,13 @@ ALTER TABLE `ropa`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `img`
@@ -228,19 +232,19 @@ ALTER TABLE `img`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `puntos`
 --
 ALTER TABLE `puntos`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `ropa`
 --
 ALTER TABLE `ropa`
-  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas

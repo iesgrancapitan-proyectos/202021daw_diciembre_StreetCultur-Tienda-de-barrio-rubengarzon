@@ -9,23 +9,25 @@ export class RopaService {
   env: string = environment.env;
   constructor(private http: HttpClient) {}
 
-  obtenerRopa(){
+  obtenerRopa() {
     if (this.env == 'Development') {
-      return this.http.get(
-        'http://localhost/streetcultur/php/ropa.php'
-      );
+      return this.http.get('http://localhost/streetcultur/php/ropa.php');
     } else {
-      return this.http.get(
-        'https://streetcultur.com/php/ropa.php'
-      );
+      return this.http.get('https://streetcultur.com/php/ropa.php');
     }
   }
 
-  obtenerSudadera(sudadera){
+  obtenerSudadera(sudadera) {
     if (this.env == 'Development') {
-      return this.http.post('http://localhost/streetcultur/php/sudadera.php',JSON.stringify(sudadera) );
+      return this.http.post(
+        'http://localhost/streetcultur/php/sudadera.php',
+        JSON.stringify(sudadera)
+      );
     } else {
-      return this.http.post('https://streetcultur.com/php/sudadera.php',JSON.stringify(sudadera) );
+      return this.http.post(
+        'https://streetcultur.com/php/sudadera.php',
+        JSON.stringify(sudadera)
+      );
     }
   }
 
@@ -58,6 +60,34 @@ export class RopaService {
       return this.http.get('http://localhost/streetcultur/php/accesorios.php');
     } else {
       return this.http.get('https://streetcultur.com/php/accesorios.php');
+    }
+  }
+
+  borrarRopa(ropa: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/borrarRopa.php',
+        JSON.stringify(ropa)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/borrarRopa.php',
+        JSON.stringify(ropa)
+      );
+    }
+  }
+
+  actualizarRopa(ropa: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/actualizarRopa.php',
+        JSON.stringify(ropa)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/actualizarRopa.php',
+        JSON.stringify(ropa)
+      );
     }
   }
 }

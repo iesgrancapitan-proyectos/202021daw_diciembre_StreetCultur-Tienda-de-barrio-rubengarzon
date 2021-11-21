@@ -9,6 +9,9 @@
     <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
       GESTIONAR PEDIDOS
     </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
+      GESTIONAR PUNTOS
+    </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
       GESTIONAR ROPA
     </button>
@@ -21,6 +24,9 @@
   <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
     GESTIONAR PEDIDOS
+  </button>
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
+    GESTIONAR PUNTOS
   </button>
   <button mat-button class="item" [routerLink]="['/gestionarropa']">
     GESTIONAR ROPA
@@ -163,11 +169,11 @@
             >
           </td>
           <td>
-            <!-- <mat-icon
+            <mat-icon
               style="cursor: pointer"
-              (click)="modificarRopa(item.id, item.estado)"
+              (click)="modificarRopa(item.Id, item.Nombre, item.Descripcion, item.Precio, item.Color)"
               >edit</mat-icon
-            > -->
+            >
           </td>
         </tr>
       </tbody>
