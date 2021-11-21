@@ -51,5 +51,17 @@ actualizarCliente(cliente:any) {
   }
 }
 
+mostrarClientes(){
+  if (this.env == 'Development') {
+    return this.http.get(
+      'http://localhost/streetcultur/php/mostrarClientes.php'
+    );
+  } else {
+    return this.http.get(
+      'https://streetcultur.com/php/mostrarClientes.php'
+    );
+  }
+}
+
 
 }

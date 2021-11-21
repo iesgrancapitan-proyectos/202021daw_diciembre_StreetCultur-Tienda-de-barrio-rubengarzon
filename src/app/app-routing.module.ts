@@ -15,6 +15,7 @@ import { PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
+import { GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'gestionarpedidos', component: PedidosComponent },
+  { path: 'gestionarclientes', component: GestionarClientesComponent },
   { path: 'detalle-ropa/:id', component: DetalleRopaComponent },
 ];
 

@@ -25,7 +25,6 @@ import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './Client/pedido/pedido.component';
@@ -53,7 +52,6 @@ import { GestionarClientesComponent } from './admin/gestionar-clientes/gestionar
     GestionarPuntosComponent,
     IncidenciaComponent,
     AdminComponent,
-    AdminHeaderComponent,
     GestionarIncidenciasComponent,
     PedidoComponent,
     DetalleRopaComponent,
