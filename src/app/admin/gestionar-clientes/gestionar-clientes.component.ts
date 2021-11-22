@@ -15,7 +15,7 @@ export class GestionarClientesComponent implements OnInit {
 
   constructor(
     private login: LoginComponent,
-    private clienteServicio: ClienteService
+    private clienteServicio: ClienteService,
   ) {}
 
   ngOnInit() {
@@ -29,4 +29,5 @@ export class GestionarClientesComponent implements OnInit {
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
+
 }

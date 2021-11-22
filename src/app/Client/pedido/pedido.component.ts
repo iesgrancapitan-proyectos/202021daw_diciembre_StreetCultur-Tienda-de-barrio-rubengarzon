@@ -39,7 +39,7 @@ export class PedidoComponent implements OnInit {
 
   puntos: any;
 
-  canjearpuntos:any;
+  canjearpuntos:number = 0;
 
   constructor(
     private clienteServicio: ClienteService,
@@ -102,7 +102,6 @@ export class PedidoComponent implements OnInit {
       for (const key in datos['carro']) {
         this.productosEnCarrito.push(Object.values(datos['carro'][key]));
         this.total = this.total + parseInt(datos['carro'][key]['precio']);
-        console.log(isNaN(this.total));
       }
     });
   }
@@ -127,7 +126,7 @@ export class PedidoComponent implements OnInit {
     let pedido = {
       fecha: this.hoy,
       estado: 'pendiente',
-      preciototal: this.total,
+      preciototal: this.total - this.canjearpuntos,
       id: sessionStorage.getItem('id'),
     };
 
@@ -160,9 +159,4 @@ export class PedidoComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  canjearPuntos(){
-    if(this.canjearPuntos){
-
-    }
-  }
 }

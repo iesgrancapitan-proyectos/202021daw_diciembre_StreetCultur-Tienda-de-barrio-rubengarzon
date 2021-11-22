@@ -112,8 +112,8 @@
         <tr>
           <th>Perfil</th>
           <th>Email</th>
-          <th>Modificar</th>
           <th>Borrar</th>
+          <th>Modificar</th>
         </tr>
       </thead>
       <tbody>
@@ -143,6 +143,7 @@
             <mat-icon
               matTooltip="Modificar"
               style="cursor: pointer"
+              data-toggle="modal"
               >edit</mat-icon
             >
           </td>
@@ -153,3 +154,15 @@
   </div>
   <div class="mdl-layout-spacer"></div>
 </section>
+
+
+<div
+  mdbModal
+  #frame2="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
