@@ -79,4 +79,8 @@ export class GestionarRopaComponent implements OnInit {
       }
     });
   }
+
+  addRopa(ropa:any){
+    this.ropaServicio.addRopa(ropa);
+  }
 }

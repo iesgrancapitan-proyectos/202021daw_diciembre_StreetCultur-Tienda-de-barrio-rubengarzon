@@ -90,4 +90,18 @@ export class RopaService {
       );
     }
   }
+
+  addRopa(ropa: any){
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/addRopa.php',
+        JSON.stringify(ropa)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/addRopa.php',
+        JSON.stringify(ropa)
+      );
+    }
+  }
 }
