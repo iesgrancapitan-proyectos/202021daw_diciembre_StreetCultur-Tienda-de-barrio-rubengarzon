@@ -104,4 +104,12 @@ export class RopaService {
       );
     }
   }
+
+  obtenerRopaPorId(id) {
+    if (this.env == 'Development') {
+      return this.http.post('http://localhost/streetcultur/php/ropaporid.php', JSON.stringify(id));
+    } else {
+      return this.http.post('https://streetcultur.com/php/ropaporid.php', JSON.stringify(id));
+    }
+  }
 }
