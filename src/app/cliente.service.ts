@@ -63,5 +63,16 @@ mostrarClientes(){
   }
 }
 
+borrarCliente(id){
+  if (this.env == 'Development') {
+    return this.http.post(
+      'http://localhost/streetcultur/php/borrarCliente.php', JSON.stringify(id)
+    );
+  } else {
+    return this.http.post(
+      'https://streetcultur.com/php/borrarCliente.php', JSON.stringify(id)
+    );
+  }
+}
 
 }

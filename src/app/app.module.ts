@@ -30,7 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
-import { GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
+import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
 
 
 @NgModule({
@@ -56,7 +56,8 @@ import { GestionarClientesComponent } from './admin/gestionar-clientes/gestionar
     PedidoComponent,
     DetalleRopaComponent,
     GestionarRopaComponent,
-    GestionarClientesComponent
+    GestionarClientesComponent,
+    DialogOverviewExampleDialog
    ],
   imports: [
     BrowserModule,

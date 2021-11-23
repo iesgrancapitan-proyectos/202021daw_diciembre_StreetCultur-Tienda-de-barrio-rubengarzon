@@ -3,6 +3,7 @@ import { ClienteService } from 'src/app/cliente.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { Cliente } from 'src/app/Model/Cliente';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gestionar-clientes',
@@ -31,10 +32,15 @@ export class GestionarClientesComponent implements OnInit {
   constructor(
     private login: LoginComponent,
     private clienteServicio: ClienteService,
-    readonly snackBar: MatSnackBar
+    readonly snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
+    this.mostrarCliente();
+  }
+
+  mostrarCliente(){
     this.clienteServicio.mostrarClientes().subscribe((datos) => {
       this.clientes = datos['clientes'];
     });
@@ -82,8 +88,44 @@ export class GestionarClientesComponent implements OnInit {
         this.snackBar.open('El cliente se ha modificado', '', {
           duration: 2000,
         });
-        this.clienteServicio.mostrarClientes();
+        this.clienteServicio.mostrarClientes().subscribe((datos) => {
+          this.clientes = datos['clientes'];
+        });
       }
     })
+  }
+  openDialog(email){
+
+   let email1 = {
+      email: email
+    }
+
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px'
+    })
+
+    dialogRef.afterClosed().subscribe((datos) => {
+      if(datos == true){
+        this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
+          if(datos["resultado"] == "OK"){
+            this.mostrarCliente();
+          }
+        })
+      }
+    })
+  }
+}
+
+@Component({
+  selector: 'dialogo',
+  templateUrl: 'dialogo.html',
+})
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
