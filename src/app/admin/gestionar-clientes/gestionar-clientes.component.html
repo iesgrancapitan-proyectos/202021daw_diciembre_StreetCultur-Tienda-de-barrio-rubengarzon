@@ -119,18 +119,10 @@
       <tbody>
         <tr *ngFor="let cliente of clientes">
           <td>
-            <input
-              type="text"
-              [(ngModel)]="cliente.perfil"
-              value="{{ cliente.perfil }}"
-            />
+            {{ cliente.perfil }}
           </td>
           <td>
-            <input
-              type="text"
-              [(ngModel)]="cliente.email"
-              value="{{ cliente.email }}"
-            />
+             {{cliente.email}}
           </td>
           <td>
              <mat-icon
@@ -144,6 +136,7 @@
               matTooltip="Modificar"
               style="cursor: pointer"
               data-toggle="modal"
+              (click)="frame6.show();pasarDatos(cliente.email)"
               >edit</mat-icon
             >
           </td>
@@ -155,10 +148,9 @@
   <div class="mdl-layout-spacer"></div>
 </section>
 
-
 <div
   mdbModal
-  #frame2="mdbModal"
+  #frame6="mdbModal"
   class="modal fade left"
   id="frameModalTop"
   tabindex="-1"
@@ -166,3 +158,35 @@
   aria-labelledby="myModalLabel"
   aria-hidden="true"
 >
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Modificar Cliente</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame6.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5" style="display:flex;flex-direction:column">
+          <input type="text" [(ngModel)]="clientes1.perfil">
+          <input type="text" [(ngModel)]="clientes1.email">
+          <input type="text" [(ngModel)]="clientes1.nombre">
+          <input type="text" [(ngModel)]="clientes1.apellidos">
+          <input type="text" [(ngModel)]="clientes1.provincia">
+          <input type="text" [(ngModel)]="clientes1.localidad">
+          <input type="text" [(ngModel)]="clientes1.domicilio">
+          <input type="text" [(ngModel)]="clientes1.codigopostal">
+          <input type="text" [(ngModel)]="clientes1.movil">
+          <button (click)="modificarCliente(clientes1.id,clientes1.perfil,clientes1.email, clientes1.nombre,clientes1.apellidos, clientes1.provincia, clientes1.localidad,clientes1.domicilio, clientes1.codigopostal, clientes1.movil)">Modificar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
