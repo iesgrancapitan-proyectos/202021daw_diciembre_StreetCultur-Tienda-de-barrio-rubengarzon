@@ -61,10 +61,6 @@ Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](ht
 * **Rubén Garzón**  - [Rubengarzon](https://github.com/rubengarzon)
 
 
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
