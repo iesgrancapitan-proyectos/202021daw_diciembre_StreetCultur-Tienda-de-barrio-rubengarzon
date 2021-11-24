@@ -112,9 +112,9 @@
 />
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-
-<button mat-stroked-button style="margin-left: 10em" (click)="frame4.show()">Añadir Ropa</button>
-
+<button mat-stroked-button style="margin-left: 10em" (click)="frame4.show()">
+  Añadir Ropa
+</button>
 
 <div
   mdbModal
@@ -141,29 +141,65 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-        <div class="md-form mb-5" style="display: flex; flex-direction: column;">
-            <input type="text" [(ngModel)]="ropa1.Nombre" placeholder="Nombre" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Descripcion" placeholder="Descripción" style="margin-bottom: 1em;">
-            <select [(ngModel)]="ropa1.Talla" style="margin-bottom: 1em;">
-              <option value="XS">XS</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L" selected>L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option>
-            </select>
-            <input type="number" [(ngModel)]="ropa1.Precio" placeholder="2" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Cantidad" placeholder="Cantidad" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Tipo" placeholder="Tipo" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Color" placeholder="Color" style="margin-bottom: 1em;">
-            <input type="number" [(ngModel)]="ropa1.Novedad" placeholder="1" style="margin-bottom: 1em;">
-            <button>Enviar</button>
+        <div class="md-form mb-5" style="display: flex; flex-direction: column">
+          <form [formGroup]="formAddRopa" (ngSubmit)="addRopa()">
+            <input
+            type="text"
+            formControlName="Nombre"
+            placeholder="Nombre"
+            style="margin-bottom: 1em"
+          />
+          <input
+            type="text"
+            formControlName="Descripcion"
+            placeholder="Descripción"
+            style="margin-bottom: 1em"
+          />
+          <select formControlName="Talla" style="margin-bottom: 1em">
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L" selected>L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+          <input
+            type="number"
+            formControlName="Precio"
+            placeholder="2"
+            style="margin-bottom: 1em"
+          />
+          <input
+            type="text"
+            formControlName="Cantidad"
+            placeholder="Cantidad"
+            style="margin-bottom: 1em"
+          />
+          <input
+            type="text"
+            formControlName="Tipo"
+            placeholder="Tipo"
+            style="margin-bottom: 1em"
+          />
+          <input
+            type="text"
+            formControlName="Color"
+            placeholder="Color"
+            style="margin-bottom: 1em"
+          />
+          <input
+            type="number"
+            formControlName="Novedad"
+            placeholder="1"
+            style="margin-bottom: 1em"
+          />
+          <button>Enviar</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <section class="mdl-grid" id="my-table">
   <div class="mdl-layout-spacer"></div>
@@ -189,16 +225,16 @@
             {{ item.Nombre }}
           </td>
           <td>
-              {{ item.Descripcion }}
+            {{ item.Descripcion }}
           </td>
           <td>
-             {{ item.Precio }}
+            {{ item.Precio }}
           </td>
           <td>
-            {{item.Color}}
+            {{ item.Color }}
           </td>
           <td>
-             <mat-icon
+            <mat-icon
               matTooltip="Borrar"
               style="cursor: pointer"
               (click)="borrarRopa(item.Id)"
@@ -208,7 +244,7 @@
           <td>
             <mat-icon
               style="cursor: pointer"
-              (click)="frame5.show();pasarDatos(item.Id)"
+              (click)="frame5.show(); pasarDatos(item.Id)"
               >edit</mat-icon
             >
           </td>
@@ -245,10 +281,19 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-        <div class="md-form mb-5" style="display: flex; flex-direction: column;">
-          <input type="text" [(ngModel)]="ropa1.Nombre" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Descripcion" placeholder="Descripción" style="margin-bottom: 1em;">
-            <select [(ngModel)]="ropa1.Talla" style="margin-bottom: 1em;">
+        <div class="md-form mb-5" style="display: flex; flex-direction: column">
+          <form [formGroup]="formModal">
+            <input
+              type="text"
+              formControlName="Nombre"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="text"
+              placeholder="Descripción"
+              style="margin-bottom: 1em"
+            />
+            <select style="margin-bottom: 1em">
               <option value="XS">XS</option>
               <option value="S">S</option>
               <option value="M">M</option>
@@ -256,15 +301,19 @@
               <option value="XL">XL</option>
               <option value="XXL">XXL</option>
             </select>
-            <input type="number" [(ngModel)]="ropa1.Precio" placeholder="2" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Cantidad" placeholder="Cantidad" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Tipo" placeholder="Tipo" style="margin-bottom: 1em;">
-            <input type="text" [(ngModel)]="ropa1.Color" placeholder="Color" style="margin-bottom: 1em;">
-            <input type="number" [(ngModel)]="ropa1.Novedad" placeholder="1" style="margin-bottom: 1em;">
-            <button (click)="modificarRopa(ropa1.Id, ropa1.Nombre, ropa1.Descripcion, ropa1.Talla, ropa1.Precio, ropa1.Cantidad, ropa1.Tipo, ropa1.Color)">Enviar</button>
+            <input type="number" placeholder="2" style="margin-bottom: 1em" />
+            <input
+              type="text"
+              placeholder="Cantidad"
+              style="margin-bottom: 1em"
+            />
+            <input type="text" placeholder="Tipo" style="margin-bottom: 1em" />
+            <input type="text" placeholder="Color" style="margin-bottom: 1em" />
+            <input type="number" placeholder="1" style="margin-bottom: 1em" />
+            <button>Enviar</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
-

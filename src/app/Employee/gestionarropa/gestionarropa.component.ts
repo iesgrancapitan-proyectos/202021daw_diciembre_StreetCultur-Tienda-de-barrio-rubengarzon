@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { RopaService } from 'src/app/ropa.service';
 import { Ropa } from 'src/app/Model/Ropa';
 import { TilePosition } from '@angular/material/grid-list/tile-coordinator';
+import { Form, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-gestionarropa',
@@ -27,18 +28,28 @@ export class GestionarRopaComponent implements OnInit {
 
   ropa: Ropa[] = [];
 
-  ropa1 = {
-    Id: null,
-    Nombre: null,
-    Descripcion: null,
-    Talla: null,
-    Precio: null,
-    Cantidad: null,
-    Tipo: null,
-    Color: null,
-    Novedad: null,
-    Imagen: null
-  }
+  formAddRopa = new FormGroup({
+    Id: new FormControl(''),
+    Nombre: new FormControl(''),
+    Descripcion: new FormControl(''),
+    Talla: new FormControl(''),
+    Precio: new FormControl(''),
+    Cantidad: new FormControl(''),
+    Tipo: new FormControl(''),
+    Color: new FormControl(''),
+    Novedad: new FormControl(''),
+  })
+
+  formModal = new FormGroup({
+    Nombre: new FormControl('aaa'),
+    Descripcion: new FormControl('aaa'),
+    Talla: new FormControl('aaa'),
+    Precio: new FormControl('aaa'),
+    Cantidad: new FormControl('aaa'),
+    Tipo: new FormControl('aaa'),
+    Color: new FormControl('aaa'),
+    Novedad: new FormControl('aaa'),
+  })
 
 
   constructor(
@@ -77,7 +88,6 @@ export class GestionarRopaComponent implements OnInit {
   }
 
   modificarRopa(id, nombre, descripcion, talla, precio, cantidad, tipo, color) {
-    console.log(nombre);
     let ropa = {
       Id: id,
       Nombre: nombre,
@@ -103,8 +113,10 @@ export class GestionarRopaComponent implements OnInit {
     });
   }
 
-  addRopa(ropa:any){
-    this.ropaServicio.addRopa(ropa);
+  addRopa(){
+    this.ropaServicio.addRopa(this.formAddRopa.value).subscribe((datos)=>{
+      console.log(datos['resultado']);
+    });
   }
 
   pasarDatos(id){
@@ -112,15 +124,18 @@ export class GestionarRopaComponent implements OnInit {
       Id:id
     }
     this.ropaServicio.obtenerRopaPorId(ropa).subscribe((datos) => {
-      this.ropa1.Id = datos["ropa"][0]["Id"]
-      this.ropa1.Nombre = datos["ropa"][0]["Nombre"];
-      this.ropa1.Descripcion = datos["ropa"][0]["Descripcion"];
-      this.ropa1.Talla = datos["ropa"][0]["Talla"];
-      this.ropa1.Precio = datos["ropa"][0]["Precio"];
-      this.ropa1.Cantidad = datos["ropa"][0]["Cantidad"];
-      this.ropa1.Tipo = datos["ropa"][0]["Tipo"];
-      this.ropa1.Color = datos["ropa"][0]["Color"];
-      this.ropa1.Novedad = datos["ropa"][0]["Novedad"];
+      this.formModal.setValue({
+        Id: datos["ropa"][0]["Id"],
+        Nombre: datos["ropa"][0]["Nombre"],
+        Descripcion: datos["ropa"][0]["Descripcion"],
+        Talla: datos["ropa"][0]["Talla"],
+        Precio: datos["ropa"][0]["Precio"],
+        Cantidad: datos["ropa"][0]["Cantidad"],
+        Tipo: datos["ropa"][0]["Tipo"],
+        Color: datos["ropa"][0]["Color"],
+        Novedad: datos["ropa"][0]["Novedad"],
+      })
     });
+
   }
 }

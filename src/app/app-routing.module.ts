@@ -16,6 +16,7 @@ import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.co
 import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
 import { GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
+import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'gestionarpedidos', component: PedidosComponent },
   { path: 'gestionarclientes', component: GestionarClientesComponent },
   { path: 'detalle-ropa/:id', component: DetalleRopaComponent },
+  { path: 'gestionarincidencias', component: GestionarIncidenciasComponent }
 ];
 
 @NgModule({
