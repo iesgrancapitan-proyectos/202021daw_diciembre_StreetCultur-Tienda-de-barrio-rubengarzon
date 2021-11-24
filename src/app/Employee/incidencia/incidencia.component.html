@@ -1,20 +1,17 @@
-
 <mat-toolbar color="primary" style="height: 5em">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/empleado']">
-      INICIO
-    </button>
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">INICIO</button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
       GESTIONAR PEDIDOS
     </button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
-      GESTIONAR PUNTOS
-    </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
       GESTIONAR ROPA
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
+      GESTIONAR PUNTOS
     </button>
   </mat-menu>
 
@@ -26,11 +23,11 @@
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
     GESTIONAR PEDIDOS
   </button>
-  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
-    GESTIONAR PUNTOS
-  </button>
   <button mat-button class="item" [routerLink]="['/gestionarropa']">
     GESTIONAR ROPA
+  </button>
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
+    GESTIONAR PUNTOS
   </button>
 
   <span class="example-spacer"></span>
@@ -101,18 +98,16 @@
     </div>
   </div>
 </div>
-<h2>Abrir incidencia</h2>
-<div class="dv">
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput placeholder="Ex. Pizza" value="Sushi">
-    </mat-form-field>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form" style="display:flex; flex-direction: column;">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Motivo</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-    <button mat-raised-button>Enviar</button>
-  </form>
-</div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Motivo de la incidencia</mat-label>
+    <textarea matInput placeholder="Escribe el motivo" formControlName="motivo"></textarea>
+  </mat-form-field>
+  <button mat-button style="width: 20em">Enviar</button>
+</form>
+
