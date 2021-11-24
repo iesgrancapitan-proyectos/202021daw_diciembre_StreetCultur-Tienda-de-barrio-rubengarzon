@@ -115,7 +115,14 @@ export class GestionarRopaComponent implements OnInit {
 
   addRopa(){
     this.ropaServicio.addRopa(this.formAddRopa.value).subscribe((datos)=>{
-      console.log(datos['resultado']);
+      if(datos['resultado']){
+        this.snackBar.open('La ropa se ha añadido', '', {
+          duration: 2000,
+        });
+        this.ropaServicio.obtenerRopa().subscribe((datos) => {
+          this.ropa = datos['ropa'];
+        });
+      }
     });
   }
 
