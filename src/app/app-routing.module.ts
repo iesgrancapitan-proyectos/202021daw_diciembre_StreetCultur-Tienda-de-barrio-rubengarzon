@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'quienes-somos', component: QuienesSomosComponent },
   { path: 'gestionarpuntos', component: GestionarPuntosComponent },
   { path: 'gestionarropa', component: GestionarRopaComponent },
-  { path: 'incidencia', component: IncidenciaComponent },
+  { path: 'abririncidencia', component: IncidenciaComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'gestionarpedidos', component: PedidosComponent },

@@ -1,14 +1,118 @@
 
-<h2>Abrir incidencia</h2>
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
-  </mat-form-field>
+<mat-toolbar color="primary" style="height: 5em">
+  <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">
+      INICIO
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
+      GESTIONAR PEDIDOS
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
+      GESTIONAR PUNTOS
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
+      GESTIONAR ROPA
+    </button>
+  </mat-menu>
 
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field>
-  <button mat-raised-button>Enviar</button>
-</form>
+  <img src="../../../../assets/logo.gif" width="120" alt="" />
+
+  <span class="example-spacer"></span>
+
+  <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
+    GESTIONAR PEDIDOS
+  </button>
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
+    GESTIONAR PUNTOS
+  </button>
+  <button mat-button class="item" [routerLink]="['/gestionarropa']">
+    GESTIONAR ROPA
+  </button>
+
+  <span class="example-spacer"></span>
+
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink="/cart"
+    routerLinkActive="active"
+  ></button>
+  <button
+    *ngIf="!estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLinkActive="active"
+    matTooltip="Iniciar Sesión"
+    data-toggle="modal"
+    (click)="frame.show()"
+    mdbWavesEffect
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button
+    *ngIf="estaLogueado"
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with heart icon"
+    routerLink=""
+    routerLinkActive="active"
+    (click)="cerrarSesion()"
+  >
+    <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<h2>Abrir incidencia</h2>
+<div class="dv">
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Ex. Pizza" value="Sushi">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Motivo</mat-label>
+      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <button mat-raised-button>Enviar</button>
+  </form>
+</div>
