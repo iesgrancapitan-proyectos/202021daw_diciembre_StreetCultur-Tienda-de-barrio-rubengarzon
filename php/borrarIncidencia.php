@@ -8,10 +8,12 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = conexion(); // CREA LA CONEXION
+$conexion = Conexion(); // CREA LA CONEXION
+
+$query = "DELETE FROM incidencia WHERE email='$params->email'";
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE email='$params->email'");
+$resultado = mysqli_query($conexion, $query);
 
 class Result
 {
@@ -20,18 +22,13 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-$response->cliente = $resultado->fetch_all(MYSQLI_ASSOC);
 
-
-
-/* while ($fila = mysqli_fetch_assoc($resultado)) {
+if ($resultado == TRUE) {
   $response->resultado = 'OK';
-  $response->nombre = $fila['nombre'];
-  $response->domicilio = $fila['domicilio'];
-  $response->codigo = $fila['codigo'];
-  $response->movil = $fila['movil'];
-} */
-
+} else {
+  $response->resultado = 'FAIL';
+  $response->mensaje = $resultado->error;
+}
 
 header('Content-Type: application/json');
 

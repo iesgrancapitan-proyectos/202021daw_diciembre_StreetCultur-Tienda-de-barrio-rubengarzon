@@ -1,0 +1,44 @@
+.mdl-data-table
+  table-layout: fixed
+  width: 100%
+
+#my-table td,
+th
+  width: 100%
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  -o-text-overflow: ellipsis
+
+/* unrelated to responsive table css */
+#my-table
+  margin-top: 24px
+
+.material-icons
+  vertical-align: -25%
+
+.mdl-data-table th,
+td
+  text-align: left !important
+
+.center
+  text-align: center
+
+.example-spacer
+  flex: 1 1 auto
+mat-toolbar
+  .icon-button
+    @media screen and ( min-width: 700px)
+      display: none
+  .item
+    @media screen and ( max-width: 700px)
+      display: none
+.item
+  font-size: 17px
+mat-icon
+  font-size: 27px
+
+
+td
+  width: 5em
+

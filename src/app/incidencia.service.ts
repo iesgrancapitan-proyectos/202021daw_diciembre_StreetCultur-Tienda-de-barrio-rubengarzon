@@ -16,4 +16,20 @@ export class IncidenciaService {
       return this.http.post('https://streetcultur.com/php/insertarIncidencia.php', JSON.stringify(incidencia));
     }
   }
+
+  mostrarIncidencias(){
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/mostrarIncidencias.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/mostrarIncidencias.php');
+    }
+  }
+
+  borrarIncidencias(incidencia){
+    if (this.env == 'Development') {
+      return this.http.post('http://localhost/streetcultur/php/borrarIncidencia.php', JSON.stringify(incidencia));
+    } else {
+      return this.http.post('https://streetcultur.com/php/borrarIncidencia.php', JSON.stringify(incidencia));
+    }
+  }
 }
