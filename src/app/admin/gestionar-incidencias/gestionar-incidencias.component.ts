@@ -3,6 +3,8 @@ import { IncidenciaService } from 'src/app/incidencia.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Incidencia } from 'src/app/Model/Incidencia';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-gestionar-incidencias',
@@ -17,7 +19,7 @@ export class GestionarIncidenciasComponent implements OnInit {
   hayIncidencias = false;
 
 
-  constructor(    readonly snackBar: MatSnackBar,
+  constructor(  public dialog: MatDialog,  readonly snackBar: MatSnackBar,
     private login: LoginComponent, private incidenciasServicio:IncidenciaService) { }
 
   ngOnInit() {
@@ -58,5 +60,32 @@ export class GestionarIncidenciasComponent implements OnInit {
       }
     })
 
+  }
+
+  openDialog(email){
+
+    let email1 = {
+       email: email
+     }
+
+     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+       width: '250px'
+     })
+
+     dialogRef.afterClosed().subscribe((datos) => {
+       if(datos == true){
+         this.borrarIncidencias(email1)
+       }
+     })
+   }
+}
+
+export class DialogOverviewExampleDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
