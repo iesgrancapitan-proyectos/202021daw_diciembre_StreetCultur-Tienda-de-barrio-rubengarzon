@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2021 a las 19:30:50
--- Versión del servidor: 10.4.14-MariaDB
--- Versión de PHP: 7.4.10
+-- Tiempo de generación: 25-11-2021 a las 13:04:22
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -70,12 +70,9 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `perfil`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
-(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pedro', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
+(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Laura', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
 (13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL),
-(14, 'cliente', 'aaa@gmail.com', '123', 'aaa', 'bbb', 'Córdoba', 'Córdoba', 'aaa', 14013, 12),
-(20, 'cliente', 'rujex93rujex@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 'admin', 'aa@gmail.com', '123', 'aa', 'bb', 'aa', NULL, NULL, NULL, NULL),
-(22, 'admin', 'jj@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(22, 'admin', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,6 +84,18 @@ CREATE TABLE `img` (
   `id` int(30) NOT NULL,
   `imagen` varchar(100) NOT NULL,
   `idropa` int(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `incidencia`
+--
+
+CREATE TABLE `incidencia` (
+  `id` int(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `motivo` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -132,7 +141,6 @@ CREATE TABLE `puntos` (
 
 INSERT INTO `puntos` (`id`, `puntos`, `idcliente`) VALUES
 (1, 10, 12),
-(2, 0, 20),
 (3, 0, 22);
 
 -- --------------------------------------------------------
@@ -145,7 +153,7 @@ CREATE TABLE `ropa` (
   `Id` int(100) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Descripcion` varchar(200) NOT NULL,
-  `Talla` varchar(10) NOT NULL,
+  `Talla` varchar(100) NOT NULL,
   `Precio` decimal(50,0) NOT NULL,
   `Cantidad` int(30) NOT NULL,
   `Tipo` enum('Sudadera','Pantalon','Zapatilla','Accesorio') NOT NULL,
@@ -159,7 +167,13 @@ CREATE TABLE `ropa` (
 --
 
 INSERT INTO `ropa` (`Id`, `Nombre`, `Descripcion`, `Talla`, `Precio`, `Cantidad`, `Tipo`, `Color`, `Novedad`, `Imagen`) VALUES
-(11, 'aaa', 'bbb', 'S, L, XL', '13', 12, 'Sudadera', 'Amarillo, Blanco', 1, '../../../assets/oso.jpg');
+(11, 'sss', 'bbb', 'S', '13', 12, 'Sudadera', 'Amarillo, Blanco', 1, '../../../assets/oso.jpg'),
+(16, 'ffff', 'aaa', 'XS,S,M,L', '20', 15, 'Sudadera', 'Negra', 1, ''),
+(17, 'fff', 'rrr', 'XS,S,M,L,XL,XXL', '20', 12, 'Sudadera', 'Negra', 1, ''),
+(18, 'ttt', 'ttttt', 'XS,S,L,M', '22', 15, 'Accesorio', 'Negra', 1, ''),
+(19, 'www', 'dgsfsdf', 'L', '12', 15, 'Pantalon', 'Negro', 1, ''),
+(20, 'pqpqpq', 'bb', 'M', '2', 2, 'Sudadera', 'azul', 1, ''),
+(21, 'tttt', 'tttt', 'M', '2', 2, 'Pantalon', 'Negro', 1, '');
 
 --
 -- Índices para tablas volcadas
@@ -185,6 +199,12 @@ ALTER TABLE `cliente`
 ALTER TABLE `img`
   ADD PRIMARY KEY (`id`),
   ADD KEY `img-ropa` (`idropa`);
+
+--
+-- Indices de la tabla `incidencia`
+--
+ALTER TABLE `incidencia`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `pedido`
@@ -229,6 +249,12 @@ ALTER TABLE `img`
   MODIFY `id` int(30) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `incidencia`
+--
+ALTER TABLE `incidencia`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
@@ -244,7 +270,7 @@ ALTER TABLE `puntos`
 -- AUTO_INCREMENT de la tabla `ropa`
 --
 ALTER TABLE `ropa`
-  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas
