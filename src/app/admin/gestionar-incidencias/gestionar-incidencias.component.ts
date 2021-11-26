@@ -25,12 +25,17 @@ export class GestionarIncidenciasComponent implements OnInit {
   ngOnInit() {
     this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
       if(datos['resultado'] == 'OK'){
-        this.hayIncidencias = true;
-        this.incidencias = datos['incidencias'];
+        if(datos['incidencias']['length'] > 0){
+          this.hayIncidencias = true;
+          this.incidencias = datos['incidencias'];
+        }else{
+          this.hayIncidencias = false;
+        }
       }else{
-        this.hayIncidencias = false;
+        console.log("error")
       }
     });
+
   }
 
   cerrarSesion() {
