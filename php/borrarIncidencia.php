@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "DELETE FROM incidencia WHERE email='$params->email'";
+$query = "DELETE FROM incidencia WHERE id='$params->id'";
 
 // REALIZA LA QUERY A LA DB
 $resultado = mysqli_query($conexion, $query);

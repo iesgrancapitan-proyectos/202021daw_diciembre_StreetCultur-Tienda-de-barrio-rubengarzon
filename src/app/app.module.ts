@@ -25,12 +25,12 @@ import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
 import { AdminComponent } from './admin/admin.component';
-import { GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
 import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
 import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
+import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 
 
 @NgModule({
@@ -57,7 +57,8 @@ import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin
     DetalleRopaComponent,
     GestionarRopaComponent,
     GestionarClientesComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    DialogOverviewExampleDialog1
    ],
   imports: [
     BrowserModule,

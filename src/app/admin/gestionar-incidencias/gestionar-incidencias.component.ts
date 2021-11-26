@@ -44,50 +44,47 @@ export class GestionarIncidenciasComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  borrarIncidencias(email){
-    let email1 = {
-      email:email
+  borrarIncidencias(id){
+    let incidencia = {
+      id:id
     }
-    this.incidenciasServicio.borrarIncidencias(email1).subscribe((datos) => {
-      if(datos["incidencias"] > 0){
-        this.hayIncidencias = true;
+    this.incidenciasServicio.borrarIncidencias(incidencia).subscribe((datos) => {
         this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
-          if(datos['resultado'] == 'OK'){
+          if(datos['incidencias']['length'] > 0){
             this.incidencias = datos['incidencias']
+            this.hayIncidencias = true;
+          }else{
             this.hayIncidencias = false;
           }
         });
         this.snackBar.open('La incidencia se ha borrado', '', {
           duration: 2000,
         });
-      }else{
-        this.hayIncidencias = false;
-      }
     })
 
   }
 
-  openDialog(email){
+  openDialog(id){
 
-    let email1 = {
-       email: email
-     }
-
-     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+     const dialogRef = this.dialog.open(DialogOverviewExampleDialog1, {
        width: '250px'
      })
 
      dialogRef.afterClosed().subscribe((datos) => {
        if(datos == true){
-         this.borrarIncidencias(email1)
+         this.borrarIncidencias(id);
        }
      })
    }
 }
 
-export class DialogOverviewExampleDialog {
+@Component({
+  selector: 'dialogo',
+  templateUrl: 'dialogo.html',
+})
+export class DialogOverviewExampleDialog1 {
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog1>
   ) {}
 
   onNoClick(): void {
