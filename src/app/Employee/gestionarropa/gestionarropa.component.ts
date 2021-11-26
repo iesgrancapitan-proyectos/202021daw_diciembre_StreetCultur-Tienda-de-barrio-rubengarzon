@@ -9,6 +9,7 @@ import { RopaService } from 'src/app/ropa.service';
 import { Ropa } from 'src/app/Model/Ropa';
 import { TilePosition } from '@angular/material/grid-list/tile-coordinator';
 import { Form, FormControl, FormGroup } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-gestionarropa',
@@ -26,7 +27,7 @@ export class GestionarRopaComponent implements OnInit {
 
   hayPedidos = false;
 
-  ropa: Ropa[] = [];
+
 
   formAddRopa = new FormGroup({
     Id: new FormControl(''),
@@ -52,6 +53,7 @@ export class GestionarRopaComponent implements OnInit {
   })
 
 
+
   constructor(
     private login: LoginComponent,
     private ropaServicio: RopaService,
@@ -63,7 +65,20 @@ export class GestionarRopaComponent implements OnInit {
     this.ropaServicio.obtenerRopa().subscribe((datos) => {
       this.ropa = datos['ropa'];
     });
+
   }
+  
+  ropa: Ropa[] = [];
+  page_size: number = 3
+  page_number: number = 1
+  pageSizeOptions = [5, 10, 20, 50, 100]
+
+  handlePage(e: PageEvent){
+    console.log(e.length)
+    this.page_size = e.pageSize
+    this.page_number = e.pageIndex + 1
+  }
+
 
   borrarRopa(id: any) {
     let ropa = {

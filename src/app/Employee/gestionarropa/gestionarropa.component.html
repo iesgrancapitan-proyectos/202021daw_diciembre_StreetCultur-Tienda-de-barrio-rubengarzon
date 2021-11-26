@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 5em">
+<mat-toolbar color="primary">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -17,7 +17,7 @@
     </button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="" />
+  <img src="../../../../assets/S.png" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
@@ -112,10 +112,6 @@
 />
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
-<button mat-stroked-button style="margin-left: 10em" (click)="frame4.show()">
-  Añadir Ropa
-</button>
-
 <div
   mdbModal
   #frame4="mdbModal"
@@ -144,56 +140,56 @@
         <div class="md-form mb-5" style="display: flex; flex-direction: column">
           <form [formGroup]="formAddRopa" (ngSubmit)="addRopa()">
             <input
-            type="text"
-            formControlName="Nombre"
-            placeholder="Nombre"
-            style="margin-bottom: 1em"
-          />
-          <input
-            type="text"
-            formControlName="Descripcion"
-            placeholder="Descripción"
-            style="margin-bottom: 1em"
-          />
-          <select formControlName="Talla" style="margin-bottom: 1em">
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L" selected>L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-          </select>
-          <input
-            type="number"
-            formControlName="Precio"
-            placeholder="2"
-            style="margin-bottom: 1em"
-          />
-          <input
-            type="text"
-            formControlName="Cantidad"
-            placeholder="Cantidad"
-            style="margin-bottom: 1em"
-          />
-          <input
-            type="text"
-            formControlName="Tipo"
-            placeholder="Tipo"
-            style="margin-bottom: 1em"
-          />
-          <input
-            type="text"
-            formControlName="Color"
-            placeholder="Color"
-            style="margin-bottom: 1em"
-          />
-          <input
-            type="number"
-            formControlName="Novedad"
-            placeholder="1"
-            style="margin-bottom: 1em"
-          />
-          <button>Enviar</button>
+              type="text"
+              formControlName="Nombre"
+              placeholder="Nombre"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="text"
+              formControlName="Descripcion"
+              placeholder="Descripción"
+              style="margin-bottom: 1em"
+            />
+            <select formControlName="Talla" style="margin-bottom: 1em">
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L" selected>L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+            <input
+              type="number"
+              formControlName="Precio"
+              placeholder="2"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="text"
+              formControlName="Cantidad"
+              placeholder="Cantidad"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="text"
+              formControlName="Tipo"
+              placeholder="Tipo"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="text"
+              formControlName="Color"
+              placeholder="Color"
+              style="margin-bottom: 1em"
+            />
+            <input
+              type="number"
+              formControlName="Novedad"
+              placeholder="1"
+              style="margin-bottom: 1em"
+            />
+            <button>Enviar</button>
           </form>
         </div>
       </div>
@@ -201,13 +197,56 @@
   </div>
 </div>
 
-<section class="mdl-grid" id="my-table">
+<div style="margin-top: 4em">
+  <div class="tabla">
+    <div class="btnr">
+      <div class="ar">
+        <h2 style="text-align: left;">Gestionar Ropa</h2>
+      </div>
+      <div>
+        <button mat-stroked-button (click)="frame4.show()">Añadir Ropa</button>
+      </div>
+
+    </div>
+    <div class="theader">
+      <div>Nombre</div>
+      <div>Descripción</div>
+      <div>Precio</div>
+      <div>Color</div>
+      <div>Acción</div>
+    </div>
+
+    <div class="fila" *ngFor="let item of ropa">
+      <div>{{ item.Nombre }}</div>
+      <div>{{ item.Descripcion }}</div>
+      <div>{{ item.Precio }}</div>
+      <div>{{ item.Color }}</div>
+      <div>
+        <mat-icon
+          matTooltip="Borrar"
+          style="cursor: pointer"
+          (click)="borrarRopa(item.Id)"
+          >delete</mat-icon
+        >
+
+        <mat-icon
+          style="cursor: pointer"
+          (click)="frame5.show(); pasarDatos(item.Id)"
+          >edit</mat-icon
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <section class="mdl-grid" id="my-table">
   <div class="mdl-layout-spacer"></div>
   <div
     class="
       mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
     "
   >
+
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
@@ -254,7 +293,7 @@
     <br />
   </div>
   <div class="mdl-layout-spacer"></div>
-</section>
+</section> -->
 
 <div
   mdbModal
