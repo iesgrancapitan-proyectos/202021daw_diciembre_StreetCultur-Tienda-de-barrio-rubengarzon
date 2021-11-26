@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ClienteService } from '../cliente.service';
+import { IncidenciaService } from '../incidencia.service';
 import { LoginComponent } from '../main/login/login.component';
 
 @Component({
@@ -9,9 +11,20 @@ import { LoginComponent } from '../main/login/login.component';
 export class AdminComponent implements OnInit {
   estaLogueado: boolean = this.login.estaLogueado();
 
-  constructor(private login: LoginComponent) {}
+  numClientes: any;
+  numIncidencias: any;
 
-  ngOnInit() {}
+  constructor(private login: LoginComponent, private clientesServicio: ClienteService, private incidenciasServicio: IncidenciaService ) {}
+
+  ngOnInit() {
+    this.clientesServicio.mostrarClientes().subscribe((datos) => {
+      this.numClientes = datos['clientes']["length"];
+    })
+
+    this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
+      this.numIncidencias = datos['incidencias']["length"];
+    })
+  }
 
   cerrarSesion() {
     sessionStorage.removeItem('email');

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 5em">
+<mat-toolbar color="primary">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -8,7 +8,7 @@
     <button mat-menu-item class="item" [routerLink]="['/gestionarincidencias']">GESTIONAR INCIDENCIAS</button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="" />
+  <img src="../../../../assets/S.png" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
@@ -85,6 +85,15 @@
   </div>
 </div>
 <div style="margin-top: 5em;">
-  <img src="../../assets/admin.ico" alt="" width="130"/>
-  <h2 style="text-align: center;margin-top: 2em">Bienvenido al panel de administración</h2>
+  <img src="../../assets/admin.ico" alt="" width="80"/>
+  <h3 style="text-align: center;margin-top: 2em; font-weight: 100;">Bienvenido al panel de administración</h3>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 3em">
+  <mat-card class="numerocliente">
+    <h4 style="text-align: center;">Estadísticas Generales</h4>
+    <h2 style="text-align: center;">{{numClientes}}</h2>
+    <p style="text-align: center;">Nº de clientes</p>
+    <h2 style="text-align: center;">{{numIncidencias}}</h2>
+    <p style="text-align: center;">Incidencias</p>
+  </mat-card>
 </div>
