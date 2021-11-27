@@ -52,7 +52,12 @@ export class LoginComponent implements OnInit {
         this.loginService.comprobarPerfil().subscribe((datos) => {
           switch (datos['perfil']) {
             case 'cliente':
-              this.router.navigate(['/ropa']);
+              if (this.router.url == "/ropa"){
+                  this.router.navigate(['/']);
+              }else{
+                  this.router.navigate(['/ropa']);
+
+              }
               break;
             case 'empleado':
               this.router.navigate(['/empleado']);

@@ -52,7 +52,7 @@ export class PedidoService {
     }
   }
 
-  borrarPedido(id:any) {
+  borrarPedido(id: any) {
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/borrarPedido.php',
@@ -66,7 +66,7 @@ export class PedidoService {
     }
   }
 
-  actualizarPedido(pedido){
+  actualizarPedido(pedido) {
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/actualizarPedido.php',
@@ -75,6 +75,20 @@ export class PedidoService {
     } else {
       return this.http.post(
         'https://streetcultur.com/php/actualizarPedido.php',
+        JSON.stringify(pedido)
+      );
+    }
+  }
+
+  insertarComprarAhora(pedido) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/insertarComprarAhora.php',
+        JSON.stringify(pedido)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/insertarComprarAhora.php',
         JSON.stringify(pedido)
       );
     }

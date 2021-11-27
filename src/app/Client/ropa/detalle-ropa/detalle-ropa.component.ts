@@ -6,13 +6,19 @@ import { RopaService } from 'src/app/ropa.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/login.service';
+import { PuntosService } from 'src/app/puntos.service';
+import { ClienteService } from 'src/app/cliente.service';
+import { PedidoService } from 'src/app/pedido.service';
 
 @Component({
   selector: 'app-detalle-ropa',
   templateUrl: './detalle-ropa.component.html',
-  styleUrls: ['./detalle-ropa.component.sass']
+  styleUrls: ['./detalle-ropa.component.sass'],
 })
 export class DetalleRopaComponent implements OnInit {
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
   sudaderas = {
     Id: null,
     Nombre: null,
@@ -24,32 +30,81 @@ export class DetalleRopaComponent implements OnInit {
     Color: null,
     Novedad: 1,
     Imagen: null,
-    Imagen1: null
-  }
+    Imagen1: null,
+  };
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+  };
 
   numProductos: any;
 
+  puntos: any;
+
+  canjearpuntos: number = 0;
+
   cantidad = 1;
 
-  talla = "L";
+  talla = 'L';
 
   estaLogueado: boolean = this.login.estaLogueado();
 
-  constructor(private login: LoginComponent,
-              private carritoServicio: CarroService,
-              private ropaServicio: RopaService,
-              private rutaActiva: ActivatedRoute,
-              readonly snackBar: MatSnackBar,
-              private carro: CarroService,
-              private loginService: LoginService,
-              private router: Router
-              ) { }
+  constructor(
+    private login: LoginComponent,
+    private carritoServicio: CarroService,
+    private ropaServicio: RopaService,
+    private rutaActiva: ActivatedRoute,
+    readonly snackBar: MatSnackBar,
+    private carro: CarroService,
+    private loginService: LoginService,
+    private router: Router,
+    private puntosServicio: PuntosService,
+    private clienteServicio: ClienteService,
+    private pedidoServicio: PedidoService
+  ) {}
 
   ngOnInit() {
+    this.obtenerDatos();
     this.contarProductos();
     this.mostrarSudadera(this.rutaActiva.snapshot.params.id);
+    let cliente = {
+      idcliente: sessionStorage.getItem('id'),
+    };
+    this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
+      this.puntos = datos['puntos'];
+    });
   }
 
+  obtenerDatos() {
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      if (
+        datos['cliente'][0]['nombre'] != null &&
+        datos['cliente'][0]['domicilio'] != null &&
+        datos['cliente'][0]['codigopostal'] &&
+        datos['cliente'][0]['movil']
+      ) {
+        this.cliente.nombre = datos['cliente'][0]['nombre'];
+        this.cliente.apellidos = datos['cliente'][0]['apellidos'];
+        this.cliente.provincia = datos['cliente'][0]['provincia'];
+        this.cliente.localidad = datos['cliente'][0]['localidad'];
+        this.cliente.domicilio = datos['cliente'][0]['domicilio'];
+        this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
+        this.cliente.movil = datos['cliente'][0]['movil'];
+      }
+    });
+  }
   cerrarSesion() {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
@@ -64,10 +119,10 @@ export class DetalleRopaComponent implements OnInit {
     });
   }
 
-  mostrarSudadera(id:any) {
+  mostrarSudadera(id: any) {
     let sudadera = {
-      Id: id
-    }
+      Id: id,
+    };
     this.ropaServicio.obtenerSudadera(sudadera).subscribe((datos: any) => {
       this.sudaderas.Nombre = Object.values(datos)[0][0]['Nombre'];
       this.sudaderas.Precio = Object.values(datos)[0][0]['Precio'];
@@ -78,29 +133,36 @@ export class DetalleRopaComponent implements OnInit {
     });
   }
 
-  addCarrito(nombre: any, precio: any, imagen: any, cantidad:any, talla:any) {
+  addCarrito(nombre: any, precio: any, imagen: any, cantidad: any, talla: any) {
     if (sessionStorage.getItem('email')) {
-
       console.log(cantidad);
 
       let total = precio * cantidad;
 
       let id = sessionStorage.getItem('id');
-      let carrito = { nombre: nombre, imagen: imagen, precio: precio, cantidad:cantidad, total: total, talla: talla, id: id };
+      let carrito = {
+        nombre: nombre,
+        imagen: imagen,
+        precio: precio,
+        cantidad: cantidad,
+        total: total,
+        talla: talla,
+        id: id,
+      };
 
-      this.carro.insertarCarro(carrito).subscribe( dato => {
-       if (Object.values(dato).includes("OK") == true){
-        this.contarProductos();
+      this.carro.insertarCarro(carrito).subscribe((dato) => {
+        if (Object.values(dato).includes('OK') == true) {
+          this.contarProductos();
 
-        return this.snackBar.open('Se ha añadido al carrito.', '', {
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-          duration: 1500,
-        });
-       }else{
-         console.log(dato);
-         return false;
-       }
+          return this.snackBar.open('Se ha añadido al carrito.', '', {
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            duration: 1500,
+          });
+        } else {
+          console.log(dato);
+          return false;
+        }
       });
       return false;
     } else {
@@ -114,7 +176,7 @@ export class DetalleRopaComponent implements OnInit {
   /**
    * Inicia sesión el empleado y almacena el email en una sesion
    */
-   loginEmail() {
+  loginEmail() {
     this.loginService.loginUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
         this.router.navigateByUrl('/');
@@ -134,11 +196,20 @@ export class DetalleRopaComponent implements OnInit {
             default:
               break;
           }
-        })
+        });
       } else {
         console.log('Ha habido un error al iniciar sesión');
       }
     });
   }
 
+  comprarAhora(nombre, precio, cantidad, talla) {
+    let pedido = {
+      nombre: nombre,
+      precio: precio,
+      cantidad: cantidad,
+      talla: talla,
+    };
+    this.pedidoServicio.insertarComprarAhora(pedido);
+  }
 }

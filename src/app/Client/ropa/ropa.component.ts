@@ -6,6 +6,7 @@ import { CarroService } from 'src/app/carro.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
+import { PuntosService } from 'src/app/puntos.service';
 
 @Component({
   selector: 'app-ropa',
@@ -16,6 +17,8 @@ export class RopaComponent implements OnInit {
   ropa: Ropa[] = [];
 
   pantalones: any;
+
+  numPuntos: any;
 
   numProductos: any;
 
@@ -28,12 +31,19 @@ export class RopaComponent implements OnInit {
     private carro: CarroService,
     private carritoServicio: CarroService,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private puntosServicio: PuntosService
   ) {}
 
   ngOnInit() {
     this.mostrarSudaderas();
     this.contarProductos();
+    let cliente = {
+      idcliente: sessionStorage.getItem('id'),
+    };
+    this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
+      this.numPuntos = datos['puntos'];
+    });
   }
 
   cerrarSesion() {
