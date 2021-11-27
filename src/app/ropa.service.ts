@@ -91,7 +91,7 @@ export class RopaService {
     }
   }
 
-  addRopa(ropa: any){
+  addRopa(ropa: any) {
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/addRopa.php',
@@ -107,9 +107,39 @@ export class RopaService {
 
   obtenerRopaPorId(id) {
     if (this.env == 'Development') {
-      return this.http.post('http://localhost/streetcultur/php/ropaporid.php', JSON.stringify(id));
+      return this.http.post(
+        'http://localhost/streetcultur/php/ropaporid.php',
+        JSON.stringify(id)
+      );
     } else {
-      return this.http.post('https://streetcultur.com/php/ropaporid.php', JSON.stringify(id));
+      return this.http.post(
+        'https://streetcultur.com/php/ropaporid.php',
+        JSON.stringify(id)
+      );
+    }
+  }
+
+  obtenerChandal() {
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/chandal.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/chandal.php');
+    }
+  }
+
+  obtenerAbrigos() {
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/abrigos.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/abrigos.php');
+    }
+  }
+
+  obtenerCamisetas() {
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/camisetas.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/camisetas.php');
     }
   }
 }

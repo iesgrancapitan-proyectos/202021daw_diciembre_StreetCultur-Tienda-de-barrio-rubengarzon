@@ -128,7 +128,25 @@ export class RopaComponent implements OnInit {
 
   mostrarAccesorios() {
     this.ropaServicio.obtenerAccesorios().subscribe((datos) => {
-      this.ropa = datos['accesorios']
+      this.ropa = datos['accesorios'];
+    });
+  }
+
+  mostrarCamisetas() {
+    this.ropaServicio.obtenerCamisetas().subscribe((datos) => {
+      this.ropa = datos['camisetas'];
+    });
+  }
+
+  mostrarAbrigos() {
+    this.ropaServicio.obtenerAbrigos().subscribe((datos) => {
+      this.ropa = datos['abrigos'];
+    });
+  }
+
+  mostrarChandal() {
+    this.ropaServicio.obtenerChandal().subscribe((datos) => {
+      this.ropa = datos['chandal'];
     });
   }
 }

@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 5em">
+<mat-toolbar color="primary">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -7,7 +7,7 @@
     <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="" />
+  <img src="../../../../assets/S.png" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
@@ -105,7 +105,10 @@
   >
     <mat-chip class="example-box" cdkDrag (click)="mostrarSudaderas()"> Sudaderas </mat-chip>
     <mat-chip class="example-box" cdkDrag (click)="mostrarPantalones()"> Pantalones </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarAbrigos()"> Abrigos </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarChandal()"> Chandal </mat-chip>
     <mat-chip class="example-box" cdkDrag (click)="mostrarAccesorios()"> Accesorios </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarCamisetas()"> Camisetas </mat-chip>
   </mat-chip-list>
 </div>
 
@@ -113,7 +116,7 @@
   <mat-card
     class="example-card"
     *ngFor="let item of ropa"
-    style="box-shadow: none"
+    style="box-shadow: none; background: none"
   >
     <mat-card-header style="display: flex; place-content: center">
     </mat-card-header>
@@ -128,7 +131,8 @@
         align-items: center;
       "
     >
-      <p>Sudadera {{ item.Nombre }}</p>
+
+      <p>{{ item.Nombre }}</p>
       <p style="font-weight: bold">{{ item.Precio }}€</p>
       <button
         mat-button

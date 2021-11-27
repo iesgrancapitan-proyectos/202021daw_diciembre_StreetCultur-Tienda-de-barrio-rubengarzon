@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 5em;">
+<mat-toolbar color="primary">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -7,15 +7,12 @@
     <button mat-menu-item [routerLink]="['/ropa']">ROPA</button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="">
+  <img src="../../../../assets/S.png" width="120" alt="" />
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/ropa']">
-    ROPA
-  </button>
-
+  <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
 
   <span class="example-spacer"></span>
   <button
@@ -37,10 +34,12 @@
     routerLink="/cart"
     routerLinkActive="active"
   >
-    <mat-icon [matBadge]="numProductos" matBadgeColor="accent">shopping_cart</mat-icon>
+    <mat-icon [matBadge]="numProductos" matBadgeColor="accent"
+      >shopping_cart</mat-icon
+    >
   </button>
   <button
-   *ngIf="!estaLogueado"
+    *ngIf="!estaLogueado"
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with heart icon"
@@ -65,15 +64,27 @@
   </button>
 </mat-toolbar>
 
-
-
-<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -81,7 +92,6 @@
         <div class="md-form mb-5">
           <app-login></app-login>
         </div>
-
       </div>
     </div>
   </div>
@@ -89,64 +99,28 @@
 
 <!--Section: Block Content-->
 <section class="mb-5" style="margin-top: 3em">
-
   <div class="row">
     <div class="col-md-6 mb-4 mb-md-0">
-
       <div id="mdb-lightbox-ui"></div>
 
       <div class="mdb-lightbox">
-
         <div class="row product-gallery mx-1">
-
           <div class="col-12 mb-0">
             <figure class="view overlay rounded z-depth-1 main-img">
-                <img src="{{ sudaderas.Imagen }}"
-                  class="img-fluid z-depth-1">
+              <img src="{{ sudaderas.Imagen1 }}" class="img-fluid z-depth-1" />
             </figure>
           </div>
-          <div class="col-12">
-            <div class="row">
-              <div class="col-3">
-                <div class="view overlay rounded z-depth-1 gallery-item">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-                    class="img-fluid">
-                  <div class="mask rgba-white-slight"></div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="view overlay rounded z-depth-1 gallery-item">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg"
-                    class="img-fluid">
-                  <div class="mask rgba-white-slight"></div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="view overlay rounded z-depth-1 gallery-item">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14a.jpg"
-                    class="img-fluid">
-                  <div class="mask rgba-white-slight"></div>
-                </div>
-              </div>
-              <div class="col-3">
-                <div class="view overlay rounded z-depth-1 gallery-item">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15a.jpg"
-                    class="img-fluid">
-                  <div class="mask rgba-white-slight"></div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
       </div>
-
     </div>
     <div class="col-md-6">
-
       <h5>{{ sudaderas.Nombre }}</h5>
       <p class="mb-2 text-muted text-uppercase small">Sudaderas</p>
-      <p><span class="mr-1"><strong>{{ sudaderas.Precio }}€</strong></span></p>
+      <p>
+        <span class="mr-1"
+          ><strong>{{ sudaderas.Precio }}€</strong></span
+        >
+      </p>
       <p class="pt-1">{{ sudaderas.Descripcion }}</p>
       <div class="table-responsive">
         <table class="table table-sm table-borderless mb-0">
@@ -167,7 +141,7 @@
           </tbody>
         </table>
       </div>
-      <hr>
+      <hr />
       <div class="table-responsive mb-2">
         <table class="table table-sm table-borderless">
           <tbody>
@@ -176,13 +150,21 @@
               <td class="pb-0">Selecciona la talla</td>
             </tr>
             <tr>
-              <td class="pl-0">
-                <input type="text" placeholder="" [(ngModel)]="cantidad">
+              <td class="p1-0">
+                <input
+                  type="text"
+                  placeholder=""
+                  [(ngModel)]="cantidad"
+                  style="width: 3em; height: 2.5em; font-size: 15px"
+                />
               </td>
               <td>
                 <div class="mt-1">
                   <div class="form-check form-check-inline pl-0">
-                    <select class="browser-default custom-select" [(ngModel)]="talla">
+                    <select
+                      class="browser-default custom-select"
+                      [(ngModel)]="talla"
+                    >
                       <option value="XS">XS</option>
                       <option value="S">S</option>
                       <option value="M">M</option>
@@ -190,18 +172,47 @@
                       <option value="XL">XL</option>
                       <option value="XXL">XXL</option>
                     </select>
-                 </div>
+                  </div>
                 </div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <button type="button" class="btn btn-primary btn-md mr-1 mb-2" routerLink="/pedido" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen, cantidad, talla)">Comprar ahora</button>
-      <button type="button" class="btn btn-light btn-md mr-1 mb-2" (click)="addCarrito(sudaderas.Nombre, sudaderas.Precio, sudaderas.Imagen, cantidad, talla)"><i
-          class="fas fa-shopping-cart pr-2"></i>Añadir a la carta</button>
+      <button
+        type="button"
+        class="btn btn-primary btn-md mr-1 mb-2"
+        routerLink="/pedido"
+        (click)="
+          addCarrito(
+            sudaderas.Nombre,
+            sudaderas.Precio,
+            sudaderas.Imagen,
+            cantidad,
+            talla
+          )
+        "
+      >
+        Comprar ahora
+      </button>
+      <button
+        type="button"
+        class="btn btn-light btn-md mr-1 mb-2"
+        (click)="
+          addCarrito(
+            sudaderas.Nombre,
+            sudaderas.Precio,
+            sudaderas.Imagen,
+            cantidad,
+            talla
+          )
+        "
+      >
+        <i class="fas fa-shopping-cart pr-2"></i>Añadir a la carta
+      </button>
     </div>
   </div>
-
 </section>
 <!--Section: Block Content-->
+
+<app-footer></app-footer>

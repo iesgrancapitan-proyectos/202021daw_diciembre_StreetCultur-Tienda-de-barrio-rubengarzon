@@ -23,7 +23,8 @@ export class DetalleRopaComponent implements OnInit {
     Tipo: null,
     Color: null,
     Novedad: 1,
-    Imagen: null
+    Imagen: null,
+    Imagen1: null
   }
 
   numProductos: any;
@@ -73,6 +74,7 @@ export class DetalleRopaComponent implements OnInit {
       this.sudaderas.Descripcion = Object.values(datos)[0][0]['Descripcion'];
       this.sudaderas.Imagen = Object.values(datos)[0][0]['Imagen'];
       this.sudaderas.Color = Object.values(datos)[0][0]['Color'];
+      this.sudaderas.Imagen1 = Object.values(datos)[0][0]['Imagen1'];
     });
   }
 
