@@ -31,6 +31,10 @@ export class PedidoComponent implements OnInit {
     movil: null,
   };
 
+  nombre: any;
+  cantidad: any;
+  talla: any;
+
   numProductos: any;
 
   productosEnCarrito = [];
@@ -39,7 +43,9 @@ export class PedidoComponent implements OnInit {
 
   puntos: any;
 
-  canjearpuntos:number = 0;
+  canjearpuntos: number = 0;
+
+  flag = false;
 
   constructor(
     private clienteServicio: ClienteService,
@@ -98,10 +104,20 @@ export class PedidoComponent implements OnInit {
   obtenerCarro() {
     let id = sessionStorage.getItem('id');
     let id1 = { id: id };
-    this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
-      for (const key in datos['carro']) {
-        this.productosEnCarrito.push(Object.values(datos['carro'][key]));
-        this.total = this.total + parseInt(datos['carro'][key]['precio']);
+
+    this.pedidoServicio.obtenerComprarAhora().subscribe((datos) => {
+      if (datos['comprarahora']['length'] == 0) {
+        this.carroServicio.obtenerCarrito(id1).subscribe((datos) => {
+          for (const key in datos['carro']) {
+            this.productosEnCarrito.push(Object.values(datos['carro'][key]));
+            this.total = this.total + parseInt(datos['carro'][key]['precio']);
+          }
+        });
+      } else {
+        this.flag = true;
+        this.nombre = datos['comprarahora'][0]['nombre'];
+        this.talla = datos['comprarahora'][0]['talla'];
+        this.total = parseInt(datos['comprarahora'][0]['precio']);
       }
     });
   }
@@ -129,6 +145,8 @@ export class PedidoComponent implements OnInit {
       preciototal: this.total - this.canjearpuntos,
       id: sessionStorage.getItem('id'),
     };
+
+    this.pedidoServicio.borrarComprarAhora();
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
@@ -158,5 +176,4 @@ export class PedidoComponent implements OnInit {
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
-
 }

@@ -93,4 +93,28 @@ export class PedidoService {
       );
     }
   }
+
+  obtenerComprarAhora() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/obtenerComprarAhora.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/obtenerComprarAhora.php'
+      );
+    }
+  }
+
+  borrarComprarAhora() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/borrarComprarAhora.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/borrarComprarAhora.php'
+      );
+    }
+  }
 }

@@ -210,6 +210,9 @@ export class DetalleRopaComponent implements OnInit {
       cantidad: cantidad,
       talla: talla,
     };
-    this.pedidoServicio.insertarComprarAhora(pedido);
+    this.pedidoServicio.insertarComprarAhora(pedido).subscribe((datos) => {
+      console.log(datos['resultado']);
+    });
+    this.router.navigateByUrl('/pedido');
   }
 }
