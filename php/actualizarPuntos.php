@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "UPDATE puntos SET puntos = '$params->puntos' WHERE id='$params->id'";
+$query = "UPDATE puntos SET puntos='$params->puntos' WHERE idcliente='$params->idcliente'";
 
 
 // REALIZA LA QUERY A LA DB
@@ -24,12 +24,12 @@ class Result
 $response = new Result();
 
 
-if ($resultado == TRUE) {
+/* if ($resultado == TRUE) {
   $response->resultado = 'OK';
 } else {
   $response->resultado = 'FAIL';
   $response->mensaje = $resultado->error;
-}
+} */
 
 header('Content-Type: application/json');
 

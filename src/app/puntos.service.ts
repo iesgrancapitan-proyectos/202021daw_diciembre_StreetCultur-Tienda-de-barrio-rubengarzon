@@ -25,6 +25,7 @@ export class PuntosService {
   }
 
   actualizarPuntos(cliente: any) {
+    console.log(cliente)
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/actualizarPuntos.php',

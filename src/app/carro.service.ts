@@ -53,14 +53,16 @@ export class CarroService {
     }
   }
 
-  borrarProductos() {
+  borrarProductos(cliente: any) {
     if (this.env == 'Development') {
-      return this.http.get(
-        'http://localhost/streetcultur/php/borrarProductos.php'
+      return this.http.post(
+        'http://localhost/streetcultur/php/borrarProductos.php',
+        JSON.stringify(cliente)
       );
     } else {
-      return this.http.get(
-        'https://streetcultur.com/php/borrarProductos.php'
+      return this.http.post(
+        'https://streetcultur.com/php/borrarProductos.php',
+        JSON.stringify(cliente)
       );
     }
   }
@@ -79,4 +81,13 @@ export class CarroService {
     }
   }
 
+  vaciarProductos() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/vaciarProductos.php'
+      );
+    } else {
+      return this.http.get('https://streetcultur.com/php/vaciarProductos.php');
+    }
+  }
 }

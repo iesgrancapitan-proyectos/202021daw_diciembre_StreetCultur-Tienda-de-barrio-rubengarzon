@@ -6,6 +6,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { render } from 'creditcardpayments/creditCardPayments';
 import { PuntosService } from 'src/app/puntos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedido',
@@ -54,7 +55,8 @@ export class PedidoComponent implements OnInit {
     private pedidoServicio: PedidoService,
     readonly snackBar: MatSnackBar,
     private login: LoginComponent,
-    private puntosServicio: PuntosService
+    private puntosServicio: PuntosService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -131,9 +133,7 @@ export class PedidoComponent implements OnInit {
   }
 
   insertarPedido(codigo: any) {
-    this.clienteServicio.actualizarCliente(this.cliente).subscribe((dato) => {
-      console.log(dato['resultado']);
-    });
+    this.clienteServicio.actualizarCliente(this.cliente);
 
     if (codigo > 14999 || codigo < 14000) {
       this.total = this.total + 3;
@@ -146,27 +146,31 @@ export class PedidoComponent implements OnInit {
       id: sessionStorage.getItem('id'),
     };
 
-    this.pedidoServicio.borrarComprarAhora();
+    this.pedidoServicio.borrarComprarAhora().subscribe((datos) => {
+      console.log(datos['resultado']);
+    });
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
         let clienteid = {
           idcliente: sessionStorage.getItem('id'),
-          puntos: '',
+          puntos: 0,
         };
         this.puntosServicio.obtenerPuntos(clienteid).subscribe((datos) => {
-          clienteid.puntos = datos['puntos'] + 3;
-          this.puntosServicio.actualizarPuntos(clienteid);
+          clienteid.puntos = parseInt(datos['puntos']) + 3;
+          this.puntosServicio.actualizarPuntos(clienteid).subscribe((datos) => {
+            /* console.log(datos['mensaje'] + ' : ' + datos['resultado']); */
+          });
         });
-
-        this.carroServicio.borrarProductos();
-        return this.snackBar.open('Se ha realizado el pedido.', '', {
+        this.router.navigateByUrl('/');
+        this.carroServicio.borrarProductos(clienteid).subscribe((datos) => {
+          console.log(datos['resultado']);
+        });
+        this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
           duration: 1500,
         });
-      } else {
-        return false;
       }
     });
   }
