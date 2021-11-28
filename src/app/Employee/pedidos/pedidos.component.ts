@@ -5,6 +5,12 @@ import { Cliente } from 'src/app/Model/Cliente';
 import { PedidoService } from 'src/app/pedido.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-pedidos',
@@ -22,24 +28,36 @@ export class PedidosComponent implements OnInit {
 
   clientes: any;
 
-  hayPedidos = false;
+  /* hayPedidos = false; */
+
+  formModal = new FormGroup({
+    id: new FormControl(''),
+    estado: new FormControl(''),
+    preciototal: new FormControl(''),
+    fechadeenvio: new FormControl(''),
+    fechaderecibo: new FormControl(''),
+  });
 
   constructor(
     private login: LoginComponent,
     private pedidoServicio: PedidoService,
     private clienteServicio: ClienteService,
-    readonly snackBar: MatSnackBar
+    readonly snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
+    /* this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
       for (const key in datos['clientes']) {
         this.clientes = datos['clientes'];
       }
+    }); */
+    this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+      this.pedido = datos['pedidos'];
     });
   }
 
-  mostrarPedido(id: any) {
+  /* mostrarPedido(id: any) {
     let cliente = {
       id: id,
     };
@@ -51,8 +69,16 @@ export class PedidosComponent implements OnInit {
         this.hayPedidos = false;
       }
     });
+  } */
+  pasarDatos(id, estado, preciototal) {
+    this.formModal.setValue({
+      id: id,
+      estado: estado,
+      preciototal: preciototal,
+      fechadeenvio: '2021-02-02',
+      fechaderecibo: '2021-02-03',
+    });
   }
-
   borrarPedido(id: any, idpedido: any) {
     let pedido = {
       id: id,
@@ -63,11 +89,11 @@ export class PedidosComponent implements OnInit {
     this.pedidoServicio.borrarPedido(pedido).subscribe((datos) => {
       this.pedidoServicio.obtenerPedido(cliente).subscribe((datos: any) => {
         this.pedido = datos['pedido'];
-        if (this.pedido.length > 0) {
+        /* if (this.pedido.length > 0) {
           this.hayPedidos = true;
         } else {
           this.hayPedidos = false;
-        }
+        } */
       });
       return this.snackBar.open('Se ha borrado el pedido.', '', {
         horizontalPosition: 'center',
@@ -83,20 +109,54 @@ export class PedidosComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  modificarPedido(id, estado) {
-    console.log(estado);
-    let pedido = {
+  modificarPedido() {
+    console.log(this.formModal.value);
+    this.pedidoServicio
+      .actualizarPedido(this.formModal.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+            this.pedido = datos['pedidos'];
+          });
+          this.snackBar.open('El pedido se ha modificado', '', {
+            duration: 2000,
+          });
+        } else {
+          alert('error');
+        }
+      });
+  }
+
+  openDialog(id) {
+    let id1 = {
       id: id,
-      estado: estado,
     };
-    this.pedidoServicio.actualizarPedido(pedido).subscribe((datos) => {
-      if (datos['resultado'] == 'OK') {
-        this.snackBar.open('El pedido se ha modificado', '', {
-          duration: 2000,
+
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog2, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe((datos) => {
+      if (datos == true) {
+        this.pedidoServicio.borrarPedido(id1).subscribe((datos) => {
+          if (datos['resultado'] == 'OK') {
+            this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+              this.pedido = datos['pedidos'];
+            });
+          }
         });
-      } else {
-        alert('error');
       }
     });
+  }
+}
+@Component({
+  selector: 'dialogo',
+  templateUrl: 'dialogo.html',
+})
+export class DialogOverviewExampleDialog2 {
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog2>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

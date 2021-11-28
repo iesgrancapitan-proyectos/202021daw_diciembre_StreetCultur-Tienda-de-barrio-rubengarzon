@@ -3,7 +3,11 @@ import { ClienteService } from 'src/app/cliente.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { Cliente } from 'src/app/Model/Cliente';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gestionar-clientes',
@@ -26,8 +30,8 @@ export class GestionarClientesComponent implements OnInit {
     localidad: null,
     domicilio: null,
     codigopostal: null,
-    movil: null
-  }
+    movil: null,
+  };
 
   constructor(
     private login: LoginComponent,
@@ -40,7 +44,7 @@ export class GestionarClientesComponent implements OnInit {
     this.mostrarCliente();
   }
 
-  mostrarCliente(){
+  mostrarCliente() {
     this.clienteServicio.mostrarClientes().subscribe((datos) => {
       this.clientes = datos['clientes'];
     });
@@ -52,39 +56,50 @@ export class GestionarClientesComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  pasarDatos(email){
+  pasarDatos(email) {
     let email1 = {
-      email: email
-    }
-    this.clienteServicio.mostrarCliente(email1).subscribe((datos)=> {
-      this.clientes1.id = datos["cliente"][0]["id"];
-      this.clientes1.perfil = datos["cliente"][0]["perfil"];
-      this.clientes1.email = datos["cliente"][0]["email"];
-      this.clientes1.nombre = datos["cliente"][0]["nombre"];
-      this.clientes1.apellidos = datos["cliente"][0]["apellidos"];
-      this.clientes1.provincia = datos["cliente"][0]["provincia"];
-      this.clientes1.localidad = datos["cliente"][0]["localidad"];
-      this.clientes1.domicilio = datos["cliente"][0]["domicilio"];
-      this.clientes1.codigopostal = datos["cliente"][0]["codigopostal"];
-      this.clientes1.movil = datos["cliente"][0]["movil"];
-    })
+      email: email,
+    };
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      this.clientes1.id = datos['cliente'][0]['id'];
+      this.clientes1.perfil = datos['cliente'][0]['perfil'];
+      this.clientes1.email = datos['cliente'][0]['email'];
+      this.clientes1.nombre = datos['cliente'][0]['nombre'];
+      this.clientes1.apellidos = datos['cliente'][0]['apellidos'];
+      this.clientes1.provincia = datos['cliente'][0]['provincia'];
+      this.clientes1.localidad = datos['cliente'][0]['localidad'];
+      this.clientes1.domicilio = datos['cliente'][0]['domicilio'];
+      this.clientes1.codigopostal = datos['cliente'][0]['codigopostal'];
+      this.clientes1.movil = datos['cliente'][0]['movil'];
+    });
   }
 
-  modificarCliente(id,perfil,email,nombre,apellidos,provincia,localidad,domicilio,codigopostal,movil){
+  modificarCliente(
+    id,
+    perfil,
+    email,
+    nombre,
+    apellidos,
+    provincia,
+    localidad,
+    domicilio,
+    codigopostal,
+    movil
+  ) {
     let cliente2 = {
       id: id,
-      perfil:perfil,
-      email:email,
-      nombre:nombre,
-      apellidos:apellidos,
-      provincia:provincia,
-      localidad:localidad,
-      domicilio:domicilio,
-      codigopostal:codigopostal,
-      movil:movil
-    }
+      perfil: perfil,
+      email: email,
+      nombre: nombre,
+      apellidos: apellidos,
+      provincia: provincia,
+      localidad: localidad,
+      domicilio: domicilio,
+      codigopostal: codigopostal,
+      movil: movil,
+    };
     this.clienteServicio.actualizarCliente(cliente2).subscribe((datos) => {
-      if(datos["resultado"] == "OK"){
+      if (datos['resultado'] == 'OK') {
         this.snackBar.open('El cliente se ha modificado', '', {
           duration: 2000,
         });
@@ -92,27 +107,26 @@ export class GestionarClientesComponent implements OnInit {
           this.clientes = datos['clientes'];
         });
       }
-    })
+    });
   }
-  openDialog(email){
-
-   let email1 = {
-      email: email
-    }
+  openDialog(email) {
+    let email1 = {
+      email: email,
+    };
 
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px'
-    })
+      width: '250px',
+    });
 
     dialogRef.afterClosed().subscribe((datos) => {
-      if(datos == true){
+      if (datos == true) {
         this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
-          if(datos["resultado"] == "OK"){
+          if (datos['resultado'] == 'OK') {
             this.mostrarCliente();
           }
-        })
+        });
       }
-    })
+    });
   }
 }
 
@@ -121,9 +135,7 @@ export class GestionarClientesComponent implements OnInit {
   templateUrl: 'dialogo.html',
 })
 export class DialogOverviewExampleDialog {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>
-  ) {}
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) {}
 
   onNoClick(): void {
     this.dialogRef.close();

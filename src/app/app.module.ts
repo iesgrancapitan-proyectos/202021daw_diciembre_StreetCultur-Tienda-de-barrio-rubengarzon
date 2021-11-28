@@ -20,7 +20,7 @@ import { ContactComponent } from './main/footer/contact/contact.component';
 import { PuntosComponent } from './Client/puntos/puntos.component';
 import { QuienesSomosComponent } from './main/footer/quienes-somos/quienes-somos.component';
 import { EmpleadoComponent } from './Employee/empleado/empleado.component';
-import { PedidosComponent } from './Employee/pedidos/pedidos.component';
+import { DialogOverviewExampleDialog2, PedidosComponent } from './Employee/pedidos/pedidos.component';
 import { RopaComponent } from './Client/ropa/ropa.component';
 import { GestionarPuntosComponent } from './Employee/puntos/puntos.component';
 import { IncidenciaComponent } from './Employee/incidencia/incidencia.component';
@@ -58,8 +58,9 @@ import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './a
     GestionarRopaComponent,
     GestionarClientesComponent,
     DialogOverviewExampleDialog,
-    DialogOverviewExampleDialog1
-   ],
+    DialogOverviewExampleDialog1,
+    DialogOverviewExampleDialog2,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -68,7 +69,7 @@ import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './a
     FormsModule,
     DemoMaterialModule,
     MDBBootstrapModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent],

@@ -117,4 +117,16 @@ export class PedidoService {
       );
     }
   }
+
+  obtenerPedidos() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/obtenerPedidos.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/obtenerPedidos.php'
+      );
+    }
+  }
 }
