@@ -6,25 +6,25 @@ import { PuntosService } from 'src/app/puntos.service';
 @Component({
   selector: 'app-puntos',
   templateUrl: './puntos.component.html',
-  styleUrls: ['./puntos.component.sass']
+  styleUrls: ['./puntos.component.sass'],
 })
 export class PuntosComponent implements OnInit {
   numPuntos: any;
-  puntos:number;
   numProductos: any;
 
   estaLogueado: boolean = this.login.estaLogueado();
 
-  constructor(private puntosServicio: PuntosService,private login: LoginComponent,private carritoServicio: CarroService) { }
+  constructor(
+    private puntosServicio: PuntosService,
+    private login: LoginComponent,
+    private carritoServicio: CarroService
+  ) {}
 
   ngOnInit() {
     this.contarProductos();
-    this.puntosServicio.obtenerPuntos(sessionStorage.getItem("id")).subscribe( (datos) => {
-     this.puntos = datos["puntos"];
-    });
     let cliente = {
-      idcliente: sessionStorage.getItem("id")
-    }
+      idcliente: sessionStorage.getItem('id'),
+    };
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
       this.numPuntos = datos['puntos'];
     });
@@ -43,5 +43,4 @@ export class PuntosComponent implements OnInit {
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
   }
-
 }

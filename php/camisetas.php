@@ -12,7 +12,7 @@ $conexion = conexion(); // CREA LA CONEXION
 
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT * FROM ropa WHERE Tipo='Camisetas'");
+$resultado = mysqli_query($conexion, "SELECT * FROM ropa WHERE Tipo='Camiseta'");
 
 class Result
 {
