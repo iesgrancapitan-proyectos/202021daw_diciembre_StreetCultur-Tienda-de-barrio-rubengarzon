@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2021 a las 13:04:22
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.3.31
+-- Tiempo de generación: 29-11-2021 a las 14:44:18
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,13 +38,6 @@ CREATE TABLE `carro` (
   `idcliente` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `carro`
---
-
-INSERT INTO `carro` (`id`, `nombre`, `imagen`, `cantidad`, `precio`, `total`, `talla`, `idcliente`) VALUES
-(160, 'Degraded', '../../../assets/degraded.png', 3, 15, 45, 'XL', 12);
-
 -- --------------------------------------------------------
 
 --
@@ -70,9 +63,23 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `perfil`, `email`, `password`, `nombre`, `apellidos`, `provincia`, `localidad`, `domicilio`, `codigopostal`, `movil`) VALUES
-(12, 'cliente', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Laura', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
+(12, '', 'prueba@gmail.com', '202cb962ac59075b964b07152d234b70', 'Laura', 'García', 'Córdoba', 'Córdoba', 'ccc', 15000, 1111),
 (13, 'empleado', 'empleado@gmail.com', '202cb962ac59075b964b07152d234b70', 'Pablo', NULL, '', '', NULL, NULL, NULL),
 (22, 'admin', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comprar_ahora`
+--
+
+CREATE TABLE `comprar_ahora` (
+  `id` int(30) NOT NULL,
+  `nombre` varchar(300) NOT NULL,
+  `precio` int(30) NOT NULL,
+  `cantidad` int(30) NOT NULL,
+  `talla` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -119,9 +126,13 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `fecha`, `estado`, `preciototal`, `fechaenvio`, `fecharecibido`, `idcliente`) VALUES
-(27, '2021-11-19', 'Pendiente', 27, NULL, NULL, 12),
-(28, '2021-11-19', 'Recibido', 30, NULL, NULL, 12),
-(29, '2021-11-19', 'Pendiente', 30, NULL, NULL, 12);
+(32, '2021-11-28', 'Pendiente', 21, NULL, NULL, 12),
+(33, '2021-11-28', 'Pendiente', 20, NULL, NULL, 12),
+(34, '2021-11-28', 'Pendiente', 20, NULL, NULL, 12),
+(35, '2021-11-28', 'Pendiente', 17, NULL, NULL, 12),
+(36, '2021-11-28', 'Pendiente', 22, NULL, NULL, 12),
+(37, '2021-11-28', 'Pendiente', 22, NULL, NULL, 12),
+(38, '2021-11-28', 'Pendiente', 16, NULL, NULL, 12);
 
 -- --------------------------------------------------------
 
@@ -140,7 +151,7 @@ CREATE TABLE `puntos` (
 --
 
 INSERT INTO `puntos` (`id`, `puntos`, `idcliente`) VALUES
-(1, 10, 12),
+(1, 24, 12),
 (3, 0, 22);
 
 -- --------------------------------------------------------
@@ -156,24 +167,26 @@ CREATE TABLE `ropa` (
   `Talla` varchar(100) NOT NULL,
   `Precio` decimal(50,0) NOT NULL,
   `Cantidad` int(30) NOT NULL,
-  `Tipo` enum('Sudadera','Pantalon','Zapatilla','Accesorio') NOT NULL,
+  `Tipo` enum('Sudadera','Pantalon','Chandal','Accesorio','Camiseta','Abrigo') NOT NULL,
   `Color` varchar(50) NOT NULL,
   `Novedad` tinyint(1) NOT NULL,
-  `Imagen` varchar(100) NOT NULL
+  `Imagen` varchar(100) NOT NULL,
+  `Imagen1` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ropa`
 --
 
-INSERT INTO `ropa` (`Id`, `Nombre`, `Descripcion`, `Talla`, `Precio`, `Cantidad`, `Tipo`, `Color`, `Novedad`, `Imagen`) VALUES
-(11, 'sss', 'bbb', 'S', '13', 12, 'Sudadera', 'Amarillo, Blanco', 1, '../../../assets/oso.jpg'),
-(16, 'ffff', 'aaa', 'XS,S,M,L', '20', 15, 'Sudadera', 'Negra', 1, ''),
-(17, 'fff', 'rrr', 'XS,S,M,L,XL,XXL', '20', 12, 'Sudadera', 'Negra', 1, ''),
-(18, 'ttt', 'ttttt', 'XS,S,L,M', '22', 15, 'Accesorio', 'Negra', 1, ''),
-(19, 'www', 'dgsfsdf', 'L', '12', 15, 'Pantalon', 'Negro', 1, ''),
-(20, 'pqpqpq', 'bb', 'M', '2', 2, 'Sudadera', 'azul', 1, ''),
-(21, 'tttt', 'tttt', 'M', '2', 2, 'Pantalon', 'Negro', 1, '');
+INSERT INTO `ropa` (`Id`, `Nombre`, `Descripcion`, `Talla`, `Precio`, `Cantidad`, `Tipo`, `Color`, `Novedad`, `Imagen`, `Imagen1`) VALUES
+(22, 'Efforts', 'Sudadera Unisex', 'XS,S,M,L,XL,XXL', '15', 50, 'Sudadera', 'Gris', 1, '../../../assets/efforts.png', '../../../assets/efforts1.png'),
+(23, 'I am very well', 'Sudadera Unisex Reflectante', 'XS,S,M,L,XL,XXL', '19', 50, 'Sudadera', 'Negra, Amarilla, Gris, Rosa, Morado', 1, '../../../assets/imverywell.png', '../../../assets/imverywell1.png'),
+(24, 'AD', 'Pantalón vaquero Unisex', 'XS,S,M,L,XL,XXL', '22', 50, 'Pantalon', 'Azul', 1, '../../../assets/ad.png', '../../../assets/ad1.png'),
+(25, 'Mountain', 'Abrigo unisex estampado montaña nevada', 'XS, S, L, M, XL, XXL', '45', 50, 'Abrigo', 'Estampado', 1, '../../../assets/mountain.PNG', '../../../assets/mountain1.PNG'),
+(26, 'Basic', 'Basic Chandal Unisex', 'XS,S,M,L,XL,XXL', '13', 50, 'Chandal', 'Gris, Negro', 1, '../../../assets/basic.PNG', '../../../assets/basic1.PNG'),
+(28, 'Flower', 'Flower Calcetines Unisex', 'XS,S,M,L,XL,XXL', '5', 50, 'Accesorio', 'Blanco,Negro,Azul,Marrón', 1, '../../../assets/flower.PNG', '../../../assets/flower1.PNG'),
+(29, 'Cactus', 'Cactus Unisex', 'XS,S,M,L,XL,XXL', '16', 50, 'Camiseta', 'Blanca,Verde,Negra', 1, '../../../assets/cactus.PNG', '../../../assets/cactus1.png'),
+(30, 'Planet', 'Planet Sudadera Unisex', 'XS,S,M,L,XL,XXL', '17', 50, 'Sudadera', 'Negra', 1, '../../../assets/planet.png', '../../../assets/planet1.png');
 
 --
 -- Índices para tablas volcadas
@@ -192,6 +205,12 @@ ALTER TABLE `carro`
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `Email` (`email`);
+
+--
+-- Indices de la tabla `comprar_ahora`
+--
+ALTER TABLE `comprar_ahora`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `img`
@@ -234,13 +253,19 @@ ALTER TABLE `ropa`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT de la tabla `comprar_ahora`
+--
+ALTER TABLE `comprar_ahora`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `img`
@@ -258,7 +283,7 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `puntos`
@@ -270,7 +295,7 @@ ALTER TABLE `puntos`
 -- AUTO_INCREMENT de la tabla `ropa`
 --
 ALTER TABLE `ropa`
-  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restricciones para tablas volcadas
