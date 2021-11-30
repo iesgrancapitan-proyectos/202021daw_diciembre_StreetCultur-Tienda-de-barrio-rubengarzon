@@ -16,8 +16,13 @@ import { PedidoService } from 'src/app/pedido.service';
   styleUrls: ['./detalle-ropa.component.sass'],
 })
 export class DetalleRopaComponent implements OnInit {
+  showFiller = false;
+
+
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
+
+  id = sessionStorage.getItem("id");
 
   sudaderas = {
     Id: null,
@@ -36,6 +41,7 @@ export class DetalleRopaComponent implements OnInit {
   cliente = {
     id: sessionStorage.getItem('id'),
     email: sessionStorage.getItem('email'),
+    perfil: null,
     fecha: this.hoy,
     nombre: null,
     apellidos: null,
@@ -44,6 +50,7 @@ export class DetalleRopaComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
+    imagen: null
   };
 
   numProductos: any;
@@ -82,6 +89,8 @@ export class DetalleRopaComponent implements OnInit {
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
       this.puntos = datos['puntos'];
     });
+
+    console.log(this.id)
   }
 
   obtenerDatos() {
@@ -95,6 +104,7 @@ export class DetalleRopaComponent implements OnInit {
         datos['cliente'][0]['codigopostal'] &&
         datos['cliente'][0]['movil']
       ) {
+        this.cliente.perfil = datos['cliente'][0]['perfil'];
         this.cliente.nombre = datos['cliente'][0]['nombre'];
         this.cliente.apellidos = datos['cliente'][0]['apellidos'];
         this.cliente.provincia = datos['cliente'][0]['provincia'];
@@ -102,6 +112,7 @@ export class DetalleRopaComponent implements OnInit {
         this.cliente.domicilio = datos['cliente'][0]['domicilio'];
         this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
         this.cliente.movil = datos['cliente'][0]['movil'];
+        this.cliente.imagen = datos['cliente'][0]['imagen'];
       }
     });
   }
