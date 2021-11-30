@@ -18,7 +18,12 @@ import { FormControl, FormControlName, FormGroup } from '@angular/forms';
   styleUrls: ['./pedidos.component.sass'],
 })
 export class PedidosComponent implements OnInit {
+  showFiller = false;
+
   pedido: Pedido[] = [];
+
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
 
   estaLogueado: boolean = this.login.estaLogueado();
 
@@ -26,9 +31,26 @@ export class PedidosComponent implements OnInit {
 
   id: any;
 
-  clientes: any;
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null
+  };
 
   /* hayPedidos = false; */
+
+  formEstado = new FormGroup({
+    estado: new FormControl(''),
+  });
 
   formModal = new FormGroup({
     id: new FormControl(''),
@@ -47,6 +69,7 @@ export class PedidosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.obtenerDatos();
     /* this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
       for (const key in datos['clientes']) {
         this.clientes = datos['clientes'];
@@ -54,6 +77,30 @@ export class PedidosComponent implements OnInit {
     }); */
     this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
       this.pedido = datos['pedidos'];
+    });
+  }
+
+  obtenerDatos() {
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      if (
+        datos['cliente'][0]['nombre'] != null &&
+        datos['cliente'][0]['domicilio'] != null &&
+        datos['cliente'][0]['codigopostal'] &&
+        datos['cliente'][0]['movil']
+      ) {
+        this.cliente.perfil = datos['cliente'][0]['perfil'];
+        this.cliente.nombre = datos['cliente'][0]['nombre'];
+        this.cliente.apellidos = datos['cliente'][0]['apellidos'];
+        this.cliente.provincia = datos['cliente'][0]['provincia'];
+        this.cliente.localidad = datos['cliente'][0]['localidad'];
+        this.cliente.domicilio = datos['cliente'][0]['domicilio'];
+        this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
+        this.cliente.movil = datos['cliente'][0]['movil'];
+        this.cliente.imagen = datos['cliente'][0]['imagen'];
+      }
     });
   }
 
@@ -109,10 +156,16 @@ export class PedidosComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  modificarPedido() {
-    console.log(this.formModal.value);
+  modificarPedido(id) {
+
+    console.log(this.formEstado.get("estado"));
+
+    let pedido = {
+      id:id,
+      estado:this.formEstado.get("estado")
+    }
     this.pedidoServicio
-      .actualizarPedido(this.formModal.value)
+      .actualizarPedido(pedido)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.pedidoServicio.obtenerPedidos().subscribe((datos) => {

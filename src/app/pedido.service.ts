@@ -67,6 +67,7 @@ export class PedidoService {
   }
 
   actualizarPedido(pedido) {
+    console.log(pedido);
     if (this.env == 'Development') {
       return this.http.post(
         'http://localhost/streetcultur/php/actualizarPedido.php',

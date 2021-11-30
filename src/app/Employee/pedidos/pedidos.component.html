@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -17,7 +17,24 @@
     </button>
   </mat-menu>
 
-  <img src="../../../../assets/S.png" width="120" alt="" />
+  <div *ngIf="cliente.imagen != null; else noavatar">
+    <a routerLink="/miperfil" (click)="drawer.toggle()">
+      <img src="{{ cliente.imagen }}" width="70" class="avatar" />
+    </a>
+  </div>
+
+  <ng-template #noavatar>
+    <div *ngIf="estaLogueado == true; else aa">
+      <a routerLink="/miperfil" (click)="drawer.toggle()">
+        <img
+          src="../../../../assets/avatardefault.png"
+          width="70"
+          class="avatar"
+        />
+      </a>
+    </div>
+    <ng-template #aa> </ng-template>
+  </ng-template>
 
   <span class="example-spacer"></span>
 
@@ -25,6 +42,7 @@
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
     GESTIONAR PEDIDOS
   </button>
+  <img src="../../../../assets/S.png" width="120" alt="" />
   <button mat-button class="item" [routerLink]="['/gestionarropa']">
     GESTIONAR ROPA
   </button>
@@ -67,6 +85,15 @@
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p style="cursor: pointer">{{ cliente.nombre }} {{ cliente.apellidos }}</p>
+    <p>Perfil: {{ cliente.perfil }}</p>
+    <p style="cursor: pointer" routerLink="/informacion">Mi información</p>
+    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
+  </mat-drawer>
+</mat-drawer-container>
 
 <div
   mdbModal
@@ -136,7 +163,16 @@
 
     <div class="fila" *ngFor="let item of pedido">
       <div>{{ item.fecha }}</div>
-      <div>{{ item.estado }}</div>
+      <div>
+        <form [formGroup]="formEstado">
+          <select formControlName="estado">
+            <option selected>{{ item.estado }}</option>
+            <option value="Pendiente" *ngIf="item.estado != 'Pendiente'">Pendiente</option>
+            <option value="Recibido" *ngIf="item.estado != 'Recibido'">Recibido</option>
+            <option value="Enviado" *ngIf="item.estado != 'Enviado'">Enviado</option>
+          </select>
+        </form>
+      </div>
       <div>{{ item.preciototal }}</div>
       <div>{{ item.fechadeenvio }}</div>
       <div>{{ item.fechaderecibo }}</div>
@@ -151,8 +187,7 @@
         <mat-icon
           style="cursor: pointer"
           (click)="
-            modificarpedido.show();
-            pasarDatos(item.id, item.estado, item.preciototal)
+            modificarPedido(item.id)
           "
           >edit</mat-icon
         >
@@ -171,7 +206,7 @@
   aria-labelledby="myModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog" role="document">
+ <!--  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Modificar pedido</h4>
@@ -222,7 +257,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- <ng-template #nohaypedidos>
     <p>El Cliente no tiene pedidos</p>
