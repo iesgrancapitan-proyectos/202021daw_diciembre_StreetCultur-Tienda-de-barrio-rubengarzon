@@ -26,14 +26,6 @@ export class BodyComponent implements OnInit {
 
   ngOnInit() {
     this.contarProductos();
-    this.snackBar.open(
-      'Este sitio web es un proyecto de FP que está en desarrollo.',
-      'De acuerdo',
-      {
-        horizontalPosition: 'center',
-        verticalPosition: 'bottom',
-      }
-    );
     let cliente = {
       idcliente: sessionStorage.getItem("id")
     }
