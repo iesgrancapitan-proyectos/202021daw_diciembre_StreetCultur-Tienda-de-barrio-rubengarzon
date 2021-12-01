@@ -5,8 +5,8 @@ export class Pedido {
     public nombre: string,
     public estado: string,
     public preciototal: number,
-    public fechadeenvio: string,
-    public fechaderecibo: string,
+    public fechaenvio: string,
+    public fecharecibido: string,
     public idcliente: number
   ) {}
 }

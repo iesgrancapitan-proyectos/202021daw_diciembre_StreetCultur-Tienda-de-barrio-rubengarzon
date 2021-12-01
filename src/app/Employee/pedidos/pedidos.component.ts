@@ -46,8 +46,6 @@ export class PedidosComponent implements OnInit {
     imagen: null
   };
 
-  /* hayPedidos = false; */
-
   formEstado = new FormGroup({
     estado: new FormControl(''),
   });
@@ -56,10 +54,9 @@ export class PedidosComponent implements OnInit {
     id: new FormControl(''),
     estado: new FormControl(''),
     preciototal: new FormControl(''),
-    fechadeenvio: new FormControl(''),
-    fechaderecibo: new FormControl(''),
+    fechaenvio: new FormControl(''),
+    fecharecibido: new FormControl(''),
   });
-
   constructor(
     private login: LoginComponent,
     private pedidoServicio: PedidoService,
@@ -70,11 +67,6 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerDatos();
-    /* this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
-      for (const key in datos['clientes']) {
-        this.clientes = datos['clientes'];
-      }
-    }); */
     this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
       this.pedido = datos['pedidos'];
     });
@@ -104,7 +96,7 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  /* mostrarPedido(id: any) {
+  /*  mostrarPedido(id: any) {
     let cliente = {
       id: id,
     };
@@ -117,16 +109,17 @@ export class PedidosComponent implements OnInit {
       }
     });
   } */
-  pasarDatos(id, estado, preciototal) {
+  pasarDatos(id, estado, preciototal, fechaenvio, fecharecibido) {
+    console.log(id)
     this.formModal.setValue({
       id: id,
       estado: estado,
       preciototal: preciototal,
-      fechadeenvio: '2021-02-02',
-      fechaderecibo: '2021-02-03',
+      fechaenvio: fechaenvio,
+      fecharecibido: fecharecibido,
     });
   }
-  borrarPedido(id: any, idpedido: any) {
+   borrarPedido(id: any, idpedido: any) {
     let pedido = {
       id: id,
     };
@@ -156,19 +149,12 @@ export class PedidosComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  modificarPedido(id) {
-
-    console.log(this.formEstado.get("estado"));
-
-    let pedido = {
-      id:id,
-      estado:this.formEstado.get("estado")
-    }
-    this.pedidoServicio
-      .actualizarPedido(pedido)
+  modificarPedido() {
+       this.pedidoServicio
+      .actualizarPedido(this.formModal.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
-          this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+           this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
             this.pedido = datos['pedidos'];
           });
           this.snackBar.open('El pedido se ha modificado', '', {
@@ -178,7 +164,7 @@ export class PedidosComponent implements OnInit {
           alert('error');
         }
       });
-  }
+    }
 
   openDialog(id) {
     let id1 = {

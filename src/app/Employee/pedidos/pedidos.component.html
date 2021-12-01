@@ -164,18 +164,11 @@
     <div class="fila" *ngFor="let item of pedido">
       <div>{{ item.fecha }}</div>
       <div>
-        <form [formGroup]="formEstado">
-          <select formControlName="estado">
-            <option selected>{{ item.estado }}</option>
-            <option value="Pendiente" *ngIf="item.estado != 'Pendiente'">Pendiente</option>
-            <option value="Recibido" *ngIf="item.estado != 'Recibido'">Recibido</option>
-            <option value="Enviado" *ngIf="item.estado != 'Enviado'">Enviado</option>
-          </select>
-        </form>
+        {{ item.estado }}
       </div>
       <div>{{ item.preciototal }}</div>
-      <div>{{ item.fechadeenvio }}</div>
-      <div>{{ item.fechaderecibo }}</div>
+      <div>{{ item.fechaenvio }}</div>
+      <div>{{ item.fecharecibido }}</div>
       <div>
         <mat-icon
           matTooltip="Borrar"
@@ -183,12 +176,9 @@
           (click)="openDialog(item.id)"
           >delete</mat-icon
         >
-
         <mat-icon
           style="cursor: pointer"
-          (click)="
-            modificarPedido(item.id)
-          "
+          (click)="modificarpedido.show();pasarDatos(item.id, item.estado, item.preciototal, item.fechaenvio, item.fecharecibido)"
           >edit</mat-icon
         >
       </div>
@@ -206,7 +196,7 @@
   aria-labelledby="myModalLabel"
   aria-hidden="true"
 >
- <!--  <div class="modal-dialog" role="document">
+<div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Modificar pedido</h4>
@@ -227,27 +217,31 @@
             [formGroup]="formModal"
             style="display: flex; flex-direction: column"
           >
-            <input type="hidden" formControlName="id" />
+          <input type="hidden" formControlName="id" />
+            Estado
             <select formControlName="estado">
               <option value="Pendiente">Pendiente</option>
               <option value="Recibido">Recibido</option>
               <option value="Enviado">Enviado</option>
             </select>
+            Precio Total
             <input
               type="text"
               formControlName="preciototal"
               placeholder="preciototal"
               style="margin-bottom: 1em"
             />
+            Fecha de Envío
             <input
-              type="date"
-              formControlName="fechadeenvio"
+              type="text"
+              formControlName="fechaenvio"
               placeholder="fechadeenvio"
               style="margin-bottom: 1em"
             />
+            Fecha de Recibo
             <input
-              type="date"
-              formControlName="fechaderecibo"
+              type="text"
+              formControlName="fecharecibido"
               placeholder="fechaderecibo"
               style="margin-bottom: 1em"
             />
