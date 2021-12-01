@@ -27,7 +27,23 @@ export class GestionarRopaComponent implements OnInit {
 
   hayPedidos = false;
 
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
 
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null
+  };
 
   formAddRopa = new FormGroup({
     Id: new FormControl(''),
@@ -67,7 +83,7 @@ export class GestionarRopaComponent implements OnInit {
     });
 
   }
-  
+
   ropa: Ropa[] = [];
   page_size: number = 3
   page_number: number = 1
