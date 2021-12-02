@@ -17,6 +17,25 @@ export class IncidenciaComponent implements OnInit {
     motivo: new FormControl(),
   });
 
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null
+  };
+
+
   onSubmit(): void {
     this.incidenciaServicio
       .insertarIncidencia(this.form.value)

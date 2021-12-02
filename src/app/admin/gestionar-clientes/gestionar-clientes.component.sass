@@ -37,8 +37,76 @@ mat-toolbar
   font-size: 17px
 mat-icon
   font-size: 27px
+  margin-right: 0.3em
+.tabla
+  display: table
+  text-align: center
+  margin: 0 auto
+  text-align: -webkit-center
+  @media screen and ( max-width: 800px )
+    margin: 0
+    display: block
+  .theader
+    display: flex
+    justify-content: center
+    div
+      text-align: center
+      padding: 3em
+      width: 10.7em
+      @media screen and ( max-width: 800px )
+        padding: 0
+  .fila
+    display: flex
+    width: 71%
+    background-color: white
+    margin-bottom: 1em
+    border-radius: 1em
+    place-items: center
+    @media screen and ( max-width: 800px )
+      margin-right: 0
+    &:hover
+      transform: scale(1.01)
+    div
+      vertical-align: middle
+      padding: 21px
+      width: 11em
 
+.btnr
+  display: flex
+  .ar
+    width: 60em
 
-td
-  width: 5em
+.item
+  font-size: 17px
+  font-weight: 500
+mat-icon
+  font-size: 32px
+.avatar
+  border-radius: 5em
+.example-icon
+  margin-right: 1em
+.icn1
+  font-size: 25px
 
+.example-container
+  position: absolute
+  width: 500px
+  height: 170px
+  background: none
+
+.example-sidenav-content
+  display: flex
+  height: 100%
+  align-items: center
+  justify-content: center
+
+.example-sidenav
+  padding: 20px
+
+form
+  div
+    align-items: center
+  input[type=text],input[type=number], select, textarea
+    border: 1px solid #ccc
+    border-radius: 4px
+    resize: vertical

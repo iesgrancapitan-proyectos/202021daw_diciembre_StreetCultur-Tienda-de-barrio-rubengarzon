@@ -1,19 +1,33 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 80px;">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item class="item" [routerLink]="['/admin']">INICIO</button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarclientes']">GESTIONAR CLIENTES</button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarusuarios']">GESTIONAR USUARIOS</button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarincidencias']">GESTIONAR INCIDENCIAS</button>
   </mat-menu>
 
-  <img src="../../../../assets/S.png" width="120" alt="" />
+  <div *ngIf="cliente.imagen != null;else noavatar">
+    <a routerLink="/miperfil" (click)="drawer.toggle()">
+      <img src="{{cliente.imagen}}" width="70" class="avatar">
+    </a>
+  </div>
+
+  <ng-template #noavatar>
+    <div *ngIf="estaLogueado == true;else aa">
+      <a routerLink="/miperfil" (click)="drawer.toggle()">
+        <img src="../../../../assets/avatardefault.png" width="70" class="avatar">
+      </a>
+    </div>
+    <ng-template #aa>
+    </ng-template>
+  </ng-template>
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/admin']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/gestionarclientes']">GESTIONAR CLIENTES</button>
+  <button mat-button class="item" [routerLink]="['/gestionarusuarios']">GESTIONAR USUARIOS</button>
   <button mat-button class="item" [routerLink]="['/gestionarincidencias']">GESTIONAR INCIDENCIAS</button>
   <span class="example-spacer"></span>
 
@@ -50,7 +64,16 @@
   >
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
+
 </mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p style="cursor:pointer" >{{cliente.nombre}} {{cliente.apellidos}}</p>
+    <p>Perfil: {{cliente.perfil}}</p>
+    <p style="cursor:pointer" routerLink="/informacion">Mi información</p>
+    <p style="cursor:pointer" (click)="cerrarSesion()">Salir</p>
+  </mat-drawer>
+</mat-drawer-container>
 
 <div
   mdbModal

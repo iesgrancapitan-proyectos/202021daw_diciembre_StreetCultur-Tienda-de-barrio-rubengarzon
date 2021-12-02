@@ -34,7 +34,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'pedido', component: PedidoComponent },
   { path: 'gestionarpedidos', component: PedidosComponent },
-  { path: 'gestionarclientes', component: GestionarClientesComponent },
+  { path: 'gestionarusuarios', component: GestionarClientesComponent },
   { path: 'detalle-ropa/:id', component: DetalleRopaComponent },
   { path: 'gestionarincidencias', component: GestionarIncidenciasComponent }
 ];

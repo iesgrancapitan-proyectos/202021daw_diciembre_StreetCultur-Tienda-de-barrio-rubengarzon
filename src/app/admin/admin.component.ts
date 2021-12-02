@@ -14,6 +14,24 @@ export class AdminComponent implements OnInit {
   numClientes: any;
   numIncidencias: any;
 
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null
+  };
+
   constructor(private login: LoginComponent, private clientesServicio: ClienteService, private incidenciasServicio: IncidenciaService ) {}
 
   ngOnInit() {

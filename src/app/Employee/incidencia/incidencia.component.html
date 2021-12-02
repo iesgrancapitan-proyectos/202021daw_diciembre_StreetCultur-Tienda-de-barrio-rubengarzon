@@ -1,21 +1,40 @@
-<mat-toolbar color="primary" style="height: 5em">
+<mat-toolbar color="primary" style="height: 80px;">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/empleado']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/empleado']">
+      INICIO
+    </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarpedidos']">
       GESTIONAR PEDIDOS
-    </button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
-      GESTIONAR ROPA
     </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarpuntos']">
       GESTIONAR PUNTOS
     </button>
+    <button mat-menu-item class="item" [routerLink]="['/gestionarropa']">
+      GESTIONAR ROPA
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/abririncidencia']">
+      ABRIR INCIDENCIA
+    </button>
   </mat-menu>
 
-  <img src="../../../../assets/logo.gif" width="120" alt="" />
+  <div *ngIf="cliente.imagen != null;else noavatar">
+    <a routerLink="/miperfil" (click)="drawer.toggle()">
+      <img src="{{cliente.imagen}}" width="70" class="avatar">
+    </a>
+  </div>
+
+  <ng-template #noavatar>
+    <div *ngIf="estaLogueado == true;else aa">
+      <a routerLink="/miperfil" (click)="drawer.toggle()">
+        <img src="../../../../assets/avatardefault.png" width="70" class="avatar">
+      </a>
+    </div>
+    <ng-template #aa>
+    </ng-template>
+  </ng-template>
 
   <span class="example-spacer"></span>
 
@@ -23,11 +42,14 @@
   <button mat-button class="item" [routerLink]="['/gestionarpedidos']">
     GESTIONAR PEDIDOS
   </button>
+  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
+    GESTIONAR PUNTOS
+  </button>
   <button mat-button class="item" [routerLink]="['/gestionarropa']">
     GESTIONAR ROPA
   </button>
-  <button mat-button class="item" [routerLink]="['/gestionarpuntos']">
-    GESTIONAR PUNTOS
+  <button mat-button class="item" [routerLink]="['/abririncidencia']">
+    ABRIR INCIDENCIA
   </button>
 
   <span class="example-spacer"></span>
@@ -66,6 +88,15 @@
   </button>
 </mat-toolbar>
 
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p style="cursor:pointer" >{{cliente.nombre}} {{cliente.apellidos}}</p>
+    <p>Perfil: {{cliente.perfil}}</p>
+    <p style="cursor:pointer" routerLink="/informacion">Mi información</p>
+    <p style="cursor:pointer" (click)="cerrarSesion()">Salir</p>
+  </mat-drawer>
+</mat-drawer-container>
+
 <div
   mdbModal
   #frame="mdbModal"
@@ -98,7 +129,8 @@
     </div>
   </div>
 </div>
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form" style="display:flex; flex-direction: column;">
+<h2 style="margin-top: 2em;text-align: center;">Abrir Incidencia</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form" style="margin-top: 3em;display:flex; flex-direction: column;">
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput formControlName="email">
@@ -108,6 +140,6 @@
     <mat-label>Motivo de la incidencia</mat-label>
     <textarea matInput placeholder="Escribe el motivo" formControlName="motivo"></textarea>
   </mat-form-field>
-  <button mat-button style="width: 20em">Enviar</button>
+  <button mat-raised-button style="width: 20em">Enviar</button>
 </form>
 

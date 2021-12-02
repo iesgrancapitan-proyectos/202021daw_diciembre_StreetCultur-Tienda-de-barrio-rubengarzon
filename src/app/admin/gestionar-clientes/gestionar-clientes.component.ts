@@ -3,6 +3,7 @@ import { ClienteService } from 'src/app/cliente.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { Cliente } from 'src/app/Model/Cliente';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { FormGroup, FormControl } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -19,6 +20,19 @@ export class GestionarClientesComponent implements OnInit {
 
   clientes: Cliente[] = [];
 
+  modificarCliente1 = new FormGroup({
+    id: new FormControl(''),
+    perfil: new FormControl(''),
+    email: new FormControl(''),
+    nombre: new FormControl(''),
+    apellidos: new FormControl(''),
+    provincia: new FormControl(''),
+    localidad: new FormControl(''),
+    domicilio: new FormControl(''),
+    codigopostal: new FormControl(''),
+    movil: new FormControl(''),
+  })
+
   clientes1 = {
     id: null,
     perfil: null,
@@ -31,6 +45,24 @@ export class GestionarClientesComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
+  };
+
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null
   };
 
   constructor(
@@ -61,44 +93,23 @@ export class GestionarClientesComponent implements OnInit {
       email: email,
     };
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      this.clientes1.id = datos['cliente'][0]['id'];
-      this.clientes1.perfil = datos['cliente'][0]['perfil'];
-      this.clientes1.email = datos['cliente'][0]['email'];
-      this.clientes1.nombre = datos['cliente'][0]['nombre'];
-      this.clientes1.apellidos = datos['cliente'][0]['apellidos'];
-      this.clientes1.provincia = datos['cliente'][0]['provincia'];
-      this.clientes1.localidad = datos['cliente'][0]['localidad'];
-      this.clientes1.domicilio = datos['cliente'][0]['domicilio'];
-      this.clientes1.codigopostal = datos['cliente'][0]['codigopostal'];
-      this.clientes1.movil = datos['cliente'][0]['movil'];
+      this.modificarCliente1.setValue({
+        id: datos['cliente'][0]['id'],
+        perfil: datos['cliente'][0]['perfil'],
+        email: datos['cliente'][0]['email'],
+        nombre: datos['cliente'][0]['nombre'],
+        apellidos: datos['cliente'][0]['apellidos'],
+        provincia: datos['cliente'][0]['provincia'],
+        localidad: datos['cliente'][0]['localidad'],
+        domicilio: datos['cliente'][0]['domicilio'],
+        codigopostal: datos['cliente'][0]['codigopostal'],
+        movil: datos['cliente'][0]['movil']
+      })
     });
   }
 
-  modificarCliente(
-    id,
-    perfil,
-    email,
-    nombre,
-    apellidos,
-    provincia,
-    localidad,
-    domicilio,
-    codigopostal,
-    movil
-  ) {
-    let cliente2 = {
-      id: id,
-      perfil: perfil,
-      email: email,
-      nombre: nombre,
-      apellidos: apellidos,
-      provincia: provincia,
-      localidad: localidad,
-      domicilio: domicilio,
-      codigopostal: codigopostal,
-      movil: movil,
-    };
-    this.clienteServicio.actualizarCliente(cliente2).subscribe((datos) => {
+  modificarCliente() {
+    this.clienteServicio.actualizarCliente(this.modificarCliente1.value).subscribe((datos) => {
       if (datos['resultado'] == 'OK') {
         this.snackBar.open('El cliente se ha modificado', '', {
           duration: 2000,
