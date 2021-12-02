@@ -53,7 +53,7 @@ export class BodyComponent implements OnInit {
       idcliente: sessionStorage.getItem("id")
     }
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.numPuntos = datos['puntos'];
+      this.numPuntos = datos['puntos'][0]['puntos'];
     });
   }
 

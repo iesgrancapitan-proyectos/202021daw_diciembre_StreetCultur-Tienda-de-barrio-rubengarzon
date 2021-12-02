@@ -24,6 +24,18 @@ export class PuntosService {
     }
   }
 
+  obtenerTodosPuntos() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarClientePuntos.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/mostrarClientePuntos.php'
+      );
+    }
+  }
+
   actualizarPuntos(cliente: any) {
     console.log(cliente);
     if (this.env == 'Development') {

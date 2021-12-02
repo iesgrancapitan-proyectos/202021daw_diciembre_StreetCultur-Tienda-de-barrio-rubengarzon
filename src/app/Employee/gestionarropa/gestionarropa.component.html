@@ -169,59 +169,49 @@
         </button>
       </div>
       <div class="modal-body mx-3">
-        <div class="md-form mb-5" style="display: flex; flex-direction: column">
+        <div class="md-form mb-5">
           <form [formGroup]="formAddRopa" (ngSubmit)="addRopa()">
-            <input
-              type="text"
-              formControlName="Nombre"
-              placeholder="Nombre"
-              style="margin-bottom: 1em"
-            />
-            <input
+            Nombre:
+              <input
+                type="text"
+                placeholder="Nombre"
+                style="margin-bottom: 1em"
+              />
+
+            Descripción
+                           <input
               type="text"
               formControlName="Descripcion"
-              placeholder="Descripción"
               style="margin-bottom: 1em"
             />
-            <select formControlName="Talla" style="margin-bottom: 1em">
-              <option value="XS">XS</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L" selected>L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option>
-            </select>
-            <input
+
+              Precio:
+              <input
               type="number"
               formControlName="Precio"
-              placeholder="2"
               style="margin-bottom: 1em"
             />
-            <input
-              type="text"
-              formControlName="Cantidad"
-              placeholder="Cantidad"
-              style="margin-bottom: 1em"
-            />
-            <input
+
+              Tipo:
+              <input
               type="text"
               formControlName="Tipo"
-              placeholder="Tipo"
               style="margin-bottom: 1em"
             />
-            <input
+
+              Color:
+              <input
               type="text"
               formControlName="Color"
-              placeholder="Color"
               style="margin-bottom: 1em"
             />
-            <input
-              type="number"
-              formControlName="Novedad"
-              placeholder="1"
-              style="margin-bottom: 1em"
-            />
-            <button>Enviar</button>
+            Imagen:
+            <input type="file" name="" id="">
+            <br>
+            <br>
+            <div style="display: flex;place-content: center;">
+              <button mat-raised-button style="width: 20em;">Enviar</button>
+            </div>
           </form>
         </div>
       </div>
@@ -351,37 +341,35 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5" style="display: flex; flex-direction: column">
+      <div class="modal-body mx-5">
+        <div>
           <form [formGroup]="formModal">
+            Nombre:
             <input
               type="text"
               formControlName="Nombre"
               style="margin-bottom: 1em"
             />
+            Descripción:
             <input
               type="text"
               placeholder="Descripción"
               style="margin-bottom: 1em"
             />
-            <select style="margin-bottom: 1em">
-              <option value="XS">XS</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L" selected>L</option>
-              <option value="XL">XL</option>
-              <option value="XXL">XXL</option>
-            </select>
+            Precio:
             <input type="number" placeholder="2" style="margin-bottom: 1em" />
             <input
               type="text"
               placeholder="Cantidad"
               style="margin-bottom: 1em"
             />
+            Tipo:
             <input type="text" placeholder="Tipo" style="margin-bottom: 1em" />
+            Color:
             <input type="text" placeholder="Color" style="margin-bottom: 1em" />
-            <input type="number" placeholder="1" style="margin-bottom: 1em" />
-            <button>Enviar</button>
+            <div style="display: flex;place-content: center;">
+              <button mat-raised-button style="width: 20em;">Enviar</button>
+            </div>
           </form>
         </div>
       </div>

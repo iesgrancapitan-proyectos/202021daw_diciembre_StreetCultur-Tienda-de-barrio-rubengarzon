@@ -13,11 +13,14 @@ import { PuntosService } from 'src/app/puntos.service';
   styleUrls: ['./puntos.component.sass'],
 })
 export class GestionarPuntosComponent implements OnInit {
-  puntos = {
-    id: null,
-    puntos: null,
-    idcliente: null,
-  };
+  clientess = [
+    {
+      id: null,
+      nombre: null,
+      apellidos:null,
+      puntos: null,
+    },
+  ];
 
   estaLogueado: boolean = this.login.estaLogueado();
 
@@ -27,6 +30,24 @@ export class GestionarPuntosComponent implements OnInit {
 
   clientes: any;
 
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null,
+  };
+
   constructor(
     private login: LoginComponent,
     private puntosServicio: PuntosService,
@@ -35,21 +56,16 @@ export class GestionarPuntosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
+    this.puntosServicio.obtenerTodosPuntos().subscribe((datos: any) => {
+      this.clientess = datos['clientes'];
+      console.log(this.clientess);
+    });
+
+    /*   this.clienteServicio.mostrarIdClientes().subscribe((datos) => {
       for (const key in datos['clientes']) {
         this.clientes = datos['clientes'];
       }
-    });
-  }
-
-  mostrarPuntos(id: any) {
-    let cliente = {
-      idcliente: id,
-    };
-    this.puntosServicio.obtenerPuntos(cliente).subscribe((datos: any) => {
-      this.puntos.id = datos['id'];
-      this.puntos.puntos = datos['puntos'];
-    });
+    }); */
   }
 
   cerrarSesion() {
@@ -58,7 +74,7 @@ export class GestionarPuntosComponent implements OnInit {
     this.estaLogueado = false;
   }
 
- modificarPuntos(id, puntos) {
+  modificarPuntos(id, puntos) {
     let puntoss = {
       id: id,
       puntos: puntos,

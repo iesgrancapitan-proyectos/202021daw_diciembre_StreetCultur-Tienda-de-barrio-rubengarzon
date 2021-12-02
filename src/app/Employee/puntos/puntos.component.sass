@@ -1,6 +1,10 @@
 .mdl-data-table
   table-layout: fixed
-  width: 100%
+  width: 700px
+
+.mdl-grid
+  text-align: -webkit-center
+  text-align-last: center
 
 #my-table td,
 th
@@ -38,6 +42,68 @@ mat-toolbar
 mat-icon
   font-size: 27px
 
-
 td
   width: 5em
+
+.tabla
+  display: table
+  text-align: center
+  margin: 0 auto
+  @media screen and ( max-width: 800px )
+    margin: 0
+    display: block
+  .theader
+    display: flex
+    div
+      text-align: center
+      padding: 3em
+      width: 11em
+      @media screen and ( max-width: 800px )
+        padding: 0
+  .fila
+    display: flex
+    background-color: white
+    margin-bottom: 2em
+    margin-right: 3em
+    border-radius: 1em
+    @media screen and ( max-width: 800px )
+      margin-right: 0
+    &:hover
+      transform: scale(1.01)
+    div
+      vertical-align: middle
+      padding: 21px
+      width: 11em
+
+.btnr
+  display: flex
+  .ar
+    width: 45em
+
+.item
+  font-size: 17px
+  font-weight: 500
+mat-icon
+  font-size: 32px
+.avatar
+  border-radius: 5em
+.example-icon
+  margin-right: 1em
+.icn1
+  font-size: 25px
+
+.example-container
+  position: absolute
+  width: 500px
+  height: 170px
+  background: none
+
+.example-sidenav-content
+  display: flex
+  height: 100%
+  align-items: center
+  justify-content: center
+
+.example-sidenav
+  padding: 20px
+

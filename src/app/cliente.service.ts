@@ -37,6 +37,20 @@ mostrarCliente(email:any) {
   }
 }
 
+mostrarClienteId(id:any) {
+  if (this.env == 'Development') {
+    return this.http.post(
+      'http://localhost/streetcultur/php/mostrarClienteId.php',
+      JSON.stringify(id)
+    );
+  } else {
+    return this.http.post(
+      'https://streetcultur.com/php/mostrarClienteId.php',
+      JSON.stringify(id)
+    );
+  }
+}
+
 actualizarCliente(cliente:any) {
   if (this.env == 'Development') {
     return this.http.post(
