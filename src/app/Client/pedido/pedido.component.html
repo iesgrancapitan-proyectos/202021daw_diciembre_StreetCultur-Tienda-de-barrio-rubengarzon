@@ -23,7 +23,9 @@
     routerLink="/puntos"
     routerLinkActive="active"
   >
-    <mat-icon [matBadge]="puntos" matBadgeColor="accent">card_giftcard</mat-icon>
+    <mat-icon [matBadge]="puntos" matBadgeColor="accent"
+      >card_giftcard</mat-icon
+    >
   </button>
 
   <button
@@ -110,78 +112,91 @@
 <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
 <div class="grey lighten-3">
-
-
   <!--Main layout-->
   <main class="pt-4">
     <div class="container wow fadeIn">
-
       <!-- Heading -->
       <h2 class="my-5 h2 text-center">Pedido</h2>
 
       <!--Grid row-->
       <div class="row">
-
         <!--Grid column-->
         <div class="col-md-8 mb-4">
-
           <!--Card-->
           <div class="card">
-
             <!--Card content-->
             <form class="card-body">
-
               <!--Grid row-->
               <div class="row">
-
                 <!--Grid column-->
                 <div class="col-md-6 mb-2">
-
                   <!--firstName-->
-                  <div class="md-form ">
+                  <div class="md-form">
                     Nombre
-                    <input type="text" name="nombre" class="form-control" [(ngModel)]="cliente.nombre" required>
+                    <input
+                      type="text"
+                      name="nombre"
+                      class="form-control"
+                      [(ngModel)]="cliente.nombre"
+                      required
+                    />
                   </div>
-
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
                 <div class="col-md-6 mb-2">
-
                   <!--lastName-->
                   <div class="md-form">
                     Apellidos
-                    <input type="text" name="apellidos" class="form-control" [(ngModel)]="cliente.apellidos" required>
+                    <input
+                      type="text"
+                      name="apellidos"
+                      class="form-control"
+                      [(ngModel)]="cliente.apellidos"
+                      required
+                    />
                   </div>
-
                 </div>
                 <!--Grid column-->
-
               </div>
               <!--Grid row-->
-
 
               <!--email-->
               <div class="md-form mb-5">
                 Email
-                <input type="text" name="email" class="form-control" [(ngModel)]="cliente.email" required>
+                <input
+                  type="text"
+                  name="email"
+                  class="form-control"
+                  [(ngModel)]="cliente.email"
+                  required
+                />
               </div>
 
               <!--address-->
               <div class="md-form mb-5">
                 Domicilio
-                <input type="text" name="domicilio" class="form-control" [(ngModel)]="cliente.domicilio" required>
+                <input
+                  type="text"
+                  name="domicilio"
+                  class="form-control"
+                  [(ngModel)]="cliente.domicilio"
+                  required
+                />
               </div>
 
               <!--Grid row-->
               <div class="row">
-
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-12 mb-4">
-
                   <label for="provincia">Provincia</label>
-                  <select class="custom-select d-block w-100" name="provincia" [(ngModel)]="cliente.provincia" required>
+                  <select
+                    class="custom-select d-block w-100"
+                    name="provincia"
+                    [(ngModel)]="cliente.provincia"
+                    required
+                  >
                     <option value="">Elige Provincia</option>
                     <option value="Álava/Araba">Álava/Araba</option>
                     <option value="Albacete">Albacete</option>
@@ -204,11 +219,15 @@
                     <option value="Gerona/Girona">Gerona/Girona</option>
                     <option value="Granada">Granada</option>
                     <option value="Guadalajara">Guadalajara</option>
-                    <option value="Guipúzcoa/Gipuzkoa">Guipúzcoa/Gipuzkoa</option>
+                    <option value="Guipúzcoa/Gipuzkoa">
+                      Guipúzcoa/Gipuzkoa
+                    </option>
                     <option value="Huelva">Huelva</option>
                     <option value="Huesca">Huesca</option>
                     <option value="Jaén">Jaén</option>
-                    <option value="La Coruña/A Coruña">La Coruña/A Coruña</option>
+                    <option value="La Coruña/A Coruña">
+                      La Coruña/A Coruña
+                    </option>
                     <option value="La Rioja">La Rioja</option>
                     <option value="Las Palmas">Las Palmas</option>
                     <option value="León">León</option>
@@ -239,130 +258,188 @@
                   <div class="invalid-feedback">
                     Please select a valid country.
                   </div>
-
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4">
-
                   <label for="localidad">Localidad</label>
-                  <input type="text" name="localidad" class="form-control" [(ngModel)]="cliente.localidad" required>
+                  <input
+                    type="text"
+                    name="localidad"
+                    class="form-control"
+                    [(ngModel)]="cliente.localidad"
+                    required
+                  />
 
                   <div class="invalid-feedback">
                     Please provide a valid state.
                   </div>
-
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-6 mb-4">
-
                   <label for="codigo">Codigo Postal</label>
-                  <input type="text" class="form-control" name="codigo" [(ngModel)]="cliente.codigopostal" required>
-                  <div class="invalid-feedback">
-                    Zip code required.
-                  </div>
-
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="codigo"
+                    [(ngModel)]="cliente.codigopostal"
+                    required
+                  />
+                  <div class="invalid-feedback">Zip code required.</div>
                 </div>
                 <!--Grid column-->
-
               </div>
               <!--Grid row-->
 
-              <hr class="mb-4">
+              <hr class="mb-4" />
 
               <!-- sb-sm9yh8614634@business.example.com -->
               <!-- R})k5YD9 -->
               <div id="miPaypalBoton"></div>
             </form>
-
           </div>
           <!--/.Card-->
-
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
         <div class="col-md-4 mb-4">
-
           <!-- Heading -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Tu carro</span>
-            <span class="badge badge-secondary badge-pill">{{numProductos}}</span>
+            <span class="badge badge-secondary badge-pill">{{
+              numProductos
+            }}</span>
           </h4>
 
           <!-- Cart -->
-          <ul class="list-group mb-3 z-depth-1" *ngIf="flag == false;else comprarahora">
-            <li class="list-group-item d-flex justify-content-between lh-condensed" *ngFor="let item of productosEnCarrito">
-              <div >
-                <h6 class="my-0">{{item[1]}}</h6>
+          <ul
+            class="list-group mb-3 z-depth-1"
+            *ngIf="flag == false; else comprarahora"
+          >
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                lh-condensed
+              "
+              *ngFor="let item of productosEnCarrito"
+            >
+              <div>
+                <h6 class="my-0">{{ item[1] }}</h6>
                 <small class="text-muted">Talla: </small>
-                <span class="text-muted">{{item[6]}}</span>
+                <span class="text-muted">{{ item[6] }}</span>
               </div>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
                 <h6 class="my-0">Puntos</h6>
-                <small>{{puntos}}</small>
+                <small>{{ puntos }}</small>
               </div>
-              <span class="text-success">-{{canjearpuntos}}€</span>
+              <span class="text-success">-{{ canjearpuntos }}€</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (€)</span>
-              <strong *ngIf="cliente.codigopostal > 14999 || cliente.codigopostal < 14000;else gratis">{{total+3-canjearpuntos}}</strong>
-              <ng-template #gratis>{{total-3-canjearpuntos}}</ng-template>
+              <strong
+                *ngIf="
+                  cliente.codigopostal > 14999 || cliente.codigopostal < 14000;
+                  else gratis
+                "
+                >{{ total + 3 - canjearpuntos }}</strong
+              >
+              <ng-template #gratis>{{ total - 3 - canjearpuntos }}</ng-template>
             </li>
           </ul>
           <!-- Cart -->
 
           <ng-template #comprarahora>
-              <ul class="list-group mb-3 z-depth-1">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">{{nombre}}</h6>
-                <small class="text-muted">Talla: </small>
-                <span class="text-muted">{{talla}}</span>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Puntos</h6>
-                <small>{{puntos}}</small>
-              </div>
-              <span class="text-success">-{{canjearpuntos}}€</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (€)</span>
-              <strong *ngIf="cliente.codigopostal > 14999 || cliente.codigopostal < 14000;else gratis">{{total+3-canjearpuntos}}</strong>
-              <ng-template #gratis>{{total-3-canjearpuntos}}</ng-template>
-            </li>
-          </ul>
+            <ul class="list-group mb-3 z-depth-1">
+              <li
+                class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  lh-condensed
+                "
+              >
+                <div>
+                  <h6 class="my-0">{{ nombre }}</h6>
+                  <small class="text-muted">Talla: </small>
+                  <span class="text-muted">{{ talla }}</span>
+                </div>
+              </li>
+              <li
+                class="list-group-item d-flex justify-content-between bg-light"
+              >
+                <div class="text-success">
+                  <h6 class="my-0">Puntos</h6>
+                  <small>{{ puntos }}</small>
+                </div>
+                <span class="text-success" id="ptn">-0€</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (€)</span>
+                <strong
+                  id="totalConEnvio"
+                  *ngIf="
+                    cliente.codigopostal > 14999 ||
+                      cliente.codigopostal < 14000;
+                    else gratis
+                  "
+                  >{{ total + 3 - canjearpuntos }}</strong
+                >
+                <ng-template #gratis>{{
+                  total - 3 - canjearpuntos
+                }}</ng-template>
+              </li>
+            </ul>
           </ng-template>
 
           <!-- Promo code -->
-          <form class="card p-2">
+          <form
+            [formGroup]="canjearPuntos"
+            (ngSubmit)="validarPuntos()"
+            class="card p-2"
+          >
             <div class="input-group">
-              <input type="number" class="form-control" placeholder="puntos" aria-label="Recipient's username" [(ngModel)]="canjearpuntos" name="canjearpuntos" aria-describedby="basic-addon2">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="puntos"
+                aria-label="Recipient's username"
+                formControlName="puntos"
+                aria-describedby="basic-addon2"
+              />
             </div>
+            <button [disabled]="canjearPuntos.invalid">Canjear Puntos</button>
+            <mat-error
+              *ngIf="
+                canjearPuntos.get('puntos').errors &&
+                canjearPuntos.get('puntos').dirty
+              "
+            >
+              <p *ngIf="canjearPuntos.get('puntos').hasError('min')">
+                No se admite números negativos.
+              </p>
+            </mat-error>
           </form>
+          <p *ngIf="flag2">
+            El número de puntos es superior al precio total del producto.
+          </p>
           <!-- Promo code -->
 
-          <div *ngIf="puntos < canjearpuntos">
-            No tienes puntos suficientes
-          </div>
-
+          <div *ngIf="puntos < canjearpuntos">No tienes puntos suficientes</div>
         </div>
         <!--Grid column-->
-
       </div>
       <!--Grid row-->
-
     </div>
   </main>
   <!--Main layout-->
-
 </div>
 
 <!-- <app-footer></app-footer> -->

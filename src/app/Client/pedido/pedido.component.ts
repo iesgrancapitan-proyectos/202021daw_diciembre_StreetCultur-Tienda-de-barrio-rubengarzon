@@ -7,6 +7,12 @@ import { LoginComponent } from 'src/app/main/login/login.component';
 import { render } from 'creditcardpayments/creditCardPayments';
 import { PuntosService } from 'src/app/puntos.service';
 import { Router } from '@angular/router';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-pedido',
@@ -18,6 +24,10 @@ export class PedidoComponent implements OnInit {
   hoy = new Date(this.tiempoTranscurrido);
 
   estaLogueado: boolean = this.login.estaLogueado();
+
+  total: number = 0;
+
+  canjearPuntos: FormGroup;
 
   cliente = {
     id: sessionStorage.getItem('id'),
@@ -40,15 +50,16 @@ export class PedidoComponent implements OnInit {
 
   productosEnCarrito = [];
 
-  total: number = 0;
-
   puntos: any;
 
   canjearpuntos: number = 0;
 
   flag = false;
 
+  flag2 = false;
+
   constructor(
+    public fb: FormBuilder,
     private clienteServicio: ClienteService,
     private carroServicio: CarroService,
     private carritoServicio: CarroService,
@@ -77,8 +88,15 @@ export class PedidoComponent implements OnInit {
     };
 
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.puntos = datos['puntos'];
+      this.puntos = datos['puntos'][0]['puntos'];
     });
+
+    console.log(this.total)
+
+    this.canjearPuntos = this.fb.group({
+      puntos: ['', [Validators.min(0)]],
+    });
+
   }
 
   obtenerDatos() {
@@ -121,6 +139,7 @@ export class PedidoComponent implements OnInit {
         this.talla = datos['comprarahora'][0]['talla'];
         this.total = parseInt(datos['comprarahora'][0]['precio']);
       }
+
     });
   }
 
@@ -179,5 +198,16 @@ export class PedidoComponent implements OnInit {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
+  }
+
+  validarPuntos() {
+    if(this.canjearPuntos.value["puntos"] > document.getElementById('totalConEnvio').innerHTML){
+      this.flag2 = true;
+    }else{
+      let total2 = parseInt(document.getElementById('totalConEnvio').innerHTML)  - this.canjearPuntos.value["puntos"];
+      document.getElementById('totalConEnvio').innerHTML = total2.toString();
+      document.getElementById("ptn").innerHTML = "-"+this.canjearPuntos.value["puntos"]+"€";
+      this.flag2 = false;
+    }
   }
 }
