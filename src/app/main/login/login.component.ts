@@ -77,21 +77,21 @@ export class LoginComponent implements OnInit {
   registroEmail() {
     this.loginService.registrarUsuario(this.login).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
-        this.emailService.emailConfirmacion();
         let cliente = {
           email: this.login.email,
         };
-        this.loginService.obtenerClientePorEmail(cliente).subscribe((datos) => {
+        this.loginService.enviarEmail(cliente);
+        /* this.loginService.obtenerClientePorEmail(cliente).subscribe((datos) => {
           let cliente1 = { idcliente: datos['id'] };
           this.puntosService.insertarPuntos(cliente1).subscribe((datos) => {
             console.log(datos['resultado']);
           });
-        });
+        }); */
 
-        this.snackBar.open('¡Bienvenido! ya te has registrado', '', {
+        this.snackBar.open('Por favor, revisa el correo electrónico ', '', {
           duration: 2000,
         });
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/ropa');
       } else {
         this.snackBar.open('Ha ocurrido un error inesperado', '', {
           duration: 1500,

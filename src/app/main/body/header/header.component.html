@@ -1,0 +1,63 @@
+<div class="imgfondo">
+  <div class="titulo">
+    <div style="width: 100%;">
+      <h1>STREETCULTUR</h1>
+    </div>
+
+    <div class="btn1">
+      <button
+        *ngIf="!estaLogueado"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with heart icon"
+        routerLinkActive="active"
+        matTooltip="Iniciar Sesión"
+        data-toggle="modal"
+        (click)="frame.show()"
+        mdbWavesEffect
+      >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="nav">
+    <ul>
+      <li><a href="/ropa">ROPA</a></li>
+      <li><a href="/novedades">NOVEDADES</a></li>
+      <li><a href="/contacto">CONTACTO</a></li>
+    </ul>
+  </div>
+</div>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Login</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

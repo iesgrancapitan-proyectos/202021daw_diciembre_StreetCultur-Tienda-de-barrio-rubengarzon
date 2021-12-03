@@ -69,5 +69,20 @@ export class LoginService {
     }
   }
 
+  enviarEmail(email){
+    console.log(email);
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/email.php',
+        JSON.stringify(email)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/email.php',
+        JSON.stringify(email)
+      );
+    }
+  }
+
 
 }

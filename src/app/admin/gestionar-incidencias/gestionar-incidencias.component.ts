@@ -18,9 +18,29 @@ export class GestionarIncidenciasComponent implements OnInit {
 
   hayIncidencias = false;
 
+  numIncidencias: any;
+
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
 
   constructor(  public dialog: MatDialog,  readonly snackBar: MatSnackBar,
     private login: LoginComponent, private incidenciasServicio:IncidenciaService) { }
+
+    cliente = {
+      id: sessionStorage.getItem('id'),
+      email: sessionStorage.getItem('email'),
+      perfil: null,
+      fecha: this.hoy,
+      nombre: null,
+      apellidos: null,
+      provincia: null,
+      localidad: null,
+      domicilio: null,
+      codigopostal: null,
+      movil: null,
+      imagen: null
+    };
+
 
   ngOnInit() {
     this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
@@ -35,6 +55,10 @@ export class GestionarIncidenciasComponent implements OnInit {
         console.log("error")
       }
     });
+
+    this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
+      this.numIncidencias = datos['incidencias']["length"];
+    })
 
   }
 

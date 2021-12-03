@@ -67,14 +67,14 @@
   </button>
 
 </mat-toolbar>
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p style="cursor:pointer" >{{cliente.nombre}} {{cliente.apellidos}}</p>
     <p>Perfil: {{cliente.perfil}}</p>
     <p style="cursor:pointer" routerLink="/informacion">Mi información</p>
     <p style="cursor:pointer" (click)="cerrarSesion()">Salir</p>
   </mat-drawer>
-</mat-drawer-container>
+</mat-drawer>
 
 <div
   mdbModal

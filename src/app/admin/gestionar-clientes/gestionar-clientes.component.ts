@@ -9,6 +9,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { IncidenciaService } from 'src/app/incidencia.service';
 
 @Component({
   selector: 'app-gestionar-clientes',
@@ -17,7 +18,7 @@ import {
 })
 export class GestionarClientesComponent implements OnInit {
   estaLogueado: boolean = this.login.estaLogueado();
-
+  numIncidencias: any;
   clientes: Cliente[] = [];
 
   modificarCliente1 = new FormGroup({
@@ -69,11 +70,15 @@ export class GestionarClientesComponent implements OnInit {
     private login: LoginComponent,
     private clienteServicio: ClienteService,
     readonly snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private incidenciasServicio: IncidenciaService
   ) {}
 
   ngOnInit() {
     this.mostrarCliente();
+    this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
+      this.numIncidencias = datos['incidencias']["length"];
+    })
   }
 
   mostrarCliente() {

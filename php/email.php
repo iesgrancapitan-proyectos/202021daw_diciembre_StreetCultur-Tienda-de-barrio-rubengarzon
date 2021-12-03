@@ -10,7 +10,15 @@ require 'C:/xampp/htdocs/streetcultur/phpmail/src/Exception.php';
 require 'C:/xampp/htdocs/streetcultur/phpmail/src/PHPMailer.php';
 require 'C:/xampp/htdocs/streetcultur/phpmail/src/SMTP.php';
 
-$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+$json = file_get_contents('php://input'); // RECIBE EL JSON DE ANGULAR
+
+$params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
+
+$mail = new PHPMailer(true);// Passing `true` enables exceptions
+
 try {
     //Server settings
     $mail->SMTPDebug = 0;                                 // Enable verbose debug output
@@ -24,7 +32,7 @@ try {
 
     //Recipients
     $mail->setFrom('info@streetcultur.com', 'Mailer');
-    $mail->addAddress('rujex93rujex@gmail.com', 'aa');     // Add a recipient
+    $mail->addAddress($params->email, 'aa');     // Add a recipient
    /*  $mail->addAddress('ellen@example.com');               // Name is optional
     $mail->addReplyTo('info@example.com', 'Information');
     $mail->addCC('cc@example.com');
