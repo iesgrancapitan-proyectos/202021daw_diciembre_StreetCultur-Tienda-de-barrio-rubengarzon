@@ -14,6 +14,24 @@ export class PuntosComponent implements OnInit {
 
   estaLogueado: boolean = this.login.estaLogueado();
 
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null,
+  };
+
   constructor(
     private puntosServicio: PuntosService,
     private login: LoginComponent,

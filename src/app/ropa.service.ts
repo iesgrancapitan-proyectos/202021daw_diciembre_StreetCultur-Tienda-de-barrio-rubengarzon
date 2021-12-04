@@ -119,6 +119,14 @@ export class RopaService {
     }
   }
 
+  obtenerNovedades(){
+    if (this.env == 'Development') {
+      return this.http.get('http://localhost/streetcultur/php/novedades.php');
+    } else {
+      return this.http.get('https://streetcultur.com/php/novedades.php');
+    }
+  }
+
   obtenerChandal() {
     if (this.env == 'Development') {
       return this.http.get('http://localhost/streetcultur/php/chandal.php');

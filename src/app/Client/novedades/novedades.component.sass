@@ -1,0 +1,100 @@
+h2,h3
+  font-weight: bold
+  text-align: center
+.example-card
+  max-width: 400px
+.example-header-image
+  background-size: cover
+.example-spacer
+  flex: 1 1 auto
+mat-toolbar
+  .icon-button
+    @media screen and ( min-width: 700px)
+      display: none
+  .item
+    @media screen and ( max-width: 700px)
+      display: none
+
+.body
+  .bloque-coleccion
+    background-color: burlywood
+    p
+      text-align-last: center
+      font-size: 12px
+      font-weight: 700
+      margin-top: 6em
+
+.item
+  font-size: 17px
+mat-icon
+  font-size: 27px
+.card1
+  p
+    text-align: justify
+    padding: 3em
+    .item
+      font-size: 17px
+      font-weight: 500
+mat-icon
+      font-size: 32px
+.avatar
+  border-radius: 5em
+.example-icon
+  margin-right: 1em
+.icn1
+  font-size: 25px
+
+.example-container
+  position: absolute
+  width: 500px
+  height: 170px
+  background: none
+
+.example-sidenav-content
+  display: flex
+  height: 100%
+  align-items: center
+  justify-content: center
+
+.example-sidenav
+  padding: 20px
+.cont
+  display: grid
+  @media screen and (min-width: 500px) and (max-width: 900px)
+    grid-template-columns: repeat(2, 1fr)
+  @media screen and (min-width: 901px) and (max-width: 1024px)
+    grid-template-columns: repeat(3, 1fr)
+  @media screen and (min-width: 1025px)
+    grid-template-columns: repeat(4, 1fr)
+  .example-card
+    margin-bottom: 8px
+    @media screen and (min-width: 500px) and (max-width: 900px)
+      max-width: 300px
+    img
+      display: block
+      margin: 0 auto
+      width: 350px
+      height: 450px
+    p
+      text-align: justify
+
+.example-spacer
+  flex: 1 1 auto
+mat-toolbar
+  .icon-button
+    @media screen and ( min-width: 700px)
+      display: none
+  .item
+    @media screen and ( max-width: 700px)
+      display: none
+.item
+  font-size: 17px
+  font-weight: 500
+mat-icon
+  font-size: 32px
+
+.example-box.cdk-drag-animating
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.example-chip .cdk-drop-list-dragging
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)

@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { BodyComponent } from './main/body/body.component';
 import { FooterComponent } from './main/footer/footer.component';
-import { SliderComponent } from './main/body/slider/slider.component';
 import { CategoriasComponent } from './main/body/categorias/categorias.component';
 import { LoginComponent } from './main/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +31,8 @@ import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.c
 import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
 import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HeaderComponent } from './main/body/header/header.component';
+import { NovedadesComponent } from './Client/novedades/novedades.component';
+
 
 
 @NgModule({
@@ -40,7 +41,6 @@ import { HeaderComponent } from './main/body/header/header.component';
     MainComponent,
     BodyComponent,
     FooterComponent,
-    SliderComponent,
     CategoriasComponent,
     LoginComponent,
     CartComponent,
@@ -61,7 +61,8 @@ import { HeaderComponent } from './main/body/header/header.component';
     DialogOverviewExampleDialog,
     DialogOverviewExampleDialog1,
     DialogOverviewExampleDialog2,
-    HeaderComponent
+    HeaderComponent,
+    NovedadesComponent
   ],
   imports: [
     BrowserModule,

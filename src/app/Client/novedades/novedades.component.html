@@ -110,65 +110,37 @@
   </div>
 </div>
 
-<h2 style="text-align: center;" *ngIf="estaLogueado">{{numPuntos}} puntos</h2>
-      <mat-card class="card1">
-          <h3>¿Qué es el sistema de Puntos de Descuento?</h3>
-      <p>
-        El Sistema de Puntos de Descuento se ha creado para agradecerte tu apoyo
-        y ofrecerte futuros incentivos. Nuestro Sistema de Puntos de Descuento
-        es tan simple como su propio nombre indica. Comprando en
-        www.streetcultur.com tu irás acumulando Puntos de Compra por el dinero
-        que vayas gastando. Una vez acumulados, podrás usarlos para pagar
-        futuras compras en www.streetcultur.com
-      </p>
+<div class="cont">
+  <mat-card
+    class="example-card"
+    *ngFor="let item of ropa"
+    style="box-shadow: none; background: none"
+  >
+    <mat-card-header style="display: flex; place-content: center">
+    </mat-card-header>
+    <a routerLink="/detalle-ropa/{{ item.Id }}">
+      <img mat-card-image src="{{ item.Imagen }}" />
+    </a>
+    <mat-card-actions
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
 
-      <h3>¿Cómo funciona?</h3>
-      <p>
-        Por cada pedido recibes un punto de descuento. Esos puntos son acumulables hasta llegar a 100 puntos.
-        En todos los productos se pueden canjear los puntos.
-      </p>
+      <p>{{ item.Nombre }}</p>
+      <p style="font-weight: bold">{{ item.Precio }}€</p>
+      <button
+        mat-button
+        (click)="addCarrito(item.Nombre, item.Precio, item.Imagen)"
+      >
+        AÑADIR AL CARRITO
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-      <h3>Puntos</h3>
-      <p>
-        Actualmente, por cada compra realizada en www.streetcultur.es consigues
-        1 punto. Cada punto está valorado en 1 € de descuento para futuras
-        compras. Por ejemplo: Coste del Producto: 20,00 € Cantidad de descuento
-        conseguidos: 1,00 €
-      </p>
-
-      <h3>¿Cómo se canjean los puntos de compra?</h3>
-      <p>
-        Durante el proceso de confirmación del pedido, en la misma página donde seleccionas el
-        método de pago, se mostrará un espacio donde introducir la cantidad de
-        puntos que deseas canjear. Escribe la cantidad de puntos que deseas
-        gastar. Es importante señalar que puede que tengas que seleccionar otro método de
-        pago si no tienes suficientes puntos para compensar el importe de la
-        compra. Una vez pasado a la página de confirmación del pedido, se te
-        indicará la cantidad de puntos que se han generado por la compra. Una
-        vez confirmado el pedido, tus puntos de descuento se actualizará y los
-        puntos usados se deducirán de tu cuenta.
-      </p>
-
-      <h3>Cantidad mínima requerida</h3>
-      <p>
-        No hay cantidad mínima, si tienes solamente 1 punto (1€) puedes gastarlo
-      </p>
-
-      <h3>Cantidad máxima de puntos</h3>
-      <p>
-        Se permite un máximo de 100 puntos (100 €) para canjear por pedido. Te
-        recomendamos consultes esta página con asiduidad por si realizamos
-        cambios en este apartado.
-      </p>
-
-      <h3>¿Se consiguen puntos por gastos de envío?</h3>
-      <p>No.</p>
-
-      <h3>¿Se consiguen puntos por los productos rebajados?</h3>
-      <p>Si.</p>
-
-      <h3>¿Se consiguen puntos por las compras pagadas por puntos?</h3>
-      <p>Si.</p>
-      </mat-card>
+</div>
 
 <app-footer></app-footer>
