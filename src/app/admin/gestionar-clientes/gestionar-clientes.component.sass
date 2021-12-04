@@ -49,6 +49,10 @@ mat-icon
   .theader
     display: flex
     justify-content: center
+    @media screen and ( max-width: 800px )
+      margin-top: 2em
+      margin-bottom: 2em
+      justify-content: none
     div
       text-align: center
       padding: 3em
@@ -64,6 +68,7 @@ mat-icon
     place-items: center
     @media screen and ( max-width: 800px )
       margin-right: 0
+      width: 100%
     &:hover
       transform: scale(1.01)
     div
@@ -75,7 +80,13 @@ mat-icon
   display: flex
   .ar
     width: 60em
+    display: flex
+    place-content: center
+    h2
+      margin: 0 197px 16px 0px
 
+.bntadd
+  height: 36px
 .item
   font-size: 17px
   font-weight: 500
@@ -87,7 +98,8 @@ mat-icon
   margin-right: 1em
 .icn1
   font-size: 25px
-
+.icninc
+  font-size: 21px
 .example-container
   position: absolute
   width: 500px
@@ -106,7 +118,9 @@ mat-icon
 form
   div
     align-items: center
-  input[type=text],input[type=number], select, textarea
+  input[type=text],input[type=number],input[type=password],input[type=password], select, textarea
     border: 1px solid #ccc
     border-radius: 4px
     resize: vertical
+  select
+    width: 12em

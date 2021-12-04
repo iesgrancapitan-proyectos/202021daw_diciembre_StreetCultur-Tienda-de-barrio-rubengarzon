@@ -4,8 +4,8 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item class="item" [routerLink]="['/admin']">INICIO</button>
-    <button mat-menu-item class="item" [routerLink]="['/gestionarclientes']">
-      GESTIONAR CLIENTE
+    <button mat-menu-item class="item" [routerLink]="['/gestionarusuarios']">
+      GESTIONAR USUARIOS
     </button>
     <button mat-menu-item class="item" [routerLink]="['/gestionarincidencias']">
       GESTIONAR INCIDENDIAS
@@ -33,9 +33,9 @@
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/gestionarclientes']">
-    GESTIONAR CLIENTES
+  <button mat-button class="item" [routerLink]="['/admin']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/gestionarusuarios']">
+    GESTIONAR USUARIOS
   </button>
   <button mat-button class="item" [routerLink]="['/gestionarincidencias']">
     GESTIONAR INCIDENCIAS
@@ -142,7 +142,7 @@
   <div class="tabla">
     <div class="btnr">
       <div class="ar">
-        <h2 style="text-align: left">Gestionar Usuarios</h2>
+        <h2 style="text-align: left">Gestionar Incidencias</h2>
       </div>
     </div>
     <div class="theader">
@@ -151,7 +151,7 @@
       <div>Acción</div>
     </div>
 
-    <div class="fila" *ngFor="let item of incidencias">
+    <div class="fila" *ngFor="let item of incidencias" *ngIf="incidencias">
       <div>{{ item.email }}</div>
       <div>
         {{ item.motivo }}

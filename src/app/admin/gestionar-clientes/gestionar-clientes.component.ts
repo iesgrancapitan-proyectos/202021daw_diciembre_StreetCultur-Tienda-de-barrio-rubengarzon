@@ -3,7 +3,7 @@ import { ClienteService } from 'src/app/cliente.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { Cliente } from 'src/app/Model/Cliente';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -22,7 +22,6 @@ export class GestionarClientesComponent implements OnInit {
   clientes: Cliente[] = [];
 
   modificarCliente1 = new FormGroup({
-    id: new FormControl(''),
     perfil: new FormControl(''),
     email: new FormControl(''),
     nombre: new FormControl(''),
@@ -32,7 +31,20 @@ export class GestionarClientesComponent implements OnInit {
     domicilio: new FormControl(''),
     codigopostal: new FormControl(''),
     movil: new FormControl(''),
-  })
+  });
+
+  formAddCliente = new FormGroup({
+    perfil: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    nombre: new FormControl(''),
+    apellidos: new FormControl(''),
+    provincia: new FormControl(''),
+    localidad: new FormControl(''),
+    domicilio: new FormControl(''),
+    codigopostal: new FormControl(''),
+    movil: new FormControl(''),
+  });
 
   clientes1 = {
     id: null,
@@ -63,7 +75,7 @@ export class GestionarClientesComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
-    imagen: null
+    imagen: null,
   };
 
   constructor(
@@ -77,8 +89,8 @@ export class GestionarClientesComponent implements OnInit {
   ngOnInit() {
     this.mostrarCliente();
     this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
-      this.numIncidencias = datos['incidencias']["length"];
-    })
+      this.numIncidencias = datos['incidencias']['length'];
+    });
   }
 
   mostrarCliente() {
@@ -108,22 +120,24 @@ export class GestionarClientesComponent implements OnInit {
         localidad: datos['cliente'][0]['localidad'],
         domicilio: datos['cliente'][0]['domicilio'],
         codigopostal: datos['cliente'][0]['codigopostal'],
-        movil: datos['cliente'][0]['movil']
-      })
+        movil: datos['cliente'][0]['movil'],
+      });
     });
   }
 
   modificarCliente() {
-    this.clienteServicio.actualizarCliente(this.modificarCliente1.value).subscribe((datos) => {
-      if (datos['resultado'] == 'OK') {
-        this.snackBar.open('El cliente se ha modificado', '', {
-          duration: 2000,
-        });
-        this.clienteServicio.mostrarClientes().subscribe((datos) => {
-          this.clientes = datos['clientes'];
-        });
-      }
-    });
+    this.clienteServicio
+      .actualizarCliente(this.modificarCliente1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('El cliente se ha modificado', '', {
+            duration: 2000,
+          });
+          this.clienteServicio.mostrarClientes().subscribe((datos) => {
+            this.clientes = datos['clientes'];
+          });
+        }
+      });
   }
   openDialog(email) {
     let email1 = {
@@ -143,6 +157,23 @@ export class GestionarClientesComponent implements OnInit {
         });
       }
     });
+  }
+
+  addCliente() {
+    this.clienteServicio
+      .insertarUsuario(this.formAddCliente.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('Se ha creado el usuario', '', {
+            duration: 2000,
+          });
+          this.mostrarCliente();
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 2000,
+          });
+        }
+      });
   }
 }
 

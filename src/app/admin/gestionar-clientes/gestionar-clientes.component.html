@@ -33,13 +33,20 @@
 
   <span class="example-spacer"></span>
 
-  <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/admin']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/gestionarusuarios']">
     GESTIONAR USUARIOS
   </button>
-  <button mat-button class="item" [routerLink]="['/gestionarincidencias']"> GESTIONAR INCIDENCIAS <mat-icon  class="icninc" matBadge="{{numIncidencias}}" matBadgeColor="accent" MatBadgeSize="small">assignment</mat-icon></button>
-
-
+  <button mat-button class="item" [routerLink]="['/gestionarincidencias']">
+    GESTIONAR INCIDENCIAS
+    <mat-icon
+      class="icninc"
+      matBadge="{{ numIncidencias }}"
+      matBadgeColor="accent"
+      MatBadgeSize="small"
+      >assignment</mat-icon
+    >
+  </button>
 
   <span class="example-spacer"></span>
 
@@ -123,6 +130,9 @@
     <div class="btnr">
       <div class="ar">
         <h2 style="text-align: left">Gestionar Usuarios</h2>
+        <button class="bntadd" mat-raised-button (click)="frame10.show()">
+          Añadir Usuario
+        </button>
       </div>
     </div>
     <div class="theader">
@@ -137,9 +147,7 @@
       <div>
         {{ item.email }}
       </div>
-      <div>
-        {{ item.nombre }} {{ item.apellidos }}
-      </div>
+      <div>{{ item.nombre }} {{ item.apellidos }}</div>
       <div>
         <mat-icon
           matTooltip="Borrar"
@@ -157,58 +165,9 @@
       </div>
     </div>
 
-    <!--   <div
-    class="
-      mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
-    "
-  >
-
-
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-      <thead>
-        <tr>
-          <th>Perfil</th>
-          <th>Email</th>
-          <th>Borrar</th>
-          <th>Modificar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cliente of clientes">
-          <td>
-            {{ cliente.perfil }}
-          </td>
-          <td>
-             {{cliente.email}}
-          </td>
-          <td>
-             <mat-icon
-              matTooltip="Borrar"
-              style="cursor: pointer"
-              (click)="openDialog(cliente.email)"
-              >delete</mat-icon
-            >
-          </td>
-          <td>
-            <mat-icon
-              matTooltip="Modificar"
-              style="cursor: pointer"
-              data-toggle="modal"
-              (click)="frame6.show();pasarDatos(cliente.email)"
-              >edit</mat-icon
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-  </div>
-  <div class="mdl-layout-spacer"></div>
-</section> -->
-
     <div
       mdbModal
-      #frame6="mdbModal"
+      #frame10="mdbModal"
       class="modal fade left"
       id="frameModalTop"
       tabindex="-1"
@@ -219,15 +178,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header text-center">
-            <h4 class="modal-title w-100 font-weight-bold">
-              Modificar Cliente
-            </h4>
+            <h4 class="modal-title w-100 font-weight-bold">Añadir Usuario</h4>
             <button
               type="button"
               class="close"
               data-dismiss="modal"
               aria-label="Close"
-              (click)="frame6.hide()"
+              (click)="frame10.hide()"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -235,68 +192,122 @@
           <div class="modal-body mx-3">
             <div
               class="md-form mb-5"
-              style="display: flex; flex-direction: column"
+              style="display: flex; flex-direction: column; align-items: center;"
             >
-              <form
-                [formGroup]="modificarCliente1"
-                (ngSubmit)="modificarCliente()"
-              >
-                <div style="display: flex; margin-bottom: 1em">
-                  <div
-                    style="
-                      margin-left: 1.5em;
-                      margin-right: 4em;
-                      display: flex;
-                      flex-direction: column;
-                    "
+              <form [formGroup]="formAddCliente" (ngSubmit)="addCliente()">
+                  <div style="margin-bottom: 1.2em;"
                   >
-                    Perfil
-                    <input type="text" formControlName="perfil" />
+                    Perfil (*)
+                    <select formControlName="perfil">
+                      <option value="Cliente">Cliente</option>
+                      <option value="Empleado">Empleado</option>
+                      <option value="Admin">Admin</option>
+                    </select>
                   </div>
-                  <div style="display: flex; flex-direction: column">
-                    Email
-                    <input type="text" formControlName="email" />
+                  <div style="margin-bottom: 1.2em;">
+                    Email (*)
+                    <input type="email" formControlName="email" />
                   </div>
-                </div>
-                <div style="display: flex; margin-bottom: 1em">
-                  <div style="margin-right: 1em">
-                    Nombre
-                    <input type="text" formControlName="nombre" />
-                  </div>
-                  <div>
-                    Apellidos
-                    <input type="text" formControlName="apellidos" />
-                  </div>
-                </div>
-                <div style="display: flex; margin-bottom: 1em">
-                  <div style="margin-right: 1em">
-                    Provincia
-                    <input type="text" formControlName="provincia" />
-                  </div>
-                  <div>
-                    Localidad
-                    <input type="text" formControlName="localidad" />
-                  </div>
-                </div>
-                <div style="display: flex; margin-bottom: 1em">
-                  <div style="margin-right: 28px; margin-left: 11px">
-                    Domicilio
-                    <input type="text" formControlName="domicilio" />
-                  </div>
-                  <div>
-                    Código Postal
-                    <input type="text" formControlName="codigopostal" />
-                  </div>
-                </div>
-                <div style="display: flex; flex-direction: column;">
-                  Móvil
-                  <input type="text" formControlName="movil" />
+                <div style="margin-bottom: 1.2em;">
+                    Password (*)
+                    <input type="password" formControlName="password" />
                 </div>
 
-                <button mat-raised-button style="margin-top:2em">Modificar</button>
+                <button [disabled]="formAddCliente.invalid" mat-raised-button style="margin-top: 2em">
+                  Añadir
+                </button>
+
               </form>
+              <p style="font-size:12px;margin: 25px 0px 0px 0px;">* Campos obligatorios</p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  mdbModal
+  #frame6="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Modificar Cliente</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame6.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5" style="display: flex; flex-direction: column">
+          <form [formGroup]="modificarCliente1" (ngSubmit)="modificarCliente()">
+            <div style="display: flex; margin-bottom: 1em">
+              <div
+                style="
+                  margin-left: 1.5em;
+                  margin-right: 4em;
+                  display: flex;
+                  flex-direction: column;
+                "
+              >
+                Perfil
+                <input type="text" formControlName="perfil" />
+              </div>
+              <div style="display: flex; flex-direction: column">
+                Email
+                <input type="text" formControlName="email" />
+              </div>
+            </div>
+            <div style="display: flex; margin-bottom: 1em">
+              <div style="margin-right: 1em">
+                Nombre
+                <input type="text" formControlName="nombre" />
+              </div>
+              <div>
+                Apellidos
+                <input type="text" formControlName="apellidos" />
+              </div>
+            </div>
+            <div style="display: flex; margin-bottom: 1em">
+              <div style="margin-right: 1em">
+                Provincia
+                <input type="text" formControlName="provincia" />
+              </div>
+              <div>
+                Localidad
+                <input type="text" formControlName="localidad" />
+              </div>
+            </div>
+            <div style="display: flex; margin-bottom: 1em">
+              <div style="margin-right: 28px; margin-left: 11px">
+                Domicilio
+                <input type="text" formControlName="domicilio" />
+              </div>
+              <div>
+                Código Postal
+                <input type="text" formControlName="codigopostal" />
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column">
+              Móvil
+              <input type="text" formControlName="movil" />
+            </div>
+
+            <button mat-raised-button style="margin-top: 2em">Modificar</button>
+          </form>
         </div>
       </div>
     </div>
