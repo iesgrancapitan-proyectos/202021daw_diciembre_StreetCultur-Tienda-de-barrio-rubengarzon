@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -8,9 +8,24 @@
     <button mat-menu-item class="item" [routerLink]="['/novedades']">NOVEDADES</button>
     <button mat-menu-item class="item" [routerLink]="['/contacto']">CONTACTO</button>
   </mat-menu>
+  <div *ngIf="cliente.imagen != null; else noavatar">
+    <a (click)="drawer.toggle()">
+      <img src="{{ cliente.imagen }}" width="70" class="avatar" />
+    </a>
+  </div>
 
-  <img src="../../../../assets/S.png" width="120" alt="" />
-
+  <ng-template #noavatar>
+    <div *ngIf="estaLogueado == true; else aa">
+      <a (click)="drawer.toggle()">
+        <img
+          src="../../../../assets/avatar1.png"
+          width="70"
+          class="avatar"
+        />
+      </a>
+    </div>
+    <ng-template #aa> </ng-template>
+  </ng-template>
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
@@ -67,6 +82,69 @@
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>{{ cliente.nombre }} {{ cliente.apellidos }}</p>
+    <p>Perfil: {{ cliente.perfil }}</p>
+    <p style="cursor: pointer" (click)="frame11.show()">Mi información</p>
+    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
+  </mat-drawer>
+</mat-drawer-container>
+
+<div
+  mdbModal
+  #frame11="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Información Personal</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame11.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form
+            [formGroup]="form1"
+            (ngSubmit)="actualizarInfo()"
+            style="display: flex; flex-direction: column; place-content: center"
+          >
+           <input type="hidden" formControlName="id">
+            Nombre
+            <input type="text" formControlName="nombre" />
+            Apellidos
+            <input type="text" formControlName="apellidos" />
+            Provincia
+            <input type="text" formControlName="provincia" />
+            Localidad
+            <input type="text" formControlName="localidad" />
+            Imagen
+            <select formControlName="imagen">
+              <option value="../../../../assets/avatar1.png">Avatar 1</option>
+              <option value="../../../../assets/avatar2.png">Avatar 2</option>
+              <option value="../../../../assets/avatar3.png">Avatar 3</option>
+            </select>
+            <button type="submit">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div
   mdbModal

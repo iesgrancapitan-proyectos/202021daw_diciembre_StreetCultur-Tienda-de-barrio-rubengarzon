@@ -7,6 +7,9 @@ import { LoginComponent } from 'src/app/main/login/login.component';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
 import { PuntosService } from 'src/app/puntos.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ClienteService } from 'src/app/cliente.service';
+
 
 @Component({
   selector: 'app-ropa',
@@ -18,11 +21,31 @@ export class RopaComponent implements OnInit {
 
   pantalones: any;
 
+  form1: FormGroup;
+
   numPuntos: any;
 
   numProductos: any;
 
   estaLogueado: boolean = this.login.estaLogueado();
+
+  tiempoTranscurrido = Date.now();
+  hoy = new Date(this.tiempoTranscurrido);
+
+  cliente = {
+    id: sessionStorage.getItem('id'),
+    email: sessionStorage.getItem('email'),
+    perfil: null,
+    fecha: this.hoy,
+    nombre: null,
+    apellidos: null,
+    provincia: null,
+    localidad: null,
+    domicilio: null,
+    codigopostal: null,
+    movil: null,
+    imagen: null,
+  };
 
   constructor(
     private ropaServicio: RopaService,
@@ -32,10 +55,12 @@ export class RopaComponent implements OnInit {
     private carritoServicio: CarroService,
     private loginService: LoginService,
     private router: Router,
-    private puntosServicio: PuntosService
+    private puntosServicio: PuntosService,
+    private clienteServicio: ClienteService
   ) {}
 
   ngOnInit() {
+    this.obtenerDatos();
     this.mostrarSudaderas();
     this.contarProductos();
     let cliente = {
@@ -43,6 +68,27 @@ export class RopaComponent implements OnInit {
     };
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
       this.numPuntos = datos['puntos'][0]['puntos'];
+    });
+
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      this.form1.setValue({
+        id: sessionStorage.getItem('id'),
+        nombre: datos['cliente'][0]['nombre'],
+        apellidos: datos['cliente'][0]['apellidos'],
+        provincia: datos['cliente'][0]['provincia'],
+        localidad: datos['cliente'][0]['localidad'],
+        imagen: datos['cliente'][0]['imagen'],
+      });
     });
   }
 
@@ -56,6 +102,40 @@ export class RopaComponent implements OnInit {
     this.ropaServicio.obtenerSudaderas().subscribe((datos: any) => {
       this.ropa = datos['sudaderas'];
     });
+  }
+
+  obtenerDatos() {
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      this.cliente.perfil = datos['cliente'][0]['perfil'];
+      this.cliente.nombre = datos['cliente'][0]['nombre'];
+      this.cliente.apellidos = datos['cliente'][0]['apellidos'];
+      this.cliente.provincia = datos['cliente'][0]['provincia'];
+      this.cliente.localidad = datos['cliente'][0]['localidad'];
+      this.cliente.domicilio = datos['cliente'][0]['domicilio'];
+      this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
+      this.cliente.movil = datos['cliente'][0]['movil'];
+      this.cliente.imagen = datos['cliente'][0]['imagen'];
+    });
+  }
+
+  actualizarInfo() {
+    console.log(this.form1.value);
+    this.clienteServicio
+      .actualizarCliente(this.form1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('Se ha actualizado la información', '', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 2000,
+          });
+        }
+      });
   }
 
   addCarrito(nombre: any, precio: any, imagen: any) {
