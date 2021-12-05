@@ -71,6 +71,12 @@ export class PedidoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (!this.estaLogueado){
+      this.router.navigateByUrl("/")
+      this.snackBar.open('Necesitas iniciar sesión', '', {
+        duration: 1000
+      })
+    }
     this.obtenerDatos();
     this.obtenerCarro();
     this.contarProductos();

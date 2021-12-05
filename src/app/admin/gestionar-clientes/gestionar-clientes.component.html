@@ -192,33 +192,40 @@
           <div class="modal-body mx-3">
             <div
               class="md-form mb-5"
-              style="display: flex; flex-direction: column; align-items: center;"
+              style="display: flex; flex-direction: column; align-items: center"
             >
               <form [formGroup]="formAddCliente" (ngSubmit)="addCliente()">
-                  <div style="margin-bottom: 1.2em;"
-                  >
-                    Perfil (*)
-                    <select formControlName="perfil">
-                      <option value="Cliente">Cliente</option>
-                      <option value="Empleado">Empleado</option>
-                      <option value="Admin">Admin</option>
-                    </select>
+                <div style="margin-bottom: 1.2em">
+                  Perfil (*)
+                  <select formControlName="perfil">
+                    <option value="Cliente">Cliente</option>
+                    <option value="Empleado">Empleado</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                </div>
+                <div style="margin-bottom: 1.2em">
+                  Email (*)
+                  <input type="email" formControlName="email" />
+                  <div *ngIf="email.errors.email" style="color: red">
+                    El formato del email es incorrecto.
                   </div>
-                  <div style="margin-bottom: 1.2em;">
-                    Email (*)
-                    <input type="email" formControlName="email" />
-                  </div>
-                <div style="margin-bottom: 1.2em;">
-                    Password (*)
-                    <input type="password" formControlName="password" />
+                </div>
+                <div style="margin-bottom: 1.2em">
+                  Password (*)
+                  <input type="password" formControlName="password" />
                 </div>
 
-                <button [disabled]="formAddCliente.invalid" mat-raised-button style="margin-top: 2em">
+                <button
+                  [disabled]="formAddCliente.invalid"
+                  mat-raised-button
+                  style="margin-top: 2em"
+                >
                   Añadir
                 </button>
-
               </form>
-              <p style="font-size:12px;margin: 25px 0px 0px 0px;">* Campos obligatorios</p>
+              <p style="font-size: 12px; margin: 25px 0px 0px 0px">
+                * Campos obligatorios
+              </p>
             </div>
           </div>
         </div>

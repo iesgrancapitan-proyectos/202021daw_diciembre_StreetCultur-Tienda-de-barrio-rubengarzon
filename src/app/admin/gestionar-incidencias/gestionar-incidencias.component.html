@@ -139,7 +139,7 @@
 
 
 <div style="margin-top: 4em">
-  <div class="tabla">
+  <div class="tabla" *ngIf="hayIncidencias else noHayIncidencias">
     <div class="btnr">
       <div class="ar">
         <h2 style="text-align: left">Gestionar Incidencias</h2>
@@ -151,7 +151,7 @@
       <div>Acción</div>
     </div>
 
-    <div class="fila" *ngFor="let item of incidencias" *ngIf="incidencias">
+    <div class="fila" *ngFor="let item of incidencias">
       <div>{{ item.email }}</div>
       <div>
         {{ item.motivo }}
@@ -165,48 +165,9 @@
         >
       </div>
     </div>
+    </div>
+    </div>
 
-<!-- <section class="mdl-grid" id="my-table">
-  <div class="mdl-layout-spacer"></div>
-  <div
-    class="
-      mdl-cell mdl-cell--6-col-tablet mdl-cell--10-col-desktop mdl-cell--stretch
-    "
-  >
-    <table
-      class="mdl-data-table mdl-js-data-table mdl-shadow--2dp"
-      *ngIf="hayIncidencias == true; else nohayincidencias"
-    >
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>Motivo</th>
-          <th>Borrar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of incidencias">
-          <td>{{ item.email }}</td>
-          <td>
-            {{ item.motivo }}
-          </td>
-          <td>
-            <mat-icon
-              matTooltip="Borrar"
-              style="cursor: pointer"
-              (click)="openDialog(item.id)"
-              >delete</mat-icon
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-  </div>
-
-  <ng-template #nohayincidencias>
-    <img src="../../../assets/incidencias.png" alt="" />
-    <h3>No hay incidencias</h3>
-  </ng-template>
-  <div class="mdl-layout-spacer"></div>
-</section> -->
+<ng-template #noHayIncidencias>
+  <h2 style="text-align: center;">No hay ninguna incidencia abierta</h2>
+</ng-template>

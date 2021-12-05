@@ -36,14 +36,7 @@ export class GestionarClientesComponent implements OnInit {
   formAddCliente = new FormGroup({
     perfil: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    nombre: new FormControl(''),
-    apellidos: new FormControl(''),
-    provincia: new FormControl(''),
-    localidad: new FormControl(''),
-    domicilio: new FormControl(''),
-    codigopostal: new FormControl(''),
-    movil: new FormControl(''),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   clientes1 = {
@@ -92,6 +85,8 @@ export class GestionarClientesComponent implements OnInit {
       this.numIncidencias = datos['incidencias']['length'];
     });
   }
+
+  get email(){return this.formAddCliente.get('email')}
 
   mostrarCliente() {
     this.clienteServicio.mostrarClientes().subscribe((datos) => {
