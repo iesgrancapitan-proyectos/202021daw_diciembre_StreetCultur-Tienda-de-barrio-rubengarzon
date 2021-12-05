@@ -99,4 +99,18 @@ export class ClienteService {
       );
     }
   }
+
+  subirImagen(imagen) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/subirImagen.php',
+        JSON.stringify(imagen)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/subirImagen.php',
+        JSON.stringify(imagen)
+      );
+    }
+  }
 }

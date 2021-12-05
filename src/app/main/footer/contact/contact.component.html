@@ -1,19 +1,49 @@
+<mat-toolbar color="primary" style="height: 80px;">
+  <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item [routerLink]="['/ropa']">ROPA</button>
+    <button mat-menu-item class="item" [routerLink]="['/novedades']">NOVEDADES</button>
+    <button mat-menu-item class="item" [routerLink]="['/contacto']">CONTACTO</button>
+  </mat-menu>
+
+
+  <button mat-button class="item" [routerLink]="['/']">INICIO</button>
+  <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
+  <img src="../../../../assets/S.png" width="120" alt="" />
+  <button mat-button class="item" [routerLink]="['/novedades']">NOVEDADES</button>
+  <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
+
+
+</mat-toolbar>
+
+
+
+
 <h2>Formulario de contacto</h2>
 <div>
   <form class="example-form">
+    <label for="">Nombre</label>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Nombre</mat-label>
       <input type="text" matInput placeholder="Pedro" />
     </mat-form-field>
+    <label for="">Apellidos</label>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Apellidos</mat-label>
       <input type="text" matInput placeholder="García García" />
     </mat-form-field>
+    <label for="">Email</label>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Email</mat-label>
       <input type="email" matInput placeholder="pedro@example.com" />
     </mat-form-field>
-    <button mat-raised-button>Enviar</button>
+    <label for="">Observaciones</label>
+    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Deja un comentario</mat-label>
+    <textarea matInput></textarea>
+  </mat-form-field>
+    <button mat-raised-button (click)="enviarForm()">Enviar</button>
   </form>
 </div>
 

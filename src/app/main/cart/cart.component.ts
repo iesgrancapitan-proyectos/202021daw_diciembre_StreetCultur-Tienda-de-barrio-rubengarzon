@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido.service';
 import { Pedido } from 'src/app/Model/Pedido';
 import { LoginComponent } from '../login/login.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -21,10 +22,18 @@ export class CartComponent implements OnInit {
   constructor(
     private carritoServicio: CarroService,
     private pedidoServicio: PedidoService,
-    private login: LoginComponent
+    private login: LoginComponent,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
+     if (!this.estaLogueado) {
+       this.router.navigateByUrl('/');
+       this.snackBar.open('Necesitas iniciar sesión', '', {
+         duration: 2500,
+       });
+     }
     this.mostrarCarrito();
     this.contarProductos();
   }

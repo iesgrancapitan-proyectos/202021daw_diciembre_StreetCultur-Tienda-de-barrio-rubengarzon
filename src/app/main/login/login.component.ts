@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['/']);
               }else{
                   this.router.navigate(['/ropa']);
-
               }
               break;
             case 'empleado':
@@ -81,12 +80,6 @@ export class LoginComponent implements OnInit {
           email: this.login.email,
         };
         this.loginService.enviarEmail(cliente);
-        /* this.loginService.obtenerClientePorEmail(cliente).subscribe((datos) => {
-          let cliente1 = { idcliente: datos['id'] };
-          this.puntosService.insertarPuntos(cliente1).subscribe((datos) => {
-            console.log(datos['resultado']);
-          });
-        }); */
 
         this.snackBar.open('Por favor, revisa el correo electrónico ', '', {
           duration: 2000,

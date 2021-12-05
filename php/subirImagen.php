@@ -8,13 +8,15 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = Conexion(); // CREA LA CONEXION
+$conexion = conexion(); // CREA LA CONEXION
 
-$query = "UPDATE cliente SET nombre='$params->nombre',apellidos='$params->apellidos',provincia='$params->provincia',localidad='$params->localidad',imagen='$params->imagen' WHERE id='$params->id'";
+$nombre = $params->nombre;
+$nombreArchivo = $params->nombreArchivo;
+$archivo = $params->base64textString;
+$archivo = base64_decode($archivo);
 
-
-// REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, $query);
+$filePath = "../src/assets/" . $nombreArchivo;
+file_put_contents($filePath, $archivo);
 
 class Result
 {
@@ -23,14 +25,13 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
+$response->sudaderas = $resultado->fetch_all(MYSQLI_ASSOC);
 
-if ($resultado == TRUE) {
-  $response->resultado = 'OK';
+if ($resultado == true) {
+  $response->resultado = "OK";
 } else {
-  $response->resultado = 'FAIL';
-  $response->mensaje = $resultado->error;
+  $response->resultado = "FAIL";
 }
-
 header('Content-Type: application/json');
 
 echo json_encode($response); // MUESTRA EL JSON GENERADO

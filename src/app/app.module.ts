@@ -32,6 +32,7 @@ import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin
 import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HeaderComponent } from './main/body/header/header.component';
 import { NovedadesComponent } from './Client/novedades/novedades.component';
+import { ImageUploadModule } from 'angular2-image-upload';
 
 
 
@@ -73,6 +74,7 @@ import { NovedadesComponent } from './Client/novedades/novedades.component';
     DemoMaterialModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
+    ImageUploadModule.forRoot()
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent],

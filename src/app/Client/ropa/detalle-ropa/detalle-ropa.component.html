@@ -1,37 +1,45 @@
-<mat-toolbar color="primary" style="height: 80px;">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item [routerLink]="['/']">INICIO</button>
     <button mat-menu-item [routerLink]="['/ropa']">ROPA</button>
-    <button mat-menu-item class="item" [routerLink]="['/novedades']">NOVEDADES</button>
-    <button mat-menu-item class="item" [routerLink]="['/contacto']">CONTACTO</button>
+    <button mat-menu-item class="item" [routerLink]="['/novedades']">
+      NOVEDADES
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/contacto']">
+      CONTACTO
+    </button>
   </mat-menu>
 
-  <div *ngIf="cliente.imagen != null;else noavatar">
-    <a routerLink="/miperfil" (click)="drawer.toggle()">
-      <img src="{{cliente.imagen}}" width="70" class="avatar">
+  <div *ngIf="cliente.imagen != null; else noavatar">
+    <a (click)="drawer.toggle()">
+      <img src="{{ cliente.imagen }}" width="70" class="avatar" />
     </a>
   </div>
 
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true;else aa">
-      <a routerLink="/miperfil" (click)="drawer.toggle()">
-        <img src="../../../../assets/avatardefault.png" width="70" class="avatar">
+    <div *ngIf="estaLogueado == true; else aa">
+      <a (click)="drawer.toggle()">
+        <img
+          src="../../../../assets/avatar1.png"
+          width="70"
+          class="avatar"
+        />
       </a>
     </div>
-    <ng-template #aa>
-    </ng-template>
+    <ng-template #aa> </ng-template>
   </ng-template>
-
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
   <img src="../../../../assets/S.png" width="120" alt="" />
-  <button mat-button class="item" [routerLink]="['/novedades']">NOVEDADES</button>
+  <button mat-button class="item" [routerLink]="['/novedades']">
+    NOVEDADES
+  </button>
   <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
 
   <span class="example-spacer"></span>
@@ -59,10 +67,7 @@
     <mat-icon [matBadge]="numProductos" matBadgeColor="accent"
       >shopping_cart</mat-icon
     >
-
-
   </button>
-
 
   <button
     *ngIf="!estaLogueado"
@@ -78,7 +83,6 @@
     <mat-icon>account_circle</mat-icon>
   </button>
 
-
   <button
     *ngIf="estaLogueado"
     mat-icon-button
@@ -90,20 +94,70 @@
   >
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
-
 </mat-toolbar>
-
 
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p style="cursor:pointer" >{{cliente.nombre}} {{cliente.apellidos}}</p>
-    <p>Perfil: {{cliente.perfil}}</p>
-    <p style="cursor:pointer" routerLink="/informacion">Mi información</p>
-    <p style="cursor:pointer" (click)="cerrarSesion()">Salir</p>
+    <p>{{ cliente.nombre }} {{ cliente.apellidos }}</p>
+    <p>Perfil: {{ cliente.perfil }}</p>
+    <p style="cursor: pointer" (click)="frame11.show()">Mi información</p>
+    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
   </mat-drawer>
 </mat-drawer-container>
 
-
+<div
+  mdbModal
+  #frame11="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Información Personal</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame11.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form
+            [formGroup]="form1"
+            (ngSubmit)="actualizarInfo()"
+            style="display: flex; flex-direction: column; place-content: center"
+          >
+           <input type="hidden" formControlName="id">
+            Nombre
+            <input type="text" formControlName="nombre" />
+            Apellidos
+            <input type="text" formControlName="apellidos" />
+            Provincia
+            <input type="text" formControlName="provincia" />
+            Localidad
+            <input type="text" formControlName="localidad" />
+            Imagen
+            <select formControlName="imagen">
+              <option value="../../../../assets/avatar1.png">Avatar 1</option>
+              <option value="../../../../assets/avatar2.png">Avatar 2</option>
+              <option value="../../../../assets/avatar3.png">Avatar 3</option>
+            </select>
+            <button type="submit">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div
   mdbModal
@@ -223,10 +277,9 @@
       <button
         type="button"
         class="btn btn-primary btn-md mr-1 mb-2"
-        (click)="comprarAhora(sudaderas.Nombre,
-            sudaderas.Precio,
-            cantidad,
-            talla )"
+        (click)="
+          comprarAhora(sudaderas.Nombre, sudaderas.Precio, cantidad, talla)
+        "
       >
         Comprar ahora
       </button>

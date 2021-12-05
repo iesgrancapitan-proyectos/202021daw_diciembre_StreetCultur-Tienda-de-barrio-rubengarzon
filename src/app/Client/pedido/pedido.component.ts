@@ -74,7 +74,7 @@ export class PedidoComponent implements OnInit {
     if (!this.estaLogueado){
       this.router.navigateByUrl("/")
       this.snackBar.open('Necesitas iniciar sesión', '', {
-        duration: 1000
+        duration: 2500
       })
     }
     this.obtenerDatos();

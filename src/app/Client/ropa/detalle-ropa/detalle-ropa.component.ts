@@ -9,6 +9,7 @@ import { LoginService } from 'src/app/login.service';
 import { PuntosService } from 'src/app/puntos.service';
 import { ClienteService } from 'src/app/cliente.service';
 import { PedidoService } from 'src/app/pedido.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-ropa',
@@ -18,11 +19,12 @@ import { PedidoService } from 'src/app/pedido.service';
 export class DetalleRopaComponent implements OnInit {
   showFiller = false;
 
+  form1: FormGroup;
 
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
 
-  id = sessionStorage.getItem("id");
+  id = sessionStorage.getItem('id');
 
   sudaderas = {
     Id: null,
@@ -50,7 +52,7 @@ export class DetalleRopaComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
-    imagen: null
+    imagen: null,
   };
 
   numProductos: any;
@@ -87,10 +89,46 @@ export class DetalleRopaComponent implements OnInit {
       idcliente: sessionStorage.getItem('id'),
     };
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.puntos = datos['puntos'];
+      this.puntos = datos['puntos'][0]['puntos'];
     });
 
-    console.log(this.id)
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      this.form1.setValue({
+        id: sessionStorage.getItem("id"),
+        nombre: datos['cliente'][0]['nombre'],
+        apellidos: datos['cliente'][0]['apellidos'],
+        provincia: datos['cliente'][0]['provincia'],
+        localidad: datos['cliente'][0]['localidad'],
+        imagen: datos['cliente'][0]['imagen'],
+      });
+    });
+  }
+
+  actualizarInfo() {
+    console.log(this.form1.value)
+    this.clienteServicio
+      .actualizarCliente(this.form1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('Se ha actualizado la información', '', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 2000,
+          });
+        }
+      });
   }
 
   obtenerDatos() {
@@ -98,12 +136,6 @@ export class DetalleRopaComponent implements OnInit {
     let email1 = { email: email };
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      if (
-        datos['cliente'][0]['nombre'] != null &&
-        datos['cliente'][0]['domicilio'] != null &&
-        datos['cliente'][0]['codigopostal'] &&
-        datos['cliente'][0]['movil']
-      ) {
         this.cliente.perfil = datos['cliente'][0]['perfil'];
         this.cliente.nombre = datos['cliente'][0]['nombre'];
         this.cliente.apellidos = datos['cliente'][0]['apellidos'];
@@ -113,7 +145,6 @@ export class DetalleRopaComponent implements OnInit {
         this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
         this.cliente.movil = datos['cliente'][0]['movil'];
         this.cliente.imagen = datos['cliente'][0]['imagen'];
-      }
     });
   }
   cerrarSesion() {

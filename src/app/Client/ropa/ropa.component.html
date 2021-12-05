@@ -17,7 +17,7 @@
   <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
   <button mat-button class="item" [routerLink]="['/novedades']">NOVEDADES</button>
   <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
-  
+
   <span class="example-spacer"></span>
   <button
     *ngIf="estaLogueado"
@@ -27,7 +27,7 @@
     routerLink="/puntos"
     routerLinkActive="active"
   >
-    <mat-icon matBadge="{{numPuntos}}" matBadgeColor="accent">card_giftcard</mat-icon>
+    <mat-icon [matBadge]="numPuntos" matBadgeColor="accent">card_giftcard</mat-icon>
   </button>
 
   <button
