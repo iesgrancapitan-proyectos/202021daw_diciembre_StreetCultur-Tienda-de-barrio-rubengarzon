@@ -13,21 +13,41 @@
     </button>
   </mat-menu>
 
-  <div *ngIf="cliente.imagen != null; else noavatar">
-    <a (click)="drawer.toggle()">
+<div
+    *ngIf="cliente.imagen != null; else noavatar"
+    style="display: flex; align-items: center"
+  >
+    <a (click)="frame11.show()">
       <img src="{{ cliente.imagen }}" width="70" class="avatar" />
     </a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+        {{ cliente.nombre }} {{ cliente.apellidos }}
+      </p>
+      <hr
+        style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+      />
+      <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+        {{ cliente.perfil }}
+      </p>
+    </div>
   </div>
-
   <ng-template #noavatar>
     <div *ngIf="estaLogueado == true; else aa">
-      <a (click)="drawer.toggle()">
-        <img
-          src="../../../../assets/avatar1.png"
-          width="70"
-          class="avatar"
-        />
+      <a (click)="frame11.show()">
+        <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
+      <div style="display: flex; flex-direction: column">
+        <p style="margin-left: 1em; font-size: 12px">
+          {{ cliente.nombre }} {{ cliente.apellidos }}
+        </p>
+        <hr
+          style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+        />
+        <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+          {{ cliente.perfil }}
+        </p>
+      </div>
     </div>
     <ng-template #aa> </ng-template>
   </ng-template>
@@ -96,14 +116,6 @@
   </button>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>{{ cliente.nombre }} {{ cliente.apellidos }}</p>
-    <p>Perfil: {{ cliente.perfil }}</p>
-    <p style="cursor: pointer" (click)="frame11.show()">Mi información</p>
-    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
-  </mat-drawer>
-</mat-drawer-container>
 
 <div
   mdbModal

@@ -5,32 +5,60 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
     <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
-    <button mat-menu-item class="item" [routerLink]="['/novedades']">NOVEDADES</button>
-    <button mat-menu-item class="item" [routerLink]="['/contacto']">CONTACTO</button>
+    <button mat-menu-item class="item" [routerLink]="['/novedades']">
+      NOVEDADES
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/contacto']">
+      CONTACTO
+    </button>
   </mat-menu>
-  <div *ngIf="cliente.imagen != null; else noavatar">
-    <a (click)="drawer.toggle()">
+
+  <div
+    *ngIf="cliente.imagen != null; else noavatar"
+    style="display: flex; align-items: center"
+  >
+    <a (click)="frame11.show()">
       <img src="{{ cliente.imagen }}" width="70" class="avatar" />
     </a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+        {{ cliente.nombre }} {{ cliente.apellidos }}
+      </p>
+      <hr
+        style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+      />
+      <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+        {{ cliente.perfil }}
+      </p>
+    </div>
   </div>
-
   <ng-template #noavatar>
     <div *ngIf="estaLogueado == true; else aa">
-      <a (click)="drawer.toggle()">
-        <img
-          src="../../../../assets/avatar1.png"
-          width="70"
-          class="avatar"
-        />
+      <a (click)="frame11.show()">
+        <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
+      <div style="display: flex; flex-direction: column">
+        <p style="margin-left: 1em; font-size: 12px">
+          {{ cliente.nombre }} {{ cliente.apellidos }}
+        </p>
+        <hr
+          style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+        />
+        <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+          {{ cliente.perfil }}
+        </p>
+      </div>
     </div>
     <ng-template #aa> </ng-template>
   </ng-template>
+
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
-  <button mat-button class="item" [routerLink]="['/novedades']">NOVEDADES</button>
+  <button mat-button class="item" [routerLink]="['/novedades']">
+    NOVEDADES
+  </button>
   <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
 
   <span class="example-spacer"></span>
@@ -42,7 +70,9 @@
     routerLink="/puntos"
     routerLinkActive="active"
   >
-    <mat-icon [matBadge]="numPuntos" matBadgeColor="accent">card_giftcard</mat-icon>
+    <mat-icon [matBadge]="numPuntos" matBadgeColor="accent"
+      >card_giftcard</mat-icon
+    >
   </button>
 
   <button
@@ -83,15 +113,6 @@
   </button>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>{{ cliente.nombre }} {{ cliente.apellidos }}</p>
-    <p>Perfil: {{ cliente.perfil }}</p>
-    <p style="cursor: pointer" (click)="frame11.show()">Mi información</p>
-    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
-  </mat-drawer>
-</mat-drawer-container>
-
 <div
   mdbModal
   #frame11="mdbModal"
@@ -123,7 +144,7 @@
             (ngSubmit)="actualizarInfo()"
             style="display: flex; flex-direction: column; place-content: center"
           >
-           <input type="hidden" formControlName="id">
+            <input type="hidden" formControlName="id" />
             Nombre
             <input type="text" formControlName="nombre" />
             Apellidos
@@ -179,18 +200,30 @@
   </div>
 </div>
 
-<div style="margin: 36px 5px 13px 43px;">
+<div style="margin: 36px 5px 13px 43px">
   <mat-chip-list
     class="example-chip"
     cdkDropList
     cdkDropListOrientation="horizontal"
   >
-    <mat-chip class="example-box" cdkDrag (click)="mostrarSudaderas()"> Sudaderas </mat-chip>
-    <mat-chip class="example-box" cdkDrag (click)="mostrarPantalones()"> Pantalones </mat-chip>
-    <mat-chip class="example-box" cdkDrag (click)="mostrarAbrigos()"> Abrigos </mat-chip>
-    <mat-chip class="example-box" cdkDrag (click)="mostrarChandal()"> Chandal </mat-chip>
-    <mat-chip class="example-box" cdkDrag (click)="mostrarAccesorios()"> Accesorios </mat-chip>
-    <mat-chip class="example-box" cdkDrag (click)="mostrarCamisetas()"> Camisetas </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarSudaderas()">
+      Sudaderas
+    </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarPantalones()">
+      Pantalones
+    </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarAbrigos()">
+      Abrigos
+    </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarChandal()">
+      Chandal
+    </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarAccesorios()">
+      Accesorios
+    </mat-chip>
+    <mat-chip class="example-box" cdkDrag (click)="mostrarCamisetas()">
+      Camisetas
+    </mat-chip>
   </mat-chip-list>
 </div>
 
@@ -211,9 +244,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: 27em;
       "
     >
-
       <p>{{ item.Nombre }}</p>
       <p style="font-weight: bold">{{ item.Precio }}€</p>
       <button
@@ -224,7 +257,6 @@
       </button>
     </mat-card-actions>
   </mat-card>
-
 </div>
 
 <app-footer></app-footer>

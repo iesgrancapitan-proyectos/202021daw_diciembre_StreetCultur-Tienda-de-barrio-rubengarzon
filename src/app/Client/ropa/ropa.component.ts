@@ -10,7 +10,6 @@ import { PuntosService } from 'src/app/puntos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ClienteService } from 'src/app/cliente.service';
 
-
 @Component({
   selector: 'app-ropa',
   templateUrl: './ropa.component.html',
@@ -60,36 +59,43 @@ export class RopaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.obtenerDatos();
     this.mostrarSudaderas();
-    this.contarProductos();
+     this.form1 = new FormGroup({
+       id: new FormControl(),
+       nombre: new FormControl(),
+       apellidos: new FormControl(),
+       provincia: new FormControl(),
+       localidad: new FormControl(),
+       imagen: new FormControl(),
+     });
+
     let cliente = {
       idcliente: sessionStorage.getItem('id'),
     };
-    this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.numPuntos = datos['puntos'][0]['puntos'];
-    });
-
-    this.form1 = new FormGroup({
-      id: new FormControl(),
-      nombre: new FormControl(),
-      apellidos: new FormControl(),
-      provincia: new FormControl(),
-      localidad: new FormControl(),
-      imagen: new FormControl(),
-    });
-    let email = sessionStorage.getItem('email');
-    let email1 = { email: email };
-    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      this.form1.setValue({
-        id: sessionStorage.getItem('id'),
-        nombre: datos['cliente'][0]['nombre'],
-        apellidos: datos['cliente'][0]['apellidos'],
-        provincia: datos['cliente'][0]['provincia'],
-        localidad: datos['cliente'][0]['localidad'],
-        imagen: datos['cliente'][0]['imagen'],
+    if (this.estaLogueado) {
+      this.obtenerDatos();
+      this.contarProductos();
+      let cliente = {
+        idcliente: sessionStorage.getItem('id'),
+      };
+      this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
+        this.numPuntos = datos['puntos'][0]['puntos'];
       });
-    });
+       let email = sessionStorage.getItem('email');
+       let email1 = { email: email };
+       this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+         this.form1.setValue({
+           id: sessionStorage.getItem('id'),
+           nombre: datos['cliente'][0]['nombre'],
+           apellidos: datos['cliente'][0]['apellidos'],
+           provincia: datos['cliente'][0]['provincia'],
+           localidad: datos['cliente'][0]['localidad'],
+           imagen: datos['cliente'][0]['imagen'],
+         });
+       });
+    }
+
+
   }
 
   cerrarSesion() {
@@ -239,4 +245,5 @@ export class RopaComponent implements OnInit {
       this.ropa = datos['chandal'];
     });
   }
+
 }
