@@ -30,6 +30,7 @@ export class PedidosComponent implements OnInit {
   estado: any;
 
   id: any;
+  form1: FormGroup;
 
   cliente = {
     id: sessionStorage.getItem('id'),
@@ -43,7 +44,7 @@ export class PedidosComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
-    imagen: null
+    imagen: null,
   };
 
   formEstado = new FormGroup({
@@ -66,10 +67,56 @@ export class PedidosComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.obtenerDatos();
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
+    let cliente = {
+      idcliente: sessionStorage.getItem('id'),
+    };
+    if (this.estaLogueado) {
+      this.obtenerDatos();
+      let cliente = {
+        idcliente: sessionStorage.getItem('id'),
+      };
+      let email = sessionStorage.getItem('email');
+      let email1 = { email: email };
+      this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+        this.form1.setValue({
+          id: sessionStorage.getItem('id'),
+          nombre: datos['cliente'][0]['nombre'],
+          apellidos: datos['cliente'][0]['apellidos'],
+          provincia: datos['cliente'][0]['provincia'],
+          localidad: datos['cliente'][0]['localidad'],
+          imagen: datos['cliente'][0]['imagen'],
+        });
+      });
+    }
     this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
       this.pedido = datos['pedidos'];
     });
+  }
+
+  actualizarInfo() {
+    console.log(this.form1.value);
+    this.clienteServicio
+      .actualizarCliente(this.form1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.obtenerDatos();
+          this.snackBar.open('Se ha actualizado la información', '', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 2000,
+          });
+        }
+      });
   }
 
   obtenerDatos() {
@@ -77,12 +124,6 @@ export class PedidosComponent implements OnInit {
     let email1 = { email: email };
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      if (
-        datos['cliente'][0]['nombre'] != null &&
-        datos['cliente'][0]['domicilio'] != null &&
-        datos['cliente'][0]['codigopostal'] &&
-        datos['cliente'][0]['movil']
-      ) {
         this.cliente.perfil = datos['cliente'][0]['perfil'];
         this.cliente.nombre = datos['cliente'][0]['nombre'];
         this.cliente.apellidos = datos['cliente'][0]['apellidos'];
@@ -92,25 +133,11 @@ export class PedidosComponent implements OnInit {
         this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
         this.cliente.movil = datos['cliente'][0]['movil'];
         this.cliente.imagen = datos['cliente'][0]['imagen'];
-      }
     });
   }
 
-  /*  mostrarPedido(id: any) {
-    let cliente = {
-      id: id,
-    };
-    this.pedidoServicio.obtenerPedido(cliente).subscribe((datos: any) => {
-      this.pedido = datos['pedido'];
-      if (this.pedido.length > 0) {
-        this.hayPedidos = true;
-      } else {
-        this.hayPedidos = false;
-      }
-    });
-  } */
   pasarDatos(id, estado, preciototal, fechaenvio, fecharecibido) {
-    console.log(id)
+    console.log(id);
     this.formModal.setValue({
       id: id,
       estado: estado,
@@ -119,7 +146,7 @@ export class PedidosComponent implements OnInit {
       fecharecibido: fecharecibido,
     });
   }
-   borrarPedido(id: any, idpedido: any) {
+  borrarPedido(id: any, idpedido: any) {
     let pedido = {
       id: id,
     };
@@ -129,11 +156,6 @@ export class PedidosComponent implements OnInit {
     this.pedidoServicio.borrarPedido(pedido).subscribe((datos) => {
       this.pedidoServicio.obtenerPedido(cliente).subscribe((datos: any) => {
         this.pedido = datos['pedido'];
-        /* if (this.pedido.length > 0) {
-          this.hayPedidos = true;
-        } else {
-          this.hayPedidos = false;
-        } */
       });
       return this.snackBar.open('Se ha borrado el pedido.', '', {
         horizontalPosition: 'center',
@@ -150,11 +172,11 @@ export class PedidosComponent implements OnInit {
   }
 
   modificarPedido() {
-       this.pedidoServicio
+    this.pedidoServicio
       .actualizarPedido(this.formModal.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
-           this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+          this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
             this.pedido = datos['pedidos'];
           });
           this.snackBar.open('El pedido se ha modificado', '', {
@@ -164,7 +186,7 @@ export class PedidosComponent implements OnInit {
           alert('error');
         }
       });
-    }
+  }
 
   openDialog(id) {
     let id1 = {

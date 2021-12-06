@@ -17,25 +17,44 @@
     </button>
   </mat-menu>
 
-  <div *ngIf="cliente.imagen != null; else noavatar">
-    <a routerLink="/miperfil" (click)="drawer.toggle()">
+  <div
+    *ngIf="cliente.imagen != null; else noavatar"
+    style="display: flex; align-items: center"
+  >
+    <a (click)="frame11.show()">
       <img src="{{ cliente.imagen }}" width="70" class="avatar" />
     </a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+        {{ cliente.nombre }} {{ cliente.apellidos }}
+      </p>
+      <hr
+        style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+      />
+      <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+        {{ cliente.perfil }}
+      </p>
+    </div>
   </div>
-
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true; else aa">
-      <a routerLink="/miperfil" (click)="drawer.toggle()">
-        <img
-          src="../../../../assets/avatardefault.png"
-          width="70"
-          class="avatar"
-        />
+    <div *ngIf="estaLogueado == true; else aa" style="display: flex; align-items: center">
+      <a (click)="frame11.show()">
+        <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
+      <div style="display: flex; flex-direction: column;align-items: center">
+        <p style="margin-left: 1em; font-size: 12px;margin-bottom: 0">
+          {{ cliente.nombre }} {{ cliente.apellidos }}
+        </p>
+        <hr
+          style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+        />
+        <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+          {{ cliente.perfil }}
+        </p>
+      </div>
     </div>
     <ng-template #aa> </ng-template>
   </ng-template>
-
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/empleado']">INICIO</button>
@@ -88,14 +107,59 @@
   </button>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p style="cursor: pointer">{{ cliente.nombre }} {{ cliente.apellidos }}</p>
-    <p>Perfil: {{ cliente.perfil }}</p>
-    <p style="cursor: pointer" routerLink="/informacion">Mi información</p>
-    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
-  </mat-drawer>
-</mat-drawer-container>
+<div
+  mdbModal
+  #frame11="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Información Personal</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame11.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form
+            [formGroup]="form1"
+            (ngSubmit)="actualizarInfo()"
+            style="display: flex; flex-direction: column; place-content: center"
+          >
+            <input type="hidden" formControlName="id" />
+            Nombre
+            <input type="text" formControlName="nombre" />
+            Apellidos
+            <input type="text" formControlName="apellidos" />
+            Provincia
+            <input type="text" formControlName="provincia" />
+            Localidad
+            <input type="text" formControlName="localidad" />
+            Imagen
+            <select formControlName="imagen">
+              <option value="../../../../assets/avatar1.png">Avatar 1</option>
+              <option value="../../../../assets/avatar2.png">Avatar 2</option>
+              <option value="../../../../assets/avatar3.png">Avatar 3</option>
+            </select>
+            <button mat-raised-button type="submit">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div
   mdbModal
@@ -130,22 +194,6 @@
   </div>
 </div>
 
-<!-- <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Id del cliente</mat-label>
-      <input
-        type="text"
-        matInput
-        [matAutocomplete]="auto"
-        [(ngModel)]="id"
-        (keyup)="mostrarPedido(id)"
-      />
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let item of clientes">
-          {{ item.id }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field> -->
-<!-- *ngIf="hayPedidos == true; else nohaypedidos" -->
 
 <div style="margin-top: 4em">
   <div class="tabla">

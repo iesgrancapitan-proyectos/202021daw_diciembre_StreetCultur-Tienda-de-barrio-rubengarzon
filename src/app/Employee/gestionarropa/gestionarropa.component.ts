@@ -7,7 +7,6 @@ import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { RopaService } from 'src/app/ropa.service';
 import { Ropa } from 'src/app/Model/Ropa';
-import { TilePosition } from '@angular/material/grid-list/tile-coordinator';
 import { Form, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 
@@ -131,6 +130,7 @@ export class GestionarRopaComponent implements OnInit {
       .actualizarCliente(this.form1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
+          this.obtenerDatos();
           this.snackBar.open('Se ha actualizado la información', '', {
             duration: 2000,
           });
