@@ -6,7 +6,6 @@ import { ClienteService } from 'src/app/cliente.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-empleado',
   templateUrl: './empleado.component.html',
@@ -15,21 +14,20 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class EmpleadoComponent implements OnInit {
   showFiller = false;
   nombreEmpleado: any;
-  estaLogueado: boolean;
 
   constructor(
     private clienteServicio: ClienteService,
     private login: LoginComponent,
     readonly snackBar: MatSnackBar,
     private loginServicio: LoginService,
-    private router: Router
+    private router: Router,
   ) {}
 
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
 
   form1: FormGroup;
-
+  estaLogueado: boolean = this.login.estaLogueado();
   cliente = {
     id: sessionStorage.getItem('id'),
     email: sessionStorage.getItem('email'),
@@ -46,9 +44,27 @@ export class EmpleadoComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.obtenerDatos();
-
-    console.log(this.cliente.imagen);
+    let cliente = {
+      idcliente: sessionStorage.getItem('id'),
+    };
+    if (this.estaLogueado) {
+      this.obtenerDatos();
+      let cliente = {
+        idcliente: sessionStorage.getItem('id'),
+      };
+      let email = sessionStorage.getItem('email');
+      let email1 = { email: email };
+      this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+        this.form1.setValue({
+          id: sessionStorage.getItem('id'),
+          nombre: datos['cliente'][0]['nombre'],
+          apellidos: datos['cliente'][0]['apellidos'],
+          provincia: datos['cliente'][0]['provincia'],
+          localidad: datos['cliente'][0]['localidad'],
+          imagen: datos['cliente'][0]['imagen'],
+        });
+      });
+    }
 
     this.loginServicio.comprobarPerfil().subscribe((datos) => {
       this.nombreEmpleado = datos['nombre'];
@@ -102,12 +118,13 @@ export class EmpleadoComponent implements OnInit {
   }
 
   obtenerDatos() {
+    console.log('holaaa');
+
     let email = sessionStorage.getItem('email');
 
     let email1 = { email: email };
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      console.log(datos['cliente'][0]['perfil']);
       this.cliente.perfil = datos['cliente'][0]['perfil'];
       this.cliente.nombre = datos['cliente'][0]['nombre'];
       this.cliente.apellidos = datos['cliente'][0]['apellidos'];
