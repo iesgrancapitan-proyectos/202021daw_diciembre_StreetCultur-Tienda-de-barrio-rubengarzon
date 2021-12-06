@@ -9,7 +9,7 @@ _Mira [Despliegue](http://github.com) para conocer como desplegar el proyecto._
 _Stackblitz es un IDE en la nube que permite crear aplicaciones fullstack con framework ya instalados como por ejemplo angular_.  [Stackblitz](https://stackblitz.com/edit/angular)
 
 ## Requisitos📋
-_Se necesita Nodejs, npm y angular_ 
+_Se necesita Nodejs, npm y angular_
 
 ```
 Da un ejemplo
@@ -41,7 +41,7 @@ _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para 
 
 
 
-## Despliegue 
+## Despliegue
 
 _Agrega notas adicionales sobre como hacer deploy_
 
@@ -54,7 +54,7 @@ _Agrega notas adicionales sobre como hacer deploy_
 
 ## Wiki 📖
 
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
+Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/iesgrancapitan-proyectos/202021daw_diciembre_StreetCultur-Tienda-de-barrio-rubengarzon/wiki)
 
 ## Autor ✒️
 
@@ -64,7 +64,7 @@ Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](ht
 ## Expresiones de Gratitud 🎁
 
 * Comenta a otros sobre este proyecto 📢
-* Invita un café a alguien del equipo. 
+* Invita un café a alguien del equipo.
 * Da las gracias públicamente 🤓.
 * etc.
 
@@ -72,4 +72,3 @@ Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](ht
 
 ---
 ⌨️ con ❤️ por [Rubengarzon](https://github.com/rubengarzon) 😊
-
