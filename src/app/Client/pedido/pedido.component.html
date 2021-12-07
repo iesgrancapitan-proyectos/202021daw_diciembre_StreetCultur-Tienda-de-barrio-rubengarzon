@@ -1,18 +1,67 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
-    <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
+     <button mat-menu-item [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item [routerLink]="['/ropa']">ROPA</button>
+    <button mat-menu-item class="item" [routerLink]="['/novedades']">
+      NOVEDADES
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/contacto']">
+      CONTACTO
+    </button>
   </mat-menu>
 
-  <img src="../../../../assets/S.png" width="120" alt="" />
+  <div
+    *ngIf="cliente.imagen != null; else noavatar"
+    style="display: flex; align-items: center"
+  >
+    <a (click)="frame11.show()">
+      <img src="{{ cliente.imagen }}" width="70" class="avatar" />
+    </a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+        {{ cliente.nombre }} {{ cliente.apellidos }}
+      </p>
+      <hr
+        style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+      />
+      <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+        {{ cliente.perfil }}
+      </p>
+    </div>
+  </div>
+  <ng-template #noavatar>
+    <div *ngIf="estaLogueado == true; else aa">
+      <a (click)="frame11.show()">
+        <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
+      </a>
+      <div style="display: flex; flex-direction: column">
+        <p style="margin-left: 1em; font-size: 12px">
+          {{ cliente.nombre }} {{ cliente.apellidos }}
+        </p>
+        <hr
+          style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+        />
+        <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+          {{ cliente.perfil }}
+        </p>
+      </div>
+    </div>
+    <ng-template #aa> </ng-template>
+  </ng-template>
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
   <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
+  <img src="../../../../assets/S.png" width="120" alt="" />
+  <button mat-button class="item" [routerLink]="['/novedades']">
+    NOVEDADES
+  </button>
+  <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
+
 
   <span class="example-spacer"></span>
   <button
@@ -65,6 +114,62 @@
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
+
+<div
+  mdbModal
+  #frame11="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Información Personal</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame11.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form
+            [formGroup]="form1"
+            (ngSubmit)="actualizarInfo()"
+            style="display: flex; flex-direction: column; place-content: center"
+          >
+            <input type="hidden" formControlName="id" />
+            Nombre
+            <input type="text" formControlName="nombre" />
+            Apellidos
+            <input type="text" formControlName="apellidos" />
+            Provincia
+            <input type="text" formControlName="provincia" />
+            Localidad
+            <input type="text" formControlName="localidad" />
+            Imagen
+            <select formControlName="imagen">
+              <option value="../../../../assets/avatar1.png">Avatar 1</option>
+              <option value="../../../../assets/avatar2.png">Avatar 2</option>
+              <option value="../../../../assets/avatar3.png">Avatar 3</option>
+            </select>
+            <button type="submit">Actualizar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div
   mdbModal
@@ -415,7 +520,7 @@
                 aria-describedby="basic-addon2"
               />
             </div>
-            <button [disabled]="canjearPuntos.invalid">Canjear Puntos</button>
+            <button mat-raised-button [disabled]="canjearPuntos.invalid">Canjear Puntos</button>
             <mat-error
               *ngIf="
                 canjearPuntos.get('puntos').errors &&

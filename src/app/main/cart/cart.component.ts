@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
      if (!this.estaLogueado) {
        this.router.navigateByUrl('/');
        this.snackBar.open('Necesitas iniciar sesión', '', {
-         duration: 2500,
+         duration: 6000,
        });
      }
     this.mostrarCarrito();

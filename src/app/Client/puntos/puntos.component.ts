@@ -111,11 +111,11 @@ export class PuntosComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.snackBar.open('Se ha actualizado la información', '', {
-            duration: 2000,
+            duration: 6000,
           });
         } else {
           this.snackBar.open('Error inesperado', '', {
-            duration: 2000,
+            duration: 6000,
           });
         }
       });

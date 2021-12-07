@@ -82,7 +82,7 @@ export class GestionarIncidenciasComponent implements OnInit {
           }
         });
         this.snackBar.open('La incidencia se ha borrado', '', {
-          duration: 2000,
+          duration: 6000,
         });
     })
 

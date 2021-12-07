@@ -127,11 +127,11 @@ export class GestionarPuntosComponent implements OnInit {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
           this.snackBar.open('Se ha actualizado la información', '', {
-            duration: 2000,
+            duration: 6000,
           });
         } else {
           this.snackBar.open('Error inesperado', '', {
-            duration: 2000,
+            duration: 6000,
           });
         }
       });
@@ -145,7 +145,7 @@ export class GestionarPuntosComponent implements OnInit {
     this.puntosServicio.actualizarPuntos(puntoss).subscribe((datos) => {
       if (datos['resultado'] == 'OK') {
         this.snackBar.open('Los puntos se han modificado', '', {
-          duration: 2000,
+          duration: 6000,
         });
       } else {
         alert('error');

@@ -163,7 +163,7 @@ export class RopaComponent implements OnInit {
           return this.snackBar.open('Se ha añadido al carrito.', '', {
             horizontalPosition: 'center',
             verticalPosition: 'bottom',
-            duration: 1500,
+            duration: 6000,
           });
         } else {
           return false;
@@ -174,6 +174,7 @@ export class RopaComponent implements OnInit {
       return this.snackBar.open('Necesitas iniciar sesión.', 'De acuerdo', {
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
+        duration: 6000,
       });
     }
   }

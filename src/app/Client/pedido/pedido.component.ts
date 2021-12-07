@@ -32,6 +32,7 @@ export class PedidoComponent implements OnInit {
   cliente = {
     id: sessionStorage.getItem('id'),
     email: sessionStorage.getItem('email'),
+    perfil: null,
     fecha: this.hoy,
     nombre: null,
     apellidos: null,
@@ -40,11 +41,14 @@ export class PedidoComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
+    imagen: null,
   };
 
   nombre: any;
   cantidad: any;
   talla: any;
+
+  form1: FormGroup;
 
   numProductos: any;
 
@@ -71,11 +75,11 @@ export class PedidoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (!this.estaLogueado){
-      this.router.navigateByUrl("/")
+    if (!this.estaLogueado) {
+      this.router.navigateByUrl('/');
       this.snackBar.open('Necesitas iniciar sesión', '', {
-        duration: 2500
-      })
+        duration: 3000,
+      });
     }
     this.obtenerDatos();
     this.obtenerCarro();
@@ -97,12 +101,32 @@ export class PedidoComponent implements OnInit {
       this.puntos = datos['puntos'][0]['puntos'];
     });
 
-    console.log(this.total)
+    console.log(this.total);
 
     this.canjearPuntos = this.fb.group({
       puntos: ['', [Validators.min(0)]],
     });
 
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
+    let email = sessionStorage.getItem('email');
+    let email1 = { email: email };
+    this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+      this.form1.setValue({
+        id: sessionStorage.getItem('id'),
+        nombre: datos['cliente'][0]['nombre'],
+        apellidos: datos['cliente'][0]['apellidos'],
+        provincia: datos['cliente'][0]['provincia'],
+        localidad: datos['cliente'][0]['localidad'],
+        imagen: datos['cliente'][0]['imagen'],
+      });
+    });
   }
 
   obtenerDatos() {
@@ -127,6 +151,23 @@ export class PedidoComponent implements OnInit {
     });
   }
 
+  actualizarInfo() {
+    console.log(this.form1.value);
+    this.clienteServicio
+      .actualizarCliente(this.form1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('Se ha actualizado la información', '', {
+            duration: 2000,
+          });
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 2000,
+          });
+        }
+      });
+  }
+
   obtenerCarro() {
     let id = sessionStorage.getItem('id');
     let id1 = { id: id };
@@ -145,7 +186,6 @@ export class PedidoComponent implements OnInit {
         this.talla = datos['comprarahora'][0]['talla'];
         this.total = parseInt(datos['comprarahora'][0]['precio']);
       }
-
     });
   }
 
@@ -194,7 +234,7 @@ export class PedidoComponent implements OnInit {
         this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
-          duration: 1500,
+          duration: 6000,
         });
       }
     });
@@ -207,12 +247,18 @@ export class PedidoComponent implements OnInit {
   }
 
   validarPuntos() {
-    if(this.canjearPuntos.value["puntos"] > document.getElementById('totalConEnvio').innerHTML){
+    if (
+      this.canjearPuntos.value['puntos'] >
+      document.getElementById('totalConEnvio').innerHTML
+    ) {
       this.flag2 = true;
-    }else{
-      let total2 = parseInt(document.getElementById('totalConEnvio').innerHTML)  - this.canjearPuntos.value["puntos"];
+    } else {
+      let total2 =
+        parseInt(document.getElementById('totalConEnvio').innerHTML) -
+        this.canjearPuntos.value['puntos'];
       document.getElementById('totalConEnvio').innerHTML = total2.toString();
-      document.getElementById("ptn").innerHTML = "-"+this.canjearPuntos.value["puntos"]+"€";
+      document.getElementById('ptn').innerHTML =
+        '-' + this.canjearPuntos.value['puntos'] + '€';
       this.flag2 = false;
     }
   }

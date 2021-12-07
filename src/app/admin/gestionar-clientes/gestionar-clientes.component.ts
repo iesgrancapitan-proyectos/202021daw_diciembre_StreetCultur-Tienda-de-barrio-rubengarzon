@@ -126,7 +126,7 @@ export class GestionarClientesComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.snackBar.open('El cliente se ha modificado', '', {
-            duration: 2000,
+            duration: 6000,
           });
           this.clienteServicio.mostrarClientes().subscribe((datos) => {
             this.clientes = datos['clientes'];
@@ -160,12 +160,12 @@ export class GestionarClientesComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.snackBar.open('Se ha creado el usuario', '', {
-            duration: 2000,
+            duration: 6000,
           });
           this.mostrarCliente();
         } else {
           this.snackBar.open('Error inesperado', '', {
-            duration: 2000,
+            duration: 6000,
           });
         }
       });

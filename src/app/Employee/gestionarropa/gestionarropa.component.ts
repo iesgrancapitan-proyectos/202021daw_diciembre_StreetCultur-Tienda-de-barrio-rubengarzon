@@ -132,11 +132,11 @@ export class GestionarRopaComponent implements OnInit {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
           this.snackBar.open('Se ha actualizado la información', '', {
-            duration: 2000,
+            duration: 6000,
           });
         } else {
           this.snackBar.open('Error inesperado', '', {
-            duration: 2000,
+            duration: 6000,
           });
         }
       });
@@ -173,7 +173,7 @@ export class GestionarRopaComponent implements OnInit {
       return this.snackBar.open('Se ha borrado la ropa.', '', {
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
-        duration: 1500,
+        duration: 6000,
       });
     });
   }
@@ -202,7 +202,7 @@ export class GestionarRopaComponent implements OnInit {
           this.ropa = datos['ropa'];
         });
         this.snackBar.open('La ropa se ha modificado', '', {
-          duration: 2000,
+          duration: 6000,
         });
       } else {
         alert('error');
@@ -214,7 +214,7 @@ export class GestionarRopaComponent implements OnInit {
     this.ropaServicio.addRopa(this.formAddRopa.value).subscribe((datos) => {
       if (datos['resultado']) {
         this.snackBar.open('La ropa se ha añadido', '', {
-          duration: 2000,
+          duration: 6000,
         });
         this.ropaServicio.obtenerRopa().subscribe((datos) => {
           this.ropa = datos['ropa'];
