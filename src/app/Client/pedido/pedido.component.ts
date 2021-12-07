@@ -49,6 +49,7 @@ export class PedidoComponent implements OnInit {
   talla: any;
 
   form1: FormGroup;
+  form2: FormGroup;
 
   numProductos: any;
 
@@ -75,23 +76,52 @@ export class PedidoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
+
+    /*  this.form2 = this.fb.group({
+       nombre: ['aaa', [Validators.required]],
+       nombre: ['aaa', [Validators.required]],
+     }); */
+
+    this.form2 = new FormGroup({
+      nombre: new FormControl('', Validators.required),
+      apellidos: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      domicilio: new FormControl('', Validators.required),
+      provincia: new FormControl('', Validators.required),
+      localidad: new FormControl('', Validators.required),
+      codigopostal: new FormControl('', Validators.required),
+      movil: new FormControl('', Validators.required),
+    });
+
+    if (this.form2.valid) {
+      render({
+        id: '#miPaypalBoton',
+        currency: '€',
+        value: '1.0',
+        onApprove: (details) => {
+          this.insertarPedido(this.cliente.codigopostal);
+        },
+      });
+    }
+
     if (!this.estaLogueado) {
       this.router.navigateByUrl('/');
       this.snackBar.open('Necesitas iniciar sesión', '', {
-        duration: 3000,
+        duration: 6000,
       });
     }
+
     this.obtenerDatos();
     this.obtenerCarro();
     this.contarProductos();
-    render({
-      id: '#miPaypalBoton',
-      currency: '€',
-      value: '1.0',
-      onApprove: (details) => {
-        this.insertarPedido(this.cliente.codigopostal);
-      },
-    });
 
     let cliente = {
       idcliente: sessionStorage.getItem('id'),
@@ -107,14 +137,6 @@ export class PedidoComponent implements OnInit {
       puntos: ['', [Validators.min(0)]],
     });
 
-    this.form1 = new FormGroup({
-      id: new FormControl(),
-      nombre: new FormControl(),
-      apellidos: new FormControl(),
-      provincia: new FormControl(),
-      localidad: new FormControl(),
-      imagen: new FormControl(),
-    });
     let email = sessionStorage.getItem('email');
     let email1 = { email: email };
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
@@ -134,35 +156,40 @@ export class PedidoComponent implements OnInit {
     let email1 = { email: email };
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-      if (
-        datos['cliente'][0]['nombre'] != null &&
-        datos['cliente'][0]['domicilio'] != null &&
-        datos['cliente'][0]['codigopostal'] &&
-        datos['cliente'][0]['movil']
-      ) {
-        this.cliente.nombre = datos['cliente'][0]['nombre'];
-        this.cliente.apellidos = datos['cliente'][0]['apellidos'];
-        this.cliente.provincia = datos['cliente'][0]['provincia'];
-        this.cliente.localidad = datos['cliente'][0]['localidad'];
-        this.cliente.domicilio = datos['cliente'][0]['domicilio'];
-        this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
-        this.cliente.movil = datos['cliente'][0]['movil'];
-      }
+      this.form2.setValue({
+        nombre: datos['cliente'][0]['nombre'],
+        apellidos: datos['cliente'][0]['apellidos'],
+        email: datos['cliente'][0]['email'],
+        provincia: datos['cliente'][0]['provincia'],
+        domicilio: datos['cliente'][0]['domicilio'],
+        localidad: datos['cliente'][0]['localidad'],
+        codigopostal: datos['cliente'][0]['codigopostal'],
+        movil: datos['cliente'][0]['movil'],
+      });
+
+      this.cliente.perfil = datos['cliente'][0]['perfil'];
+      this.cliente.nombre = datos['cliente'][0]['nombre'];
+      this.cliente.apellidos = datos['cliente'][0]['apellidos'];
+      this.cliente.provincia = datos['cliente'][0]['provincia'];
+      this.cliente.localidad = datos['cliente'][0]['localidad'];
+      this.cliente.domicilio = datos['cliente'][0]['domicilio'];
+      this.cliente.codigopostal = datos['cliente'][0]['codigopostal'];
+      this.cliente.movil = datos['cliente'][0]['movil'];
+      this.cliente.imagen = datos['cliente'][0]['imagen'];
     });
   }
 
   actualizarInfo() {
-    console.log(this.form1.value);
     this.clienteServicio
       .actualizarCliente(this.form1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.snackBar.open('Se ha actualizado la información', '', {
-            duration: 2000,
+            duration: 6000,
           });
         } else {
           this.snackBar.open('Error inesperado', '', {
-            duration: 2000,
+            duration: 6000,
           });
         }
       });
@@ -238,6 +265,20 @@ export class PedidoComponent implements OnInit {
         });
       }
     });
+  }
+
+  validarDatos() {
+    if (this.form2.valid) {
+      this.actualizarInfo();
+      render({
+        id: '#miPaypalBoton',
+        currency: '€',
+        value: '1.0',
+        onApprove: (details) => {
+          this.insertarPedido(this.cliente.codigopostal);
+        },
+      });
+    }
   }
 
   cerrarSesion() {

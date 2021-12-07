@@ -3,7 +3,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-     <button mat-menu-item [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item [routerLink]="['/']">INICIO</button>
     <button mat-menu-item [routerLink]="['/ropa']">ROPA</button>
     <button mat-menu-item class="item" [routerLink]="['/novedades']">
       NOVEDADES
@@ -33,12 +33,15 @@
     </div>
   </div>
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true; else aa">
+    <div
+      *ngIf="estaLogueado == true; else aa"
+      style="display: flex; align-items: center"
+    >
       <a (click)="frame11.show()">
         <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
-      <div style="display: flex; flex-direction: column">
-        <p style="margin-left: 1em; font-size: 12px">
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
           {{ cliente.nombre }} {{ cliente.apellidos }}
         </p>
         <hr
@@ -61,7 +64,6 @@
     NOVEDADES
   </button>
   <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
-
 
   <span class="example-spacer"></span>
   <button
@@ -169,8 +171,6 @@
   </div>
 </div>
 
-
-
 <div
   mdbModal
   #frame="mdbModal"
@@ -225,244 +225,290 @@
 
       <!--Grid row-->
       <div class="row">
-        <!--Grid column-->
-        <div class="col-md-8 mb-4">
-          <!--Card-->
-          <div class="card">
-            <!--Card content-->
-            <form class="card-body">
-              <!--Grid row-->
-              <div class="row">
-                <!--Grid column-->
-                <div class="col-md-6 mb-2">
-                  <!--firstName-->
-                  <div class="md-form">
-                    Nombre
-                    <input
-                      type="text"
-                      name="nombre"
-                      class="form-control"
-                      [(ngModel)]="cliente.nombre"
-                      required
-                    />
+        <form [formGroup]="form2"  (ngSubmit)="validarDatos()" style="display: flex;">
+          <!--Grid column-->
+          <div class="col-md-8 mb-4">
+            <!--Card-->
+            <div class="card">
+              <!--Card content-->
+              <div class="card-body">
+                <!--Grid row-->
+                <div class="row">
+                  <!--Grid column-->
+                  <div class="col-md-6 mb-2">
+                    <!--firstName-->
+                    <div class="md-form">
+                      Nombre
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="nombre"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          form2.get('nombre').errors &&
+                          form2.get('nombre').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('nombre').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                    </div>
                   </div>
-                </div>
-                <!--Grid column-->
+                  <!--Grid column-->
 
-                <!--Grid column-->
-                <div class="col-md-6 mb-2">
-                  <!--lastName-->
-                  <div class="md-form">
-                    Apellidos
-                    <input
-                      type="text"
-                      name="apellidos"
-                      class="form-control"
-                      [(ngModel)]="cliente.apellidos"
-                      required
-                    />
+                  <!--Grid column-->
+                  <div class="col-md-6 mb-2">
+                    <!--lastName-->
+                    <div class="md-form">
+                      Apellidos
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="apellidos"
+                        required
+                      />
+                      <mat-error
+                        *ngIf="
+                          form2.get('apellidos').errors &&
+                          form2.get('apellidos').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('apellidos').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                    </div>
                   </div>
+                  <!--Grid column-->
                 </div>
-                <!--Grid column-->
-              </div>
-              <!--Grid row-->
+                <!--Grid row-->
 
-              <!--email-->
-              <div class="md-form mb-5">
-                Email
-                <input
-                  type="text"
-                  name="email"
-                  class="form-control"
-                  [(ngModel)]="cliente.email"
-                  required
-                />
-              </div>
-
-              <!--address-->
-              <div class="md-form mb-5">
-                Domicilio
-                <input
-                  type="text"
-                  name="domicilio"
-                  class="form-control"
-                  [(ngModel)]="cliente.domicilio"
-                  required
-                />
-              </div>
-
-              <!--Grid row-->
-              <div class="row">
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
-                  <label for="provincia">Provincia</label>
-                  <select
-                    class="custom-select d-block w-100"
-                    name="provincia"
-                    [(ngModel)]="cliente.provincia"
-                    required
-                  >
-                    <option value="">Elige Provincia</option>
-                    <option value="Álava/Araba">Álava/Araba</option>
-                    <option value="Albacete">Albacete</option>
-                    <option value="Alicante">Alicante</option>
-                    <option value="Almería">Almería</option>
-                    <option value="Asturias">Asturias</option>
-                    <option value="Ávila">Ávila</option>
-                    <option value="Badajoz">Badajoz</option>
-                    <option value="Baleares">Baleares</option>
-                    <option value="Barcelona">Barcelona</option>
-                    <option value="Burgos">Burgos</option>
-                    <option value="Cáceres">Cáceres</option>
-                    <option value="Cádiz">Cádiz</option>
-                    <option value="Cantabria">Cantabria</option>
-                    <option value="Castellón">Castellón</option>
-                    <option value="Ceuta">Ceuta</option>
-                    <option value="Ciudad Real">Ciudad Real</option>
-                    <option value="Córdoba">Córdoba</option>
-                    <option value="Cuenca">Cuenca</option>
-                    <option value="Gerona/Girona">Gerona/Girona</option>
-                    <option value="Granada">Granada</option>
-                    <option value="Guadalajara">Guadalajara</option>
-                    <option value="Guipúzcoa/Gipuzkoa">
-                      Guipúzcoa/Gipuzkoa
-                    </option>
-                    <option value="Huelva">Huelva</option>
-                    <option value="Huesca">Huesca</option>
-                    <option value="Jaén">Jaén</option>
-                    <option value="La Coruña/A Coruña">
-                      La Coruña/A Coruña
-                    </option>
-                    <option value="La Rioja">La Rioja</option>
-                    <option value="Las Palmas">Las Palmas</option>
-                    <option value="León">León</option>
-                    <option value="Lérida/Lleida">Lérida/Lleida</option>
-                    <option value="Lugo">Lugo</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Málaga">Málaga</option>
-                    <option value="Melilla">Melilla</option>
-                    <option value="Murcia">Murcia</option>
-                    <option value="Navarra">Navarra</option>
-                    <option value="Orense/Ourense">Orense/Ourense</option>
-                    <option value="Palencia">Palencia</option>
-                    <option value="Pontevedra">Pontevedra</option>
-                    <option value="Salamanca">Salamanca</option>
-                    <option value="Segovia">Segovia</option>
-                    <option value="Sevilla">Sevilla</option>
-                    <option value="Soria">Soria</option>
-                    <option value="Tarragona">Tarragona</option>
-                    <option value="Tenerife">Tenerife</option>
-                    <option value="Teruel">Teruel</option>
-                    <option value="Toledo">Toledo</option>
-                    <option value="Valencia">Valencia</option>
-                    <option value="Valladolid">Valladolid</option>
-                    <option value="Vizcaya/Bizkaia">Vizcaya/Bizkaia</option>
-                    <option value="Zamora">Zamora</option>
-                    <option value="Zaragoza">Zaragoza</option>
-                  </select>
-                  <div class="invalid-feedback">
-                    Please select a valid country.
-                  </div>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                  <label for="localidad">Localidad</label>
-                  <input
-                    type="text"
-                    name="localidad"
-                    class="form-control"
-                    [(ngModel)]="cliente.localidad"
-                    required
-                  />
-
-                  <div class="invalid-feedback">
-                    Please provide a valid state.
-                  </div>
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-                  <label for="codigo">Codigo Postal</label>
+                <!--email-->
+                <div class="md-form mb-5">
+                  Email
                   <input
                     type="text"
                     class="form-control"
-                    name="codigo"
-                    [(ngModel)]="cliente.codigopostal"
+                    formControlName="email"
                     required
                   />
-                  <div class="invalid-feedback">Zip code required.</div>
+                  <mat-error
+                        *ngIf="
+                          form2.get('email').errors &&
+                          form2.get('email').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('email').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
                 </div>
-                <!--Grid column-->
+
+                <!--address-->
+                <div class="md-form mb-5">
+                  Domicilio
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="domicilio"
+                    required
+                  />
+                  <mat-error
+                        *ngIf="
+                          form2.get('domicilio').errors &&
+                          form2.get('domicilio').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('domicilio').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                </div>
+
+                <!--Grid row-->
+                <div class="row">
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-12 mb-4">
+                    <label for="provincia">Provincia</label>
+                    <select
+                      class="custom-select d-block w-100"
+                      formControlName="provincia"
+                      required
+                    >
+                      <option value="">Elige Provincia</option>
+                      <option value="Álava/Araba">Álava/Araba</option>
+                      <option value="Albacete">Albacete</option>
+                      <option value="Alicante">Alicante</option>
+                      <option value="Almería">Almería</option>
+                      <option value="Asturias">Asturias</option>
+                      <option value="Ávila">Ávila</option>
+                      <option value="Badajoz">Badajoz</option>
+                      <option value="Baleares">Baleares</option>
+                      <option value="Barcelona">Barcelona</option>
+                      <option value="Burgos">Burgos</option>
+                      <option value="Cáceres">Cáceres</option>
+                      <option value="Cádiz">Cádiz</option>
+                      <option value="Cantabria">Cantabria</option>
+                      <option value="Castellón">Castellón</option>
+                      <option value="Ceuta">Ceuta</option>
+                      <option value="Ciudad Real">Ciudad Real</option>
+                      <option value="Córdoba">Córdoba</option>
+                      <option value="Cuenca">Cuenca</option>
+                      <option value="Gerona/Girona">Gerona/Girona</option>
+                      <option value="Granada">Granada</option>
+                      <option value="Guadalajara">Guadalajara</option>
+                      <option value="Guipúzcoa/Gipuzkoa">
+                        Guipúzcoa/Gipuzkoa
+                      </option>
+                      <option value="Huelva">Huelva</option>
+                      <option value="Huesca">Huesca</option>
+                      <option value="Jaén">Jaén</option>
+                      <option value="La Coruña/A Coruña">
+                        La Coruña/A Coruña
+                      </option>
+                      <option value="La Rioja">La Rioja</option>
+                      <option value="Las Palmas">Las Palmas</option>
+                      <option value="León">León</option>
+                      <option value="Lérida/Lleida">Lérida/Lleida</option>
+                      <option value="Lugo">Lugo</option>
+                      <option value="Madrid">Madrid</option>
+                      <option value="Málaga">Málaga</option>
+                      <option value="Melilla">Melilla</option>
+                      <option value="Murcia">Murcia</option>
+                      <option value="Navarra">Navarra</option>
+                      <option value="Orense/Ourense">Orense/Ourense</option>
+                      <option value="Palencia">Palencia</option>
+                      <option value="Pontevedra">Pontevedra</option>
+                      <option value="Salamanca">Salamanca</option>
+                      <option value="Segovia">Segovia</option>
+                      <option value="Sevilla">Sevilla</option>
+                      <option value="Soria">Soria</option>
+                      <option value="Tarragona">Tarragona</option>
+                      <option value="Tenerife">Tenerife</option>
+                      <option value="Teruel">Teruel</option>
+                      <option value="Toledo">Toledo</option>
+                      <option value="Valencia">Valencia</option>
+                      <option value="Valladolid">Valladolid</option>
+                      <option value="Vizcaya/Bizkaia">Vizcaya/Bizkaia</option>
+                      <option value="Zamora">Zamora</option>
+                      <option value="Zaragoza">Zaragoza</option>
+                    </select>
+                    <div class="invalid-feedback">
+                      Please select a valid country.
+                    </div>
+                    <mat-error
+                        *ngIf="
+                          form2.get('provincia').errors &&
+                          form2.get('provincia').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('provincia').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <label for="localidad">Localidad</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="localidad"
+                      required
+                    />
+
+                    <div class="invalid-feedback">
+                      Please provide a valid state.
+                    </div>
+                    <mat-error
+                        *ngIf="
+                          form2.get('localidad').errors &&
+                          form2.get('localidad').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('localidad').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-lg-4 col-md-6 mb-4">
+                    <label for="codigo">Codigo Postal</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="codigopostal"
+                      required
+                    />
+                    <div class="invalid-feedback">Zip code required.</div>
+                    <mat-error
+                        *ngIf="
+                          form2.get('codigopostal').errors &&
+                          form2.get('codigopostal').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('codigopostal').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                  </div>
+                  <!--Grid column-->
+                   <div class="col-lg-4 col-md-6 mb-4">
+                    <label for="codigo">Móvil</label>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      formControlName="movil"
+                      required
+                    />
+                    <mat-error
+                        *ngIf="
+                          form2.get('movil').errors &&
+                          form2.get('movil').dirty
+                        "
+                      >
+                        <p *ngIf="form2.get('movil').hasError('required')">
+                          Este campo es requerido
+                        </p>
+                      </mat-error>
+                  </div>
+                </div>
+                  <!--Grid row-->
+                <div style="text-align: center;">
+                  <button mat-raised-button type="submit">Actualizar Información</button>
+                </div>
+
+                <!-- sb-sm9yh8614634@business.example.com -->
+                <!-- R})k5YD9 -->
+                <div id="miPaypalBoton" style="margin-top:2em"></div>
               </div>
-              <!--Grid row-->
-
-              <hr class="mb-4" />
-
-              <!-- sb-sm9yh8614634@business.example.com -->
-              <!-- R})k5YD9 -->
-              <div id="miPaypalBoton"></div>
-            </form>
+            </div>
+            <!--/.Card-->
           </div>
-          <!--/.Card-->
-        </div>
-        <!--Grid column-->
+          <!--Grid column-->
 
-        <!--Grid column-->
-        <div class="col-md-4 mb-4">
-          <!-- Heading -->
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Tu carro</span>
-            <span class="badge badge-secondary badge-pill">{{
-              numProductos
-            }}</span>
-          </h4>
+          <!--Grid column-->
+          <div class="col-md-4 mb-4">
+            <!-- Heading -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Tu carro</span>
+              <span class="badge badge-secondary badge-pill">{{
+                numProductos
+              }}</span>
+            </h4>
 
-          <!-- Cart -->
-          <ul
-            class="list-group mb-3 z-depth-1"
-            *ngIf="flag == false; else comprarahora"
-          >
-            <li
-              class="
-                list-group-item
-                d-flex
-                justify-content-between
-                lh-condensed
-              "
-              *ngFor="let item of productosEnCarrito"
+            <!-- Cart -->
+            <ul
+              class="list-group mb-3 z-depth-1"
+              *ngIf="flag == false; else comprarahora"
             >
-              <div>
-                <h6 class="my-0">{{ item[1] }}</h6>
-                <small class="text-muted">Talla: </small>
-                <span class="text-muted">{{ item[6] }}</span>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Puntos</h6>
-                <small>{{ puntos }}</small>
-              </div>
-              <span class="text-success">-{{ canjearpuntos }}€</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (€)</span>
-              <strong
-                *ngIf="
-                  cliente.codigopostal > 14999 || cliente.codigopostal < 14000;
-                  else gratis
-                "
-                >{{ total + 3 - canjearpuntos }}</strong
-              >
-              <ng-template #gratis>{{ total - 3 - canjearpuntos }}</ng-template>
-            </li>
-          </ul>
-          <!-- Cart -->
-
-          <ng-template #comprarahora>
-            <ul class="list-group mb-3 z-depth-1">
               <li
                 class="
                   list-group-item
@@ -470,11 +516,12 @@
                   justify-content-between
                   lh-condensed
                 "
+                *ngFor="let item of productosEnCarrito"
               >
                 <div>
-                  <h6 class="my-0">{{ nombre }}</h6>
+                  <h6 class="my-0">{{ item[1] }}</h6>
                   <small class="text-muted">Talla: </small>
-                  <span class="text-muted">{{ talla }}</span>
+                  <span class="text-muted">{{ item[6] }}</span>
                 </div>
               </li>
               <li
@@ -484,12 +531,11 @@
                   <h6 class="my-0">Puntos</h6>
                   <small>{{ puntos }}</small>
                 </div>
-                <span class="text-success" id="ptn">-0€</span>
+                <span class="text-success">-{{ canjearpuntos }}€</span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (€)</span>
                 <strong
-                  id="totalConEnvio"
                   *ngIf="
                     cliente.codigopostal > 14999 ||
                       cliente.codigopostal < 14000;
@@ -502,49 +548,102 @@
                 }}</ng-template>
               </li>
             </ul>
-          </ng-template>
+            <!-- Cart -->
 
-          <!-- Promo code -->
-          <form
-            [formGroup]="canjearPuntos"
-            (ngSubmit)="validarPuntos()"
-            class="card p-2"
-          >
-            <div class="input-group">
-              <input
-                type="number"
-                class="form-control"
-                placeholder="puntos"
-                aria-label="Recipient's username"
-                formControlName="puntos"
-                aria-describedby="basic-addon2"
-              />
-            </div>
-            <button mat-raised-button [disabled]="canjearPuntos.invalid">Canjear Puntos</button>
-            <mat-error
-              *ngIf="
-                canjearPuntos.get('puntos').errors &&
-                canjearPuntos.get('puntos').dirty
-              "
+            <ng-template #comprarahora>
+              <ul class="list-group mb-3 z-depth-1">
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    lh-condensed
+                  "
+                >
+                  <div>
+                    <h6 class="my-0">{{ nombre }}</h6>
+                    <small class="text-muted">Talla: </small>
+                    <span class="text-muted">{{ talla }}</span>
+                  </div>
+                </li>
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    bg-light
+                  "
+                >
+                  <div class="text-success">
+                    <h6 class="my-0">Puntos</h6>
+                    <small>{{ puntos }}</small>
+                  </div>
+                  <span class="text-success" id="ptn">-0€</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <span>Total (€)</span>
+                  <strong
+                    id="totalConEnvio"
+                    *ngIf="
+                      cliente.codigopostal > 14999 ||
+                        cliente.codigopostal < 14000;
+                      else gratis
+                    "
+                    >{{ total + 3 - canjearpuntos }}</strong
+                  >
+                  <ng-template #gratis>{{
+                    total - 3 - canjearpuntos
+                  }}</ng-template>
+                </li>
+              </ul>
+            </ng-template>
+
+            <!-- Promo code -->
+            <form
+              [formGroup]="canjearPuntos"
+              (ngSubmit)="validarPuntos()"
+              class="card p-2"
             >
-              <p *ngIf="canjearPuntos.get('puntos').hasError('min')">
-                No se admite números negativos.
-              </p>
-            </mat-error>
-          </form>
-          <p *ngIf="flag2">
-            El número de puntos es superior al precio total del producto.
-          </p>
-          <!-- Promo code -->
+              <div class="input-group">
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="0"
+                  aria-label="Recipient's username"
+                  formControlName="puntos"
+                  aria-describedby="basic-addon2"
+                />
+              </div>
+              <button mat-raised-button [disabled]="canjearPuntos.invalid">
+                Canjear Puntos
+              </button>
+              <mat-error
+                *ngIf="
+                  canjearPuntos.get('puntos').errors &&
+                  canjearPuntos.get('puntos').dirty
+                "
+              >
+                <p *ngIf="canjearPuntos.get('puntos').hasError('min')">
+                  No se admite números negativos.
+                </p>
+              </mat-error>
+            </form>
+            <p *ngIf="flag2">
+              El número de puntos es superior al precio total del producto.
+            </p>
+            <!-- Promo code -->
 
-          <div *ngIf="puntos < canjearpuntos">No tienes puntos suficientes</div>
-        </div>
-        <!--Grid column-->
+            <div *ngIf="puntos < canjearpuntos">
+              No tienes puntos suficientes
+            </div>
+          </div>
+          <!--Grid column-->
+          <!--Grid row-->
+          <!--Main layout-->
+
+          <!-- <app-footer></app-footer> -->
+        </form>
       </div>
-      <!--Grid row-->
     </div>
   </main>
-  <!--Main layout-->
 </div>
-
-<!-- <app-footer></app-footer> -->

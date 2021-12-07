@@ -69,7 +69,9 @@ export class LoginComponent implements OnInit {
           }
         });
       } else {
-        console.log('Ha habido un error al iniciar sesión');
+        this.snackBar.open('Email y/o contraseña incorrecta, vuelve a intentarlo', '', {
+          duration: 6000,
+        });
       }
     });
   }
@@ -82,12 +84,12 @@ export class LoginComponent implements OnInit {
         this.loginService.enviarEmail(cliente);
 
         this.snackBar.open('Por favor, revisa el correo electrónico ', '', {
-          duration: 2000,
+          duration: 6000,
         });
         this.router.navigateByUrl('/ropa');
       } else {
         this.snackBar.open('Ha ocurrido un error inesperado', '', {
-          duration: 1500,
+          duration: 6000,
         });
       }
     });

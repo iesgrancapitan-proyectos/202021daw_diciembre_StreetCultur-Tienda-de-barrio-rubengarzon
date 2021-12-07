@@ -13,7 +13,7 @@
     </button>
   </mat-menu>
 
-  <div
+<div
     *ngIf="cliente.imagen != null; else noavatar"
     style="display: flex; align-items: center"
   >
@@ -33,12 +33,12 @@
     </div>
   </div>
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true; else aa">
+    <div *ngIf="estaLogueado == true; else aa" style="display: flex; align-items: center">
       <a (click)="frame11.show()">
         <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
-      <div style="display: flex; flex-direction: column">
-        <p style="margin-left: 1em; font-size: 12px">
+      <div style="display: flex; flex-direction: column;align-items: center">
+        <p style="margin-left: 1em; font-size: 12px;margin-bottom: 0">
           {{ cliente.nombre }} {{ cliente.apellidos }}
         </p>
         <hr
