@@ -191,31 +191,63 @@
           >
             <input type="hidden" formControlName="id" />
             Nombre
-            <input type="text" formControlName="nombre" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="nombre"
+              style="margin-bottom: 1em"
+            />
             Apellidos
-            <input type="text" formControlName="apellidos" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="apellidos"
+              style="margin-bottom: 1em"
+            />
             Provincia
-            <input type="text" formControlName="provincia" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="provincia"
+              style="margin-bottom: 1em"
+            />
             Localidad
-            <input type="text" formControlName="localidad" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="localidad"
+              style="margin-bottom: 1em"
+            />
             Domicilio
-            <input type="text" formControlName="domicilio" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="domicilio"
+              style="margin-bottom: 1em"
+            />
             Imagen
             <div style="display: flex">
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 1</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 1
+                </p>
                 <img src="../../../../assets/avatar1.png" width="30" alt="" />
               </div>
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 2</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 2
+                </p>
                 <img src="../../../../assets/avatar2.png" width="30" alt="" />
               </div>
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 3</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 3
+                </p>
                 <img src="../../../../assets/avatar3.png" width="30" alt="" />
               </div>
             </div>
-            <select formControlName="imagen" style="margin-top: 1em;">
+            <select formControlName="imagen" style="margin-top: 1em">
               <option value="../../../../assets/avatar1.png">Avatar 1</option>
               <option value="../../../../assets/avatar2.png">Avatar 2</option>
               <option value="../../../../assets/avatar3.png">Avatar 3</option>
@@ -258,7 +290,9 @@
         <div class="md-form mb-5">
           <form [formGroup]="formAddRopa" (ngSubmit)="addRopa()">
             <div style="display: flex">
-              <div style="display: flex; flex-direction: column;margin-right: 2em">
+              <div
+                style="display: flex; flex-direction: column; margin-right: 2em"
+              >
                 Nombre:
                 <input
                   type="text"
@@ -440,17 +474,36 @@
               style="margin-bottom: 1em"
             />
             Precio(*)
-            <input type="number"
-            formControlName="Precio" placeholder="2" style="margin-bottom: 1em" />
+            <input
+              type="number"
+              formControlName="Precio"
+              placeholder="2"
+              style="margin-bottom: 1em"
+            />
             Tipo(*)
-            <input type="text" placeholder="Tipo"
-            formControlName="Tipo" style="margin-bottom: 1em" />
+            <select formControlName="Tipo" style="margin-bottom: 1em">
+              <option value="Sudadera">Sudadera</option>
+              <option value="Pantalon">Pantalon</option>
+              <option value="Abrigo">Abrigo</option>
+              <option value="Chandal">Chandal</option>
+              <option value="Accesorio">Accesorio</option>
+              <option value="Accesorio">Camiseta</option>
+            </select>
             Color(*)
-            <input type="text" placeholder="Color"
-            formControlName="Color"
-            style="margin-bottom: 1em" />
+            <input
+              type="text"
+              placeholder="Color"
+              formControlName="Color"
+              style="margin-bottom: 1em"
+            />
             <div style="display: flex; place-content: center">
-              <button [disabled]="formModal.invalid" mat-raised-button style="width: 20em">Enviar</button>
+              <button
+                [disabled]="formModal.invalid"
+                mat-raised-button
+                style="width: 20em"
+              >
+                Enviar
+              </button>
             </div>
           </form>
         </div>
