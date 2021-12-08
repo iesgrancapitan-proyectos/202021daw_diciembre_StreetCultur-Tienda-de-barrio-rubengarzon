@@ -12,21 +12,44 @@
     </button>
   </mat-menu>
 
-  <div *ngIf="cliente.imagen != null; else noavatar">
-    <a routerLink="/miperfil" (click)="drawer.toggle()">
+  <div
+    *ngIf="cliente.imagen != null; else noavatar"
+    style="display: flex; align-items: center"
+  >
+    <a (click)="frame11.show()">
       <img src="{{ cliente.imagen }}" width="70" class="avatar" />
     </a>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+        {{ cliente.nombre }} {{ cliente.apellidos }}
+      </p>
+      <hr
+        style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+      />
+      <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+        {{ cliente.perfil }}
+      </p>
+    </div>
   </div>
-
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true; else aa">
-      <a routerLink="/miperfil" (click)="drawer.toggle()">
-        <img
-          src="../../../../assets/avatardefault.png"
-          width="70"
-          class="avatar"
-        />
+    <div
+      *ngIf="estaLogueado == true; else aa"
+      style="display: flex; align-items: center"
+    >
+      <a (click)="frame11.show()">
+        <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
+          {{ cliente.nombre }} {{ cliente.apellidos }}
+        </p>
+        <hr
+          style="border: 1px solid black; width: 3em; margin: 0px 0px 0px 12px"
+        />
+        <p style="font-size: 10px; margin-left: 1em; margin-bottom: 0">
+          {{ cliente.perfil }}
+        </p>
+      </div>
     </div>
     <ng-template #aa> </ng-template>
   </ng-template>
@@ -83,15 +106,109 @@
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
-
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p style="cursor: pointer">{{ cliente.nombre }} {{ cliente.apellidos }}</p>
-    <p>Perfil: {{ cliente.perfil }}</p>
-    <p style="cursor: pointer" routerLink="/informacion">Mi información</p>
-    <p style="cursor: pointer" (click)="cerrarSesion()">Salir</p>
-  </mat-drawer>
-</mat-drawer-container>
+<div
+  mdbModal
+  #frame11="mdbModal"
+  class="modal fade left"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Información Personal</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="frame11.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <form
+            [formGroup]="form1"
+            (ngSubmit)="actualizarInfo()"
+            style="display: flex; flex-direction: column; place-content: center"
+          >
+            <input type="hidden" formControlName="id" />
+            Nombre (*)
+            <input
+              type="text"
+              formControlName="nombre"
+              style="margin-bottom: 1em"
+            />
+            Apellidos (*)
+            <input
+              type="text"
+              formControlName="apellidos"
+              style="margin-bottom: 1em"
+            />
+            Provincia (*)
+            <input
+              type="text"
+              formControlName="provincia"
+              style="margin-bottom: 1em"
+            />
+            Localidad (*)
+            <input
+              type="text"
+              formControlName="localidad"
+              style="margin-bottom: 1em"
+            />
+            Domicilio (*)
+            <input
+              type="text"
+              formControlName="domicilio"
+              style="margin-bottom: 1em"
+            />
+            Imagen (*)
+            <div style="display: flex">
+              <div>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 1
+                </p>
+                <img src="../../../../assets/avatar1.png" width="30" alt="" />
+              </div>
+              <div>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 2
+                </p>
+                <img src="../../../../assets/avatar2.png" width="30" alt="" />
+              </div>
+              <div>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 3
+                </p>
+                <img src="../../../../assets/avatar3.png" width="30" alt="" />
+              </div>
+            </div>
+            <select formControlName="imagen" style="margin-top: 1em">
+              <option value="../../../../assets/avatar1.png">Avatar 1</option>
+              <option value="../../../../assets/avatar2.png">Avatar 2</option>
+              <option value="../../../../assets/avatar3.png">Avatar 3</option>
+            </select>
+            <button [disabled]="form1.invalid" mat-raised-button type="submit" style="margin-top: 2em">
+              Actualizar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div
   mdbModal
@@ -125,6 +242,7 @@
     </div>
   </div>
 </div>
+
 <div style="margin-top: 4em">
   <div class="tabla">
     <div class="btnr">
@@ -135,6 +253,17 @@
         </button>
       </div>
     </div>
+    Filtrar por:
+    <br>
+    <br>
+    <div style="display: flex; place-content: center">
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip (click)="mostrarClientes()">Clientes</mat-chip>
+        <mat-chip (click)="mostrarEmpleados()">Empleados</mat-chip>
+        <mat-chip (click)="mostrarAdmin()">Admin</mat-chip>
+      </mat-chip-list>
+    </div>
+
     <div class="theader">
       <div>Perfil</div>
       <div>Email</div>

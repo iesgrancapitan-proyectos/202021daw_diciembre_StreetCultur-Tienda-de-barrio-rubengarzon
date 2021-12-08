@@ -8,7 +8,11 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { RopaService } from 'src/app/ropa.service';
 import { Ropa } from 'src/app/Model/Ropa';
 import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PageEvent } from '@angular/material/paginator';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gestionarropa',
@@ -80,7 +84,8 @@ export class GestionarRopaComponent implements OnInit {
     private login: LoginComponent,
     private ropaServicio: RopaService,
     private clienteServicio: ClienteService,
-    readonly snackBar: MatSnackBar
+    readonly snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -101,6 +106,7 @@ export class GestionarRopaComponent implements OnInit {
           apellidos: datos['cliente'][0]['apellidos'],
           provincia: datos['cliente'][0]['provincia'],
           localidad: datos['cliente'][0]['localidad'],
+          domicilio: datos['cliente'][0]['domicilio'],
           imagen: datos['cliente'][0]['imagen'],
         });
       });
@@ -112,6 +118,7 @@ export class GestionarRopaComponent implements OnInit {
       apellidos: new FormControl(),
       provincia: new FormControl(),
       localidad: new FormControl(),
+      domicilio: new FormControl(),
       imagen: new FormControl(),
     });
 
@@ -125,11 +132,7 @@ export class GestionarRopaComponent implements OnInit {
   page_number: number = 1;
   pageSizeOptions = [5, 10, 20, 50, 100];
 
-  handlePage(e: PageEvent) {
-    console.log(e.length);
-    this.page_size = e.pageSize;
-    this.page_number = e.pageIndex + 1;
-  }
+
 
   actualizarInfo() {
     this.clienteServicio
@@ -273,5 +276,39 @@ export class GestionarRopaComponent implements OnInit {
         Novedad: datos['ropa'][0]['Novedad'],
       });
     });
+  }
+
+  openDialog(id) {
+    let id1 = {
+      Id: id,
+    };
+
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog3, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe((datos) => {
+      if (datos == true) {
+        this.ropaServicio.borrarRopa(id1).subscribe((datos) => {
+          if (datos['resultado'] == 'OK') {
+            this.ropaServicio.obtenerRopa().subscribe((datos) => {
+              this.ropa = datos['ropa'];
+            });
+          }
+        });
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'dialogo',
+  templateUrl: 'dialogo.html',
+})
+export class DialogOverviewExampleDialog3 {
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog3>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

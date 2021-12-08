@@ -48,6 +48,38 @@ export class ClienteService {
     }
   }
 
+  mostrarClientess() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarClientess.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/mostrarClientess.php'
+      );
+    }
+  }
+
+  mostrarEmpleados() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarEmpleados.php'
+      );
+    } else {
+      return this.http.get('https://streetcultur.com/php/mostrarEmpleados.php');
+    }
+  }
+
+  mostrarAdmin() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarAdmin.php'
+      );
+    } else {
+      return this.http.get('https://streetcultur.com/php/mostrarAdmin.php');
+    }
+  }
+
   mostrarClienteId(id: any) {
     if (this.env == 'Development') {
       return this.http.post(

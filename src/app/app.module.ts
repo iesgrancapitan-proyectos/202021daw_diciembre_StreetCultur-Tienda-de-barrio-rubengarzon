@@ -27,7 +27,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './Client/pedido/pedido.component';
 import { DetalleRopaComponent } from './Client/ropa/detalle-ropa/detalle-ropa.component';
-import { GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
+import { DialogOverviewExampleDialog3, GestionarRopaComponent } from './Employee/gestionarropa/gestionarropa.component';
 import { DialogOverviewExampleDialog, GestionarClientesComponent } from './admin/gestionar-clientes/gestionar-clientes.component';
 import { DialogOverviewExampleDialog1, GestionarIncidenciasComponent } from './admin/gestionar-incidencias/gestionar-incidencias.component';
 import { HeaderComponent } from './main/body/header/header.component';
@@ -62,6 +62,7 @@ import { ImageUploadModule } from 'angular2-image-upload';
     DialogOverviewExampleDialog,
     DialogOverviewExampleDialog1,
     DialogOverviewExampleDialog2,
+    DialogOverviewExampleDialog3,
     HeaderComponent,
     NovedadesComponent
   ],
