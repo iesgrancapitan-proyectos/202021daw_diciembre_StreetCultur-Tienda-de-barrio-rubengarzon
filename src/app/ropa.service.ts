@@ -91,16 +91,17 @@ export class RopaService {
     }
   }
 
-  addRopa(ropa: any) {
+  addRopa(archivo: any) {
     if (this.env == 'Development') {
+      console.log(archivo);
       return this.http.post(
         'http://localhost/streetcultur/php/addRopa.php',
-        JSON.stringify(ropa)
+        JSON.stringify(archivo)
       );
     } else {
       return this.http.post(
         'https://streetcultur.com/php/addRopa.php',
-        JSON.stringify(ropa)
+        JSON.stringify(archivo)
       );
     }
   }
@@ -119,7 +120,7 @@ export class RopaService {
     }
   }
 
-  obtenerNovedades(){
+  obtenerNovedades() {
     if (this.env == 'Development') {
       return this.http.get('http://localhost/streetcultur/php/novedades.php');
     } else {

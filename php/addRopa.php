@@ -10,7 +10,17 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "INSERT INTO ropa (Nombre, Descripcion, Talla, Precio, Cantidad, Tipo, Color, Novedad) VALUES('$params->Nombre', '$params->Descripcion', 'XS,S,M,L,XL,XXL', '$params->Precio', '50', '$params->Tipo', '$params->Color', '1')";
+$nombreArchivo = $params->nombreArchivo;
+$archivo = $params->base64;
+$archivo = base64_decode($archivo);
+
+$filePath =  "../assets/" . $nombreArchivo;
+$filePathNuevo = "../../../assets/" . $nombreArchivo;
+file_put_contents($filePath, $archivo);
+
+
+$query = "INSERT INTO ropa (Nombre, Descripcion, Talla, Precio, Cantidad, Tipo, Color, Novedad, Imagen, Imagen1) VALUES('$params->Nombre', '$params->Descripcion', 'XS,S,M,L,XL,XXL', '$params->Precio', '50', '$params->Tipo', '$params->Color', '1', '$filePathNuevo', '$filePathNuevo')";
+
 
 // REALIZA LA QUERY A LA DB
 $resultado = mysqli_query($conexion, $query);

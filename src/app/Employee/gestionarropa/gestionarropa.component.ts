@@ -17,6 +17,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class GestionarRopaComponent implements OnInit {
   estaLogueado: boolean = this.login.estaLogueado();
+  ficheroSeleccionado1: any = null;
 
   estado: any;
 
@@ -26,7 +27,13 @@ export class GestionarRopaComponent implements OnInit {
 
   hayPedidos = false;
 
+  nombreArchivo: any;
+
   form1: FormGroup;
+
+  nombreImagen: any;
+
+  base64textString: any;
 
   tiempoTranscurrido = Date.now();
   hoy = new Date(this.tiempoTranscurrido);
@@ -47,7 +54,6 @@ export class GestionarRopaComponent implements OnInit {
   };
 
   formAddRopa = new FormGroup({
-    Id: new FormControl(''),
     Nombre: new FormControl(''),
     Descripcion: new FormControl(''),
     Talla: new FormControl(''),
@@ -56,6 +62,7 @@ export class GestionarRopaComponent implements OnInit {
     Tipo: new FormControl(''),
     Color: new FormControl(''),
     Novedad: new FormControl(''),
+    Imagen: new FormControl(''),
   });
 
   formModal = new FormGroup({
@@ -99,14 +106,14 @@ export class GestionarRopaComponent implements OnInit {
       });
     }
 
-      this.form1 = new FormGroup({
-        id: new FormControl(),
-        nombre: new FormControl(),
-        apellidos: new FormControl(),
-        provincia: new FormControl(),
-        localidad: new FormControl(),
-        imagen: new FormControl(),
-      });
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      imagen: new FormControl(),
+    });
 
     this.ropaServicio.obtenerRopa().subscribe((datos) => {
       this.ropa = datos['ropa'];
@@ -125,7 +132,6 @@ export class GestionarRopaComponent implements OnInit {
   }
 
   actualizarInfo() {
-    console.log(this.form1.value);
     this.clienteServicio
       .actualizarCliente(this.form1.value)
       .subscribe((datos) => {
@@ -210,8 +216,33 @@ export class GestionarRopaComponent implements OnInit {
     });
   }
 
+  ficheroSeleccionado(event) {
+    this.ficheroSeleccionado1 = event.target.files[0];
+    this.nombreImagen = event.target.files[0].name;
+    if (this.ficheroSeleccionado1) {
+      var reader = new FileReader();
+      reader.onload = this._handleReaderLoaded.bind(this);
+      reader.readAsBinaryString(this.ficheroSeleccionado1);
+    }
+  }
+
+  _handleReaderLoaded(readerEvent) {
+    var binaryString = readerEvent.target.result;
+    this.base64textString = btoa(binaryString);
+  }
+
   addRopa() {
-    this.ropaServicio.addRopa(this.formAddRopa.value).subscribe((datos) => {
+    let archivo = {
+      Nombre: this.formAddRopa.value['Nombre'],
+      Descripcion: this.formAddRopa.value['Descripcion'],
+      Precio: this.formAddRopa.value['Precio'],
+      Tipo: this.formAddRopa.value['Tipo'],
+      Color: this.formAddRopa.value['Color'],
+      nombreArchivo: this.nombreImagen,
+      base64: this.base64textString,
+    };
+
+    this.ropaServicio.addRopa(archivo).subscribe((datos) => {
       if (datos['resultado']) {
         this.snackBar.open('La ropa se ha añadido', '', {
           duration: 6000,
@@ -219,6 +250,8 @@ export class GestionarRopaComponent implements OnInit {
         this.ropaServicio.obtenerRopa().subscribe((datos) => {
           this.ropa = datos['ropa'];
         });
+      }else{
+        console.log(datos["mensaje"])
       }
     });
   }

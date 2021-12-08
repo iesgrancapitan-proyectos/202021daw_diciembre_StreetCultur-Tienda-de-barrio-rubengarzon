@@ -242,7 +242,7 @@
             Nombre:
               <input
                 type="text"
-                placeholder="Nombre"
+                formControlName="Nombre"
                 style="margin-bottom: 1em"
               />
 
@@ -274,7 +274,7 @@
               style="margin-bottom: 1em"
             />
             Imagen:
-            <input type="file" name="" id="">
+            <input type="file" formControlName="Imagen" (change)="ficheroSeleccionado($event)">
             <br>
             <br>
             <div style="display: flex;place-content: center;">
