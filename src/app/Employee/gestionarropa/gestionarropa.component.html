@@ -425,32 +425,32 @@
       </div>
       <div class="modal-body mx-5">
         <div>
-          <form [formGroup]="formModal">
-            Nombre:
+          <form [formGroup]="formModal" (ngSubmit)="modificarRopa()">
+            Nombre(*)
             <input
               type="text"
               formControlName="Nombre"
               style="margin-bottom: 1em"
             />
-            Descripción:
+            Descripción(*)
             <input
               type="text"
               placeholder="Descripción"
+              formControlName="Descripcion"
               style="margin-bottom: 1em"
             />
-            Precio:
-            <input type="number" placeholder="2" style="margin-bottom: 1em" />
-            <input
-              type="text"
-              placeholder="Cantidad"
-              style="margin-bottom: 1em"
-            />
-            Tipo:
-            <input type="text" placeholder="Tipo" style="margin-bottom: 1em" />
-            Color:
-            <input type="text" placeholder="Color" style="margin-bottom: 1em" />
+            Precio(*)
+            <input type="number"
+            formControlName="Precio" placeholder="2" style="margin-bottom: 1em" />
+            Tipo(*)
+            <input type="text" placeholder="Tipo"
+            formControlName="Tipo" style="margin-bottom: 1em" />
+            Color(*)
+            <input type="text" placeholder="Color"
+            formControlName="Color"
+            style="margin-bottom: 1em" />
             <div style="display: flex; place-content: center">
-              <button mat-raised-button style="width: 20em">Enviar</button>
+              <button [disabled]="formModal.invalid" mat-raised-button style="width: 20em">Enviar</button>
             </div>
           </form>
         </div>

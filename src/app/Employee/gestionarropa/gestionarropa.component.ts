@@ -27,6 +27,8 @@ export class GestionarRopaComponent implements OnInit {
 
   id: any;
 
+  formModal:FormGroup;
+
   clientes: any;
 
   hayPedidos = false;
@@ -69,16 +71,8 @@ export class GestionarRopaComponent implements OnInit {
     Imagen: new FormControl('', Validators.required),
   });
 
-  formModal = new FormGroup({
-    Nombre: new FormControl('aaa'),
-    Descripcion: new FormControl('aaa'),
-    Talla: new FormControl('aaa'),
-    Precio: new FormControl('aaa'),
-    Cantidad: new FormControl('aaa'),
-    Tipo: new FormControl('aaa'),
-    Color: new FormControl('aaa'),
-    Novedad: new FormControl('aaa'),
-  });
+
+
 
   constructor(
     private login: LoginComponent,
@@ -92,6 +86,18 @@ export class GestionarRopaComponent implements OnInit {
     let cliente = {
       idcliente: sessionStorage.getItem('id'),
     };
+
+    this.formModal = new FormGroup({
+      Id: new FormControl('', Validators.required),
+      Nombre: new FormControl('', Validators.required),
+      Descripcion: new FormControl('', Validators.required),
+      Talla: new FormControl('', Validators.required),
+      Precio: new FormControl('', Validators.required),
+      Cantidad: new FormControl('', Validators.required),
+      Tipo: new FormControl('', Validators.required),
+      Color: new FormControl('', Validators.required),
+      Novedad: new FormControl('', Validators.required),
+    });
     if (this.estaLogueado) {
       this.obtenerDatos();
       let cliente = {
@@ -131,8 +137,6 @@ export class GestionarRopaComponent implements OnInit {
   page_size: number = 3;
   page_number: number = 1;
   pageSizeOptions = [5, 10, 20, 50, 100];
-
-
 
   actualizarInfo() {
     this.clienteServicio
@@ -193,19 +197,8 @@ export class GestionarRopaComponent implements OnInit {
     this.estaLogueado = false;
   }
 
-  modificarRopa(id, nombre, descripcion, talla, precio, cantidad, tipo, color) {
-    let ropa = {
-      Id: id,
-      Nombre: nombre,
-      Descripcion: descripcion,
-      Talla: talla,
-      Precio: precio,
-      Cantidad: cantidad,
-      Tipo: tipo,
-      Color: color,
-      Novedad: 1,
-    };
-    this.ropaServicio.actualizarRopa(ropa).subscribe((datos) => {
+  modificarRopa() {
+    this.ropaServicio.actualizarRopa(this.formModal.value).subscribe((datos) => {
       if (datos['resultado'] == 'OK') {
         this.ropaServicio.obtenerRopa().subscribe((datos) => {
           this.ropa = datos['ropa'];
@@ -264,6 +257,7 @@ export class GestionarRopaComponent implements OnInit {
       Id: id,
     };
     this.ropaServicio.obtenerRopaPorId(ropa).subscribe((datos) => {
+      console.log(datos['ropa'][0]['Descripcion']);
       this.formModal.setValue({
         Id: datos['ropa'][0]['Id'],
         Nombre: datos['ropa'][0]['Nombre'],

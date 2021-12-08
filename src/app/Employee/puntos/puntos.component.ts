@@ -126,7 +126,7 @@ export class GestionarPuntosComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
-          this.snackBar.open('Se ha actualizado la información', '', {
+          this.snackBar.open('Información actualizada', '', {
             duration: 6000,
           });
         } else {
@@ -144,7 +144,7 @@ export class GestionarPuntosComponent implements OnInit {
     };
     this.puntosServicio.actualizarPuntos(puntoss).subscribe((datos) => {
       if (datos['resultado'] == 'OK') {
-        this.snackBar.open('Los puntos se han modificado', '', {
+        this.snackBar.open('Puntos actualizados', '', {
           duration: 6000,
         });
       } else {
