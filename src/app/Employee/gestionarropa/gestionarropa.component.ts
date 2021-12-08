@@ -7,7 +7,7 @@ import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { RopaService } from 'src/app/ropa.service';
 import { Ropa } from 'src/app/Model/Ropa';
-import { Form, FormControl, FormGroup } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
@@ -54,15 +54,15 @@ export class GestionarRopaComponent implements OnInit {
   };
 
   formAddRopa = new FormGroup({
-    Nombre: new FormControl(''),
-    Descripcion: new FormControl(''),
-    Talla: new FormControl(''),
-    Precio: new FormControl(''),
-    Cantidad: new FormControl(''),
-    Tipo: new FormControl(''),
-    Color: new FormControl(''),
-    Novedad: new FormControl(''),
-    Imagen: new FormControl(''),
+    Nombre: new FormControl('', Validators.required),
+    Descripcion: new FormControl('', Validators.required),
+    Talla: new FormControl('', Validators.required),
+    Precio: new FormControl('', Validators.required),
+    Cantidad: new FormControl('', Validators.required),
+    Tipo: new FormControl('', Validators.required),
+    Color: new FormControl('', Validators.required),
+    Novedad: new FormControl('', Validators.required),
+    Imagen: new FormControl('', Validators.required),
   });
 
   formModal = new FormGroup({
@@ -250,8 +250,8 @@ export class GestionarRopaComponent implements OnInit {
         this.ropaServicio.obtenerRopa().subscribe((datos) => {
           this.ropa = datos['ropa'];
         });
-      }else{
-        console.log(datos["mensaje"])
+      } else {
+        console.log(datos['mensaje']);
       }
     });
   }

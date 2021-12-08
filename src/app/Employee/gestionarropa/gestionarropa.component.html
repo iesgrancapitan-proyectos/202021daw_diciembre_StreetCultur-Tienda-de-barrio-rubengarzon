@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" style="height: 80px;">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
@@ -20,7 +20,7 @@
     </button>
   </mat-menu>
 
-<div
+  <div
     *ngIf="cliente.imagen != null; else noavatar"
     style="display: flex; align-items: center"
   >
@@ -40,12 +40,15 @@
     </div>
   </div>
   <ng-template #noavatar>
-    <div *ngIf="estaLogueado == true; else aa" style="display: flex; align-items: center">
+    <div
+      *ngIf="estaLogueado == true; else aa"
+      style="display: flex; align-items: center"
+    >
       <a (click)="frame11.show()">
         <img src="../../../../assets/avatar1.png" width="70" class="avatar" />
       </a>
-      <div style="display: flex; flex-direction: column;align-items: center">
-        <p style="margin-left: 1em; font-size: 12px;margin-bottom: 0">
+      <div style="display: flex; flex-direction: column; align-items: center">
+        <p style="margin-left: 1em; font-size: 12px; margin-bottom: 0">
           {{ cliente.nombre }} {{ cliente.apellidos }}
         </p>
         <hr
@@ -58,7 +61,6 @@
     </div>
     <ng-template #aa> </ng-template>
   </ng-template>
-
 
   <span class="example-spacer"></span>
 
@@ -111,8 +113,6 @@
     <mat-icon matBadgeColor="accent">exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
-
-
 
 <div
   mdbModal
@@ -239,49 +239,99 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <form [formGroup]="formAddRopa" (ngSubmit)="addRopa()">
-            Nombre:
-              <input
-                type="text"
-                formControlName="Nombre"
-                style="margin-bottom: 1em"
-              />
+            <div style="display: flex">
+              <div style="display: flex; flex-direction: column;margin-right: 2em">
+                Nombre:
+                <input
+                  type="text"
+                  formControlName="Nombre"
+                  style="margin-bottom: 1em"
+                />
+                <p
+                  style="color: red"
+                  *ngIf="formAddRopa.get('Nombre').hasError('required')"
+                >
+                  Este campo es requerido
+                </p>
+              </div>
 
-            Descripción
-                           <input
-              type="text"
-              formControlName="Descripcion"
-              style="margin-bottom: 1em"
-            />
+              <div style="display: flex; flex-direction: column">
+                Descripción
+                <input
+                  type="text"
+                  formControlName="Descripcion"
+                  style="margin-bottom: 1em"
+                />
+                <p
+                  style="color: red"
+                  *ngIf="formAddRopa.get('Descripcion').hasError('required')"
+                >
+                  Este campo es requerido
+                </p>
+              </div>
+            </div>
 
-              Precio:
-              <input
+            Precio:
+            <input
               type="number"
               formControlName="Precio"
               style="margin-bottom: 1em"
             />
+            <p
+              style="color: red"
+              *ngIf="formAddRopa.get('Precio').hasError('required')"
+            >
+              Este campo es requerido
+            </p>
 
-              Tipo:
-              <select formControlName="Tipo">
-                <option value="Sudadera">Sudadera</option>
-                <option value="Pantalon">Pantalon</option>
-                <option value="Chandal">Chandal</option>
-                <option value="Accesorio">Accesorio</option>
-                <option value="Abrigo">Abrigo</option>
-                <option value="Camiseta">Camiseta</option>
-              </select>
-
-              Color:
-              <input
+            Tipo:
+            <select formControlName="Tipo">
+              <option value="Sudadera">Sudadera</option>
+              <option value="Pantalon">Pantalon</option>
+              <option value="Chandal">Chandal</option>
+              <option value="Accesorio">Accesorio</option>
+              <option value="Abrigo">Abrigo</option>
+              <option value="Camiseta">Camiseta</option>
+            </select>
+            <p
+              style="color: red"
+              *ngIf="formAddRopa.get('Tipo').hasError('required')"
+            >
+              Este campo es requerido
+            </p>
+            Color:
+            <input
               type="text"
               formControlName="Color"
               style="margin-bottom: 1em"
             />
+            <p
+              style="color: red"
+              *ngIf="formAddRopa.get('Color').hasError('required')"
+            >
+              Este campo es requerido
+            </p>
             Imagen:
-            <input type="file" formControlName="Imagen" (change)="ficheroSeleccionado($event)">
-            <br>
-            <br>
-            <div style="display: flex;place-content: center;">
-              <button mat-raised-button style="width: 20em;">Enviar</button>
+            <input
+              type="file"
+              formControlName="Imagen"
+              (change)="ficheroSeleccionado($event)"
+            />
+            <p
+              style="color: red"
+              *ngIf="formAddRopa.get('Imagen').hasError('required')"
+            >
+              Este campo es requerido
+            </p>
+            <br />
+            <div style="display: flex; place-content: center">
+              <button
+                [disabled]="formAddRopa.invalid"
+                mat-raised-button
+                style="width: 20em"
+              >
+                Enviar
+              </button>
             </div>
           </form>
         </div>
@@ -294,12 +344,11 @@
   <div class="tabla">
     <div class="btnr">
       <div class="ar">
-        <h2 style="text-align: left;">Gestionar Ropa</h2>
+        <h2 style="text-align: left">Gestionar Ropa</h2>
       </div>
       <div>
         <button mat-stroked-button (click)="frame4.show()">Añadir Ropa</button>
       </div>
-
     </div>
     <div class="theader">
       <div>Nombre</div>
@@ -382,8 +431,8 @@
             <input type="text" placeholder="Tipo" style="margin-bottom: 1em" />
             Color:
             <input type="text" placeholder="Color" style="margin-bottom: 1em" />
-            <div style="display: flex;place-content: center;">
-              <button mat-raised-button style="width: 20em;">Enviar</button>
+            <div style="display: flex; place-content: center">
+              <button mat-raised-button style="width: 20em">Enviar</button>
             </div>
           </form>
         </div>
