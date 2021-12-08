@@ -82,13 +82,9 @@ export class PedidoComponent implements OnInit {
       apellidos: new FormControl(),
       provincia: new FormControl(),
       localidad: new FormControl(),
+      domicilio: new FormControl(),
       imagen: new FormControl(),
     });
-
-    /*  this.form2 = this.fb.group({
-       nombre: ['aaa', [Validators.required]],
-       nombre: ['aaa', [Validators.required]],
-     }); */
 
     this.form2 = new FormGroup({
       nombre: new FormControl('', Validators.required),
@@ -131,8 +127,6 @@ export class PedidoComponent implements OnInit {
       this.puntos = datos['puntos'][0]['puntos'];
     });
 
-    console.log(this.total);
-
     this.canjearPuntos = this.fb.group({
       puntos: ['', [Validators.min(0)]],
     });
@@ -146,6 +140,7 @@ export class PedidoComponent implements OnInit {
         apellidos: datos['cliente'][0]['apellidos'],
         provincia: datos['cliente'][0]['provincia'],
         localidad: datos['cliente'][0]['localidad'],
+        domicilio: datos['cliente'][0]['domicilio'],
         imagen: datos['cliente'][0]['imagen'],
       });
     });
@@ -184,7 +179,8 @@ export class PedidoComponent implements OnInit {
       .actualizarCliente(this.form1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
-          this.snackBar.open('Se ha actualizado la información', '', {
+          this.obtenerDatos();
+          this.snackBar.open('Información actualizada', '', {
             duration: 6000,
           });
         } else {
@@ -238,26 +234,21 @@ export class PedidoComponent implements OnInit {
       id: sessionStorage.getItem('id'),
     };
 
-    this.pedidoServicio.borrarComprarAhora().subscribe((datos) => {
-      console.log(datos['resultado']);
-    });
-
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
+        this.pedidoServicio.borrarComprarAhora();
         let clienteid = {
           idcliente: sessionStorage.getItem('id'),
           puntos: 0,
         };
         this.puntosServicio.obtenerPuntos(clienteid).subscribe((datos) => {
           clienteid.puntos = parseInt(datos['puntos']) + 3;
-          this.puntosServicio.actualizarPuntos(clienteid).subscribe((datos) => {
-            /* console.log(datos['mensaje'] + ' : ' + datos['resultado']); */
-          });
+          this.puntosServicio
+            .actualizarPuntos(clienteid)
+            .subscribe((datos) => {});
         });
         this.router.navigateByUrl('/');
-        this.carroServicio.borrarProductos(clienteid).subscribe((datos) => {
-          console.log(datos['resultado']);
-        });
+        this.carroServicio.borrarProductos(clienteid).subscribe((datos) => {});
         this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

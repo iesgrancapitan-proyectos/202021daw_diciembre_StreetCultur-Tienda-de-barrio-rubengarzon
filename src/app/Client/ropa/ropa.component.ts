@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { PuntosService } from 'src/app/puntos.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ClienteService } from 'src/app/cliente.service';
+import { PedidoService } from 'src/app/pedido.service';
 
 @Component({
   selector: 'app-ropa',
@@ -55,17 +56,22 @@ export class RopaComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private puntosServicio: PuntosService,
-    private clienteServicio: ClienteService
+    private clienteServicio: ClienteService,
+    private pedidoServicio: PedidoService
   ) {}
 
   ngOnInit() {
     this.mostrarSudaderas();
+    this.pedidoServicio.borrarComprarAhora().subscribe((datos) => {
+      console.log(datos["resultado"])
+    });
      this.form1 = new FormGroup({
        id: new FormControl(),
        nombre: new FormControl(),
        apellidos: new FormControl(),
        provincia: new FormControl(),
        localidad: new FormControl(),
+       domicilio: new FormControl(),
        imagen: new FormControl(),
      });
 
@@ -90,6 +96,7 @@ export class RopaComponent implements OnInit {
            apellidos: datos['cliente'][0]['apellidos'],
            provincia: datos['cliente'][0]['provincia'],
            localidad: datos['cliente'][0]['localidad'],
+           domicilio: datos['cliente'][0]['domicilio'],
            imagen: datos['cliente'][0]['imagen'],
          });
        });

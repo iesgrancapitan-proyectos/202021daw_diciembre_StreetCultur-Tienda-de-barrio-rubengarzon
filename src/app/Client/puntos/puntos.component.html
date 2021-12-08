@@ -184,7 +184,7 @@
       <p>Si.</p>
       </mat-card>
 
-      <div
+   <div
   mdbModal
   #frame11="mdbModal"
   class="modal fade left"
@@ -217,20 +217,38 @@
           >
             <input type="hidden" formControlName="id" />
             Nombre
-            <input type="text" formControlName="nombre" />
+            <input type="text" formControlName="nombre" style="margin-bottom: 1em"/>
             Apellidos
-            <input type="text" formControlName="apellidos" />
+            <input type="text" formControlName="apellidos" style="margin-bottom: 1em"/>
             Provincia
-            <input type="text" formControlName="provincia" />
+            <input type="text" formControlName="provincia" style="margin-bottom: 1em"/>
             Localidad
-            <input type="text" formControlName="localidad" />
+            <input type="text" formControlName="localidad" style="margin-bottom: 1em"/>
+            Domicilio
+            <input type="text" formControlName="domicilio" style="margin-bottom: 1em"/>
             Imagen
-            <select formControlName="imagen">
+            <div style="display: flex">
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 1</p>
+                <img src="../../../../assets/avatar1.png" width="30" alt="" />
+              </div>
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 2</p>
+                <img src="../../../../assets/avatar2.png" width="30" alt="" />
+              </div>
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 3</p>
+                <img src="../../../../assets/avatar3.png" width="30" alt="" />
+              </div>
+            </div>
+            <select formControlName="imagen" style="margin-top: 1em;">
               <option value="../../../../assets/avatar1.png">Avatar 1</option>
               <option value="../../../../assets/avatar2.png">Avatar 2</option>
               <option value="../../../../assets/avatar3.png">Avatar 3</option>
             </select>
-            <button type="submit">Actualizar</button>
+            <button mat-raised-button type="submit" style="margin-top: 2em">
+              Actualizar
+            </button>
           </form>
         </div>
       </div>

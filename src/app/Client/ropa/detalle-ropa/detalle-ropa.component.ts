@@ -83,6 +83,9 @@ export class DetalleRopaComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerDatos();
+    this.pedidoServicio.borrarComprarAhora().subscribe((datos) => {
+      console.log(datos['resultado']);
+    });
     this.contarProductos();
     this.mostrarSudadera(this.rutaActiva.snapshot.params.id);
     let cliente = {
@@ -98,6 +101,7 @@ export class DetalleRopaComponent implements OnInit {
       apellidos: new FormControl(),
       provincia: new FormControl(),
       localidad: new FormControl(),
+      domicilio: new FormControl(),
       imagen: new FormControl(),
     });
     let email = sessionStorage.getItem('email');
@@ -109,6 +113,7 @@ export class DetalleRopaComponent implements OnInit {
         apellidos: datos['cliente'][0]['apellidos'],
         provincia: datos['cliente'][0]['provincia'],
         localidad: datos['cliente'][0]['localidad'],
+        domicilio: datos['cliente'][0]['domicilio'],
         imagen: datos['cliente'][0]['imagen'],
       });
     });

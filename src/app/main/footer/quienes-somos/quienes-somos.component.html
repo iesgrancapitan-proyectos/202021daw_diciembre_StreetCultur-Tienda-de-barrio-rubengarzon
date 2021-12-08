@@ -1,32 +1,27 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" style="height: 80px">
   <button mat-icon-button class="icon-button" [matMenuTriggerFor]="menu">
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/']">INICIO</button>
-    <button mat-menu-item [routerLink]="['/sudaderas']">SUDADERAS</button>
-    <button mat-menu-item [routerLink]="['/pantalones']">PANTALONES</button>
-    <button mat-menu-item [routerLink]="['/zapatillas']">ZAPATILLAS</button>
-    <button mat-menu-item [routerLink]="['/accesorios']">ACCESORIOS</button>
+    <button mat-menu-item class="item" [routerLink]="['/']">INICIO</button>
+    <button mat-menu-item class="item" [routerLink]="['/ropa']">ROPA</button>
+    <button mat-menu-item class="item" [routerLink]="['/novedades']">
+      NOVEDADES
+    </button>
+    <button mat-menu-item class="item" [routerLink]="['/contacto']">
+      CONTACTO
+    </button>
   </mat-menu>
-
-  <img src="../../../../assets/logo.gif" alt="">
 
   <span class="example-spacer"></span>
 
   <button mat-button class="item" [routerLink]="['/']">INICIO</button>
-  <button mat-button class="item" [routerLink]="['/sudaderas']">
-    SUDADERAS
+  <button mat-button class="item" [routerLink]="['/ropa']">ROPA</button>
+  <img src="../../../assets/S.png" width="120" alt="">
+  <button mat-button class="item" [routerLink]="['/novedades']">
+    NOVEDADES
   </button>
-  <button mat-button class="item" [routerLink]="['/pantalones']">
-    PANTALONES
-  </button>
-  <button mat-button class="item" [routerLink]="['/zapatillas']">
-    ZAPATILLAS
-  </button>
-  <button mat-button class="item" [routerLink]="['/accesorios']">
-    ACCESORIOS
-  </button>
+  <button mat-button class="item" [routerLink]="['/contacto']">CONTACTO</button>
 
   <span class="example-spacer"></span>
   <button
@@ -77,7 +72,6 @@
 </mat-toolbar>
 
 
-
 <div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -110,5 +104,5 @@
 </p>
 <p>Disponemos de un <strong>sistema de puntos</strong> muy sencillo, por cada compra el cliente recibirá puntos que con equivalentes a dinero real (€). Si una prenda cuesta 10€ y tienes 5 puntos, la prenda te saldrá por 5€</p>
 <p>Buscamos las <strong>últimas tendencias en moda</strong> a la vez que nos adaptamos a las exigencias de nuestros clientes. Porque en streetcultur tú eres el auténtico protagonista. Cuidamos hasta el último detalle para que disfrutes de la ropa que mejor se adapta a tu estilo y personalidad.</p>
-<img src="https://www.torontohispano.com/wp-content/uploads/2018/12/trabajo-lider-amigos.jpg" alt="">
+<img class="qns" src="https://www.torontohispano.com/wp-content/uploads/2018/12/trabajo-lider-amigos.jpg" alt="">
 <app-footer></app-footer>

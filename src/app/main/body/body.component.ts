@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/login.service';
 import { PuntosService } from 'src/app/puntos.service';
 import { LoginComponent } from '../login/login.component';
 import { ClienteService } from 'src/app/cliente.service';
+import { PedidoService } from 'src/app/pedido.service';
 
 
 @Component({
@@ -43,10 +44,14 @@ export class BodyComponent implements OnInit {
     private login: LoginComponent,
     readonly snackBar: MatSnackBar,
     private carritoServicio: CarroService,
-    private clienteServicio: ClienteService
+    private clienteServicio: ClienteService,
+    private pedidoServicio1: PedidoService
   ) {}
 
   ngOnInit() {
+    this.pedidoServicio1.borrarComprarAhora().subscribe((datos) => {
+      console.log(datos['resultado']);
+    });
     this.obtenerDatos();
     this.contarProductos();
     let cliente = {

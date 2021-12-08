@@ -150,20 +150,38 @@
           >
             <input type="hidden" formControlName="id" />
             Nombre
-            <input type="text" formControlName="nombre" />
+            <input type="text" formControlName="nombre" style="margin-bottom: 1em"/>
             Apellidos
-            <input type="text" formControlName="apellidos" />
+            <input type="text" formControlName="apellidos" style="margin-bottom: 1em"/>
             Provincia
-            <input type="text" formControlName="provincia" />
+            <input type="text" formControlName="provincia" style="margin-bottom: 1em"/>
             Localidad
-            <input type="text" formControlName="localidad" />
+            <input type="text" formControlName="localidad" style="margin-bottom: 1em"/>
+            Domicilio
+            <input type="text" formControlName="domicilio" style="margin-bottom: 1em"/>
             Imagen
-            <select formControlName="imagen">
+            <div style="display: flex">
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 1</p>
+                <img src="../../../../assets/avatar1.png" width="30" alt="" />
+              </div>
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 2</p>
+                <img src="../../../../assets/avatar2.png" width="30" alt="" />
+              </div>
+              <div>
+                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 3</p>
+                <img src="../../../../assets/avatar3.png" width="30" alt="" />
+              </div>
+            </div>
+            <select formControlName="imagen" style="margin-top: 1em;">
               <option value="../../../../assets/avatar1.png">Avatar 1</option>
               <option value="../../../../assets/avatar2.png">Avatar 2</option>
               <option value="../../../../assets/avatar3.png">Avatar 3</option>
             </select>
-            <button type="submit">Actualizar</button>
+            <button mat-raised-button type="submit" style="margin-top: 2em">
+              Actualizar
+            </button>
           </form>
         </div>
       </div>
@@ -225,7 +243,11 @@
 
       <!--Grid row-->
       <div class="row">
-        <form [formGroup]="form2"  (ngSubmit)="validarDatos()" style="display: flex;">
+        <form
+          [formGroup]="form2"
+          (ngSubmit)="validarDatos()"
+          style="display: flex"
+        >
           <!--Grid column-->
           <div class="col-md-8 mb-4">
             <!--Card-->
@@ -296,15 +318,14 @@
                     required
                   />
                   <mat-error
-                        *ngIf="
-                          form2.get('email').errors &&
-                          form2.get('email').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('email').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                    *ngIf="
+                      form2.get('email').errors && form2.get('email').dirty
+                    "
+                  >
+                    <p *ngIf="form2.get('email').hasError('required')">
+                      Este campo es requerido
+                    </p>
+                  </mat-error>
                 </div>
 
                 <!--address-->
@@ -317,15 +338,15 @@
                     required
                   />
                   <mat-error
-                        *ngIf="
-                          form2.get('domicilio').errors &&
-                          form2.get('domicilio').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('domicilio').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                    *ngIf="
+                      form2.get('domicilio').errors &&
+                      form2.get('domicilio').dirty
+                    "
+                  >
+                    <p *ngIf="form2.get('domicilio').hasError('required')">
+                      Este campo es requerido
+                    </p>
+                  </mat-error>
                 </div>
 
                 <!--Grid row-->
@@ -400,15 +421,15 @@
                       Please select a valid country.
                     </div>
                     <mat-error
-                        *ngIf="
-                          form2.get('provincia').errors &&
-                          form2.get('provincia').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('provincia').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                      *ngIf="
+                        form2.get('provincia').errors &&
+                        form2.get('provincia').dirty
+                      "
+                    >
+                      <p *ngIf="form2.get('provincia').hasError('required')">
+                        Este campo es requerido
+                      </p>
+                    </mat-error>
                   </div>
                   <!--Grid column-->
 
@@ -426,15 +447,15 @@
                       Please provide a valid state.
                     </div>
                     <mat-error
-                        *ngIf="
-                          form2.get('localidad').errors &&
-                          form2.get('localidad').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('localidad').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                      *ngIf="
+                        form2.get('localidad').errors &&
+                        form2.get('localidad').dirty
+                      "
+                    >
+                      <p *ngIf="form2.get('localidad').hasError('required')">
+                        Este campo es requerido
+                      </p>
+                    </mat-error>
                   </div>
                   <!--Grid column-->
 
@@ -442,52 +463,53 @@
                   <div class="col-lg-4 col-md-6 mb-4">
                     <label for="codigo">Codigo Postal</label>
                     <input
-                      type="text"
+                      type="number"
                       class="form-control"
                       formControlName="codigopostal"
                       required
                     />
                     <div class="invalid-feedback">Zip code required.</div>
                     <mat-error
-                        *ngIf="
-                          form2.get('codigopostal').errors &&
-                          form2.get('codigopostal').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('codigopostal').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                      *ngIf="
+                        form2.get('codigopostal').errors &&
+                        form2.get('codigopostal').dirty
+                      "
+                    >
+                      <p *ngIf="form2.get('codigopostal').hasError('required')">
+                        Este campo es requerido
+                      </p>
+                    </mat-error>
                   </div>
                   <!--Grid column-->
-                   <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="col-lg-4 col-md-6 mb-4">
                     <label for="codigo">Móvil</label>
                     <input
-                      type="tel"
+                      type="number"
                       class="form-control"
                       formControlName="movil"
                       required
                     />
                     <mat-error
-                        *ngIf="
-                          form2.get('movil').errors &&
-                          form2.get('movil').dirty
-                        "
-                      >
-                        <p *ngIf="form2.get('movil').hasError('required')">
-                          Este campo es requerido
-                        </p>
-                      </mat-error>
+                      *ngIf="
+                        form2.get('movil').errors && form2.get('movil').dirty
+                      "
+                    >
+                      <p *ngIf="form2.get('movil').hasError('required')">
+                        Este campo es requerido
+                      </p>
+                    </mat-error>
                   </div>
                 </div>
-                  <!--Grid row-->
-                <div style="text-align: center;">
-                  <button mat-raised-button type="submit">Actualizar Información</button>
+                <!--Grid row-->
+                <div style="text-align: center">
+                  <button mat-raised-button type="submit">
+                    Actualizar Información
+                  </button>
                 </div>
 
                 <!-- sb-sm9yh8614634@business.example.com -->
                 <!-- R})k5YD9 -->
-                <div id="miPaypalBoton" style="margin-top:2em"></div>
+                <div id="miPaypalBoton" style="margin-top: 2em"></div>
               </div>
             </div>
             <!--/.Card-->
