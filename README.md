@@ -7,6 +7,11 @@ _Stackblitz es un IDE en la nube que permite crear aplicaciones fullstack con fr
 ## Requisitos📋
 _Se necesita Nodejs, npm y angular_
 
+- **nodejs** es un entorno de ejecución para JavaScript
+- **npm** gestor de paquetes de nodejs
+- **angular** es un framework desarrollado en typescript basado en componentes y en una única página
+
+
 ### Instalación 🔧
 
 Aquí te explico como instalar estos componentes necesarios [instalación](https://github.com/iesgrancapitan-proyectos/202021daw_diciembre_StreetCultur-Tienda-de-barrio-rubengarzon/wiki/instalacion_angular)
