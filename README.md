@@ -1,49 +1,21 @@
 # STREETCULTUR
 _El proyecto consiste en una tienda online que vende ropa unisex de estilo urbano, con la peculiaridad de tener un sistema de puntos._
 
-## Comenzando 🚀
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
-_Mira [Despliegue](http://github.com) para conocer como desplegar el proyecto._
-
 ## Probar Angular sin instalar nada
 _Stackblitz es un IDE en la nube que permite crear aplicaciones fullstack con framework ya instalados como por ejemplo angular_.  [Stackblitz](https://stackblitz.com/edit/angular)
 
 ## Requisitos📋
 _Se necesita Nodejs, npm y angular_
 
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
-```
-
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
-
-```
-Da un ejemplo
-```
-
-_Y repite_
-
-```
-hasta finalizar
-```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
+Aquí te explico como instalar estos componentes necesarios [instalación](https://github.com/iesgrancapitan-proyectos/202021daw_diciembre_StreetCultur-Tienda-de-barrio-rubengarzon/wiki/instalacion_angular)
 
 
 ## Despliegue
 
-_Agrega notas adicionales sobre como hacer deploy_
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_Mira [Despliegue](https://github.com/iesgrancapitan-proyectos/202021daw_diciembre_StreetCultur-Tienda-de-barrio-rubengarzon/wiki/Manual_Despliegue) para conocer como desplegar el proyecto._
 
 ## Construido con 🛠️
 
