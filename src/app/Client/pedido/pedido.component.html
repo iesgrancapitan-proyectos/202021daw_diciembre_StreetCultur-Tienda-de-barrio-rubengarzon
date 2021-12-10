@@ -150,31 +150,63 @@
           >
             <input type="hidden" formControlName="id" />
             Nombre
-            <input type="text" formControlName="nombre" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="nombre"
+              style="margin-bottom: 1em"
+            />
             Apellidos
-            <input type="text" formControlName="apellidos" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="apellidos"
+              style="margin-bottom: 1em"
+            />
             Provincia
-            <input type="text" formControlName="provincia" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="provincia"
+              style="margin-bottom: 1em"
+            />
             Localidad
-            <input type="text" formControlName="localidad" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="localidad"
+              style="margin-bottom: 1em"
+            />
             Domicilio
-            <input type="text" formControlName="domicilio" style="margin-bottom: 1em"/>
+            <input
+              type="text"
+              formControlName="domicilio"
+              style="margin-bottom: 1em"
+            />
             Imagen
             <div style="display: flex">
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 1</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 1
+                </p>
                 <img src="../../../../assets/avatar1.png" width="30" alt="" />
               </div>
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 2</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 2
+                </p>
                 <img src="../../../../assets/avatar2.png" width="30" alt="" />
               </div>
               <div>
-                <p style="font-size: 10px;margin-bottom:0;margin-right:10px">Avatar 3</p>
+                <p
+                  style="font-size: 10px; margin-bottom: 0; margin-right: 10px"
+                >
+                  Avatar 3
+                </p>
                 <img src="../../../../assets/avatar3.png" width="30" alt="" />
               </div>
             </div>
-            <select formControlName="imagen" style="margin-top: 1em;">
+            <select formControlName="imagen" style="margin-top: 1em">
               <option value="../../../../assets/avatar1.png">Avatar 1</option>
               <option value="../../../../assets/avatar2.png">Avatar 2</option>
               <option value="../../../../assets/avatar3.png">Avatar 3</option>
@@ -243,11 +275,7 @@
 
       <!--Grid row-->
       <div class="row">
-        <form
-          [formGroup]="form2"
-          (ngSubmit)="validarDatos()"
-          style="display: flex"
-        >
+        <form [formGroup]="form2" (change)="comprobar()" style="display: flex">
           <!--Grid column-->
           <div class="col-md-8 mb-4">
             <!--Card-->
@@ -265,7 +293,6 @@
                         type="text"
                         class="form-control"
                         formControlName="nombre"
-                        required
                       />
                       <mat-error
                         *ngIf="
@@ -290,7 +317,6 @@
                         type="text"
                         class="form-control"
                         formControlName="apellidos"
-                        required
                       />
                       <mat-error
                         *ngIf="
@@ -315,7 +341,6 @@
                     type="text"
                     class="form-control"
                     formControlName="email"
-                    required
                   />
                   <mat-error
                     *ngIf="
@@ -335,7 +360,6 @@
                     type="text"
                     class="form-control"
                     formControlName="domicilio"
-                    required
                   />
                   <mat-error
                     *ngIf="
@@ -357,7 +381,6 @@
                     <select
                       class="custom-select d-block w-100"
                       formControlName="provincia"
-                      required
                     >
                       <option value="">Elige Provincia</option>
                       <option value="Álava/Araba">Álava/Araba</option>
@@ -440,7 +463,6 @@
                       type="text"
                       class="form-control"
                       formControlName="localidad"
-                      required
                     />
 
                     <div class="invalid-feedback">
@@ -466,7 +488,6 @@
                       type="number"
                       class="form-control"
                       formControlName="codigopostal"
-                      required
                     />
                     <div class="invalid-feedback">Zip code required.</div>
                     <mat-error
@@ -487,7 +508,6 @@
                       type="number"
                       class="form-control"
                       formControlName="movil"
-                      required
                     />
                     <mat-error
                       *ngIf="
@@ -502,7 +522,11 @@
                 </div>
                 <!--Grid row-->
                 <div style="text-align: center">
-                  <button mat-raised-button type="submit">
+                  <button
+                    (click)="actualizarInfo2()"
+                    mat-raised-button
+                    type="submit"
+                  >
                     Actualizar Información
                   </button>
                 </div>

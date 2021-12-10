@@ -97,17 +97,6 @@ export class PedidoComponent implements OnInit {
       movil: new FormControl('', Validators.required),
     });
 
-    if (this.form2.valid) {
-      render({
-        id: '#miPaypalBoton',
-        currency: '€',
-        value: '1.0',
-        onApprove: (details) => {
-          this.insertarPedido(this.cliente.codigopostal);
-        },
-      });
-    }
-
     if (!this.estaLogueado) {
       this.router.navigateByUrl('/');
       this.snackBar.open('Necesitas iniciar sesión', '', {
@@ -162,6 +151,21 @@ export class PedidoComponent implements OnInit {
         movil: datos['cliente'][0]['movil'],
       });
 
+      console.log(this.form2.value);
+
+      if (this.form2.valid) {
+        render({
+          id: '#miPaypalBoton',
+          currency: '€',
+          value: '1.0',
+          onApprove: (details) => {
+            this.insertarPedido(this.cliente.codigopostal);
+          },
+        });
+      } else {
+        document.getElementById('miPaypalBoton').remove();
+      }
+
       this.cliente.perfil = datos['cliente'][0]['perfil'];
       this.cliente.nombre = datos['cliente'][0]['nombre'];
       this.cliente.apellidos = datos['cliente'][0]['apellidos'];
@@ -174,9 +178,42 @@ export class PedidoComponent implements OnInit {
     });
   }
 
+  comprobar(){
+    if (this.form2.valid) {
+      document.getElementById('miPaypalBoton').style.display = 'block';
+      render({
+        id: '#miPaypalBoton',
+        currency: '€',
+        value: '1.0',
+        onApprove: (details) => {
+          this.insertarPedido(this.cliente.codigopostal);
+        },
+      });
+    } else {
+      document.getElementById('miPaypalBoton').style.display = "none";
+    }
+  }
+
   actualizarInfo() {
     this.clienteServicio
       .actualizarCliente(this.form1.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.obtenerDatos();
+          this.snackBar.open('Información actualizada', '', {
+            duration: 6000,
+          });
+        } else {
+          this.snackBar.open('Error inesperado', '', {
+            duration: 6000,
+          });
+        }
+      });
+  }
+
+  actualizarInfo2() {
+    this.clienteServicio
+      .actualizarCliente(this.form2.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
@@ -259,8 +296,8 @@ export class PedidoComponent implements OnInit {
   }
 
   validarDatos() {
+    console.log(this.form2.valid);
     if (this.form2.valid) {
-      this.actualizarInfo();
       render({
         id: '#miPaypalBoton',
         currency: '€',
