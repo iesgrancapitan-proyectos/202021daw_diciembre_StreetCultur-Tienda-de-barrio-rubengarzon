@@ -54,9 +54,7 @@ export class ClienteService {
         'http://localhost/streetcultur/php/mostrarClientess.php'
       );
     } else {
-      return this.http.get(
-        'https://streetcultur.com/php/mostrarClientess.php'
-      );
+      return this.http.get('https://streetcultur.com/php/mostrarClientess.php');
     }
   }
 
@@ -103,6 +101,20 @@ export class ClienteService {
     } else {
       return this.http.post(
         'https://streetcultur.com/php/actualizarCliente.php',
+        JSON.stringify(cliente)
+      );
+    }
+  }
+
+  actualizarCliente2(cliente: any) {
+    if (this.env == 'Development') {
+      return this.http.post(
+        'http://localhost/streetcultur/php/actualizarCliente2.php',
+        JSON.stringify(cliente)
+      );
+    } else {
+      return this.http.post(
+        'https://streetcultur.com/php/actualizarCliente2.php',
         JSON.stringify(cliente)
       );
     }

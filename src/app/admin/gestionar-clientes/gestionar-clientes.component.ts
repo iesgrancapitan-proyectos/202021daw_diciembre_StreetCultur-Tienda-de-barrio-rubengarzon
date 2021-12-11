@@ -23,6 +23,7 @@ export class GestionarClientesComponent implements OnInit {
   form1: FormGroup;
 
   modificarCliente1 = new FormGroup({
+    id: new FormControl(''),
     perfil: new FormControl(''),
     email: new FormControl(''),
     nombre: new FormControl(''),
@@ -132,7 +133,7 @@ export class GestionarClientesComponent implements OnInit {
   }
   actualizarInfo() {
     this.clienteServicio
-      .actualizarCliente(this.form1.value)
+      .actualizarCliente2(this.form1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
@@ -187,13 +188,15 @@ export class GestionarClientesComponent implements OnInit {
   }
 
   modificarCliente() {
+    console.log(this.modificarCliente1.value);
     this.clienteServicio
       .actualizarCliente(this.modificarCliente1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
-          this.snackBar.open('El cliente se ha modificado', '', {
+          this.snackBar.open('Cliente actualizado', '', {
             duration: 6000,
           });
+          this.obtenerDatos();
           this.clienteServicio.mostrarClientes().subscribe((datos) => {
             this.clientes = datos['clientes'];
           });

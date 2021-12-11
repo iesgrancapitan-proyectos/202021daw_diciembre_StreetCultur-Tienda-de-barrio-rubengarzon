@@ -288,7 +288,7 @@
         <mat-icon
           matTooltip="Modificar"
           style="cursor: pointer"
-          (click)="frame6.show(); pasarDatos(cliente.email)"
+          (click)="frame6.show(); pasarDatos(item.email)"
           >edit</mat-icon
         >
       </div>
@@ -335,7 +335,7 @@
                 <div style="margin-bottom: 1.2em">
                   Email (*)
                   <input type="email" formControlName="email" />
-                  <div *ngIf="email.errors.email" style="color: red">
+                  <div *ngIf="formAddCliente.get('email').hasError('email')" style="color: red">
                     El formato del email es incorrecto.
                   </div>
                 </div>
@@ -393,12 +393,12 @@
             <div style="display: flex; margin-bottom: 1em">
               <div
                 style="
-                  margin-left: 1.5em;
                   margin-right: 4em;
                   display: flex;
                   flex-direction: column;
                 "
               >
+              <input type="hidden" formControlName="id">
                 Perfil
                 <input type="text" formControlName="perfil" />
               </div>
@@ -428,21 +428,22 @@
               </div>
             </div>
             <div style="display: flex; margin-bottom: 1em">
-              <div style="margin-right: 28px; margin-left: 11px">
+              <div style="margin-right: 28px;">
                 Domicilio
                 <input type="text" formControlName="domicilio" />
               </div>
               <div>
                 Código Postal
-                <input type="text" formControlName="codigopostal" />
+                <input type="number" formControlName="codigopostal" />
               </div>
             </div>
             <div style="display: flex; flex-direction: column">
               Móvil
-              <input type="text" formControlName="movil" />
+              <input type="number" formControlName="movil" style="width: 100px;" />
             </div>
-
-            <button mat-raised-button style="margin-top: 2em">Modificar</button>
+            <div style="margin-top: 2em; text-align: center">
+              <button mat-raised-button>Modificar</button>
+            </div>
           </form>
         </div>
       </div>

@@ -85,7 +85,7 @@ export class AdminComponent implements OnInit {
   }
   actualizarInfo() {
     this.clienteServicio
-      .actualizarCliente(this.form1.value)
+      .actualizarCliente2(this.form1.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
