@@ -269,11 +269,16 @@
     </div>
 
     <div class="fila" *ngFor="let item of incidencias">
-      <div>{{ item.email }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Email:</p>
+        {{ item.email }}
+      </div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Motivo:</p>
         {{ item.motivo }}
       </div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Acción:</p>
         <mat-icon
           matTooltip="Borrar"
           style="cursor: pointer"
