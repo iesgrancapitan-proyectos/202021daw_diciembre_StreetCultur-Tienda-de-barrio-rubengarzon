@@ -80,6 +80,7 @@ export class PedidosComponent implements OnInit {
       apellidos: new FormControl(),
       provincia: new FormControl(),
       localidad: new FormControl(),
+      domicilio: new FormControl(),
       imagen: new FormControl(),
     });
     let cliente = {
@@ -99,6 +100,7 @@ export class PedidosComponent implements OnInit {
           apellidos: datos['cliente'][0]['apellidos'],
           provincia: datos['cliente'][0]['provincia'],
           localidad: datos['cliente'][0]['localidad'],
+          domicilio: datos['cliente'][0]['localidad'],
           imagen: datos['cliente'][0]['imagen'],
         });
       });
