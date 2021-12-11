@@ -3,10 +3,13 @@ import { IncidenciaService } from 'src/app/incidencia.service';
 import { LoginComponent } from 'src/app/main/login/login.component';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Incidencia } from 'src/app/Model/Incidencia';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'src/app/cliente.service';
-
 
 @Component({
   selector: 'app-gestionar-incidencias',
@@ -148,19 +151,24 @@ export class GestionarIncidenciasComponent implements OnInit {
     this.incidenciasServicio
       .borrarIncidencias(incidencia)
       .subscribe((datos) => {
-        if(datos["resultado"] == 'OK'){
+        if (datos['resultado'] == 'OK') {
           this.snackBar.open('La incidencia se ha borrado', '', {
             duration: 6000,
           });
           this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
             if (datos['incidencias']['length'] > 0) {
               this.incidencias = datos['incidencias'];
+              this.incidenciasServicio
+                .mostrarIncidencias()
+                .subscribe((datos) => {
+                  this.numIncidencias = datos['incidencias']['length'];
+                });
               this.hayIncidencias = true;
             } else {
               this.hayIncidencias = false;
             }
           });
-        }else{
+        } else {
           this.snackBar.open('Ha ocurrido un error inesperado', '', {
             duration: 6000,
           });
@@ -186,9 +194,7 @@ export class GestionarIncidenciasComponent implements OnInit {
   templateUrl: 'dialogo.html',
 })
 export class DialogOverviewExampleDialog1 {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog1>
-  ) {}
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog1>) {}
 
   onNoClick(): void {
     this.dialogRef.close();
