@@ -203,24 +203,33 @@ export class GestionarClientesComponent implements OnInit {
         }
       });
   }
-  openDialog(email) {
-    let email1 = {
-      email: email,
-    };
+  openDialog(email, perfil) {
 
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-    });
+    if(perfil != "admin"){
+       let email1 = {
+         email: email,
+       };
 
-    dialogRef.afterClosed().subscribe((datos) => {
-      if (datos == true) {
-        this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
-          if (datos['resultado'] == 'OK') {
-            this.mostrarCliente();
-          }
+       const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+         width: '250px',
+       });
+
+       dialogRef.afterClosed().subscribe((datos) => {
+         if (datos == true) {
+           this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
+             if (datos['resultado'] == 'OK') {
+               this.mostrarCliente();
+             }
+           });
+         }
+       });
+    }else{
+        this.snackBar.open('Los Administradores no se pueden borrar', '', {
+          duration: 6000,
         });
-      }
-    });
+    }
+
+
   }
 
   mostrarClientes() {

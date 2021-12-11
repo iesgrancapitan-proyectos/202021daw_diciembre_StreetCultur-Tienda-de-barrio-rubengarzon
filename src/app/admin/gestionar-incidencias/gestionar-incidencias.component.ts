@@ -148,17 +148,23 @@ export class GestionarIncidenciasComponent implements OnInit {
     this.incidenciasServicio
       .borrarIncidencias(incidencia)
       .subscribe((datos) => {
-        this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
-          if (datos['incidencias']['length'] > 0) {
-            this.incidencias = datos['incidencias'];
-            this.hayIncidencias = true;
-          } else {
-            this.hayIncidencias = false;
-          }
-        });
-        this.snackBar.open('La incidencia se ha borrado', '', {
-          duration: 6000,
-        });
+        if(datos["resultado"] == 'OK'){
+          this.snackBar.open('La incidencia se ha borrado', '', {
+            duration: 6000,
+          });
+          this.incidenciasServicio.mostrarIncidencias().subscribe((datos) => {
+            if (datos['incidencias']['length'] > 0) {
+              this.incidencias = datos['incidencias'];
+              this.hayIncidencias = true;
+            } else {
+              this.hayIncidencias = false;
+            }
+          });
+        }else{
+          this.snackBar.open('Ha ocurrido un error inesperado', '', {
+            duration: 6000,
+          });
+        }
       });
   }
 

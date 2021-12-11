@@ -259,7 +259,7 @@
   <div class="tabla" *ngIf="hayIncidencias else noHayIncidencias">
     <div class="btnr">
       <div class="ar">
-        <h2 style="text-align: left;">Gestionar Incidencias</h2>
+        <h2>Gestionar Incidencias</h2>
       </div>
     </div>
     <div class="theader">
@@ -277,7 +277,7 @@
         <mat-icon
           matTooltip="Borrar"
           style="cursor: pointer"
-          (click)="openDialog(cliente.email)"
+          (click)="openDialog(item.id)"
           >delete</mat-icon
         >
       </div>

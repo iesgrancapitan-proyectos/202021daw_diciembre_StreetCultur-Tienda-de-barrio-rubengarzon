@@ -26,6 +26,7 @@ export class IncidenciaService {
   }
 
   borrarIncidencias(incidencia){
+    console.log(incidencia);
     if (this.env == 'Development') {
       return this.http.post('http://localhost/streetcultur/php/borrarIncidencia.php', JSON.stringify(incidencia));
     } else {
