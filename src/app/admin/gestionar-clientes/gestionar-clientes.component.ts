@@ -10,6 +10,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { IncidenciaService } from 'src/app/incidencia.service';
+import { PedidoService } from 'src/app/pedido.service';
 
 @Component({
   selector: 'app-gestionar-clientes',
@@ -78,7 +79,8 @@ export class GestionarClientesComponent implements OnInit {
     private clienteServicio: ClienteService,
     readonly snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private incidenciasServicio: IncidenciaService
+    private incidenciasServicio: IncidenciaService,
+    private pedidoServicio: PedidoService
   ) {}
 
   ngOnInit() {
@@ -203,33 +205,41 @@ export class GestionarClientesComponent implements OnInit {
         }
       });
   }
-  openDialog(email, perfil) {
+  openDialog(id, email, perfil) {
+    if (perfil != 'admin') {
+      let email1 = {
+        email: email,
+      };
 
-    if(perfil != "admin"){
-       let email1 = {
-         email: email,
-       };
+      let id1 = {
+        id: id,
+      };
 
-       const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-         width: '250px',
-       });
+      const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+        width: '250px',
+      });
 
-       dialogRef.afterClosed().subscribe((datos) => {
-         if (datos == true) {
-           this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
-             if (datos['resultado'] == 'OK') {
-               this.mostrarCliente();
-             }
-           });
-         }
-       });
-    }else{
-        this.snackBar.open('Los Administradores no se pueden borrar', '', {
-          duration: 6000,
-        });
+      dialogRef.afterClosed().subscribe((datos) => {
+        if (datos == true) {
+          this.pedidoServicio.obtenerPedido(id1).subscribe((datos) => {
+            if (datos['pedido'].length == 0) {
+              this.clienteServicio.borrarCliente(email1).subscribe((datos) => {
+                if (datos['resultado'] == 'OK') {
+                  this.snackBar.open('El usuario ha sido borrado', '', {
+                    duration: 6000,
+                  });
+                  this.mostrarCliente();
+                }
+              });
+            }
+          });
+        }
+      });
+    } else {
+      this.snackBar.open('Los Administradores no se pueden borrar', '', {
+        duration: 6000,
+      });
     }
-
-
   }
 
   mostrarClientes() {

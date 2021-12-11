@@ -27,7 +27,7 @@ export class GestionarRopaComponent implements OnInit {
 
   id: any;
 
-  formModal:FormGroup;
+  formModal: FormGroup;
 
   clientes: any;
 
@@ -70,9 +70,6 @@ export class GestionarRopaComponent implements OnInit {
     Novedad: new FormControl('', Validators.required),
     Imagen: new FormControl('', Validators.required),
   });
-
-
-
 
   constructor(
     private login: LoginComponent,
@@ -198,18 +195,20 @@ export class GestionarRopaComponent implements OnInit {
   }
 
   modificarRopa() {
-    this.ropaServicio.actualizarRopa(this.formModal.value).subscribe((datos) => {
-      if (datos['resultado'] == 'OK') {
-        this.ropaServicio.obtenerRopa().subscribe((datos) => {
-          this.ropa = datos['ropa'];
-        });
-        this.snackBar.open('La ropa se ha modificado', '', {
-          duration: 6000,
-        });
-      } else {
-        alert('error');
-      }
-    });
+    this.ropaServicio
+      .actualizarRopa(this.formModal.value)
+      .subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.ropaServicio.obtenerRopa().subscribe((datos) => {
+            this.ropa = datos['ropa'];
+          });
+          this.snackBar.open('La ropa se ha modificado', '', {
+            duration: 6000,
+          });
+        } else {
+          alert('error');
+        }
+      });
   }
 
   ficheroSeleccionado(event) {
@@ -272,6 +271,40 @@ export class GestionarRopaComponent implements OnInit {
     });
   }
 
+  mostrarPantalones() {
+    this.ropaServicio.obtenerPantalones().subscribe((datos) => {
+      this.ropa = datos['pantalones'];
+    });
+  }
+
+  mostrarAccesorios() {
+    this.ropaServicio.obtenerAccesorios().subscribe((datos) => {
+      this.ropa = datos['accesorios'];
+    });
+  }
+
+  mostrarCamisetas() {
+    this.ropaServicio.obtenerCamisetas().subscribe((datos) => {
+      this.ropa = datos['camisetas'];
+    });
+  }
+
+  mostrarAbrigos() {
+    this.ropaServicio.obtenerAbrigos().subscribe((datos) => {
+      this.ropa = datos['abrigos'];
+    });
+  }
+
+  mostrarChandal() {
+    this.ropaServicio.obtenerChandal().subscribe((datos) => {
+      this.ropa = datos['chandal'];
+    });
+  }
+  mostrarSudaderas() {
+    this.ropaServicio.obtenerSudaderas().subscribe((datos: any) => {
+      this.ropa = datos['sudaderas'];
+    });
+  }
   openDialog(id) {
     let id1 = {
       Id: id,

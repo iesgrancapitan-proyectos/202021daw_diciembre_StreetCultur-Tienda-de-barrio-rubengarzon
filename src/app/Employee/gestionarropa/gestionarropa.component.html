@@ -402,6 +402,14 @@
         <button mat-stroked-button (click)="frame4.show()">Añadir Ropa</button>
       </div>
     </div>
+    <mat-chip-list aria-label="Fish selection">
+      <mat-chip (click)="mostrarSudaderas()">Sudaderas</mat-chip>
+      <mat-chip (click)="mostrarPantalones()">Pantalones</mat-chip>
+      <mat-chip (click)="mostrarAccesorios()">Accesorios</mat-chip>
+      <mat-chip (click)="mostrarChandal()">Chandals</mat-chip>
+      <mat-chip (click)="mostrarCamisetas()">Camisetas</mat-chip>
+      <mat-chip (click)="mostrarAbrigos()">Abrigos</mat-chip>
+    </mat-chip-list>
     <div class="theader">
       <div>Nombre</div>
       <div>Descripción</div>
