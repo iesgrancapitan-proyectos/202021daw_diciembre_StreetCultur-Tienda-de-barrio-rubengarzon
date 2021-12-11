@@ -7,6 +7,7 @@ export class Pedido {
     public preciototal: number,
     public fechaenvio: string,
     public fecharecibido: string,
-    public idcliente: number
+    public idcliente: number,
+    public email: string
   ) {}
 }

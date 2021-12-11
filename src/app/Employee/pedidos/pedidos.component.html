@@ -201,8 +201,16 @@
       <div class="ar">
         <h2 style="text-align:center">Gestionar Pedidos</h2>
       </div>
+
     </div>
+    <p style="text-align:left">Filtrar por:</p>
+    <mat-chip-list aria-label="Fish selection">
+        <mat-chip (click)="mostrarPendiente()" style="cursor:pointer">Pendiente</mat-chip>
+        <mat-chip (click)="mostrarEnviado()" style="cursor:pointer">Enviado</mat-chip>
+        <mat-chip (click)="mostrarRecibido()" style="cursor:pointer">Recibido</mat-chip>
+      </mat-chip-list>
     <div class="theader">
+      <div>Email</div>
       <div>Fecha</div>
       <div>Estado</div>
       <div>Precio Total</div>
@@ -212,6 +220,7 @@
     </div>
 
     <div class="fila" *ngFor="let item of pedido">
+      <div>{{ item.email }}</div>
       <div>{{ item.fecha }}</div>
       <div>
         {{ item.estado }}
@@ -228,7 +237,7 @@
         >
         <mat-icon
           style="cursor: pointer"
-          (click)="modificarpedido.show();pasarDatos(item.id, item.estado, item.preciototal, item.fechaenvio, item.fecharecibido)"
+          (click)="modificarpedido.show();pasarDatos(item.id, item.fecha, item.estado, item.preciototal, item.fechaenvio, item.fecharecibido)"
           >edit</mat-icon
         >
       </div>
@@ -288,6 +297,9 @@
               placeholder="fechadeenvio"
               style="margin-bottom: 1em"
             />
+            <div id="errorfechaenvio" style="display:none">
+              <p style="color:red">La fecha de envío es menor que la fecha de compra</p>
+            </div>
             Fecha de Recibo
             <input
               type="date"
@@ -295,13 +307,16 @@
               placeholder="fechaderecibo"
               style="margin-bottom: 1em"
             />
+            <div id="errorfecharecibido" style="display:none">
+              <p style="color:red">La fecha de recibo es menor que la fecha de envio</p>
+            </div>
             <button>Enviar</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <!-- <ng-template #nohaypedidos>
     <p>El Cliente no tiene pedidos</p>

@@ -8,13 +8,10 @@ $params = json_decode($json); // DECODIFICA EL JSON Y LO GUARADA EN LA VARIABLE
 
 require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
-$conexion = Conexion(); // CREA LA CONEXION
-
-$query = "UPDATE cliente SET puntos='$params->puntos' WHERE id='$params->idcliente'";
-
+$conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, $query);
+$resultado = mysqli_query($conexion, "SELECT * FROM pedido WHERE estado='Recibido'");
 
 class Result
 {
@@ -23,12 +20,18 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-if ($resultado == TRUE) {
+$response->pedidos = $resultado->fetch_all(MYSQLI_ASSOC);
+
+
+
+/* while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
-} else {
-  $response->resultado = 'FAIL';
-  $response->mensaje = $resultado->error;
-}
+  $response->nombre = $fila['nombre'];
+  $response->domicilio = $fila['domicilio'];
+  $response->codigo = $fila['codigo'];
+  $response->movil = $fila['movil'];
+} */
+
 
 header('Content-Type: application/json');
 

@@ -14,6 +14,7 @@ import {
   FormControl,
   FormControlName,
   FormGroup,
+  MinValidator,
   Validators,
 } from '@angular/forms';
 
@@ -58,6 +59,7 @@ export class PedidosComponent implements OnInit {
 
   formModal = new FormGroup({
     id: new FormControl(''),
+    fecha: new FormControl(''),
     estado: new FormControl(''),
     preciototal: new FormControl(''),
     fechaenvio: new FormControl(''),
@@ -102,13 +104,16 @@ export class PedidosComponent implements OnInit {
       });
     }
     this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+      for (const key in datos['pedidos']) {
+        console.log(datos['pedidos'][key]['idcliente']);
+      }
       this.pedido = datos['pedidos'];
     });
   }
 
   actualizarInfo() {
     console.log(this.form1.value);
-    if (this.form1.value){
+    if (this.form1.value) {
       this.clienteServicio
         .actualizarCliente(this.form1.value)
         .subscribe((datos) => {
@@ -123,12 +128,11 @@ export class PedidosComponent implements OnInit {
             });
           }
         });
-    }else{
+    } else {
       this.snackBar.open('Rellena todos los datos', '', {
         duration: 6000,
       });
     }
-
   }
 
   obtenerDatos() {
@@ -148,10 +152,10 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  pasarDatos(id, estado, preciototal, fechaenvio, fecharecibido) {
-    console.log(id);
+  pasarDatos(id, fecha, estado, preciototal, fechaenvio, fecharecibido) {
     this.formModal.setValue({
       id: id,
+      fecha: fecha,
       estado: estado,
       preciototal: preciototal,
       fechaenvio: fechaenvio,
@@ -184,20 +188,57 @@ export class PedidosComponent implements OnInit {
   }
 
   modificarPedido() {
-    this.pedidoServicio
-      .actualizarPedido(this.formModal.value)
-      .subscribe((datos) => {
-        if (datos['resultado'] == 'OK') {
-          this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
-            this.pedido = datos['pedidos'];
+    if (
+      this.formModal.get('fechaenvio').value < this.formModal.get('fecha').value
+    ) {
+      document.getElementById('errorfechaenvio').style.display = 'block';
+    } else if (this.formModal.get('fecharecibido').value != '0000-00-00' || this.formModal.get('fecharecibido').value != null) {
+      if (
+        this.formModal.get('fecharecibido').value <
+        this.formModal.get('fechaenvio').value
+      ) {
+        document.getElementById('errorfecharecibido').style.display = 'block';
+      } else {
+        console.log("recibidooo")
+        this.formModal.get('estado').setValue('Recibido');
+        this.pedidoServicio
+          .actualizarPedido(this.formModal.value)
+          .subscribe((datos) => {
+            if (datos['resultado'] == 'OK') {
+              this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+                this.pedido = datos['pedidos'];
+              });
+              this.snackBar.open('El pedido se ha modificado', '', {
+                duration: 6000,
+              });
+            } else {
+              alert('error');
+            }
           });
-          this.snackBar.open('El pedido se ha modificado', '', {
-            duration: 6000,
-          });
-        } else {
-          alert('error');
-        }
-      });
+        document.getElementById('errorfechaenvio').style.display = 'none';
+      }
+    } else {
+      if (this.formModal.get('fechaenvio').value > '0000-00-00') {
+        this.formModal.get('estado').setValue('Enviado');
+      } else if (this.formModal.get('fecharecibido').value > '0000-00-00') {
+        this.formModal.get('estado').setValue('Recibido');
+      }
+      this.pedidoServicio
+        .actualizarPedido(this.formModal.value)
+        .subscribe((datos) => {
+          if (datos['resultado'] == 'OK') {
+            this.pedidoServicio.obtenerPedidos().subscribe((datos) => {
+              this.pedido = datos['pedidos'];
+            });
+            this.snackBar.open('El pedido se ha modificado', '', {
+              duration: 6000,
+            });
+          } else {
+            alert('error');
+          }
+        });
+      document.getElementById('errorfechaenvio').style.display = 'none';
+    }
   }
 
   openDialog(id) {
@@ -220,6 +261,24 @@ export class PedidosComponent implements OnInit {
         });
       }
     });
+  }
+
+  mostrarPendiente() {
+    this.pedidoServicio.mostrarPendientes().subscribe((datos) => {
+          this.pedido = datos['pedidos'];
+    });
+  }
+
+  mostrarEnviado() {
+    this.pedidoServicio.mostrarEnviados().subscribe((datos) => {
+        this.pedido = datos['pedidos'];
+    });
+  }
+
+  mostrarRecibido() {
+    this.pedidoServicio.mostrarRecibidos().subscribe((datos) => {
+          this.pedido = datos['pedidos'];
+      })
   }
 }
 @Component({

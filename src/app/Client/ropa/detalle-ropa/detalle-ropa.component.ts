@@ -89,10 +89,10 @@ export class DetalleRopaComponent implements OnInit {
     this.contarProductos();
     this.mostrarSudadera(this.rutaActiva.snapshot.params.id);
     let cliente = {
-      idcliente: sessionStorage.getItem('id'),
+      id: sessionStorage.getItem('id'),
     };
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.puntos = datos['puntos'][0]['puntos'];
+      this.puntos = datos['puntos'];
     });
 
     this.form1 = new FormGroup({

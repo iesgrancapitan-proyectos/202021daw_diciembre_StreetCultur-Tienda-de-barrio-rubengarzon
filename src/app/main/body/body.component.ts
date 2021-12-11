@@ -7,7 +7,6 @@ import { LoginComponent } from '../login/login.component';
 import { ClienteService } from 'src/app/cliente.service';
 import { PedidoService } from 'src/app/pedido.service';
 
-
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
@@ -34,7 +33,7 @@ export class BodyComponent implements OnInit {
     domicilio: null,
     codigopostal: null,
     movil: null,
-    imagen: null
+    imagen: null,
   };
 
   estaLogueado: boolean = this.login.estaLogueado();
@@ -49,16 +48,23 @@ export class BodyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.snackBar.open(
+      'La web es un proyecto FP, las imágenes sacadas son de Inflation Store.',
+      '',
+      {
+        duration: 6000,
+      }
+    );
     this.pedidoServicio1.borrarComprarAhora().subscribe((datos) => {
       console.log(datos['resultado']);
     });
     this.obtenerDatos();
     this.contarProductos();
     let cliente = {
-      idcliente: sessionStorage.getItem("id")
-    }
+      id: sessionStorage.getItem('id'),
+    };
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.numPuntos = datos['puntos'][0]['puntos'];
+      this.numPuntos = datos['puntos'];
     });
   }
 

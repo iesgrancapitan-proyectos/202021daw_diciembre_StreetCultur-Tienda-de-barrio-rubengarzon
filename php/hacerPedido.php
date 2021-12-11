@@ -11,7 +11,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 $conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "INSERT INTO pedido (fecha, estado, preciototal, idcliente) VALUES('$params->fecha', '$params->estado', '$params->preciototal', '$params->id')");
+$resultado = mysqli_query($conexion, "INSERT INTO pedido (fecha, estado, preciototal, idcliente, email) VALUES('$params->fecha', '$params->estado', '$params->preciototal', '$params->id', '$params->email')");
 
 class Result
 {

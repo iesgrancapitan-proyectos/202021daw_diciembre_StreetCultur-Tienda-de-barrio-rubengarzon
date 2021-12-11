@@ -11,7 +11,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 $conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT puntos FROM cliente WHERE id='$params->idcliente'");
+$resultado = mysqli_query($conexion, "SELECT * FROM cliente WHERE id='$params->id'");
 
 class Result
 {
@@ -20,13 +20,13 @@ class Result
 // GENERA LOS DATOS DE RESPUESTA
 $response = new Result();
 
-$response->puntos = $resultado->fetch_all(MYSQLI_ASSOC);
+//$response->puntos = $resultado->fetch_all(MYSQLI_ASSOC);
 
-/* while ($fila = mysqli_fetch_assoc($resultado)) {
+ while ($fila = mysqli_fetch_assoc($resultado)) {
   $response->resultado = 'OK';
   $response->id = $fila['id'];
   $response->puntos = $fila['puntos'];
-} */
+}
 
 
 header('Content-Type: application/json');

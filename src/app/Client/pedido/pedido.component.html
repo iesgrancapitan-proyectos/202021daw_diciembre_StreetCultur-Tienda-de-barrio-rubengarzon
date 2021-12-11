@@ -287,6 +287,7 @@
                   <!--Grid column-->
                   <div class="col-md-6 mb-2">
                     <!--firstName-->
+                    <input type="hidden" formControlName="id">
                     <div class="md-form">
                       Nombre
                       <input
@@ -582,6 +583,7 @@
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (€)</span>
                 <strong
+                  id="totalConEnvio"
                   *ngIf="
                     cliente.codigopostal > 14999 ||
                       cliente.codigopostal < 14000;
@@ -589,9 +591,11 @@
                   "
                   >{{ total + 3 - canjearpuntos }}</strong
                 >
-                <ng-template #gratis>{{
-                  total - 3 - canjearpuntos
-                }}</ng-template>
+                <ng-template id="totalConEnvio" #gratis>
+                  <span id="totalConEnvio">{{
+                    total - 3 - canjearpuntos
+                  }}</span>
+                </ng-template>
               </li>
             </ul>
             <!-- Cart -->
@@ -628,18 +632,21 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Total (€)</span>
-                  <strong
+                  <span
+                    style="font-weight: bold"
                     id="totalConEnvio"
                     *ngIf="
                       cliente.codigopostal > 14999 ||
                         cliente.codigopostal < 14000;
                       else gratis
                     "
-                    >{{ total + 3 - canjearpuntos }}</strong
+                    >{{ total + 3 - canjearpuntos }}</span
                   >
-                  <ng-template #gratis>{{
-                    total - 3 - canjearpuntos
-                  }}</ng-template>
+                  <ng-template #gratis>
+                    <span id="totalConEnvio">{{
+                      total - 3 - canjearpuntos
+                    }}</span>
+                  </ng-template>
                 </li>
               </ul>
             </ng-template>

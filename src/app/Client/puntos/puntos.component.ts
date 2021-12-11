@@ -60,10 +60,10 @@ export class PuntosComponent implements OnInit {
       this.obtenerDatos();
       this.contarProductos();
       let cliente = {
-        idcliente: sessionStorage.getItem('id'),
+        id: sessionStorage.getItem('id'),
       };
       this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-        this.numPuntos = datos['puntos'][0]['puntos'];
+        this.numPuntos = datos['puntos'];
       });
       let email = sessionStorage.getItem('email');
       let email1 = { email: email };

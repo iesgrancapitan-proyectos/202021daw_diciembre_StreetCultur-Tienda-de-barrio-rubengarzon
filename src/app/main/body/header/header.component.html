@@ -21,6 +21,19 @@
       >
         <mat-icon>account_circle</mat-icon>
       </button>
+      <button
+        *ngIf="estaLogueado"
+        mat-icon-button
+        class="example-icon"
+        aria-label="Example icon-button with heart icon"
+        routerLinkActive="active"
+        matTooltip="Salir"
+        data-toggle="modal"
+        (click)="cerrarSesion()"
+        mdbWavesEffect
+      >
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
     </div>
   </div>
   <div class="nav">

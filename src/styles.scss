@@ -9,16 +9,19 @@ body {
   background-color: #f7f7f7;
 }
 
-.mat-simple-snackbar span{
+.mat-simple-snackbar span {
   font-size: 25px !important;
 }
 
 .mat-snack-bar-container {
   background-color: rgb(0, 0, 0) !important;
   width: 100% !important;
-  height: 1em !important;
+  height: 100% !important;
   color: white !important;
   font-size: 25px !important;
+  letter-spacing: 1px !important;
+  line-height: 10px !important;
+  text-align: justify !important;
 }
 
 @import "./theme.scss";

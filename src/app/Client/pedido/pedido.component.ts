@@ -63,6 +63,8 @@ export class PedidoComponent implements OnInit {
 
   flag2 = false;
 
+  puntos1 = 0;
+
   constructor(
     public fb: FormBuilder,
     private clienteServicio: ClienteService,
@@ -76,6 +78,14 @@ export class PedidoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.snackBar.open(
+      'Por favor no compres con una cuenta real de paypal.',
+      '',
+      {
+        duration: 6000,
+      }
+    );
+
     this.form1 = new FormGroup({
       id: new FormControl(),
       nombre: new FormControl(),
@@ -87,6 +97,7 @@ export class PedidoComponent implements OnInit {
     });
 
     this.form2 = new FormGroup({
+      id: new FormControl(''),
       nombre: new FormControl('', Validators.required),
       apellidos: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
@@ -109,11 +120,11 @@ export class PedidoComponent implements OnInit {
     this.contarProductos();
 
     let cliente = {
-      idcliente: sessionStorage.getItem('id'),
+      id: sessionStorage.getItem('id'),
     };
 
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
-      this.puntos = datos['puntos'][0]['puntos'];
+      this.puntos = datos['puntos'];
     });
 
     this.canjearPuntos = this.fb.group({
@@ -141,6 +152,7 @@ export class PedidoComponent implements OnInit {
 
     this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
       this.form2.setValue({
+        id: datos['cliente'][0]['id'],
         nombre: datos['cliente'][0]['nombre'],
         apellidos: datos['cliente'][0]['apellidos'],
         email: datos['cliente'][0]['email'],
@@ -151,17 +163,17 @@ export class PedidoComponent implements OnInit {
         movil: datos['cliente'][0]['movil'],
       });
 
-      console.log(this.form2.value);
-
       if (this.form2.valid) {
-        render({
-          id: '#miPaypalBoton',
-          currency: '€',
-          value: '1.0',
-          onApprove: (details) => {
-            this.insertarPedido(this.cliente.codigopostal);
-          },
-        });
+        if (document.getElementById('miPaypalBoton').innerHTML.length == 0) {
+          render({
+            id: '#miPaypalBoton',
+            currency: '€',
+            value: '1.0',
+            onApprove: (details) => {
+              this.insertarPedido(this.cliente.codigopostal);
+            },
+          });
+        }
       } else {
         document.getElementById('miPaypalBoton').remove();
       }
@@ -178,19 +190,13 @@ export class PedidoComponent implements OnInit {
     });
   }
 
-  comprobar(){
+  comprobar() {
     if (this.form2.valid) {
-      document.getElementById('miPaypalBoton').style.display = 'block';
-      render({
-        id: '#miPaypalBoton',
-        currency: '€',
-        value: '1.0',
-        onApprove: (details) => {
-          this.insertarPedido(this.cliente.codigopostal);
-        },
-      });
+      if (document.getElementById('miPaypalBoton').style.display == 'none') {
+        document.getElementById('miPaypalBoton').style.display = 'block';
+      }
     } else {
-      document.getElementById('miPaypalBoton').style.display = "none";
+      document.getElementById('miPaypalBoton').style.display = 'none';
     }
   }
 
@@ -260,43 +266,50 @@ export class PedidoComponent implements OnInit {
   insertarPedido(codigo: any) {
     this.clienteServicio.actualizarCliente(this.cliente);
 
-    if (codigo > 14999 || codigo < 14000) {
-      this.total = this.total + 3;
-    }
+    this.total = parseInt(document.getElementById('totalConEnvio').innerHTML);
 
     let pedido = {
       fecha: this.hoy,
       estado: 'pendiente',
-      preciototal: this.total - this.canjearpuntos,
+      preciototal: this.total,
       id: sessionStorage.getItem('id'),
+      email: sessionStorage.getItem('email')
     };
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
       if (dato['resultado'] == 'OK') {
         this.pedidoServicio.borrarComprarAhora();
-        let clienteid = {
-          idcliente: sessionStorage.getItem('id'),
-          puntos: 0,
+
+        let id1 = {
+          id: sessionStorage.getItem('id'),
         };
-        this.puntosServicio.obtenerPuntos(clienteid).subscribe((datos) => {
-          clienteid.puntos = parseInt(datos['puntos']) + 3;
-          this.puntosServicio
-            .actualizarPuntos(clienteid)
-            .subscribe((datos) => {});
+
+        this.puntosServicio.obtenerPuntos(id1).subscribe((datos) => {
+          console.log('puntosssss: ' + datos['puntos']);
+          console.log('resultadooooo: ' + datos['resultado']);
+            let clienteid = {
+            idcliente: sessionStorage.getItem('id'),
+            puntos: parseInt(datos['puntos']) + 3,
+          };
+          clienteid.puntos = clienteid.puntos - this.puntos1;
+          this.puntosServicio.actualizarPuntos(clienteid).subscribe((datos) => {
+            console.log(datos['puntos']);
+          });
         });
         this.router.navigateByUrl('/');
-        this.carroServicio.borrarProductos(clienteid).subscribe((datos) => {});
+        this.carroServicio.borrarProductos(id1).subscribe((datos) => {
+          console.log(datos)
+        });
         this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
           verticalPosition: 'bottom',
           duration: 6000,
         });
       }
-    });
+        });
   }
 
   validarDatos() {
-    console.log(this.form2.valid);
     if (this.form2.valid) {
       render({
         id: '#miPaypalBoton',
@@ -316,12 +329,14 @@ export class PedidoComponent implements OnInit {
   }
 
   validarPuntos() {
+    console.log(document.getElementById('totalConEnvio').innerHTML);
     if (
       this.canjearPuntos.value['puntos'] >
       document.getElementById('totalConEnvio').innerHTML
     ) {
       this.flag2 = true;
     } else {
+      this.puntos1 = this.canjearPuntos.value['puntos'];
       let total2 =
         parseInt(document.getElementById('totalConEnvio').innerHTML) -
         this.canjearPuntos.value['puntos'];

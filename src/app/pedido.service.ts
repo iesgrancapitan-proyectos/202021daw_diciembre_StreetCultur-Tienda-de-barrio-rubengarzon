@@ -38,6 +38,40 @@ export class PedidoService {
     }
   }
 
+  mostrarEnviados() {
+      if (this.env == 'Development') {
+        return this.http.get(
+          'http://localhost/streetcultur/php/mostrarEnviados.php'
+        );
+      } else {
+        return this.http.get(
+          'https://streetcultur.com/php/mostrarEnviados.php'
+        );
+      }
+  }
+
+  mostrarPendientes() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarPendientes.php'
+      );
+    } else {
+      return this.http.get(
+        'https://streetcultur.com/php/mostrarPendientes.php'
+      );
+    }
+  }
+
+  mostrarRecibidos() {
+    if (this.env == 'Development') {
+      return this.http.get(
+        'http://localhost/streetcultur/php/mostrarRecibidos.php'
+      );
+    } else {
+      return this.http.get('https://streetcultur.com/php/mostrarRecibidos.php');
+    }
+  }
+
   obtenerCliente(id: any) {
     if (this.env == 'Development') {
       return this.http.post(
@@ -125,9 +159,7 @@ export class PedidoService {
         'http://localhost/streetcultur/php/obtenerPedidos.php'
       );
     } else {
-      return this.http.get(
-        'https://streetcultur.com/php/obtenerPedidos.php'
-      );
+      return this.http.get('https://streetcultur.com/php/obtenerPedidos.php');
     }
   }
 }
