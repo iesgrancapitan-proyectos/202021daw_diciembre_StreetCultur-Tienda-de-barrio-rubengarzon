@@ -272,12 +272,18 @@
     </div>
 
     <div class="fila" *ngFor="let item of clientes">
-      <div>{{ item.perfil }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Perfil:</p>
+        {{ item.perfil }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Email:</p>
         {{ item.email }}
       </div>
-      <div>{{ item.nombre }} {{ item.apellidos }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Nombre:</p>
+        {{ item.nombre }} {{ item.apellidos }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Acción:</p>
         <mat-icon
           matTooltip="Borrar"
           style="cursor: pointer"
