@@ -56,6 +56,7 @@ export class PedidoComponent implements OnInit {
   productosEnCarrito = [];
 
   puntos: any;
+  codigopostal: any;
 
   canjearpuntos: number = 0;
 
@@ -64,6 +65,8 @@ export class PedidoComponent implements OnInit {
   flag2 = false;
 
   puntos1 = 0;
+
+  precioAumentado = false;
 
   constructor(
     public fb: FormBuilder,
@@ -125,6 +128,12 @@ export class PedidoComponent implements OnInit {
 
     this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
       this.puntos = datos['puntos'];
+    });
+    let cliente2 = {
+      email: sessionStorage.getItem('email'),
+    };
+    this.clienteServicio.mostrarCliente(cliente2).subscribe((datos) => {
+      this.codigopostal = datos['cliente'][0]['codigopostal'];
     });
 
     this.canjearPuntos = this.fb.group({
@@ -222,6 +231,16 @@ export class PedidoComponent implements OnInit {
       .actualizarCliente(this.form2.value)
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
+          if (
+            this.form2.get('codigopostal').value > 13999 ||
+            this.form2.get('codigopostal').value < 15000
+          ) {
+            if ((this.precioAumentado = true)) {
+              this.total = this.total - 3;
+              this.codigopostal = this.form2.get('codigopostal').value;
+              this.precioAumentado = false;
+            }
+          }
           this.obtenerDatos();
           this.snackBar.open('Información actualizada', '', {
             duration: 6000,
@@ -250,8 +269,13 @@ export class PedidoComponent implements OnInit {
         this.flag = true;
         this.nombre = datos['comprarahora'][0]['nombre'];
         this.talla = datos['comprarahora'][0]['talla'];
-        this.total = parseInt(datos['comprarahora'][0]['precio']);
-        console.log(parseInt(datos['comprarahora'][0]['precio']));
+        console.log(this.form2.get('codigopostal').value);
+        if (
+          this.form2.get('codigopostal').value > 14999 ||
+          this.form2.get('codigopostal').value < 14000
+        )
+          this.total = parseInt(datos['comprarahora'][0]['precio']) + 3;
+        this.precioAumentado = true;
       }
     });
   }
@@ -274,7 +298,7 @@ export class PedidoComponent implements OnInit {
       estado: 'pendiente',
       preciototal: this.total,
       id: sessionStorage.getItem('id'),
-      email: sessionStorage.getItem('email')
+      email: sessionStorage.getItem('email'),
     };
 
     this.pedidoServicio.hacerPedido(pedido).subscribe((dato) => {
@@ -288,7 +312,7 @@ export class PedidoComponent implements OnInit {
         this.puntosServicio.obtenerPuntos(id1).subscribe((datos) => {
           console.log('puntosssss: ' + datos['puntos']);
           console.log('resultadooooo: ' + datos['resultado']);
-            let clienteid = {
+          let clienteid = {
             idcliente: sessionStorage.getItem('id'),
             puntos: parseInt(datos['puntos']) + 3,
           };
@@ -299,7 +323,7 @@ export class PedidoComponent implements OnInit {
         });
         this.router.navigateByUrl('/');
         this.carroServicio.borrarProductos(id1).subscribe((datos) => {
-          console.log(datos)
+          console.log(datos);
         });
         this.snackBar.open('Se ha realizado el pedido.', '', {
           horizontalPosition: 'center',
@@ -307,7 +331,7 @@ export class PedidoComponent implements OnInit {
           duration: 6000,
         });
       }
-        });
+    });
   }
 
   validarDatos() {

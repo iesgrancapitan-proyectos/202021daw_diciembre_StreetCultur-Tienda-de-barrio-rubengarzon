@@ -580,6 +580,22 @@
                 </div>
                 <span class="text-success" id="ptn">-0€</span>
               </li>
+              <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    bg-light
+                  "
+                >
+                  <div class="text-success" *ngIf="codigopostal > 14999 || codigopostal < 14000">
+                    <h6 class="my-0">Codigo Postal</h6>
+                    <small>{{ codigopostal }}</small>
+
+                  </div>
+                  <span class="text-success" *ngIf="codigopostal > 14999 || codigopostal < 14000" id="er">+3€</span>
+
+                </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total (€)</span>
                 <strong
@@ -589,11 +605,11 @@
                       cliente.codigopostal < 14000;
                     else gratis
                   "
-                  >{{ total + 3 - canjearpuntos }}</strong
+                  >{{ total - canjearpuntos }}</strong
                 >
                 <ng-template id="totalConEnvio" #gratis>
                   <span id="totalConEnvio">{{
-                    total - 3 - canjearpuntos
+                    total  - canjearpuntos
                   }}</span>
                 </ng-template>
               </li>
@@ -630,6 +646,22 @@
                   </div>
                   <span class="text-success" id="ptn">-0€</span>
                 </li>
+                <li
+                  class="
+                    list-group-item
+                    d-flex
+                    justify-content-between
+                    bg-light
+                  "
+                >
+                  <div class="text-success" *ngIf="codigopostal > 14999 || codigopostal < 14000">
+                    <h6 class="my-0">Codigo Postal</h6>
+                    <small>{{ codigopostal }}</small>
+
+                  </div>
+                  <span class="text-success"  *ngIf="codigopostal > 14999 || codigopostal < 14000" id="er">+3€</span>
+
+                </li>
                 <li class="list-group-item d-flex justify-content-between">
                   <span>Total (€)</span>
                   <span
@@ -640,11 +672,11 @@
                         cliente.codigopostal < 14000;
                       else gratis
                     "
-                    >{{ total + 3 - canjearpuntos }}</span
+                    >{{ total - canjearpuntos }}</span
                   >
                   <ng-template #gratis>
                     <span id="totalConEnvio">{{
-                      total - 3 - canjearpuntos
+                      total  - canjearpuntos
                     }}</span>
                   </ng-template>
                 </li>
