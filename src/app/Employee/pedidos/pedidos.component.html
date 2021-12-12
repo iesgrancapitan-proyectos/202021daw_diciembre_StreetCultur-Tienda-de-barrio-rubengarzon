@@ -270,15 +270,26 @@
     </div>
 
     <div class="fila" *ngFor="let item of pedido">
-      <div>{{ item.email }}</div>
-      <div>{{ item.fecha }}</div>
+      <div><p class="prf1" style="font-weight: bold;">Email:</p>
+        {{ item.email }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Fecha:</p>
+        {{ item.fecha }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Estado:</p>
         {{ item.estado }}
       </div>
-      <div>{{ item.preciototal }}</div>
-      <div>{{ item.fechaenvio }}</div>
-      <div>{{ item.fecharecibido }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Precio Total:</p>
+        {{ item.preciototal }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Fecha Envio:</p>
+        {{ item.fechaenvio }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Fecha Recibido:</p>
+        {{ item.fecharecibido }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Acción:</p>
         <mat-icon
           matTooltip="Borrar"
           style="cursor: pointer"

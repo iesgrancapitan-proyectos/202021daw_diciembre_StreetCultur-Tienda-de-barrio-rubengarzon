@@ -52,16 +52,27 @@ mat-icon
       text-align: center
       padding: 3em
       width: 11em
-      @media screen and ( max-width: 800px )
+      @media screen and ( max-width: 800px ) and (min-width: 400px)
         padding: 0
+        width: 100%
+      @media screen and ( max-width: 400px )
+        display: none
   .fila
     display: flex
     background-color: white
     margin-bottom: 2em
     margin-right: 3em
     border-radius: 1em
-    @media screen and ( max-width: 800px )
+    @media screen and ( max-width: 800px ) and (min-width: 400px)
       margin-right: 0
+      width: 100%
+    @media screen and ( max-width: 400px )
+      border: 1px solid black
+      flex-direction: column
+      margin-bottom: 3em
+      align-items: center
+      .prf1
+        display: block
     &:hover
       transform: scale(1.01)
     div

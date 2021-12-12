@@ -419,11 +419,20 @@
     </div>
 
     <div class="fila" *ngFor="let item of ropa">
-      <div>{{ item.Nombre }}</div>
-      <div>{{ item.Descripcion }}</div>
-      <div>{{ item.Precio }}</div>
-      <div>{{ item.Color }}</div>
       <div>
+        <p class="prf1" style="font-weight: bold;">Nombre:</p>
+        {{ item.Nombre }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Descripción:</p>
+        {{ item.Descripcion }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Precio:</p>
+        {{ item.Precio }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Color:</p>
+        {{ item.Color }}</div>
+      <div>
+        <p class="prf1" style="font-weight: bold;">Acción:</p>
         <mat-icon
           matTooltip="Borrar"
           style="cursor: pointer"
