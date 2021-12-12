@@ -194,15 +194,28 @@ export class PedidosComponent implements OnInit {
       this.formModal.get('fechaenvio').value < this.formModal.get('fecha').value
     ) {
       document.getElementById('errorfechaenvio').style.display = 'block';
-    } else if (this.formModal.get('fecharecibido').value != '0000-00-00' || this.formModal.get('fecharecibido').value != null) {
+    } else if (
+      this.formModal.get('fecharecibido').value != '0000-00-00' &&
+      this.formModal.get('fecharecibido').value != null
+    ) {
+      console.log(this.formModal.get('fecharecibido').value);
       if (
         this.formModal.get('fecharecibido').value <
         this.formModal.get('fechaenvio').value
       ) {
         document.getElementById('errorfecharecibido').style.display = 'block';
       } else {
-        console.log("recibidooo")
-        this.formModal.get('estado').setValue('Recibido');
+        if (
+          this.formModal.get('fechaenvio').value != '0000-00-00' &&
+          this.formModal.get('fecharecibido').value == '0000-00-00'
+        ) {
+          this.formModal.get('estado').setValue('Enviado');
+        } else if (
+          this.formModal.get('fechaenvio').value != '0000-00-00' &&
+          this.formModal.get('fecharecibido').value != '0000-00-00'
+        ) {
+          this.formModal.get('estado').setValue('Recibido');
+        }
         this.pedidoServicio
           .actualizarPedido(this.formModal.value)
           .subscribe((datos) => {
@@ -223,6 +236,7 @@ export class PedidosComponent implements OnInit {
       if (this.formModal.get('fechaenvio').value > '0000-00-00') {
         this.formModal.get('estado').setValue('Enviado');
       } else if (this.formModal.get('fecharecibido').value > '0000-00-00') {
+        console.log('por aquiiiiiiii');
         this.formModal.get('estado').setValue('Recibido');
       }
       this.pedidoServicio
@@ -267,20 +281,20 @@ export class PedidosComponent implements OnInit {
 
   mostrarPendiente() {
     this.pedidoServicio.mostrarPendientes().subscribe((datos) => {
-          this.pedido = datos['pedidos'];
+      this.pedido = datos['pedidos'];
     });
   }
 
   mostrarEnviado() {
     this.pedidoServicio.mostrarEnviados().subscribe((datos) => {
-        this.pedido = datos['pedidos'];
+      this.pedido = datos['pedidos'];
     });
   }
 
   mostrarRecibido() {
     this.pedidoServicio.mostrarRecibidos().subscribe((datos) => {
-          this.pedido = datos['pedidos'];
-      })
+      this.pedido = datos['pedidos'];
+    });
   }
 }
 @Component({

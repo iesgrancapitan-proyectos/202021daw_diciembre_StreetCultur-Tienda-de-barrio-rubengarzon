@@ -251,6 +251,7 @@ export class PedidoComponent implements OnInit {
         this.nombre = datos['comprarahora'][0]['nombre'];
         this.talla = datos['comprarahora'][0]['talla'];
         this.total = parseInt(datos['comprarahora'][0]['precio']);
+        console.log(parseInt(datos['comprarahora'][0]['precio']));
       }
     });
   }
