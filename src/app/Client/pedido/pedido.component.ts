@@ -218,6 +218,7 @@ export class PedidoComponent implements OnInit {
           this.snackBar.open('Información actualizada', '', {
             duration: 6000,
           });
+          this.obtenerDatos();
         } else {
           this.snackBar.open('Error inesperado', '', {
             duration: 6000,

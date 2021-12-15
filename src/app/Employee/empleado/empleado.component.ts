@@ -109,6 +109,7 @@ export class EmpleadoComponent implements OnInit {
           this.snackBar.open('Se ha actualizado la información', '', {
             duration: 6000,
           });
+          this.obtenerDatos();
         } else {
           this.snackBar.open('Error inesperado', '', {
             duration: 6000,

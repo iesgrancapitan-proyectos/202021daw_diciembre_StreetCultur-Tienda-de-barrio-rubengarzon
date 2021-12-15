@@ -35,25 +35,21 @@ mat-toolbar
 mat-icon
   font-size: 27px
   margin-right: 0.3em
+.prf1
+  display: none
 .tabla
   display: table
   text-align: center
   margin: 0 auto
-  text-align: -webkit-center
   @media screen and ( max-width: 800px )
     margin: 0
     display: block
   .theader
     display: flex
-    justify-content: center
-    @media screen and ( max-width: 800px )
-      margin-top: 2em
-      margin-bottom: 2em
-      justify-content: none
     div
       text-align: center
       padding: 3em
-      width: 10.7em
+      width: 14em
       @media screen and ( max-width: 800px ) and (min-width: 400px)
         padding: 0
         width: 100%
@@ -61,11 +57,9 @@ mat-icon
         display: none
   .fila
     display: flex
-    width: 71%
     background-color: white
-    margin-bottom: 1em
+    margin-bottom: 2em
     border-radius: 1em
-    place-items: center
     @media screen and ( max-width: 800px ) and (min-width: 400px)
       margin-right: 0
       width: 100%
@@ -73,6 +67,7 @@ mat-icon
       border: 1px solid black
       flex-direction: column
       margin-bottom: 3em
+      align-items: center
       .prf1
         display: block
     &:hover
@@ -80,8 +75,7 @@ mat-icon
     div
       vertical-align: middle
       padding: 21px
-      width: 11em
-
+      width: 14em
 .btnr
   display: flex
   .ar

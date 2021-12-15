@@ -6,7 +6,6 @@ import { LoginComponent } from 'src/app/main/login/login.component';
 import { PuntosService } from 'src/app/puntos.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-puntos',
   templateUrl: './puntos.component.html',
@@ -115,6 +114,7 @@ export class PuntosComponent implements OnInit {
           this.snackBar.open('Se ha actualizado la información', '', {
             duration: 6000,
           });
+          this.obtenerDatos();
         } else {
           this.snackBar.open('Error inesperado', '', {
             duration: 6000,

@@ -139,6 +139,7 @@ export class NovedadesComponent implements OnInit {
           this.snackBar.open('Se ha actualizado la información', '', {
             duration: 2000,
           });
+          this.obtenerDatos();
         } else {
           this.snackBar.open('Error inesperado', '', {
             duration: 2000,
