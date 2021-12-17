@@ -9,6 +9,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ClienteService } from 'src/app/cliente.service';
 import { PuntosService } from 'src/app/puntos.service';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cart',
@@ -48,7 +53,8 @@ export class CartComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     private clienteServicio: ClienteService,
-    private puntosServicio: PuntosService
+    private puntosServicio: PuntosService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -179,5 +185,28 @@ export class CartComponent implements OnInit {
     sessionStorage.removeItem('email');
     sessionStorage.removeItem('id');
     this.estaLogueado = false;
+  }
+   openDialog(id) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog4, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe((datos) => {
+      if (datos == true) {
+        this.borrarProducto(id);
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'dialogo',
+  templateUrl: 'dialogo.html',
+})
+export class DialogOverviewExampleDialog4 {
+  constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog4>) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

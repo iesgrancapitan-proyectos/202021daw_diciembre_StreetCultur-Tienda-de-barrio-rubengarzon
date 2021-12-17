@@ -12,7 +12,7 @@ import { FooterComponent } from './main/footer/footer.component';
 import { CategoriasComponent } from './main/body/categorias/categorias.component';
 import { LoginComponent } from './main/login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CartComponent } from './main/cart/cart.component';
+import { CartComponent, DialogOverviewExampleDialog4 } from './main/cart/cart.component';
 import { DemoMaterialModule } from '../app/material-module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ContactComponent } from './main/footer/contact/contact.component';
@@ -63,8 +63,9 @@ import { ImageUploadModule } from 'angular2-image-upload';
     DialogOverviewExampleDialog1,
     DialogOverviewExampleDialog2,
     DialogOverviewExampleDialog3,
+    DialogOverviewExampleDialog4,
     HeaderComponent,
-    NovedadesComponent
+    NovedadesComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +76,7 @@ import { ImageUploadModule } from 'angular2-image-upload';
     DemoMaterialModule,
     MDBBootstrapModule.forRoot(),
     HttpClientModule,
-    ImageUploadModule.forRoot()
+    ImageUploadModule.forRoot(),
   ],
   providers: [LoginComponent],
   bootstrap: [AppComponent],

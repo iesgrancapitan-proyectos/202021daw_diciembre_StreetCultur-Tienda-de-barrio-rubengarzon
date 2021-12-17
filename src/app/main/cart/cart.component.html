@@ -74,7 +74,9 @@
     routerLink="/puntos"
     routerLinkActive="active"
   >
-    <mat-icon [matBadge]="numPuntos" matBadgeColor="accent">card_giftcard</mat-icon>
+    <mat-icon [matBadge]="numPuntos" matBadgeColor="accent"
+      >card_giftcard</mat-icon
+    >
   </button>
 
   <button
@@ -273,7 +275,7 @@
               <mat-icon
                 matTooltip="borrar"
                 style="cursor: pointer"
-                (click)="borrarProducto(item.id)"
+                (click)="openDialog(item.id)"
                 >delete</mat-icon
               >
             </td>

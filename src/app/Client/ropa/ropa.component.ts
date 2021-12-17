@@ -19,6 +19,8 @@ import { PedidoService } from 'src/app/pedido.service';
 export class RopaComponent implements OnInit {
   ropa: Ropa[] = [];
 
+  formTalla: FormGroup;
+
   pantalones: any;
 
   form1: FormGroup;
@@ -63,17 +65,21 @@ export class RopaComponent implements OnInit {
   ngOnInit() {
     this.mostrarSudaderas();
     this.pedidoServicio.borrarComprarAhora().subscribe((datos) => {
-      console.log(datos["resultado"])
+      console.log(datos['resultado']);
     });
-     this.form1 = new FormGroup({
-       id: new FormControl(),
-       nombre: new FormControl(),
-       apellidos: new FormControl(),
-       provincia: new FormControl(),
-       localidad: new FormControl(),
-       domicilio: new FormControl(),
-       imagen: new FormControl(),
-     });
+    this.form1 = new FormGroup({
+      id: new FormControl(),
+      nombre: new FormControl(),
+      apellidos: new FormControl(),
+      provincia: new FormControl(),
+      localidad: new FormControl(),
+      domicilio: new FormControl(),
+      imagen: new FormControl(),
+    });
+
+    this.formTalla = new FormGroup({
+      talla: new FormControl(),
+    });
 
     let cliente = {
       idcliente: sessionStorage.getItem('id'),
@@ -87,22 +93,20 @@ export class RopaComponent implements OnInit {
       this.puntosServicio.obtenerPuntos(cliente).subscribe((datos) => {
         this.numPuntos = datos['puntos'];
       });
-       let email = sessionStorage.getItem('email');
-       let email1 = { email: email };
-       this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
-         this.form1.setValue({
-           id: sessionStorage.getItem('id'),
-           nombre: datos['cliente'][0]['nombre'],
-           apellidos: datos['cliente'][0]['apellidos'],
-           provincia: datos['cliente'][0]['provincia'],
-           localidad: datos['cliente'][0]['localidad'],
-           domicilio: datos['cliente'][0]['domicilio'],
-           imagen: datos['cliente'][0]['imagen'],
-         });
-       });
+      let email = sessionStorage.getItem('email');
+      let email1 = { email: email };
+      this.clienteServicio.mostrarCliente(email1).subscribe((datos) => {
+        this.form1.setValue({
+          id: sessionStorage.getItem('id'),
+          nombre: datos['cliente'][0]['nombre'],
+          apellidos: datos['cliente'][0]['apellidos'],
+          provincia: datos['cliente'][0]['provincia'],
+          localidad: datos['cliente'][0]['localidad'],
+          domicilio: datos['cliente'][0]['domicilio'],
+          imagen: datos['cliente'][0]['imagen'],
+        });
+      });
     }
-
-
   }
 
   cerrarSesion() {
@@ -161,7 +165,7 @@ export class RopaComponent implements OnInit {
         cantidad: 1,
         precio: precio,
         total: precio,
-        talla: 'M',
+        talla: this.formTalla.get('talla').value,
         id: id,
       };
 
@@ -254,5 +258,4 @@ export class RopaComponent implements OnInit {
       this.ropa = datos['chandal'];
     });
   }
-
 }
