@@ -179,6 +179,18 @@
               formControlName="domicilio"
               style="margin-bottom: 1em"
             />
+            Código Postal
+            <input
+              type="text"
+              formControlName="codigopostal"
+              style="margin-bottom: 1em"
+            />
+            Móvil
+            <input
+              type="text"
+              formControlName="movil"
+              style="margin-bottom: 1em"
+            />
             Imagen
             <div style="display: flex">
               <div>
@@ -303,7 +315,7 @@
       <p>{{ item.Nombre }}</p>
       <p style="font-weight: bold">{{ item.Precio }}€</p>
       <form [formGroup]="formTalla" style="margin-bottom: 2em;">
-        <mat-form-field appearance="fill" style="width: 5em; height: 1em">
+        <mat-form-field style="width: 5em; height: 1em">
           <mat-label>Talla</mat-label>
           <select matNativeControl formControlName="talla" >
             <option value="XS">XS</option>

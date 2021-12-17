@@ -74,6 +74,8 @@ export class RopaComponent implements OnInit {
       provincia: new FormControl(),
       localidad: new FormControl(),
       domicilio: new FormControl(),
+      codigopostal: new FormControl(),
+      movil: new FormControl(),
       imagen: new FormControl(),
     });
 
@@ -103,6 +105,8 @@ export class RopaComponent implements OnInit {
           provincia: datos['cliente'][0]['provincia'],
           localidad: datos['cliente'][0]['localidad'],
           domicilio: datos['cliente'][0]['domicilio'],
+          codigopostal: datos['cliente'][0]['codigopostal'],
+          movil: datos['cliente'][0]['movil'],
           imagen: datos['cliente'][0]['imagen'],
         });
       });
