@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$query = "UPDATE cliente SET puntos='$params->puntos' WHERE id='$params->idcliente'";
+$query = "UPDATE cliente SET puntos='$params->puntos' WHERE email='$params->email'";
 
 
 // REALIZA LA QUERY A LA DB

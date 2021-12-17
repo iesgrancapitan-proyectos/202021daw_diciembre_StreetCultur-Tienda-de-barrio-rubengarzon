@@ -303,9 +303,9 @@
       <p>{{ item.Nombre }}</p>
       <p style="font-weight: bold">{{ item.Precio }}€</p>
       <form [formGroup]="formTalla" style="margin-bottom: 2em;">
-        <mat-form-field appearance="fill" style="width: 5.2em;height:0.5em;">
+        <mat-form-field appearance="fill" style="width: 5em; height: 1em">
           <mat-label>Talla</mat-label>
-          <select matNativeControl formControlName="talla">
+          <select matNativeControl formControlName="talla" >
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M" [selected]="true">M</option>

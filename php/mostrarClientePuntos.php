@@ -11,7 +11,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 $conexion = conexion(); // CREA LA CONEXION
 
 // REALIZA LA QUERY A LA DB
-$resultado = mysqli_query($conexion, "SELECT id,nombre,apellidos,puntos FROM cliente WHERE perfil='cliente'");
+$resultado = mysqli_query($conexion, "SELECT email,nombre,apellidos,puntos FROM cliente WHERE perfil='cliente'");
 
 class Result
 {

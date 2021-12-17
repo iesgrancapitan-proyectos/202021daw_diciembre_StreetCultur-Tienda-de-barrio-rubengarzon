@@ -96,6 +96,8 @@ export class PedidoComponent implements OnInit {
       provincia: new FormControl(),
       localidad: new FormControl(),
       domicilio: new FormControl(),
+      codigopostal: new FormControl(),
+      movil: new FormControl(),
       imagen: new FormControl(),
     });
 
@@ -150,6 +152,8 @@ export class PedidoComponent implements OnInit {
         provincia: datos['cliente'][0]['provincia'],
         localidad: datos['cliente'][0]['localidad'],
         domicilio: datos['cliente'][0]['domicilio'],
+        codigopostal: datos['cliente'][0]['codigopostal'],
+        movil: datos['cliente'][0]['movil'],
         imagen: datos['cliente'][0]['imagen'],
       });
     });
@@ -184,7 +188,9 @@ export class PedidoComponent implements OnInit {
           });
         }
       } else {
-        document.getElementById('miPaypalBoton').remove();
+        if (document.getElementById('miPaypalBoton')) {
+          document.getElementById('miPaypalBoton').style.display = 'none';
+        }
       }
 
       this.cliente.perfil = datos['cliente'][0]['perfil'];
@@ -215,10 +221,10 @@ export class PedidoComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           this.obtenerDatos();
+          this.comprobar();
           this.snackBar.open('Información actualizada', '', {
             duration: 6000,
           });
-          this.obtenerDatos();
         } else {
           this.snackBar.open('Error inesperado', '', {
             duration: 6000,
@@ -243,6 +249,7 @@ export class PedidoComponent implements OnInit {
             }
           }
           this.obtenerDatos();
+          this.comprobar();
           this.snackBar.open('Información actualizada', '', {
             duration: 6000,
           });
@@ -313,14 +320,23 @@ export class PedidoComponent implements OnInit {
         this.puntosServicio.obtenerPuntos(id1).subscribe((datos) => {
           console.log('puntosssss: ' + datos['puntos']);
           console.log('resultadooooo: ' + datos['resultado']);
-          let clienteid = {
-            idcliente: sessionStorage.getItem('id'),
-            puntos: parseInt(datos['puntos']) + 3,
-          };
-          clienteid.puntos = clienteid.puntos - this.puntos1;
-          this.puntosServicio.actualizarPuntos(clienteid).subscribe((datos) => {
-            console.log(datos['puntos']);
-          });
+
+          if (datos['puntos'] < 101) {
+            let clienteid = {
+              idcliente: sessionStorage.getItem('id'),
+              puntos: parseInt(datos['puntos']) + 3,
+            };
+            clienteid.puntos = clienteid.puntos - this.puntos1;
+            this.puntosServicio
+              .actualizarPuntos(clienteid)
+              .subscribe((datos) => {
+                console.log(datos['puntos']);
+              });
+          } else {
+            this.snackBar.open('El límite es de 100 puntos', '', {
+              duration: 6000,
+            });
+          }
         });
         this.router.navigateByUrl('/');
         this.carroServicio.borrarProductos(id1).subscribe((datos) => {

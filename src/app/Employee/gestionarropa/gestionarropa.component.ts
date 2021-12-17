@@ -36,6 +36,7 @@ export class GestionarRopaComponent implements OnInit {
   nombreArchivo: any;
 
   form1: FormGroup;
+  formAddRopa: FormGroup;
 
   nombreImagen: any;
 
@@ -58,18 +59,6 @@ export class GestionarRopaComponent implements OnInit {
     movil: null,
     imagen: null,
   };
-
-  formAddRopa = new FormGroup({
-    Nombre: new FormControl('', Validators.required),
-    Descripcion: new FormControl('', Validators.required),
-    Talla: new FormControl('', Validators.required),
-    Precio: new FormControl('', Validators.required),
-    Cantidad: new FormControl('', Validators.required),
-    Tipo: new FormControl('', Validators.required),
-    Color: new FormControl('', Validators.required),
-    Novedad: new FormControl('', Validators.required),
-    Imagen: new FormControl('', Validators.required),
-  });
 
   constructor(
     private login: LoginComponent,
@@ -95,6 +84,16 @@ export class GestionarRopaComponent implements OnInit {
       Color: new FormControl('', Validators.required),
       Novedad: new FormControl('', Validators.required),
     });
+
+    this.formAddRopa = new FormGroup({
+      Nombre: new FormControl('', Validators.required),
+      Descripcion: new FormControl('', Validators.required),
+      Precio: new FormControl('', Validators.required),
+      Tipo: new FormControl('', Validators.required),
+      Color: new FormControl('', Validators.required),
+      Imagen: new FormControl('', Validators.required),
+    });
+
     if (this.estaLogueado) {
       this.obtenerDatos();
       let cliente = {
@@ -238,7 +237,7 @@ export class GestionarRopaComponent implements OnInit {
     };
 
     this.ropaServicio.addRopa(archivo).subscribe((datos) => {
-      if (datos['resultado']) {
+      if (datos['resultado'] == 'OK') {
         this.snackBar.open('La ropa se ha añadido', '', {
           duration: 6000,
         });

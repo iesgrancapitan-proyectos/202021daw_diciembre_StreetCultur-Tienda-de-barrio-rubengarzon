@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,6 +27,7 @@ export class LoginComponent implements OnInit {
   };
 
   loginForm: FormGroup;
+  regisForm: FormGroup;
 
   email1 = this.login.email;
 
@@ -38,6 +44,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]],
+    });
+    this.regisForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
     });
   }
 
@@ -80,24 +93,80 @@ export class LoginComponent implements OnInit {
     });
   }
   registroEmail() {
-    this.loginService.registrarUsuario(this.login).subscribe((datos: any) => {
-      if (datos['resultado'] == 'OK') {
-        let cliente = {
-          email: this.login.email,
-        };
-        this.loginService.obtenerClientePorEmail(cliente).subscribe((datos) => {
-          console.log(datos);
-          sessionStorage.setItem('email', this.login.email);
-          sessionStorage.setItem('id', datos['id']);
-          this.estaLogueado();
-          this.router.navigateByUrl('/ropa');
+    if (this.regisForm.valid) {
+      this.loginService
+        .registrarUsuario(this.regisForm.value)
+        .subscribe((datos: any) => {
+          if (datos['resultado'] == 'OK') {
+            let login1 = {
+              email: this.regisForm.get("email").value,
+              contrasena: this.regisForm.get("password").value
+            }
+            this.loginService
+              .loginUsuario(login1)
+              .subscribe((datos: any) => {
+                if (datos['resultado'] == 'OK') {
+                  sessionStorage.setItem('email', datos.email);
+                  sessionStorage.setItem('id', datos.id);
+                  this.loginService.comprobarPerfil().subscribe((datos) => {
+                    switch (datos['perfil']) {
+                      case 'cliente':
+                        if (this.router.url == '/ropa') {
+                          this.router.navigate(['/']);
+                        } else {
+                          this.router.navigate(['/ropa']);
+                        }
+                        break;
+                      case 'empleado':
+                        this.router.navigate(['/empleado']);
+                        break;
+                      case 'admin':
+                        this.router.navigate(['/admin']);
+                        break;
+                      default:
+                        break;
+                    }
+                  });
+                } else {
+                  this.snackBar.open(
+                    'Email y/o contraseña incorrecta, vuelve a intentarlo',
+                    '',
+                    {
+                      duration: 6000,
+                    }
+                  );
+                }
+              });
+
+            /* let cliente = {
+              email: this.loginForm.get('email').value,
+            };
+            this.loginService
+              .obtenerClientePorEmail(cliente)
+              .subscribe((datos) => {
+                console.log(datos);
+                sessionStorage.setItem(
+                  'email',
+                  this.loginForm.get('email').value
+                );
+                sessionStorage.setItem('id', datos['id']);
+                this.estaLogueado();
+                this.router.navigateByUrl('/ropa'); */
+          } else {
+            this.snackBar.open('Ha ocurrido un error inesperado', '', {
+              duration: 6000,
+            });
+          }
         });
-      } else {
-        this.snackBar.open('Ha ocurrido un error inesperado', '', {
+    } else {
+      this.snackBar.open(
+        'Comprueba el formato del email y contraseña, vuelve a intentarlo.',
+        '',
+        {
           duration: 6000,
-        });
-      }
-    });
+        }
+      );
+    }
   }
   /**
    * comprueba si alguien ha iniciado sesión

@@ -10,7 +10,7 @@ require("conexion.php"); // IMPORTA EL ARCHIVO CON LA CONEXION A LA DB
 
 $conexion = Conexion(); // CREA LA CONEXION
 
-$contrasenaCifrada = md5($params->contrasena);
+$contrasenaCifrada = md5($params->password);
 
 $query = "INSERT INTO cliente (perfil, email, password) VALUES('cliente','$params->email', '$contrasenaCifrada')";
 

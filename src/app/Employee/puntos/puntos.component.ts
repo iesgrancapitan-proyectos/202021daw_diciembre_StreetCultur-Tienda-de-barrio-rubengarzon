@@ -16,7 +16,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class GestionarPuntosComponent implements OnInit {
   clientess = [
     {
-      id: null,
+      email: null,
       nombre: null,
       apellidos: null,
       puntos: null,
@@ -139,19 +139,25 @@ export class GestionarPuntosComponent implements OnInit {
       });
   }
 
-  modificarPuntos(id, puntos) {
-    let puntoss = {
-      id: id,
-      puntos: puntos,
-    };
-    this.puntosServicio.actualizarPuntos(puntoss).subscribe((datos) => {
-      if (datos['resultado'] == 'OK') {
-        this.snackBar.open('Puntos actualizados', '', {
-          duration: 6000,
-        });
-      } else {
-        alert('error');
-      }
-    });
+  modificarPuntos(email, puntos) {
+    if (puntos < 101) {
+      let puntoss = {
+        email: email,
+        puntos: puntos,
+      };
+      this.puntosServicio.actualizarPuntos(puntoss).subscribe((datos) => {
+        if (datos['resultado'] == 'OK') {
+          this.snackBar.open('Puntos actualizados', '', {
+            duration: 6000,
+          });
+        } else {
+          alert('error');
+        }
+      });
+    } else {
+      this.snackBar.open('El límite es de 100 puntos', '', {
+        duration: 6000,
+      });
+    }
   }
 }
