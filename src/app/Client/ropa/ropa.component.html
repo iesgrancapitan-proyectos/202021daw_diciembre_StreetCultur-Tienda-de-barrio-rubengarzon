@@ -314,18 +314,15 @@
     >
       <p>{{ item.Nombre }}</p>
       <p style="font-weight: bold">{{ item.Precio }}€</p>
-      <form [formGroup]="formTalla" style="margin-bottom: 2em;">
-        <mat-form-field style="width: 5em; height: 1em">
-          <mat-label>Talla</mat-label>
-          <select matNativeControl formControlName="talla" >
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M" [selected]="true">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-          </select>
-        </mat-form-field>
+      <form [formGroup]="formTalla" style="margin-bottom: 1em">
+        <select formControlName="talla">
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M" [selected]="true">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
       </form>
       <button
         mat-raised-button
