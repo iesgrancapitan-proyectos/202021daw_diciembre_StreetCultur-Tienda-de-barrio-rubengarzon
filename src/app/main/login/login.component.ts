@@ -52,10 +52,10 @@ export class LoginComponent implements OnInit {
         this.loginService.comprobarPerfil().subscribe((datos) => {
           switch (datos['perfil']) {
             case 'cliente':
-              if (this.router.url == "/ropa"){
-                  this.router.navigate(['/']);
-              }else{
-                  this.router.navigate(['/ropa']);
+              if (this.router.url == '/ropa') {
+                this.router.navigate(['/']);
+              } else {
+                this.router.navigate(['/ropa']);
               }
               break;
             case 'empleado':
@@ -69,9 +69,13 @@ export class LoginComponent implements OnInit {
           }
         });
       } else {
-        this.snackBar.open('Email y/o contraseña incorrecta, vuelve a intentarlo', '', {
-          duration: 6000,
-        });
+        this.snackBar.open(
+          'Email y/o contraseña incorrecta, vuelve a intentarlo',
+          '',
+          {
+            duration: 6000,
+          }
+        );
       }
     });
   }
@@ -81,12 +85,13 @@ export class LoginComponent implements OnInit {
         let cliente = {
           email: this.login.email,
         };
-        this.loginService.enviarEmail(cliente);
-
-        this.snackBar.open('Por favor, revisa el correo electrónico ', '', {
-          duration: 6000,
+        this.loginService.obtenerClientePorEmail(cliente).subscribe((datos) => {
+          console.log(datos);
+          sessionStorage.setItem('email', this.login.email);
+          sessionStorage.setItem('id', datos['id']);
+          this.estaLogueado();
+          this.router.navigateByUrl('/ropa');
         });
-        this.router.navigateByUrl('/ropa');
       } else {
         this.snackBar.open('Ha ocurrido un error inesperado', '', {
           duration: 6000,
