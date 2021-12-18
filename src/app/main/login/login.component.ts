@@ -98,62 +98,11 @@ export class LoginComponent implements OnInit {
         .registrarUsuario(this.regisForm.value)
         .subscribe((datos: any) => {
           if (datos['resultado'] == 'OK') {
-            let login1 = {
-              email: this.regisForm.get("email").value,
-              contrasena: this.regisForm.get("password").value
-            }
-            this.loginService
-              .loginUsuario(login1)
-              .subscribe((datos: any) => {
-                if (datos['resultado'] == 'OK') {
-                  sessionStorage.setItem('email', datos.email);
-                  sessionStorage.setItem('id', datos.id);
-                  this.loginService.comprobarPerfil().subscribe((datos) => {
-                    switch (datos['perfil']) {
-                      case 'cliente':
-                        if (this.router.url == '/ropa') {
-                          this.router.navigate(['/']);
-                        } else {
-                          this.router.navigate(['/ropa']);
-                        }
-                        break;
-                      case 'empleado':
-                        this.router.navigate(['/empleado']);
-                        break;
-                      case 'admin':
-                        this.router.navigate(['/admin']);
-                        break;
-                      default:
-                        break;
-                    }
-                  });
-                } else {
-                  this.snackBar.open(
-                    'Email y/o contraseña incorrecta, vuelve a intentarlo',
-                    '',
-                    {
-                      duration: 6000,
-                    }
-                  );
-                }
-              });
-
-            /* let cliente = {
-              email: this.loginForm.get('email').value,
-            };
-            this.loginService
-              .obtenerClientePorEmail(cliente)
-              .subscribe((datos) => {
-                console.log(datos);
-                sessionStorage.setItem(
-                  'email',
-                  this.loginForm.get('email').value
-                );
-                sessionStorage.setItem('id', datos['id']);
-                this.estaLogueado();
-                this.router.navigateByUrl('/ropa'); */
+            this.snackBar.open('Te has registrado correctamente.', '', {
+              duration: 6000,
+            });
           } else {
-            this.snackBar.open('Ha ocurrido un error inesperado', '', {
+            this.snackBar.open('Ha ocurrido un error inesperado.', '', {
               duration: 6000,
             });
           }
