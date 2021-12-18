@@ -163,13 +163,23 @@ export class RopaComponent implements OnInit {
   addCarrito(nombre: any, precio: any, imagen: any) {
     if (sessionStorage.getItem('email')) {
       let id = sessionStorage.getItem('id');
+      let talla1;
+
+      console.log('aaaaa ' + this.formTalla.get('talla').value);
+
+      if (this.formTalla.get('talla').value == null) {
+        talla1 = 'M';
+      } else {
+        talla1 = this.formTalla.get('talla').value;
+      }
+
       let carrito = {
         nombre: nombre,
         imagen: imagen,
         cantidad: 1,
         precio: precio,
         total: precio,
-        talla: this.formTalla.get('talla').value,
+        talla: talla1,
         id: id,
       };
 

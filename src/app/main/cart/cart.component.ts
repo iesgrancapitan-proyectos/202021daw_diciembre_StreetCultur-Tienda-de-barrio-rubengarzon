@@ -156,6 +156,7 @@ export class CartComponent implements OnInit {
       if (Object.values(datos).includes('OK')) {
         console.log('El producto ha sido borrado');
         this.mostrarCarrito();
+        this.contarProductos();
       } else {
         console.log('El producto no se ha borrado');
       }
