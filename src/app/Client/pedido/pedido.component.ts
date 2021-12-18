@@ -68,6 +68,8 @@ export class PedidoComponent implements OnInit {
 
   precioAumentado = false;
 
+  flag3 = false;
+
   constructor(
     public fb: FormBuilder,
     private clienteServicio: ClienteService,
@@ -239,13 +241,25 @@ export class PedidoComponent implements OnInit {
       .subscribe((datos) => {
         if (datos['resultado'] == 'OK') {
           if (
-            this.form2.get('codigopostal').value > 13999 ||
-            this.form2.get('codigopostal').value < 15000
+            this.form2.get('codigopostal').value > 13999 &&
+            this.form2.get('codigopostal').value < 15000 &&
+            this.precioAumentado
           ) {
-            if ((this.precioAumentado = true)) {
+            if (document.getElementById('er') != null) {
               this.total = this.total - 3;
               this.codigopostal = this.form2.get('codigopostal').value;
               this.precioAumentado = false;
+            }
+          } else if (
+            this.form2.get('codigopostal').value < 14000 ||
+            this.form2.get('codigopostal').value > 14999 &&
+            !this.precioAumentado
+          ) {
+            if (!document.getElementById('er')) {
+              console.log('holaaaaa');
+              this.total = this.total + 3;
+              this.codigopostal = this.form2.get('codigopostal').value;
+              this.precioAumentado = true;
             }
           }
           this.obtenerDatos();
@@ -279,11 +293,15 @@ export class PedidoComponent implements OnInit {
         this.talla = datos['comprarahora'][0]['talla'];
         console.log(this.form2.get('codigopostal').value);
         if (
-          this.form2.get('codigopostal').value > 14999 ||
-          this.form2.get('codigopostal').value < 14000
-        )
+          this.form2.get('codigopostal').value > 13999 &&
+          this.form2.get('codigopostal').value < 15000
+        ) {
+          this.total = parseInt(datos['comprarahora'][0]['precio']);
+          this.precioAumentado = false;
+        } else {
           this.total = parseInt(datos['comprarahora'][0]['precio']) + 3;
-        this.precioAumentado = true;
+          this.precioAumentado = true;
+        }
       }
     });
   }
