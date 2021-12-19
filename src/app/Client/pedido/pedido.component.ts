@@ -356,7 +356,7 @@ export class PedidoComponent implements OnInit {
             });
           }
         });
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/ropa');
         this.carroServicio.borrarProductos(id1).subscribe((datos) => {
           console.log(datos);
         });
